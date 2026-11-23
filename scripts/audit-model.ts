@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { assumptionValues, bottomLine, buildLibrary, compute, headline, type ResolvedModel } from "../src/engine/model";
 import { sensitivity } from "../src/engine/sensitivity";
-import { uncertainty } from "../src/engine/uncertainty";
+import { causeMedian as causeMedian_, judgmentShare, modelRange, storedDistribution } from "../src/engine/figures";
 import { lintModel, SEVERITY_ORDER, type Finding } from "../src/engine/lint";
 import { TEMPLATES, type Family } from "../src/engine/templates";
 import { templateRowIds } from "../src/engine/template-files";
@@ -92,12 +92,12 @@ const sBuilder = sensitivity(builderLib, m, av);
 const line = bottomLine(lib, m, av);
 const years = headline(lib, m, av);
 const vals = compute(lib, m, av);
-// The combined range: every input's range combined as independent errors in log space (the variance
-// the site's uncertainty breakdown adds up), so a 90% interval if each range is one. The joint
-// low–high sets every input at its end at once, the extreme case, and spans orders of magnitude.
-const sd = Math.sqrt(uncertainty(lib, m, vals, av, "charityevals").total);
-// Ordered, so a net harm (a negative result) reads from its most harmful end.
-const combined = { low: Math.min(years * Math.exp(-sd), years * Math.exp(sd)), high: Math.max(years * Math.exp(-sd), years * Math.exp(sd)) };
+// The range as the model's page shows it: the simulation the build stores (src/engine/figures.ts), run
+// here so a draft not yet in generated/distributions.json gets the same; and how often it does no good.
+const dist = storedDistribution(lib, m);
+const shown = dist ? { ...lib, distributions: { ...lib.distributions, [m.id]: dist } } : lib;
+const range = modelRange(shown, m, years, av);
+const zeroShare = dist?.zero ?? NaN;
 
 // Reference class: other ranked, hand-built charity models in the same output unit.
 const peers = [...lib.models.values()]
@@ -114,12 +114,9 @@ if (peers.length >= 3 && Number.isFinite(line.native) && line.native > 0) {
 // healthy life per $1,000. Far off either way is a pointer to a wrong row (far below usually means another
 // scope, or reach and persistence counted short), checked in the audit. A comparison never goes into the
 // summary or write-up: the median moves whenever models land.
-const causePeers = [...lib.models.values()]
-  .filter((x) => x.id !== m.id && x.kind === "charity" && x.output && !x.bulk && x.cause === m.cause)
-  .map((x) => headline(lib, x, av)).filter((x) => Number.isFinite(x) && x > 0).sort((a, b) => a - b);
-const causeMedian = causePeers.length >= 3 ? (causePeers.length % 2 ? causePeers[causePeers.length >> 1] : (causePeers[causePeers.length / 2 - 1] + causePeers[causePeers.length / 2]) / 2) : NaN;
+const causeMedian = causeMedian_(lib, m.cause, av, m.id);
 if (Number.isFinite(causeMedian) && Number.isFinite(years)) {
-  const where = `${years.toPrecision(3)} years of healthy life per $1,000 is ${(years / causeMedian).toPrecision(3)}× the median of ${causePeers.length} ${m.cause} models (${causeMedian.toPrecision(3)})`;
+  const where = `${years.toPrecision(3)} years of healthy life per $1,000 is ${(years / causeMedian).toPrecision(3)}× the median of the ranked ${m.cause} models (${causeMedian.toPrecision(3)})`;
   if (years > 10 * causeMedian)
     findings.push({ severity: "medium", code: "far-above", message: where, fix: "Find the row that makes the difference (compare intermediates with the closest model of the cause); correct it if it is wrong. If it is right, say why in the audit, not in the summary or write-up." });
   // A net harm (at or below zero) is a sign the audit checks row by row, not a gap to a median (2.21).
@@ -169,17 +166,17 @@ const fmt = (x: number) => (!Number.isFinite(x) ? String(x) : Math.abs(x) >= 1e4
 if (json) {
   console.log(JSON.stringify({
     id: m.id, template: family, unit: m.output?.unit,
-    native: line.native, common: line.common, yearsPer1000: years, combinedLow: combined.low, combinedHigh: combined.high,
+    native: line.native, common: line.common, yearsPer1000: years, rangeLow: range.low, rangeHigh: range.high, zeroShare,
     jointLow: s.jointLow, jointHigh: s.jointHigh,
-    ownJointLow: sOwn.jointLow, ownJointHigh: sOwn.jointHigh, builderJointLow: sBuilder.jointLow, builderJointHigh: sBuilder.jointHigh, judgmentShare: s.judgmentShare,
+    ownJointLow: sOwn.jointLow, ownJointHigh: sOwn.jointHigh, builderJointLow: sBuilder.jointLow, builderJointHigh: sBuilder.jointHigh, judgmentShare: judgmentShare(lib, m, av),
     swings: s.swings.slice(0, 10).map((w) => ({ id: w.id, kind: w.kind, low: w.low, high: w.high, atLow: w.atLow, atHigh: w.atHigh })),
     causeMedian, findings, peers, canonical: Object.fromEntries(canon.map((id) => [id, vals[id]])),
   }, null, 2));
 } else {
   console.log(`# Audit (mechanical): ${m.id}  [${family ?? "no template"}]\n`);
   console.log(`Bottom line: ${fmt(line.native)} ${m.output?.unit}/$ = ${fmt(years)} years of healthy life per $1,000`);
-  console.log(`Combined range (ranges combined as independent errors; 90% if each range is): ${fmt(combined.low)} – ${fmt(combined.high)}`);
-  console.log(`Joint low–high (every input at its end at once): ${fmt(s.jointLow)} – ${fmt(s.jointHigh)}   judgment share of uncertainty: ${Math.round(s.judgmentShare * 100)}%`);
+  console.log(`Range as the page shows it (5% to 95% of the simulation; inputs without a range at the default spread): ${fmt(range.low)} – ${fmt(range.high)}   draws at zero or below: ${Number.isFinite(zeroShare) ? `${Math.round(zeroShare * 100)}%` : "n/a"}`);
+  console.log(`Joint low–high (every input at its end at once): ${fmt(s.jointLow)} – ${fmt(s.jointHigh)}   judgment share of uncertainty: ${Math.round(judgmentShare(lib, m, av) * 100)}%`);
   console.log(`Joint low–high with shared assumptions at their defaults: ${fmt(sOwn.jointLow)} – ${fmt(sOwn.jointHigh)}`);
   console.log(`Joint low–high of the model's own ranges (shared assumptions and facts at their best): ${fmt(sBuilder.jointLow)} – ${fmt(sBuilder.jointHigh)}`);
   console.log(`Point inputs on the result's path (no range): ${s.pointInputs.join(", ") || "none"}\n`);
@@ -189,7 +186,7 @@ if (json) {
   console.log(`\n## Reference class: hand-built models in ${m.output?.unit} (years of healthy life per $1,000)`);
   for (const p of peers) console.log(`  ${p.id.padEnd(44)} ${p.owner.padEnd(12)} ${fmt(p.years)}`);
   console.log(`  >> this model                                             ${fmt(years)}`);
-  if (Number.isFinite(causeMedian)) console.log(`  median of ${causePeers.length} ${m.cause} models: ${fmt(causeMedian)} (this model ×${fmt(years / causeMedian)})`);
+  if (Number.isFinite(causeMedian)) console.log(`  median of the ranked ${m.cause} models: ${fmt(causeMedian)} (this model ×${fmt(years / causeMedian)})`);
   if (siblings.length) {
     console.log(`\n## Same template (${family}): canonical rows`);
     const sv = siblings.map((x) => ({ id: x.id, v: compute(lib, x, av) }));

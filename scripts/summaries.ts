@@ -13,8 +13,9 @@
 // hands the browser its full rows.
 import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { execFileSync } from "node:child_process";
 import { buildLibrary, assumptionValues, compute, comparable, factUsage, hasRange, type Distribution, type JointEnds, type Library } from "../src/engine/model";
-import { simulate } from "../src/engine/montecarlo";
+import { storedDistribution } from "../src/engine/figures";
 import { sensitivity } from "../src/engine/sensitivity";
 import { isValueOfInformation } from "../src/engine/ranking";
 import { renderRaw } from "../src/engine/prose";
@@ -131,33 +132,37 @@ let firstDiff = "";
  * ranges read (docs/normalization.md 2.18). Seeded by model id, so the file only changes when a model does. */
 export function distributions(lib: Library): Record<string, Distribution> {
   const out: Record<string, Distribution> = {};
-  const defaults = assumptionValues(lib.assumptions, {});
   for (const m of [...lib.models.values()].sort((a, b) => a.id.localeCompare(b.id))) {
-    if (!comparable(lib, m)) continue;
-    const d = simulate(lib, m);
-    if (!d) continue;
-    const s = sensitivity(lib, m, defaults);
-    // An unstable model's range is the sensitivity's joint bounds: which end each input takes in each.
-    const ends = (wantHigh: boolean) => {
-      const e: JointEnds = { inputs: {}, assumptions: {} };
-      for (const w of s.swings) (w.scope === "assumption" ? e.assumptions : e.inputs)[w.id] = (w.atHigh >= w.atLow) === wantHigh ? w.high : w.low;
-      return e;
-    };
-    out[m.id] = { ...d, judgment: Math.round(s.judgmentShare * 100) / 100, points: s.pointInputs.length, ...(d.unstable ? { joint: { low: ends(false), high: ends(true) } } : {}) };
+    const d = storedDistribution(lib, m);
+    if (d) out[m.id] = d;
   }
   return out;
 }
 
 /** The models every page ships: a stand-in for each summarised standalone model, the rest as written. */
 function browserModels(built: ReturnType<typeof library>, dist: Record<string, Distribution>): unknown[] {
-  const ids = summarisedIds(built.own, dist);
-  const stand = new Map((summaries({ ...built, raws: built.own.filter((r) => ids.has(r.id)) }, dist) as { id: string }[]).map((s) => [s.id, s]));
-  return built.own.map((r) => stand.get(r.id) ?? r);
+  // Only models in the library: an unpublished owner's (owners.json `published: false`) never ship.
+  const own = built.own.filter((r) => built.lib.models.has(r.id));
+  const ids = summarisedIds(own, dist);
+  const stand = new Map((summaries({ ...built, raws: own.filter((r) => ids.has(r.id)) }, dist) as { id: string }[]).map((s) => [s.id, s]));
+  return own.map((r) => stand.get(r.id) ?? r);
+}
+
+/** The fact files the published site ships: the repository's, never files kept out of it on one machine
+ * (a private evaluator's figures in .git/info/exclude), so the build is the same everywhere. */
+function publishedFactFiles(): string[] {
+  const all = walk(join(root, "facts")).sort();
+  try {
+    const tracked = new Set(execFileSync("git", ["ls-files", "facts"], { cwd: root, encoding: "utf8" }).split("\n").filter(Boolean).map((f) => join(root, f)));
+    return tracked.size ? all.filter((f) => tracked.has(f)) : all;
+  } catch {
+    return all;
+  }
 }
 
 const built = library();
 const dist = distributions(built.lib);
-for (const [file, fresh] of [[out, summaries(built, dist)], [browserOut, browserModels(built, dist)], [factsOut, browserFacts(walk(join(root, "facts")).sort().map(read))], [usageOut, factUsage(built.lib)], [distributionsOut, dist]] as const) {
+for (const [file, fresh] of [[out, summaries(built, dist)], [browserOut, browserModels(built, dist)], [factsOut, browserFacts(publishedFactFiles().map(read))], [usageOut, factUsage(built.lib)], [distributionsOut, dist]] as const) {
   if (process.argv.includes("--check")) {
     if (!existsSync(file) || !same(JSON.parse(readFileSync(file, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
       console.error(`${file.slice(root.length + 1)} is out of date: run npx tsx scripts/summaries.ts${firstDiff ? `\n  first difference ${firstDiff}` : ""}`);

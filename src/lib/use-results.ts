@@ -1,73 +1,28 @@
 import { useEffect, useMemo, useReducer, useState, useSyncExternalStore } from "react";
-import { lib, primaryOf, rankedCharities } from "./data";
-import { assumptionValues, headline, referencedModels, plausibleRange, ranks, unstableFlag, type ResolvedModel } from "../engine/model";
-import { combine, combineLocations, coverageFlag, nextDollarFlag, declaredLocations, locationsOf, locationWeights, rankingPlan, type Basis } from "../engine/ranking";
+import { lib, rankedCharities } from "./data";
+import { assumptionValues, headline, type ResolvedModel } from "../engine/model";
 import type { Charity } from "../engine/schema";
-import { sensitivity, flags, type Sensitivity, type Flag } from "../engine/sensitivity";
+import { sensitivity, type Sensitivity, type Flag } from "../engine/sensitivity";
+import { barLow, charityFigure, judgmentShare, modelFigure, modelFlags, modelRange, type CharityFigure, type EvaluatorFigure, type ModelFigure, type ProgrammeFigure } from "../engine/figures";
 import { getOverrides, subscribeOverrides, useOverrides } from "./assumption-state";
 
-export type Result = {
-  model: ResolvedModel;
-  /** Everything below is in years of healthy life per $1,000 (a model in a unit that doesn't convert:
-   * its own unit per dollar), under the same assumptions. */
-  central: number;
-  low: number;
-  high: number;
-  /** Where the range's bar starts on the chart's log scale: the low end, or for a range reaching zero or
-   * harm the lowest of the simulation's 5% steps above zero (the rest sits in the chart's ≤0 zone);
-   * undefined when none is above zero. */
-  barLow?: number;
-  /** The one-at-a-time sensitivity: on a model's own result (useResultFor), not on the rankings'. */
-  s?: Sensitivity;
-  flags: Flag[];
-};
+/** A model as the site shows it (src/engine/figures.ts modelFigure): headline, range and caveats, in years
+ * of healthy life per $1,000 (a model in a unit that doesn't convert: its own unit per dollar). On a model's
+ * own page also its one-at-a-time sensitivity. */
+export type Result = ModelFigure & { s?: Sensitivity };
 
 /** One program's figure within an evaluator's: its model, or the model's locations combined. */
-export type ProgramResult = {
-  program: string;
-  /** The program's model (for a model with locations, the one its page shows). */
-  result: Result;
-  central: number;
-  low: number;
-  high: number;
-  weight?: number;
-  /** How many locations, and how they combine: "weighted" by funding (the charity's declared money per
-   * location, else the sheet's own grant sizes), or "single" (the model's own figure; for GiveWell's
-   * multi-location models, the median location). */
-  locations: number;
-  locationBasis: Basis;
-};
+export type ProgramResult = ProgrammeFigure<Result>;
 
 /** One evaluator's dot on a charity's line (src/engine/ranking.ts says which models count). */
-export type EvaluatorResult = {
-  owner: string;
-  central: number;
-  low: number;
-  high: number;
-  /** How the programs combine: one program, funding-weighted, or their median. */
-  basis: Basis;
-  programs: ProgramResult[];
+export type EvaluatorResult = EvaluatorFigure<Result> & {
   flags: Flag[];
   /** Every program's model is purely theoretical (an idea's estimate from before the charity existed). */
   theoretical: boolean;
 };
 
 /** A charity on the rankings: one figure per evaluator, and where the row sits. */
-export type CharityResult = {
-  charity: Charity;
-  evaluators: EvaluatorResult[];
-  /** The primary evaluator: the one whose model the charity's page leads with. */
-  primary: string;
-  /** The primary evaluator's figure: the row's number and position, the same as the charity page's
-   * headline. The other evaluators show as their own dots. */
-  central: number;
-  /** Lowest joint low and highest joint high across evaluators. */
-  low: number;
-  high: number;
-  /** Where the bar starts on the log scale (Result.barLow): the low end, or for a range reaching zero
-   * or harm the lowest such start among its programmes. */
-  barLow?: number;
-};
+export type CharityResult = Omit<CharityFigure<Result>, "evaluators"> & { evaluators: EvaluatorResult[] };
 
 // One values object per overrides object, shared by every island, so results cache and settle by
 // identity: islands that hydrate at different times (each first seeing the empty server snapshot,
@@ -98,75 +53,26 @@ export function useResultsFor(models: ResolvedModel[]) {
   );
 }
 
-/** Result.barLow for a model's range, from its stored simulation. The stored steps are multiples of the
- * best guess: plausibleRange's ends are k × the first and the last step, so every step is put in the
- * range's units by the same k (negative for a net-harm best guess, which turns the steps round). Where
- * that can't be read (an unstable simulation, a range not from the steps) the bar keeps running to the
- * axis start. */
-function barLowOf(m: ResolvedModel, range: { low: number; high: number }): number | undefined {
-  const low = Math.min(range.low, range.high), high = Math.max(range.low, range.high);
-  if (low > 0) return low;
-  if (!(high > 0)) return undefined;
-  const q = lib.distributions?.[m.id]?.q;
-  const first = q?.[0], last = q?.[q.length - 1];
-  const k = q && last ? range.high / last : NaN;
-  if (!q || lib.distributions?.[m.id]?.unstable || !(Math.abs(range.low - k * first!) <= 1e-9 * Math.max(1, Math.abs(range.low)))) return Number.MIN_VALUE;
-  const positive = q.map((x) => k * x).filter((v) => v > 0);
-  return positive.length ? Math.min(...positive) : Number.MIN_VALUE;
-}
-
-const extraFlags = (m: ResolvedModel) => [coverageFlag(lib, m), unstableFlag(lib, m), nextDollarFlag(lib, m)].filter((f) => !!f);
-
-/** A model as the rankings show it: its headline, the simulated 5% to 95% stored at build time
- * (generated/distributions.json) scaled to it, and the flags from the figures stored beside it. Cheap
- * enough to work out for every model at every change: the one-at-a-time sensitivity, which costs seconds
- * for the whole rankings (most in models that read others live), is left to a model's own page. */
+/** A model as the rankings show it: cheap enough to work out for every model at every change (the
+ * one-at-a-time sensitivity, seconds for the whole rankings, is left to a model's own page). */
 const ranked = new Map<ResolvedModel, { av: Record<string, number>; r: Result }>();
 function rankedOf(m: ResolvedModel, av: Record<string, number>): Result {
   const hit = ranked.get(m);
   if (hit?.av === av) return hit.r;
-  const central = headline(lib, m, av);
-  const d = lib.distributions?.[m.id];
-  const range = plausibleRange(lib, m, central, av) ?? (d?.unstable ? unstableRange(m, av) : { low: central, high: central });
-  const stored = { central, jointLow: range.low, jointHigh: range.high, judgmentShare: d?.judgment ?? 0, pointInputs: Array.from({ length: d?.points ?? 0 }, () => "") } as Sensitivity;
-  const r: Result = { model: m, central, low: range.low, high: range.high, barLow: barLowOf(m, range), flags: [...flags(m, stored), ...extraFlags(m)] };
+  const r = modelFigure(lib, m, av);
   ranked.set(m, { av, r });
   return r;
 }
 
-/** An unstable simulation's range is the sensitivity's joint bounds: every input at its worst end and at
- * its best. Worked out exactly at the reader's values for a model that computes only itself (a few
- * milliseconds); one that reads other models live takes seconds for that, so it uses the ends stored at
- * build time (which end each input takes, from the sensitivity at the defaults). */
-const exact = new Map<ResolvedModel, { av: Record<string, number>; low: number; high: number }>();
-function unstableRange(m: ResolvedModel, av: Record<string, number>): { low: number; high: number } {
-  const hit = exact.get(m);
-  if (hit?.av === av) return hit;
-  const j = lib.distributions?.[m.id]?.joint;
-  let low: number, high: number;
-  if (!referencedModels(lib, m).length || !j) {
-    const s = sensitivity(lib, m, av);
-    [low, high] = [Math.min(s.jointLow, s.jointHigh), Math.max(s.jointLow, s.jointHigh)];
-  } else {
-    const at = (e: { inputs: Record<string, number>; assumptions: Record<string, number> }) => headline(lib, m, { ...av, ...e.assumptions }, e.inputs);
-    const ends = [at(j.low), at(j.high)];
-    [low, high] = [Math.min(...ends), Math.max(...ends)];
-  }
-  const v = { av, low, high };
-  exact.set(m, v);
-  return v;
-}
-
-/** A model's full result, sensitivity included: for its own page. */
+/** A model's full result, sensitivity included: for its own page. The same range as the rankings; the
+ * caveats' judgment share and point inputs at the reader's values. */
 const full = new Map<ResolvedModel, { av: Record<string, number>; r: Result }>();
 function fullOf(m: ResolvedModel, av: Record<string, number>): Result {
   const hit = full.get(m);
   if (hit?.av === av) return hit.r;
   const s = sensitivity(lib, m, av);
-  // The plausible range is the model's simulated 5% to 95% (src/engine/montecarlo.ts), where it has one;
-  // otherwise every ranged input at its end together.
-  const range = plausibleRange(lib, m, s.central, av) ?? { low: s.jointLow, high: s.jointHigh };
-  const r: Result = { model: m, central: s.central, low: range.low, high: range.high, barLow: barLowOf(m, range), s, flags: [...flags(m, { ...s, jointLow: range.low, jointHigh: range.high }), ...extraFlags(m)] };
+  const range = modelRange(lib, m, s.central, av, { low: s.jointLow, high: s.jointHigh });
+  const r: Result = { model: m, central: s.central, ...range, barLow: barLow(lib, m, range), s, flags: modelFlags(lib, m, range, { judgment: judgmentShare(lib, m, av), points: s.pointInputs.length }) };
   full.set(m, { av, r });
   return r;
 }
@@ -292,47 +198,17 @@ export function useResults(): Rankings {
   return useSyncExternalStore(subscribeRankings, () => shown?.value ?? atDefaults(), atDefaults);
 }
 
-const plans = new Map(rankedCharities.map((c) => [c.id, rankingPlan(lib, c.id)]));
-
-/** A charity's figure for one evaluator at any values, by the same plan and combination as the rankings
- * (programs by weight, locations by funding; old estimates included, as on its pages), from each model's
- * headline only: for the notes under a page's headline, which compare the figure with one slider at its
- * neutral setting. */
-export function figureOf(charity: string, owner: string, av: Record<string, number>): number {
-  const c = lib.charities.get(charity);
-  const plan = plans.get(charity)?.find((e) => e.owner === owner);
-  if (!c || !plan) return NaN;
-  const point = (m: ResolvedModel) => { const v = headline(lib, m, av); return { central: v, low: v, high: v }; };
-  return combine(plan.parts.map((p) => {
-    const family = locationsOf(lib, p.model);
-    const declared = declaredLocations(c, family);
-    if (declared) return { ...combineLocations(declared, point), weight: p.weight };
-    const weights = locationWeights(lib, family);
-    if (!weights) return { ...point(p.model), weight: p.weight };
-    return { ...combine(family.map((x, i) => ({ ...point(x), weight: weights[i] }))), weight: p.weight };
-  })).central;
-}
-
 type ResultFn = (m: ResolvedModel, av: Record<string, number>) => Result;
 
-function programResult(c: Charity, program: string, m: ResolvedModel, weight: number | undefined, av: Record<string, number>, resultOf: ResultFn): ProgramResult {
-  const result = resultOf(m, av);
-  const family = locationsOf(lib, m);
-  const declared = declaredLocations(c, family);
-  if (declared) {
-    const { central, low, high } = combineLocations(declared, (x) => (x === m ? result : resultOf(x, av)));
-    return { program, result, central, low, high, weight, locations: family.length, locationBasis: "weighted" };
-  }
-  const weights = locationWeights(lib, family);
-  if (!weights) return { program, result, central: result.central, low: result.low, high: result.high, weight, locations: family.length, locationBasis: "single" };
-  const { central, low, high } = combine(family.map((x, i) => ({ ...(i ? resultOf(x, av) : result), weight: weights[i] })));
-  return { program, result, central, low, high, weight, locations: family.length, locationBasis: "weighted" };
+/** An evaluator's figure with the caveats of its programmes' models. */
+function withFlags(e: EvaluatorFigure<Result>): EvaluatorResult {
+  const flags = [...new Map(e.programs.flatMap((p) => p.result.flags).map((f) => [f.short, f])).values()];
+  return { ...e, flags, theoretical: e.programs.every((p) => !!p.result.model.theoretical) };
 }
 
-function evaluatorResult(owner: string, programs: ProgramResult[]): EvaluatorResult {
-  const flags = [...new Map(programs.flatMap((p) => p.result.flags).map((f) => [f.short, f])).values()];
-  return { owner, ...combine(programs), programs, flags, theoretical: programs.every((p) => !!p.result.model.theoretical) };
-}
+/** The rankings and pages' figures at values `av`, worked out at once: what the islands show once a run
+ * finishes (for tests that compare the site with the other surfaces). */
+export const rankingsAt = (av: Record<string, number>) => computeResults(av, rankedOf);
 
 function computeResults(av: Record<string, number>, resultOf: ResultFn) {
   const steps = computeSteps(av, resultOf);
@@ -355,33 +231,13 @@ function* computeSteps(av: Record<string, number>, resultOf: ResultFn) {
   return { av, results, pages };
 }
 
+/** A charity's row on the rankings (src/engine/figures.ts charityFigure), and its pages' figures, every
+ * programme counted (the rankings may leave some out, `$ignore_old_estimates`). */
 function charityResult(c: Charity, av: Record<string, number>, resultOf: ResultFn, pages: Map<string, EvaluatorResult[]>): CharityResult[] {
-  {
-    const all = (plans.get(c.id) ?? []).map(({ owner, parts }) =>
-      evaluatorResult(owner, parts.map((p) => programResult(c, p.program, p.model, p.weight, av, resultOf))));
-    pages.set(c.id, all);
-    const evaluators = all.flatMap((e) => {
-      const programs = e.programs.filter((p) => ranks(lib, p.result.model, av));
-      if (!programs.length) return [];
-      return [programs.length === e.programs.length ? e : evaluatorResult(e.owner, programs)];
-    });
-    if (!evaluators.length) return [];
-    const lead = evaluators.find((e) => e.owner === primaryOf(lib, c.id)?.owner) ?? evaluators[0];
-    return [{
-      charity: c,
-      evaluators,
-      primary: lead.owner,
-      central: lead.central,
-      low: Math.min(...evaluators.map((r) => r.low)),
-      high: Math.max(...evaluators.map((r) => r.high)),
-      barLow: (() => {
-        const low = Math.min(...evaluators.map((r) => r.low));
-        if (low > 0) return low;
-        const starts = evaluators.flatMap((e) => e.programs.map((p) => p.result.barLow)).filter((x): x is number => x !== undefined && x > 0);
-        return starts.length ? Math.min(...starts) : undefined;
-      })(),
-    }];
-  }
+  const result = (m: ResolvedModel) => resultOf(m, av);
+  pages.set(c.id, (charityFigure(lib, c.id, av, result, false)?.evaluators ?? []).map(withFlags));
+  const row = charityFigure(lib, c.id, av, result, true);
+  return row ? [{ ...row, evaluators: row.evaluators.map(withFlags) }] : [];
 }
 
 /** One evaluator's figure for a charity as its own pages show it: every programme, old estimates

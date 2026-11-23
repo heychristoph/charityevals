@@ -1,24 +1,20 @@
 ---
 name: audit-cea
-description: Independently audit a charityevals cost-effectiveness model (models/*.json): for charityevals' own models (build-cea) the template structure, source verification (fetch every key source and check the number), double counting, missing adjustments, unit errors and sensitivity; for every model the standard steps of docs/normalization.md (units, species step, shared figures, levers, evaluator view) and plausibility against its peers. Produces a findings list with severity and concrete fixes. Use when asked to audit, review, critique or check a CEA model, and as the audit step of build-cea (run in a fresh subagent).
+description: Independently audit a charityevals cost-effectiveness model (models/*.json): for our own models (build-cea) template structure, sources (fetch each key number), double counting, missing adjustments, units and sensitivity; for every model the standard steps of docs/normalization.md, plausibility and a sanity check of the result as its page shows it. Produces findings with severity and concrete fixes. Use when asked to audit, review or check a CEA model, and as build-cea's audit step (fresh subagent).
 ---
 
 # Audit a CEA
 
-This skill checks one cost-effectiveness model (result in **years of healthy life per 1,000 dollars
-donated**) and produces a findings list, each finding with a severity and a concrete fix. It is the
-middle of build-cea's loop (build → independent audit → fix, until no high-severity finding remains),
-run in a fresh subagent, and also audits any imported model. Terms:
-[glossary](../build-cea/references/templates.md#glossary).
+Checks one model (result in **years of healthy life per $1,000**) and lists findings, each with a
+severity and a concrete fix: the audit step of build-cea's loop (fresh subagent) and of any import.
+Terms: [glossary](../build-cea/references/templates.md#glossary).
 
-You are the independent reviewer: check explainers, don't trust them. You **don't edit the
-model**; you write findings its builder can act on. Work only from the model, its write-up, the blind
-list and the previous round's findings, never the builder's notes, so your check
-doesn't inherit the builder's reasoning.
+You are the independent reviewer: check explainers, don't trust them, and **don't edit the model**.
+Work only from the model, its write-up, the blind list and the previous round's findings, never the
+builder's notes.
 
 Inputs: the model path; optionally the write-up path, the preflight output, the previous round's
-findings, a blind list (sources and model ids you must not read; pass the ids to `--exclude`) and where
-to write findings (default: print them).
+findings, a blind list (sources and model ids you must not read; pass the ids to `--exclude`).
 
 ## Rounds
 
@@ -31,7 +27,7 @@ to write findings (default: print them).
 The rules: docs/normalization.md (standard steps, shared versions, invariants in section 3, owner
 decisions), import-cea (evaluator models), build-cea's SKILL.md and references/templates.md
 (charityevals models). The principles: **one consistent way** (every shared concept the site's one way,
-every slider moving every model it concerns, so models stay comparable), **best guesses**, and **fix,
+every slider moving every model it concerns), **best guesses**, and **fix,
 don't flag**: every finding names the concrete fix.
 
 ## 1. Mechanical pass (any blocking line is high)
@@ -43,7 +39,7 @@ only for a checked false positive, with its reason. Then `npx tsx scripts/audit-
 [--exclude id,id]` for the result, range, tornado, peers and the cause's median.
 
 Then go further: a rule broken under other words is yours to find. Reading shared facts and sliders is
-never a finding, even in a blind run.
+never a finding.
 
 ## 2. Structure and standard steps
 
@@ -132,6 +128,10 @@ so the severity rests on a number.
   charities, a median, an average or peers (the lint's `comparison` code). Never tune toward a peer's
   or an evaluator's number: the fix is the rule, not the result.
 
+- **Sanity check**: read the model as its page shows it (figure, range, chance of no good or harm,
+  flags, gap to the evaluator). Anything a donor would find odd is a finding until you've traced it
+  to its cause, wherever that is: an input, a shared figure, or the site's own code.
+
 ## 6. Severity
 
 - **high**: wrong or unsupported number on a top-5 driver; unit error; double counting or a missing
@@ -143,7 +143,7 @@ so the severity rests on a number.
   charities, a median, an average or peers; any blocking preflight line.
 - **medium**: moves the result 10–25%; weak source for a top-10 driver; judgment without a reference
   class; range clearly too narrow or wide; a gap with peers (over 10× or under a tenth of the cause's
-  median) whose row isn't found; a sign convention broken; a write-up with a stale or non-live result, or a result
+  median) whose row isn't found; an odd result whose cause isn't found; a sign convention broken; a write-up with a stale or non-live result, or a result
   as a multiple of GiveDirectly.
 - **low**: wording, context, cosmetic structure, better sources.
 
@@ -151,7 +151,7 @@ so the severity rests on a number.
 
 ```
 # Audit: <model id>, round <n>
-Result: <x> <unit>/$ = <y> years of healthy life per 1,000 dollars (combined range <lo>–<hi>); cause median <m> (×<r>). Verdict: <pass | fix needed>.
+Result: <x> <unit>/$ = <y> years of healthy life per 1,000 dollars (range <lo>–<hi>, <z>% of draws at or below zero, as audit-model prints them: the page's); cause median <m> (×<r>). Verdict: <pass | fix needed>.
 Model-sha: <what `npx tsx scripts/audit-receipt.ts <id>` prints for the audited model>
 Rules: <first version in audits/versions.json>
 Scope: <programmes and year modelled, against the charity's spending breakdown>

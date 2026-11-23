@@ -55,6 +55,15 @@ export function barSpan(low: number, high: number, central: number, barLow?: num
   return [lo, hi];
 }
 
+/** The range in the right-hand column: "0.4–12", or "−0.2 to 3" where a dash would read as a minus.
+ * Screen readers get " to " throughout, so "0.4–12" isn't read as a subtraction. */
+function rangeText(fig: Figure, low: number, high: number, dash = "–"): string {
+  const a = Math.min(low, high), b = Math.max(low, high);
+  const [x, y] = [fig.format(a), fig.format(b)];
+  if (x === y) return x;
+  return a < 0 || b < 0 ? `${x} to ${y}` : `${x}${dash}${y}`;
+}
+
 /** Vertical offset of each evaluator's dot on a row with several, so they never sit on each other. */
 const LANE = 11;
 
@@ -120,7 +129,11 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
             <span key={t.label} className={`r-tick num ${t.major ? "" : "r-tick-minor"}`} style={{ left: pct(t.at) }}>{t.label}</span>
           ))}
         </div>
-        <div />
+        <div className="r-range-head tip-host">
+          Likely range{"\u00a0"}<InfoTip label="What's the likely range?">
+            Nine in ten of each model's simulated outcomes fall in it. Hover a range for the best guess. <a href="/method#ranges">More</a>
+          </InfoTip>
+        </div>
       </div>
 
       <ol className="r-list">
@@ -187,7 +200,7 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
               </div>
 
               <div className="r-value">
-                <span className="r-central num">{fig.format(r.central)}</span>
+                <span className="r-central num" title={`Best guess ${fig.format(r.central)}`} aria-label={`${rangeText(fig, r.low, r.high, " to ")}, best guess ${fig.format(r.central)}`}>{rangeText(fig, r.low, r.high)}</span>
               </div>
 
             </li>

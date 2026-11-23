@@ -6,8 +6,8 @@
 //
 // Leverage comes from one backward pass over the model: each formula's elasticity to each number it
 // uses, chained from the bottom line down. That costs one evaluation of each formula per reference,
-// so it runs on 8,000-row models in the browser. Default spreads only feed this view; the joint low and
-// high on the rankings use published ranges alone.
+// so it runs on 8,000-row models in the browser. The Monte Carlo (montecarlo.ts) draws the same default
+// spreads; the joint low and high (an unstable model's range) use published ranges alone.
 
 import { evaluate, normInv, refs, type Node, type Scope } from "./expr";
 import { AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, MISSING_DATA_DISCOUNT, hasRange, inputRange, modelConversion, modelResult, pickValue, readsAsDestination, refValues, referencedModels, usedAssumptions, viewAssumptions, type Library, type ResolvedModel, type ResolvedRow, type View } from "./model";

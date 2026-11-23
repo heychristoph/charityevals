@@ -8,6 +8,7 @@ export const CC_BY_4 = "CC BY 4.0";
 const URLS: Record<string, string> = {
   [CC_BY_4]: "https://creativecommons.org/licenses/by/4.0/",
   "CC BY-NC-SA 3.0 US": "https://creativecommons.org/licenses/by-nc-sa/3.0/us/",
+  "CC BY-NC 4.0": "https://creativecommons.org/licenses/by-nc/4.0/",
 };
 // "CC BY 4.0 (Zenodo record …)" is CC BY 4.0 too; "EA Forum posts: CC BY 4.0; the sheet …" is not one licence.
 export const licenceUrl = (name: string) => Object.entries(URLS).find(([k]) => name === k || name.startsWith(`${k} (`))?.[1];

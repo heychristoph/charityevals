@@ -96,7 +96,7 @@ function charityFig(f: CharityFigure, ranked: boolean): CharityFig {
     central: num(f.central), low: num(f.low), high: num(f.high),
     evaluators: f.evaluators.map((e) => ({
       owner: e.owner, basis: e.basis, central: num(e.central), low: num(e.low), high: num(e.high),
-      programmes: e.programmes.map((p) => ({ programme: p.programme, model: p.model.id, ...(p.weight !== undefined ? { weight: p.weight } : {}), locations: p.locations, central: num(p.central), low: num(p.low), high: num(p.high) })),
+      programmes: e.programs.map((p) => ({ programme: p.program, model: p.result.model.id, ...(p.weight !== undefined ? { weight: p.weight } : {}), locations: p.locations, central: num(p.central), low: num(p.low), high: num(p.high) })),
     })),
   };
 }

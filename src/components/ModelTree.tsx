@@ -19,6 +19,7 @@ import { childrenOf, lookupFor, pathTo, pathToRef, rangedRowOf, rootOf, shapeOf,
 import { rowsFeeding } from "../engine/sensitivity";
 import type { Uncertainty } from "../engine/uncertainty";
 import { useAssumptionValues } from "../lib/use-results";
+import { useFigure, type Figure } from "../lib/metric";
 import { formatValue, formatAssumption, formatShown, formatYears, parseEdit, editText } from "../lib/format";
 import { oneIn } from "../lib/comparables";
 import { track } from "../lib/analytics";
@@ -206,8 +207,11 @@ type Ctx = {
   glossed: Set<string>;
   /** The reader's edits: inputs by row id, facts by "@key". */
   edits: Record<string, number>;
-  /** The top row is in years of healthy life per $1,000. */
+  /** The top row is in years of healthy life per $1,000, shown in the reader's measure. */
   years: boolean;
+  fig: Figure;
+  /** The location this model covers, when it is one of several: kept on the top row's label. */
+  place?: string;
 };
 
 /** The models that read a shared fact, when more than one does. */
@@ -437,7 +441,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
   const isOpen = open.has(n.key);
   const branch = isBranch(n);
   const id = domId(n.key);
-  const label = labelOf(m, n);
+  const label = depth === 1 && ctx.years ? `${ctx.fig.metric.unit}${ctx.place ? ` in ${ctx.place}` : ""}` : labelOf(m, n);
   // Below a row whose own published range stands for its uncertainty, parts add none of their own.
   const rangedRow = rangedRowOf(ctx.u, n);
   const ranged = !!rangedRow;
@@ -495,7 +499,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
           </span>
         </span>
         <span id={`${id}-v`} className={`tn-val num ${edited ? "tn-edited" : ""}`}>
-          {show(m, n, root && ctx.years)}{odds && <span className="tn-odds"> {odds}</span>}
+          {root && ctx.years ? ctx.fig.format(n.value) : show(m, n)}{odds && <span className="tn-odds"> {odds}</span>}
         </span>
         <span
           id={`${id}-e`}
@@ -559,6 +563,7 @@ function matches(m: ResolvedModel, q: string, used: Set<string>) {
  * apart from the page's headline, which may combine every funded location. */
 export default function ModelTree({ model, values, edits = {}, u, flags = [], place, engine = lib, children }: { model: ResolvedModel; values: Record<string, number>; edits?: Record<string, number>; u: Uncertainty; flags?: Flag[]; place?: string; engine?: Library; children?: React.ReactNode }) {
   const av = useAssumptionValues();
+  const fig = useFigure(lib, av);
   const look = useMemo(() => lookupFor(lib, model, values, av, "charityevals", edits), [model, values, av, edits]);
   const editCount = Object.keys(edits).length;
   // The tree ends in the number at the top of the page: the model's result converted into years of
@@ -747,7 +752,7 @@ export default function ModelTree({ model, values, edits = {}, u, flags = [], pl
     }
   };
 
-  const ctx: Ctx = { m: model, look, open, all, focus, flash, u, flags, weight, toggle, showAll, setFocus, edits, glossed: new Set(), years: toCommon !== undefined };
+  const ctx: Ctx = { m: model, look, open, all, focus, flash, u, flags, weight, toggle, showAll, setFocus, edits, glossed: new Set(), years: toCommon !== undefined, fig, place };
   const orphanRow = orphan ? model.byId.get(orphan) : undefined;
   const rowCount = model.rows.length.toLocaleString("en-US");
 

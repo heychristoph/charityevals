@@ -3,7 +3,8 @@
 // charity, so the order never changes. The factors read the shared sliders and facts, so a measure moves
 // with them as the figures do (docs/normalization.md 2.7).
 import { useMemo, useSyncExternalStore } from "react";
-import type { Library } from "../engine/model";
+import { conversionLookup, headlineConversion, type Library } from "../engine/model";
+import { evaluate } from "../engine/expr";
 import { formatYears } from "./format";
 import { editQuery } from "./query";
 
@@ -50,7 +51,9 @@ export const METRICS: Metric[] = [
     label: "WELLBYs",
     unit: "WELLBYs per $1,000",
     about: "One point more life satisfaction, on a scale of 0 to 10, for one person for a year. Healthy years become WELLBYs at the rate you set under Your values.",
-    factor: (_lib, av) => 1 / av.daly_per_wellby,
+    // The same conversion every wellbeing model's headline uses (assumptions units.wellby): a WELLBY per
+    // dollar is this many healthy years per $1,000, so healthy years per $1,000 are this many WELLBYs.
+    factor: (lib, av) => 1000 / evaluate(headlineConversion(lib, "wellby")!, conversionLookup(lib, av)),
   },
 ];
 

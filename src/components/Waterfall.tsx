@@ -5,6 +5,7 @@ import { assumptionValues, headline, unitFormula, type Library, type ResolvedMod
 import { parse, type Node } from "../engine/expr";
 import { waterfall, type Step, type StepTarget } from "../engine/waterfall";
 import { formatYears } from "../lib/format";
+import { useFigure } from "../lib/metric";
 
 /** "1,700", "0.052", "3.2e-5": a native result per dollar. */
 const fmtNative = (x: number) => (Math.abs(x) >= 1000 ? Math.round(x).toLocaleString("en-US") : Math.abs(x) >= 0.01 ? String(Number(x.toPrecision(2))) : x.toPrecision(2));
@@ -106,6 +107,7 @@ export default function Waterfall({ model, av, edits, engine = lib }: { model: R
       ? { ...out, steps: [...out.steps, { kind: "yours" as const, label: "Your edits to this model's numbers", from: out.end, to }], end: to }
       : out;
   }, [model, av, edits, engine]);
+  const fig = useFigure(lib, av);
   if (!w || !w.steps.length) return null;
   const points = [w.startValue, ...w.steps.map((s) => s.to)];
   // A long shot below its chance ends at 0 (the risk step): 0 sits at the axis's start.
@@ -178,7 +180,7 @@ export default function Waterfall({ model, av, edits, engine = lib }: { model: R
         <li className="wf-step wf-end" style={{ marginTop: 0 }}>
           <span className="wf-label">{w.start === "evaluator" ? `${possessive(owner)} result, in our units` : "The model at the site's defaults"}</span>
           <span className="wf-track"><span className="wf-bar wf-bar-total" style={bar(Math.exp(lo), w.startValue)} /></span>
-          <span className="wf-value num">{formatYears(w.startValue)}</span>
+          <span className="wf-value num">{fig.format(w.startValue)}</span>
         </li>
         {w.steps.map((s, i) => {
           const href = hrefOf(s.target);
@@ -197,7 +199,7 @@ export default function Waterfall({ model, av, edits, engine = lib }: { model: R
         <li className="wf-step wf-end" style={{ marginTop: 0 }}>
           <span className="wf-label">As shown on this page</span>
           <span className="wf-track"><span className="wf-bar wf-bar-total" style={bar(Math.exp(lo), w.end)} /></span>
-          <span className="wf-value num">{formatYears(w.end)}</span>
+          <span className="wf-value num">{fig.format(w.end)}</span>
         </li>
       </ol>
     </section>

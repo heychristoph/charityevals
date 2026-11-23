@@ -38,7 +38,7 @@ lists each family's required rows, bounds, basis and shared reads, which the lin
   intervention delivered the same way. *Thin*: reach judged (spending over an assumed cost), an effect judged (care
   with no trial against none) or from other delivery, or no outcome data. A judged baseline,
   counterfactual or attribution never makes a branch thin.
-- **Combined range**: audit-model's, every input's range as independent log-space errors.
+- **Range**: the page's, 5–95% of the simulation (audit-model prints it).
 - **Mobiliser's share** (`$mobiliser_share`, read by the row `mobiliser_share` only): the charity's share
   of the good done with resources others commit only because of it, net of their cost (INV-22).
 

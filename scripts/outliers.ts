@@ -6,6 +6,7 @@ import { join } from "node:path";
 import { buildLibrary } from "../src/engine/model";
 import { headline, assumptionValues } from "../src/engine/model";
 import { rankingPlan } from "../src/engine/ranking";
+import { causeMedian } from "../src/engine/figures";
 import type { ResolvedModel } from "../src/engine/model";
 
 const root = join(import.meta.dirname, "..");
@@ -22,9 +23,9 @@ const ranked = new Map<string, ResolvedModel>();
 for (const c of lib.charities.keys()) for (const p of rankingPlan(lib, c)) for (const part of p.parts) ranked.set(part.model.id, part.model);
 const h = new Map([...ranked.values()].map((m) => [m.id, headline(lib, m, av)]));
 for (const m of [...ranked.values()].sort((a, b) => h.get(b.id)! - h.get(a.id)!)) {
-  const peers = [...ranked.values()].filter((o) => o.id !== m.id && o.cause === m.cause).map((o) => h.get(o.id)!).filter((x) => Number.isFinite(x) && x > 0).sort((a, b) => a - b);
-  if (peers.length < 3) continue;
-  const median = peers.length % 2 ? peers[peers.length >> 1] : (peers[peers.length / 2 - 1] + peers[peers.length / 2]) / 2;
+  // The same median the audit tool reports (src/engine/figures.ts).
+  const median = causeMedian(lib, m.cause, av, m.id);
+  if (!Number.isFinite(median)) continue;
   const k = h.get(m.id)! / median;
   if (k >= min || k <= 1 / min) console.log(`${k.toFixed(1)}× ${m.cause} ${m.id}`);
 }

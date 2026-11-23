@@ -1,7 +1,7 @@
 import type React from "react";
 import { useMemo } from "react";
 import { lib, rawFacts, fullRaw } from "../lib/data";
-import { buildLibrary, compute, plausibleRange, unstableFlag, type Library } from "../engine/model";
+import { buildLibrary, compute, type Library } from "../engine/model";
 import { useAssumptionValues, useResultFor } from "../lib/use-results";
 import { useOverrides } from "../lib/assumption-state";
 import { useLiveDistribution, withPageDistribution } from "../lib/live-distribution";
@@ -9,8 +9,8 @@ import { editsFor, useEdits } from "../lib/edit-state";
 import ModelTree from "./ModelTree";
 import { WaterfallInSlot } from "./Waterfall";
 import { uncertainty } from "../engine/uncertainty";
-import { flags, sensitivity } from "../engine/sensitivity";
-import { coverageFlag } from "../engine/ranking";
+import { sensitivity } from "../engine/sensitivity";
+import { judgmentOf, modelFlags, modelRange } from "../engine/figures";
 import "./model.css";
 
 /** `place`: the location the model covers, when it is one of several. `about`: who made the model and links to its spreadsheet, file and history, shown under the model.
@@ -39,9 +39,8 @@ export default function ModelView({ id, bulk = false, place, about, children, wa
   const caveats = useMemo(() => {
     if (!Object.keys(edits).length && !live) return r.flags;
     const s = sensitivity(engine, model, av, "charityevals", edits);
-    const range = plausibleRange(engine, model, s.central, av) ?? { low: s.jointLow, high: s.jointHigh };
-    return [...flags(model, { ...s, jointLow: range.low, jointHigh: range.high }), ...[coverageFlag(lib, model), unstableFlag(engine, model)].filter((f) => !!f)];
-  }, [model, av, edits, r.flags, live, engine]);
+    return modelFlags(engine, model, modelRange(engine, model, s.central, av, { low: s.jointLow, high: s.jointHigh }), { judgment: judgmentOf(u), points: s.pointInputs.length });
+  }, [model, av, edits, r.flags, live, engine, u]);
 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>

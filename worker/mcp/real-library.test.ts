@@ -75,7 +75,7 @@ describe("MCP server on the real library", () => {
     const theory = [...site.models.values()].filter((m) => m.theoretical);
     expect(theory.length).toBeGreaterThan(0);
     const ranked = rankings(site, assumptionValues(site.assumptions));
-    for (const f of ranked) for (const e of f.evaluators) for (const p of e.programmes) expect(p.model.theoretical, `${f.charity.id}: ${p.model.id}`).toBeFalsy();
+    for (const f of ranked) for (const e of f.evaluators) for (const p of e.programs) expect(p.result.model.theoretical, `${f.charity.id}: ${p.result.model.id}`).toBeFalsy();
     for (const m of theory) expect(charityFigure(site, m.charity, assumptionValues(site.assumptions), false), m.charity).toBeDefined();
   });
 

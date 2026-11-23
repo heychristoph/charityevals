@@ -5,7 +5,8 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { buildLibrary, assumptionValues, compute, comparable } from "../src/engine/model";
 import { checkModel } from "../src/engine/check-model";
-import { sensitivity, flags } from "../src/engine/sensitivity";
+import { sensitivity } from "../src/engine/sensitivity";
+import { judgmentShare, modelFlags, modelRange } from "../src/engine/figures";
 import { comparisonFindings, namesFor } from "../src/engine/lint";
 import { checkProseNumbers } from "../src/engine/prose-numbers";
 
@@ -55,7 +56,7 @@ for (const m of lib.models.values()) {
   if (only) {
     for (const sw of s.swings)
       console.log(`  ${sw.label.slice(0, 60).padEnd(60)} ${years(sw.atLow).padStart(8)} – ${years(sw.atHigh)}`);
-    for (const f of flags(m, s)) console.log(`  [${f.level}] ${f.text}`);
+    for (const f of modelFlags(lib, m, modelRange(lib, m, s.central, av), { judgment: judgmentShare(lib, m, av), points: s.pointInputs.length })) console.log(`  [${f.level}] ${f.text}`);
   }
 }
 

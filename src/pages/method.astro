@@ -3,6 +3,21 @@ import Prose from "../layouts/Prose.astro";
 import Setting from "../components/Setting.tsx";
 import { ValueSets, Measures } from "../components/Choices.tsx";
 import { repo } from "../lib/site";
+import { lib } from "../lib/data";
+import { assumptionValues } from "../engine/model";
+import { charityFigure, modelFigure } from "../engine/figures";
+import { formatYears } from "../lib/format";
+
+// The worked example of a charity's figure: the Against Malaria Foundation at the defaults, from the same
+// function as its page and the rankings, so the numbers here can't drift from theirs.
+const av = assumptionValues(lib.assumptions);
+const amf = charityFigure(lib, "against-malaria-foundation", av, (m) => modelFigure(lib, m, av), false);
+const amfParts = (() => {
+  const parts = (amf?.evaluators.find((e) => e.owner === amf.primary)?.programs[0]?.parts ?? []).filter((p) => p.weight > 0);
+  const total = parts.reduce((t, p) => t + p.weight, 0);
+  return parts.map((p) => ({ label: p.label, share: `${Math.round((p.weight / total) * 100)}%`, value: formatYears(p.central) })).sort((a, b) => parseFloat(b.share) - parseFloat(a.share));
+})();
+const amfTotal = formatYears(amf?.central ?? NaN);
 
 // The file-format example at the end: a valid model (about 5.8 healthy years per $1,000 at the defaults).
 const example = `{
@@ -102,12 +117,13 @@ const toc = [
   <p>
     A charity with several programmes, or one programme in several countries, gets the spending-weighted average of them, where the split is published. The Against Malaria Foundation at the defaults, for example:
   </p>
-  <div class="eq" aria-label="Against Malaria Foundation: 80% of 24 plus 12% of 22 plus 6% of 8 plus 2% of 12 is about 23">
-    <span class="eq-term"><b>80%</b> × 24<small>DRC</small></span><span class="eq-op">+</span>
-    <span class="eq-term"><b>12%</b> × 22<small>Nigeria</small></span><span class="eq-op">+</span>
-    <span class="eq-term"><b>6%</b> × 8<small>Chad</small></span><span class="eq-op">+</span>
-    <span class="eq-term"><b>2%</b> × 12<small>South Sudan</small></span><span class="eq-op">=</span>
-    <span class="eq-term eq-result"><b>23</b><small>the charity</small></span>
+  <div class="eq" aria-label={`Against Malaria Foundation: ${amfParts.map((p) => `${p.share} of ${p.value}`).join(" plus ")} is about ${amfTotal}`}>
+    {amfParts.map((p, i) => (
+      <>
+        <span class="eq-term"><b>{p.share}</b> × {p.value}<small>{p.label}</small></span><span class="eq-op">{i === amfParts.length - 1 ? "=" : "+"}</span>
+      </>
+    ))}
+    <span class="eq-term eq-result"><b>{amfTotal}</b><small>the charity</small></span>
   </div>
   <p>
     Each evaluator's figure stands on its own; we never blend evaluators. A charity analysed by several shows each as its own dot, and its number is the newest analysis from the first of them in a fixed order (GiveWell first, ours last).

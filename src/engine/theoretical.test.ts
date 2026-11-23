@@ -4,8 +4,9 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { assumptionValues, buildLibrary, modelsOf } from "./model";
-import { flags, sensitivity, THEORETICAL_TEXT } from "./sensitivity";
+import { assumptionValues, buildLibrary, headline, modelsOf } from "./model";
+import { THEORETICAL_TEXT } from "./sensitivity";
+import { modelFlags, modelRange } from "./figures";
 
 const root = join(import.meta.dirname, "../..");
 const read = (p: string) => JSON.parse(readFileSync(p, "utf8"));
@@ -35,10 +36,10 @@ describe("purely theoretical models", () => {
   it("its first caveat says it is purely theoretical; other models don't carry it", () => {
     const av = assumptionValues(lib.assumptions);
     const m = aim[0];
-    const f = flags(m, sensitivity(lib, m, av));
+    const f = modelFlags(lib, m, modelRange(lib, m, headline(lib, m, av), av));
     expect(f[0]).toEqual({ level: "warn", short: "purely theoretical", text: THEORETICAL_TEXT });
     const other = lib.models.get(lib.assumptions.common.benchmark)!;
-    expect(flags(other, sensitivity(lib, other, av)).some((x) => x.short === "purely theoretical")).toBe(false);
+    expect(modelFlags(lib, other, modelRange(lib, other, headline(lib, other, av), av)).some((x) => x.short === "purely theoretical")).toBe(false);
   });
 
   it("the inventory lists every Ambitious Impact entry as imported (and theoretical) or not shown, with a reason", () => {

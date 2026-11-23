@@ -1,12 +1,12 @@
 ---
 // Every evaluator whose models are on the site, with how many charities and models each has here.
 import Prose from "../../layouts/Prose.astro";
-import { lib } from "../../lib/data";
+import { lib, rankable } from "../../lib/data";
 import CharityLogo from "../../components/CharityLogo.tsx";
 
 const counts = new Map<string, { charities: Set<string>; models: number }>();
-for (const m of lib.models.values()) {
-  if (m.kind !== "charity" || !m.output) continue;
+// The same models the homepage counts (every published model, locations included).
+for (const m of rankable) {
   const c = counts.get(m.owner) ?? { charities: new Set(), models: 0 };
   c.charities.add(m.charity);
   c.models++;

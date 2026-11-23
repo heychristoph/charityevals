@@ -3,7 +3,8 @@ import Base from "../layouts/Base.astro";
 import Rankings from "../components/Rankings.tsx";
 import AssumptionsPanel from "../components/AssumptionsPanel.tsx";
 import Onboarding from "../components/Onboarding.tsx";
-import { rankedCharities, rankable, theoreticalOnly } from "../lib/data";
+import RankedCount from "../components/RankedCount.tsx";
+import { rankable, theoreticalOnly } from "../lib/data";
 
 ---
 
@@ -17,7 +18,7 @@ import { rankedCharities, rankable, theoreticalOnly } from "../lib/data";
         </p>
       </header>
       <Rankings client:load />
-      <p class="count small muted">{rankedCharities.length - theoreticalOnly.length} charities, {rankable.length} models. <a href="/suggest">Suggest a charity</a></p>
+      <p class="count small muted"><RankedCount client:load /> charities, {rankable.length} models. <a href="/suggest">Suggest a charity</a></p>
       {theoreticalOnly.length > 0 && (
         <p class="small muted">Not ranked, <a href="/method#theoretical">purely theoretical</a>: {theoreticalOnly.map((c, i) => <>{i > 0 && ", "}<a href={`/${c.id}`}>{c.name}</a></>)}.</p>
       )}
