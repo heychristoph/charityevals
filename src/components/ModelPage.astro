@@ -174,7 +174,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           </section>
         </WholeCharity>
         ) : (
-          <WholeCharity client:load id={model.id}>
+          <WholeCharity client:model={model.id} id={model.id}>
           <section class="writeup" aria-labelledby="writeup-title">
             <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
             {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
@@ -217,7 +217,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
       ) : (
         <>
         {located && <Locations client:load id={model.id} />}
-        <ModelView client:load id={model.id} place={place}>
+        <ModelView client:model={model.id} id={model.id} place={place}>
           <Fragment slot="about">
             <p>
               {model.source ? <a href={model.source.url} data-track-kind="source">{plainModelName(model.name)}</a> : <strong>{plainModelName(model.name)}</strong>}
