@@ -633,11 +633,12 @@ export function compute(
 }
 
 /** The rows a headline reads: the output and the rows its unit's conversion reads. */
-function headRows(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs: Record<string, number>, view: View): Record<string, number> {
+function headRows(lib: Library, m: ResolvedModel, av: Record<string, number>, inputs: Record<string, number>, view: View, more: string[] = []): Record<string, number> {
   const { v } = run(lib, m, av, inputs, view);
   const p = rowProgram(m);
   const out: Record<string, number> = {};
   for (let i = 0; i < p.head.length; i++) out[p.head[i]] = v[p.at.get(p.head[i]) ?? -1];
+  for (const id of more) out[id] = v[p.at.get(id) ?? -1];
   return out;
 }
 
@@ -1245,13 +1246,26 @@ export function headline(
   inputs: Record<string, number> = {},
   view: View = "charityevals",
 ): number {
-  if (!m.output) return NaN;
-  const vals = headRows(lib, m, av, inputs, view);
+  return headlineAndRows(lib, m, av, inputs, view).value;
+}
+
+/** A headline and the rows it was worked out from: the head rows, and any of `rows` asked for (the Monte
+ * Carlo checks each draw's bounded shares). */
+export function headlineAndRows(
+  lib: Library,
+  m: ResolvedModel,
+  av: Record<string, number>,
+  inputs: Record<string, number> = {},
+  view: View = "charityevals",
+  rows: string[] = [],
+): { value: number; rows: Record<string, number> } {
+  if (!m.output) return { value: NaN, rows: {} };
+  const vals = headRows(lib, m, av, inputs, view, rows);
   const native = vals[m.output.row];
   const conv = modelConversion(lib, m, view);
   // The view's own rates: the evaluator view converts at the evaluator's pinned values (INV-8).
   const a = viewAssumptions(m, av, view);
-  return conv ? native * evaluate(conv, conversionLookup(lib, a, vals, inputs)) : native;
+  return { value: conv ? native * evaluate(conv, conversionLookup(lib, a, vals, inputs)) : native, rows: vals };
 }
 
 /** Assumptions that can change this model's headline in a view. */

@@ -210,6 +210,8 @@ type Ctx = {
   /** The top row is in years of healthy life per $1,000, shown in the reader's measure. */
   years: boolean;
   fig: Figure;
+  /** The location this model covers, when it is one of several: kept on the top row's label. */
+  place?: string;
 };
 
 /** The models that read a shared fact, when more than one does. */
@@ -439,7 +441,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
   const isOpen = open.has(n.key);
   const branch = isBranch(n);
   const id = domId(n.key);
-  const label = depth === 1 && ctx.years ? ctx.fig.metric.unit : labelOf(m, n);
+  const label = depth === 1 && ctx.years ? `${ctx.fig.metric.unit}${ctx.place ? ` in ${ctx.place}` : ""}` : labelOf(m, n);
   // Below a row whose own published range stands for its uncertainty, parts add none of their own.
   const rangedRow = rangedRowOf(ctx.u, n);
   const ranged = !!rangedRow;
@@ -750,7 +752,7 @@ export default function ModelTree({ model, values, edits = {}, u, flags = [], pl
     }
   };
 
-  const ctx: Ctx = { m: model, look, open, all, focus, flash, u, flags, weight, toggle, showAll, setFocus, edits, glossed: new Set(), years: toCommon !== undefined, fig };
+  const ctx: Ctx = { m: model, look, open, all, focus, flash, u, flags, weight, toggle, showAll, setFocus, edits, glossed: new Set(), years: toCommon !== undefined, fig, place };
   const orphanRow = orphan ? model.byId.get(orphan) : undefined;
   const rowCount = model.rows.length.toLocaleString("en-US");
 

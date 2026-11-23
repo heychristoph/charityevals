@@ -13,6 +13,7 @@
 // hands the browser its full rows.
 import { readFileSync, readdirSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { execFileSync } from "node:child_process";
 import { buildLibrary, assumptionValues, compute, comparable, factUsage, hasRange, type Distribution, type JointEnds, type Library } from "../src/engine/model";
 import { storedDistribution } from "../src/engine/figures";
 import { sensitivity } from "../src/engine/sensitivity";
@@ -147,9 +148,21 @@ function browserModels(built: ReturnType<typeof library>, dist: Record<string, D
   return own.map((r) => stand.get(r.id) ?? r);
 }
 
+/** The fact files the published site ships: the repository's, never files kept out of it on one machine
+ * (a private evaluator's figures in .git/info/exclude), so the build is the same everywhere. */
+function publishedFactFiles(): string[] {
+  const all = walk(join(root, "facts")).sort();
+  try {
+    const tracked = new Set(execFileSync("git", ["ls-files", "facts"], { cwd: root, encoding: "utf8" }).split("\n").filter(Boolean).map((f) => join(root, f)));
+    return tracked.size ? all.filter((f) => tracked.has(f)) : all;
+  } catch {
+    return all;
+  }
+}
+
 const built = library();
 const dist = distributions(built.lib);
-for (const [file, fresh] of [[out, summaries(built, dist)], [browserOut, browserModels(built, dist)], [factsOut, browserFacts(walk(join(root, "facts")).sort().map(read))], [usageOut, factUsage(built.lib)], [distributionsOut, dist]] as const) {
+for (const [file, fresh] of [[out, summaries(built, dist)], [browserOut, browserModels(built, dist)], [factsOut, browserFacts(publishedFactFiles().map(read))], [usageOut, factUsage(built.lib)], [distributionsOut, dist]] as const) {
   if (process.argv.includes("--check")) {
     if (!existsSync(file) || !same(JSON.parse(readFileSync(file, "utf8")), JSON.parse(JSON.stringify(fresh)))) {
       console.error(`${file.slice(root.length + 1)} is out of date: run npx tsx scripts/summaries.ts${firstDiff ? `\n  first difference ${firstDiff}` : ""}`);

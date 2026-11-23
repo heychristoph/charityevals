@@ -1331,9 +1331,13 @@ The uncertainty engine reads every range at its interval.
 seeded by model id): at the defaults, in our view, 1,000 draws of the inputs that carry 99.9% of the
 model's variance, the reader's own value judgments (the sliders) held fixed. Each input is split at its
 best guess, so an asymmetric range stays asymmetric. Inputs without a range take the default spread by
-kind (judgment ×1.5, estimate ×1.3, data ×1.1), a share on its odds so it stays between 0 and 1; a
-negative share added to 1 (an adjustment of −40%) on the factor 1 + x, so it never takes away more than
-everything; calendar years never vary (a row or fact named a year, a whole number from 1950 to 2150 without
+kind (judgment ×1.5, estimate ×1.3, data ×1.1), bounded to what the number can be: a share (a percentage,
+or a number the model takes 1 minus) on its odds so it stays between 0 and 1; a ratio whose effect is its
+distance from 1 (a relative risk in rate × ratio − rate) with the spread on that distance, so the effect keeps
+its sign; a negative share added to 1 (an adjustment of −40%) on the factor 1 + x, so it never takes away
+more than everything. A draw that pushes a computed share (a row `1 - x`) outside 0–1 is drawn again; where
+over three in four draws would be impossible, the defaults don't fit the model and the simulation counts
+as unstable; calendar years never vary (a row or fact named a year, a whole number from 1950 to 2150 without
 a published range, such a number named for a time, or a row in unit "Year": a sheet's timeline index). Stored per model: the result at 5%, 10%, …, 95% and its average, as
 multiples of the best guess, and the share of draws at zero or below. The browser scales this shape with
 the reader's values. Where the reader's values change a model's structure, not just its size, the shape
