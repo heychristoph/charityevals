@@ -54,8 +54,16 @@ export function formatYears(x: number): string {
   if (x >= 100) return Number(x.toPrecision(SIG)).toLocaleString("en-US");
   if (x >= 10) return x.toFixed(0);
   if (x >= 1) return x.toFixed(1);
-  return x.toPrecision(2);
+  if (x >= 0.001 || x === 0) return x.toPrecision(2);
+  // Below a thousandth, a power of ten instead of a row of zeros: 9.6×10⁻⁵, as the rankings' axis reads.
+  let e = Math.floor(Math.log10(x));
+  let m = Number((x / 10 ** e).toPrecision(2));
+  if (m >= 10) (m /= 10, e += 1);
+  return `${m}×10${superscript(e)}`;
 }
+
+const SUPERSCRIPT: Record<string, string> = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+const superscript = (n: number) => String(n).replace(/./g, (c) => SUPERSCRIPT[c] ?? c);
 
 /** Dollars per year of healthy life, from years per $1,000. */
 export function formatCostPerYear(x: number): string {

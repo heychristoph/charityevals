@@ -38,7 +38,9 @@ function spec(d: Driver, best: number, interval: number | undefined, shape: stri
     const sd = (d.spread / Z90);
     // A share stated as certain (0% or 100%) with no range stays so.
     if (share && (best === 0 || best === 1)) return undefined;
-    if (percent && best > -1 && best < 0) return { key: d.key, draw: (g) => (1 + best) * Math.exp(g * sd) - 1 };
+    // A negative share (an adjustment of −2.5% a year, −40%) scales by its own size, as every default does,
+    // and never takes away more than everything: spread on the factor 1 + x, a −2.5% rate would swing ±25%.
+    if (percent && best > -1 && best < 0) return { key: d.key, draw: (g) => Math.max(-1, best * Math.exp(g * sd)) };
     // A share strictly between 0 and 1 spreads on its odds, so it never reaches 0% or 100%.
     if (best > 0 && best < 1 && (d.high <= 1 || bounded)) {
       const logit = Math.log(best / (1 - best));
@@ -182,6 +184,28 @@ const MISS = 1e-9;
 const REDRAWS = 100;
 const inBounds = (p: Plan, rows: Record<string, number>) =>
   p.bounds.every((id) => !(rows[id] < -1e-9 || rows[id] > 1 + 1e-9));
+
+/** For diagnostics (audits, scripts): `n` draws of a model at the defaults, each with its drawn inputs and
+ * its result as a multiple of the best guess. */
+export function sampleDraws(lib: Library, m: ResolvedModel, n = 1000): { inputs: Record<string, number>; x: number }[] {
+  const p: Plan | undefined = plan(lib, m);
+  if (!p) return [];
+  const specs: Spec[] = p.specs, groups: Set<string> = p.groups, gauss: () => number = p.gauss;
+  const out: { inputs: Record<string, number>; x: number }[] = [];
+  for (let i = 0; i < n; i++) {
+    const inputs: Record<string, number> = {};
+    const zs: Record<string, number> = {};
+    for (let k = 0; k < specs.length; k++) {
+      const one: Spec = specs[k];
+      const g: string | undefined = one.group ?? (groups.has(one.key) ? one.key : undefined);
+      const z: number = g ? (zs[g] ??= gauss()) : gauss();
+      inputs[one.key] = one.draw(z);
+    }
+    const x: number = headline(p.lib, p.m, p.av, inputs) / p.central;
+    out.push({ inputs, x });
+  }
+  return out;
+}
 
 /** `n` draws into `xs` (and `smooth`); returns how many draws had to be drawn again. */
 function drawInto(p: Plan, n: number, xs: number[], smooth: number[]): number {

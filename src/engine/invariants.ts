@@ -1141,6 +1141,36 @@ export function inv2d(lib: Library): InvariantReport {
   };
 }
 
+// --- INV-26: a number the simulation varies is read, never typed -----------------------------------------
+
+/** A formula constant that repeats a shared figure with a range (GiveWell's 0.00335 for a dollar given as
+ * cash, @cash.uov_per_dollar): the simulation draws the fact where it is read and keeps the copy fixed, so
+ * one quantity takes two values in the same draw. It must read the fact. Coincidences (12.5 mg of iron)
+ * are waived with their reason. */
+export function inv26(lib: Library): InvariantReport {
+  const ranged = [...lib.facts.values()]
+    .filter((f) => !/^(fx|cpi|countries|meta|next_dollar)\./.test(f.key) && typeof f.value === "object" && f.value.low !== undefined)
+    .map((f) => ({ key: f.key, v: pickValue(f.value) }))
+    .filter((f) => Number.isFinite(f.v) && f.v !== 0);
+  const models = [...lib.models.values()].filter((m) => m.output);
+  const violations: Violation[] = [];
+  for (const m of models) {
+    const path = rowsFeeding(m);
+    for (const r of ownRows(m)) {
+      if (!path.has(r.id) || !r.node) continue;
+      for (const x of new Set(literals(r.formula !== undefined ? parse(r.formula) : (r.node as Node)))) {
+        if (ALLOWED_LITERALS.has(x) || sigDigits(x) < 3) continue;
+        const copies = ranged.filter((f) => Number(f.v.toPrecision(sigDigits(x))) === x);
+        if (copies.length) violations.push({ inv: "INV-26", model: m.id, where: `${r.id} ${fmt(x)}`, detail: `formula ${r.formula} types ${fmt(x)}, the value of ${copies.map((f) => `@${f.key}`).join(" or ")}: read the fact, so the simulation draws one value for it` });
+      }
+    }
+  }
+  return {
+    id: "INV-26", title: "A number the simulation varies is read, never typed", status: "checked", checked: models.length, violations,
+    how: "Every formula row on the path to the output (variants: their overrides): each constant with three or more significant digits, outside lint's ALLOWED_LITERALS, that equals (at its written precision) the best value of a shared fact with a range is flagged. Lookup files (fx, cpi, countries, meta, next_dollar) are left out. A coincidence is waived with its reason.",
+  };
+}
+
 // --- INV-13: same concept, same value ---------------------------------------------------------------
 
 /** Concepts several evaluators' models state, each with its shared version. A literal row naming the
@@ -1803,7 +1833,7 @@ export function inv23(lib: Library, av = asWritten(lib)): InvariantReport {
 /** Every invariant against every model, in the design's order. */
 export function checkAll(lib: Library): InvariantReport[] {
   const av = asWritten(lib);
-  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv9c(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av), inv23(lib, av), inv24(lib), inv25(lib)];
+  return [inv1(lib), inv2a(lib, av), inv2b(lib), inv2c(lib, av), inv2d(lib), inv3(lib), inv4(lib), inv5(lib, av), inv6(lib), inv7(lib), inv8(lib, av), inv9(lib), inv9b(lib, av), inv9c(lib, av), inv5b(lib), inv10(lib, av), sameChange(lib, av), inv11(lib), inv12(lib), inv13(lib), inv14(lib), inv16(lib), inv17(lib, av), inv18(lib, av), inv19(lib, av), inv20(lib, av), inv21(lib, av), inv22(lib, av), inv23(lib, av), inv24(lib), inv25(lib), inv26(lib)];
 }
 
 /** Allowlist file shape: invariant id → sorted "model where" keys. */

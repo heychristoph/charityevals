@@ -437,7 +437,7 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | Staff pay below market | `@staff_pay.*`: share of cost and pay gap by kind of work (goods, staff-delivered help, research and policy, advocacy, media; GiveDirectly's and New Incentives' own) | as listed | facts/staff_pay.json, our judgment, read by 487 staff-pay rows; only matters with "Credit by share of resources" on |
 | Past average vs the next dollar | `@next_dollar.<charity>` (each charity's own; `@next_dollar.no_evidence` in templates) | per charity (no evidence: 49%, 20–90%) | estimate; every model whose `estimate_basis` is `past_average` (2.10) |
 | Depression on the PHQ-9 | `@depression.dalys_per_phq9_point_year`; one SD = `@depression.phq9_sd` PHQ-9 points (4.21, 3.5–5.5) | 0.031 (0.0244–0.0435) | GBD 2019 weights for mild 0.145, moderate 0.396, severe 0.658 placed at the middle of the PHQ-9 bands (Kroenke et al. 2001; moderate covers 10–19), least-squares slope |
-| "1× cash" | `@cash.uov_per_dollar` (new) | 0.00335 (0.00321–0.00872) | GiveWell's benchmark in 142 sheets; low our judgment, high GiveWell's 2024 GiveDirectly |
+| "1× cash" | `@cash.uov_per_dollar` (new) | 0.00335, no range | GiveWell's benchmark in 142 sheets: a unit (what multiples of cash are stated against), not an estimate |
 | A dollar to GiveDirectly (where shifted money would have gone) | `#givedirectly`, live | 0.00872 | GiveWell's Kenya model, the site's cash benchmark; every meta model reads it, never `@cash` |
 | A dollar to GiveDirectly (where money goes) | `#givewell:givedirectly`, live | 0.00993 | GiveWell's figure for the charity on the rankings, as every destination (2.8) |
 | Currencies (pounds, euros, kroner, rupees; naira, Kenyan and Ugandan shillings, Rwandan francs, kwacha, meticais, leones) | `@fx.usd_per_<cur>_<year>` (its reciprocal where a sheet states local currency per dollar) | yearly averages | IRS where it lists the currency (2021–25 live table, 2015–20 archived), else World Bank WDI, official exchange rate (LCU per US$, period average, PA.NUS.FCRF); the year the evaluator's rate is for. A rate for a particular day (a grant date, "Google, 12 July 2024") stays the evaluator's in `published`; our view uses that year's average. `scripts/link-fx.py` |
@@ -1334,8 +1334,8 @@ best guess, so an asymmetric range stays asymmetric. Inputs without a range take
 kind (judgment ×1.5, estimate ×1.3, data ×1.1), bounded to what the number can be: a share (a percentage,
 or a number the model takes 1 minus) on its odds so it stays between 0 and 1; a ratio whose effect is its
 distance from 1 (a relative risk in rate × ratio − rate) with the spread on that distance, so the effect keeps
-its sign; a negative share added to 1 (an adjustment of −40%) on the factor 1 + x, so it never takes away
-more than everything. A draw that pushes a computed share (a row `1 - x`) outside 0–1 is drawn again; where
+its sign; a negative share (an adjustment of −40%, a decline of 2.5% a year) scaled by its own size, never
+below −100%: a default changes a number's size, never its sign. A draw that pushes a computed share (a row `1 - x`) outside 0–1 is drawn again; where
 over three in four draws would be impossible, the defaults don't fit the model and the simulation counts
 as unstable; calendar years never vary (a row or fact named a year, a whole number from 1950 to 2150 without
 a published range, such a number named for a time, or a row in unit "Year": a sheet's timeline index). Stored per model: the result at 5%, 10%, …, 95% and its average, as
