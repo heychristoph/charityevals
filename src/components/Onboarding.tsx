@@ -1,25 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { lib } from "../lib/data";
-import { pickValue } from "../engine/model";
-import { useOverrides } from "../lib/assumption-state";
 import { setConsent, track } from "../lib/analytics";
 import { markOnboarded, openOnboarding } from "../lib/onboarding";
-import { CountrySelect, Slider, Toggle, offered } from "./AssumptionsPanel";
-import "./assumptions.css";
+import { ValueSets } from "./Choices";
 import "./onboarding.css";
 
-/** A first screen (what this is, and the analytics choice that Consent.astro would otherwise ask), then one
- * screen per group of Your values, before the ranking: the same controls as the panel, sharing its state.
- * Opens only on a first visit that starts on the landing page (src/lib/onboarding.ts). */
+/** One screen before the ranking: the value sets as cards, none marked until one is clicked, and the
+ * analytics choice that Consent.astro would otherwise ask. Without that question a click on a set closes
+ * the screen; with it, Accept or Decline does, and the site's own set stays if none was clicked. Opens only
+ * on a first visit that starts on the landing page (src/lib/onboarding.ts). */
 export default function Onboarding() {
   const dialog = useRef<HTMLDialogElement>(null);
-  const body = useRef<HTMLDivElement>(null);
-  /** -1 is the first screen. */
-  const [step, setStep] = useState(-1);
-  const overrides = useOverrides();
-  const groups = lib.assumptions.groups
-    .map((g) => ({ ...g, rows: lib.assumptions.rows.filter((r) => r.section === g.id && !r.fixed) }))
-    .filter((g) => g.rows.length);
+  const [picked, setPicked] = useState<string | null>(null);
 
   useEffect(() => {
     const d = dialog.current;
@@ -29,79 +20,38 @@ export default function Onboarding() {
     if (d.open) track("onboarding_open");
   }, []);
 
-  useEffect(() => {
-    body.current?.scrollTo(0, 0);
-  }, [step]);
-
-  const finish = (how: "done" | "skip") => {
+  const finish = (set: string, analytics?: boolean) => {
+    if (analytics !== undefined) setConsent(analytics);
     markOnboarded();
-    track("onboarding_" + how, { value: step + 1 });
+    track("onboarding_done", { key: set });
     dialog.current?.close();
   };
 
-  const choose = (analytics: boolean) => {
-    setConsent(analytics);
-    document.documentElement.dataset.onboarding = "start";
-    setStep(0);
+  const pick = (id: string) => {
+    setPicked(id);
+    if (document.documentElement.dataset.onboarding !== "ask") finish(id);
   };
 
   // The page's early script may have opened the dialog before hydration: its `open` is expected
   // (suppressHydrationWarning).
-  if (step < 0)
-    return (
-      <dialog ref={dialog} className="onboarding" aria-labelledby="onboarding-title" onCancel={(e) => e.preventDefault()} suppressHydrationWarning>
-        <div className="onboarding-body">
-          <h2 id="onboarding-title">Your values first</h2>
-          <p className="onboarding-lead">Comparing charities takes value judgments with no right answer. Set yours in {groups.length} short steps; the ranking follows them.</p>
-          {/* Both versions of this screen are in the page; html[data-onboarding] shows one (onboarding.css). */}
-          <div className="onboarding-consent ob-ask">
-            <h3>Help us improve charityevals</h3>
-            <p>
-              We'd like to see which charities people look at and how they get there. Accept, and a random id in this browser
-              connects the pages of your visit: no cookies, no names, no ads. Decline, and we count nothing. <a href="/privacy#analytics">How it works</a>
-            </p>
-          </div>
-        </div>
-        <div className="onboarding-actions">
-          <button type="button" className="onboarding-back ob-ask" onClick={() => choose(false)}>Decline</button>
-          <button type="button" className="onboarding-next ob-ask" onClick={() => choose(true)}>Accept</button>
-          <button type="button" className="onboarding-next ob-start" onClick={() => setStep(0)}>Start</button>
-        </div>
-      </dialog>
-    );
-
-  const g = groups[step];
-  const last = step === groups.length - 1;
   return (
     <dialog ref={dialog} className="onboarding" aria-labelledby="onboarding-title" onCancel={(e) => e.preventDefault()} suppressHydrationWarning>
-      <div className="onboarding-top">
-        <ol className="onboarding-progress" aria-label={`Step ${step + 1} of ${groups.length}`}>
-          {groups.map((x, i) => (
-            <li key={x.id} className={i <= step ? "on" : undefined}>
-              <button type="button" aria-label={x.title} aria-current={i === step ? "step" : undefined} onClick={() => setStep(i)} />
-            </li>
-          ))}
-        </ol>
-        <button type="button" className="link-button small" onClick={() => finish("skip")}>Skip</button>
-      </div>
-      <div className="onboarding-body" ref={body}>
-        <h2 id="onboarding-title">{g.title}</h2>
-        <div className="assumptions compact">
-          {g.rows.filter((r) => offered(r, overrides)).map((r) => {
-            const value = overrides[r.id] ?? pickValue(r.value);
-            return r.control === "country"
-              ? <CountrySelect key={r.id} row={r} value={value} compact />
-              : r.format === "toggle"
-              ? <Toggle key={r.id} row={r} value={value} compact />
-              : <Slider key={r.id} row={r} value={value} compact />;
-          })}
+      <div className="onboarding-body">
+        <h2 id="onboarding-title">Your values first</h2>
+        <p className="onboarding-lead">Pick the set closest to yours.</p>
+        <ValueSets picked={picked} onPick={pick} short />
+        {/* Shown only while the analytics question is open; html[data-onboarding] says which (onboarding.css). */}
+        <div className="onboarding-consent ob-ask">
+          <h3>Help us improve charityevals</h3>
+          <p>
+            We'd like to see which charities people look at and how they get there. Accept, and a random id in this browser
+            connects the pages of your visit: no cookies, no names, no ads. Decline, and we count nothing. <a href="/privacy#analytics">How it works</a>
+          </p>
         </div>
       </div>
-      <div className="onboarding-actions">
-        <button type="button" className="onboarding-back" onClick={() => setStep(step - 1)}>Back</button>
-        <button type="button" className="onboarding-next" onClick={() => (last ? finish("done") : setStep(step + 1))}>
-          {last ? "See the ranking" : "Next"}
-        </button>
+      <div className="onboarding-actions ob-ask">
+        <button type="button" className="onboarding-back" onClick={() => finish(picked ?? "default", false)}>Decline</button>
+        <button type="button" className="onboarding-next" onClick={() => finish(picked ?? "default", true)}>Accept</button>
       </div>
     </dialog>
   );

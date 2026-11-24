@@ -20,37 +20,6 @@
 html:has(dialog.onboarding[open]) {
   overflow: hidden;
 }
-.onboarding-top {
-  display: flex;
-  align-items: center;
-  gap: var(--s4);
-  padding: var(--s4) var(--s6);
-  border-bottom: 1px solid var(--rule);
-}
-.onboarding-progress {
-  flex: 1;
-  display: flex;
-  gap: var(--s1);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.onboarding-progress li {
-  flex: 1;
-}
-.onboarding-progress button {
-  display: block;
-  width: 100%;
-  height: 6px;
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius);
-  background: var(--rule);
-  cursor: pointer;
-}
-.onboarding-progress li.on button {
-  background: var(--blue);
-}
 .onboarding-body {
   flex: 1;
   overflow-y: auto;
@@ -61,9 +30,8 @@ html:has(dialog.onboarding[open]) {
   line-height: 1.5;
   margin: 0;
 }
-/* The first screen's two versions: asking the analytics question, or (already answered) only starting. */
-html:not([data-onboarding="ask"]) .onboarding .ob-ask,
-html[data-onboarding="ask"] .onboarding .ob-start {
+/* The analytics question and its buttons show only while it is open. */
+html:not([data-onboarding="ask"]) .onboarding .ob-ask {
   display: none;
 }
 .onboarding-consent {
@@ -81,10 +49,8 @@ html[data-onboarding="ask"] .onboarding .ob-start {
 .onboarding-consent p {
   margin: 0;
 }
-.onboarding .assumptions.compact {
-  padding: 0;
-  background: none;
-  border: 0;
+.onboarding .choices {
+  margin: var(--s5) 0 0;
 }
 .onboarding h2 {
   font-size: 26px;
@@ -127,7 +93,6 @@ html[data-onboarding="ask"] .onboarding .ob-start {
     border: 0;
     border-radius: 0;
   }
-  .onboarding-top,
   .onboarding-body,
   .onboarding-actions {
     padding-left: var(--s4);

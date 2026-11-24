@@ -267,9 +267,12 @@ const toc = [
     <div role="row"><span role="rowheader">Sure thing</span><span role="cell">a little below best</span><span role="cell">about best</span><span role="cell">a little above</span></div>
     <div role="row"><span role="rowheader">Long shot</span><span role="cell">0</span><span role="cell">0</span><span role="cell">4× best</span></div>
   </div>
+  <p id="average">
+    <strong>Or count the average.</strong> Instead of a point in the range, each charity can count at its average result: every possible outcome weighed by its odds. A long shot then counts at its odds times its payoff, the sure thing at about its best guess. This is the expected value most evaluators say they maximise, and the value sets for evidence, high risk, the long run and AI use it. For most health charities the average is about 15% above the best guess; for catastrophic-risk charities, whose rare successes are very large, it is about 2.7 times.
+  </p>
   <Setting client:load ids={["risk_quantile"]} />
   <p id="hits">
-    <a href="https://coefficientgiving.org/research/hits-based-giving/">Hits-based giving</a> (Coefficient Giving, formerly Open Philanthropy) argues for accepting that most bets fail when the few that succeed do far more. At the default 50%, a long shot with less than even odds counts as 0. The <a href="#value-sets">Hits-based value set</a> counts unmeasured results in full and accepts a 90% risk, so a long shot with better than 1-in-10 odds counts at its payoff.
+    <a href="https://coefficientgiving.org/research/hits-based-giving/">Hits-based giving</a> (Coefficient Giving, formerly Open Philanthropy) argues for accepting that most bets fail when the few that succeed do far more. At the default 50%, a long shot with less than even odds counts as 0.
   </p>
 
   <h3 id="climate">Climate</h3>
@@ -469,41 +472,6 @@ const toc = [
   .chain-op {
     font: 400 20px/1 var(--serif);
     color: var(--ink-3);
-  }
-  :global(.choices) {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--s2);
-    margin: var(--s4) 0;
-  }
-  :global(.choice) {
-    display: grid;
-    align-content: start;
-    gap: 4px;
-    padding: var(--s3);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    background: var(--paper);
-    color: var(--ink);
-    text-align: left;
-    font: 14px/1.4 var(--sans);
-    cursor: pointer;
-  }
-  :global(.choice span) {
-    color: var(--ink-2);
-    font-size: 13px;
-  }
-  :global(.choice[aria-pressed="true"]) {
-    border-color: var(--blue);
-    box-shadow: inset 0 0 0 1px var(--blue);
-  }
-  :global(.choice:hover) {
-    border-color: var(--ink-3);
-  }
-  @media (max-width: 560px) {
-    :global(.choices) {
-      grid-template-columns: 1fr;
-    }
   }
   .risk-fig {
     margin: var(--s4) 0;

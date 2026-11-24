@@ -166,6 +166,13 @@ export function applyPreset(id: string) {
   listeners.forEach((l) => l());
 }
 
+/** Every set a reader can pick. The site's own values (every slider at its default) aren't one of them:
+ * they're what applies until a set is picked. */
+export const VALUE_SETS: { id: string; label: string; about: string }[] = PRESETS;
+
+/** Picks a set: the site's own resets every slider. */
+export const chooseSet = (id: string) => (id === "default" ? resetAssumptions() : applyPreset(id));
+
 /** Which set the values are: "default" with none changed, a set's id when they are exactly its values,
  * else "custom". */
 export const presetOf = (o: Overrides) => presetIn(PRESETS, o);

@@ -2,7 +2,7 @@
 // its log-normal plausible range, 1 at 50%, never in the evaluator view.
 import { describe, expect, it } from "vitest";
 import { normInv } from "./expr";
-import { QUANTILES, RISK_OFF, assumptionValues, buildLibrary, bottomLine, headline, plausibleRange, usedAssumptions } from "./model";
+import { QUANTILES, RISK_AVERAGE, RISK_OFF, assumptionValues, buildLibrary, bottomLine, headline, plausibleRange, usedAssumptions } from "./model";
 
 const assumptions = {
   groups: [{ id: "g", title: "G" }],
@@ -39,6 +39,16 @@ describe("risk", () => {
     const r = plausibleRange(lib, m("wide"), headline(lib, m("wide"), at(0.2)), at(0.2))!;
     expect(r.low / best).toBeCloseTo(Math.exp(-S), 6);
     expect(r.high / best).toBeCloseTo(Math.exp(S), 6);
+  });
+  it("counts the simulated average at RISK_AVERAGE, and the plausible range stays", () => {
+    const avg = buildLibrary([model("wide")], assumptions, [], [], [], { distributions: { wide: { q: Q, mean: 1.4, zero: 0 } } });
+    const w = avg.models.get("wide")!;
+    const best = headline(avg, w, av);
+    expect(headline(avg, w, at(RISK_AVERAGE)) / best).toBeCloseTo(1.4, 6);
+    const r = plausibleRange(avg, w, headline(avg, w, at(RISK_AVERAGE)), at(RISK_AVERAGE))!;
+    expect(r.low / best).toBeCloseTo(Math.exp(-S), 6);
+    // Off still means off.
+    expect(headline(avg, w, at(RISK_OFF))).toBe(best);
   });
   it("moves nothing without a simulation, and never the evaluator view", () => {
     expect(headline(lib, m("none"), at(0.05))).toBe(headline(lib, m("none"), av));

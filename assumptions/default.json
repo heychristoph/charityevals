@@ -433,16 +433,17 @@
       "id": "risk_quantile",
       "section": "evidence",
       "label": "Accept a … % risk that the real impact is lower than shown",
-      "technical": "Where in each result's simulated outcomes the figure counted sits: the share of outcomes below it (the reader's own value judgments left out; a single event's chance drawn as happens or doesn't, so a long shot is 0 below its chance). 50% is the best guess where no such event is drawn, less is risk-averse, more risk-seeking (docs/normalization.md 2.18)",
+      "technical": "Where in each result's simulated outcomes the figure counted sits: the share of outcomes below it (the reader's own value judgments left out; a single event's chance drawn as happens or doesn't, so a long shot is 0 below its chance). 50% is the best guess where no such event is drawn, less is risk-averse, more risk-seeking; 100% stands for the simulated average instead, expected value (docs/normalization.md 2.18)",
       "format": "percent",
       "value": 0.5,
       "slider": {
         "low": 0.05,
         "high": 0.95,
-        "linear": true
+        "linear": true,
+        "average": true
       },
       "kind": "judgment",
-      "explainer": "At 50% each charity counts at our best guess, as likely too high as too low, or at 0 if it rests on one event with less than even odds. Less counts a lower figure, one the real impact is more likely to reach: charities with very uncertain results drop, predictable ones barely move. More bets on long shots."
+      "explainer": "At 50% each charity counts at our best guess, as likely too high as too low, or at 0 if it rests on one event with less than even odds. Less counts a lower figure, one the real impact is more likely to reach: charities with very uncertain results drop, predictable ones barely move. More bets on long shots. Or count each charity at its average, as most evaluators do: a long shot then counts at its odds times its payoff."
     },
     {
       "id": "rp_species_weights",
@@ -730,70 +731,71 @@
   ],
   "presets": [
     {
+      "id": "evidence-first",
+      "label": "Evidence-based",
+      "about": "Counts each charity's average result; results nobody measured count 13% and side effects a quarter. A healthy year is worth 2.3 years of double income and a young child's life 50 healthy years.",
+      "values": {
+        "uov_per_daly": 2.3,
+        "daly_per_child_death": 50.5,
+        "missing_data_discount": 0.13,
+        "risk_quantile": 1,
+        "mobiliser_share": 1,
+        "side_effect_weight": 0.25
+      }
+    },
+    {
       "id": "animal-focused",
       "label": "Animal-focused",
-      "about": "A chicken's suffering counts at Rethink Priorities' estimate, a third of a person's, and a day of disabling pain as 107 hours of healthy life. A won reform counts 15 years, Rethink Priorities' estimate of how far campaigns bring it forward.",
+      "about": "A chicken's suffering counts a third of a person's instead of a ten-thousandth, and severe pain weighs heavier. Side effects don't count, good done later counts only 1.4% less a year, and a won reform counts for 15 years, its credit shared with the groups that campaigned for it.",
       "values": {
         "chicken_vs_person": 0.332,
         "daly_per_sad": 0.0122,
-        "win_years_counted": 15
+        "win_years_counted": 15,
+        "discount_rate": 0.014,
+        "side_effect_weight": 0,
+        "resource_shares": 1,
+        "mobiliser_share": 1
       }
     },
     {
       "id": "longtermist",
       "label": "Long-run",
-      "about": "The future counts almost as much as today: 0.1% less a year, lives that never start in full, and Toby Ord's catastrophe chances (AI 10%, pandemics 3%, nuclear war 0.1%). Long shots and results nobody measured count in full.",
+      "about": "Future generations count almost as much as people alive today, and AI, pandemics and nuclear war together have a 13% chance of ending humanity this century. Each charity counts at its average, side effects a quarter, and a chicken's suffering a four-hundredth of a person's.",
       "values": {
-        "discount_rate": 0.001,
+        "discount_rate": 0.0018,
         "never_started_weight": 1,
         "ai_catastrophe_chance": 0.1,
         "bio_catastrophe_chance": 0.0334,
         "nuclear_catastrophe_chance": 0.001,
-        "risk_quantile": 0.9,
-        "missing_data_discount": 1
-      }
-    },
-    {
-      "id": "evidence-first",
-      "label": "Evidence-first",
-      "about": "Only what is measured counts in full: results nobody measured count 13%, and each charity counts at a figure it beats 7 times in 10. Catastrophe chances are superforecasters': AI 0.38%, pandemics 0.01%, nuclear war 0.07%.",
-      "values": {
-        "missing_data_discount": 0.13,
-        "risk_quantile": 0.3,
-        "ai_catastrophe_chance": 0.0038,
-        "bio_catastrophe_chance": 0.0001,
-        "nuclear_catastrophe_chance": 0.00074
-      }
-    },
-    {
-      "id": "wellbeing-focused",
-      "label": "Wellbeing-focused",
-      "about": "Feeling better counts as much as the evidence allows: a point more life satisfaction for a year is worth 100 days of healthy life, not 24.",
-      "values": {
-        "daly_per_wellby": 0.275
+        "risk_quantile": 1,
+        "chicken_vs_person": 0.0025,
+        "side_effect_weight": 0.25
       }
     },
     {
       "id": "hits-based",
-      "label": "Hits-based",
-      "about": "Long shots count: each charity counts at a result it beats only 1 time in 10, and results nobody measured count in full. A healthy year is worth 2.9 years of double income and a young child's life 51 healthy years, as Coefficient Giving values them.",
+      "label": "High risk",
+      "about": "Each charity counts at its average result, long shots included, side effects count a quarter, and each funder gets credit only for its share. A healthy year is worth 2.9 years of double income, and AI and pandemics are twice as likely to end humanity as by default.",
       "values": {
-        "missing_data_discount": 1,
-        "risk_quantile": 0.9,
         "uov_per_daly": 2.885,
-        "daly_per_child_death": 51
+        "daly_per_child_death": 51,
+        "resource_shares": 1,
+        "risk_quantile": 1,
+        "ai_catastrophe_chance": 0.1,
+        "bio_catastrophe_chance": 0.02,
+        "side_effect_weight": 0.25
       }
     },
     {
       "id": "ai-concerned",
       "label": "AI-concerned",
-      "about": "AI has a 20% chance of taking humanity's future, the median of AI safety researchers. The future counts almost in full, lives that never start too, and long shots and results nobody measured count in full.",
+      "about": "AI has a 1-in-5 chance of ending humanity's future this century and will change the world soon, so good that comes decades later counts much less. Lives that never start count in full, each charity at its average, side effects a quarter.",
       "values": {
         "ai_catastrophe_chance": 0.2,
-        "risk_quantile": 0.9,
-        "missing_data_discount": 1,
-        "discount_rate": 0.001,
-        "never_started_weight": 1
+        "discount_rate": 0.038,
+        "never_started_weight": 1,
+        "risk_quantile": 1,
+        "side_effect_weight": 0.25
       }
     }
   ],

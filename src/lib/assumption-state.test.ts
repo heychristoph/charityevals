@@ -46,9 +46,11 @@ describe("value sets", () => {
   it("set only sliders that exist, within their ends", () => {
     for (const p of PRESETS)
       for (const [id, v] of Object.entries(p.values)) {
-        const r = assumptions.rows.find((x) => x.id === id) as { value: number | { low: number; high: number }; slider?: { low?: number; high?: number }; fixed?: boolean } | undefined;
+        const r = assumptions.rows.find((x) => x.id === id) as { value: number | { low: number; high: number }; slider?: { low?: number; high?: number; average?: boolean }; fixed?: boolean } | undefined;
         expect(r, `${p.id}: ${id}`).toBeDefined();
         expect(r!.fixed, `${p.id}: ${id}`).toBeFalsy();
+        // The risk setting's average option sits above its slider (src/engine/model.ts RISK_AVERAGE).
+        if (r!.slider?.average && v === 1) continue;
         // The slider's ends where it has them, else the value's range.
         const range = typeof r!.value === "number" ? { low: r!.value, high: r!.value } : r!.value;
         expect(v).toBeGreaterThanOrEqual(r!.slider?.low ?? range.low);

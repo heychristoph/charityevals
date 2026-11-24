@@ -3,7 +3,7 @@ import { shouldOnboard } from "./onboarding";
 
 const base = { path: "/", search: "", referrer: "", origin: "https://charityevals.org", done: false };
 
-describe("the values walk-through", () => {
+describe("the values screen", () => {
   it("opens on a first visit that starts on the landing page", () => {
     expect(shouldOnboard(base)).toBe(true);
     expect(shouldOnboard({ ...base, referrer: "https://www.google.com/" })).toBe(true);
