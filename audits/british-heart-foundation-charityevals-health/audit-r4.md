@@ -1,6 +1,6 @@
 # Audit: british-heart-foundation-charityevals-health, round 4
 Result: 8.420e-6 uov/$ = 0.00421 years of healthy life per 1,000 dollars (combined range 4.9e-4 to 0.036); cause median 0.1085 (x0.039). Verdict: pass.
-Model-sha: 3274d90eb024489ebe4b084b83fae7695aad2b7d93bd6fea1fbd86a31571f643
+Model-sha: e9fc4af94cb4f303a4de3c9b99082907b59c82a610ab06fa5c10c4580aed5225
 Rules: 0.3.13
 Scope: unchanged since round 3 (health expenditure £54.2m, year to 31 March 2026, less policy and pilots; information and support 74%, RevivR and The Circuit 15%). Scoped round: only the changes in commit 5ebec4e3 were checked (new shared fact chd_remaining_life_ratio, row info_patient_life_share and its use, summary and write-up edits, the compliance-cost quote).
 Mechanical: lint 0 high / 1 medium (far-below, found and explained in round 3, finding 2) / 1 low (spread; the summary says so); invariants none; normalization-audit not run (by instruction).
@@ -32,3 +32,5 @@ Re-stamped (16 Nov 2026): Pre-audit gate cleanup: judgments' explainers name the
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 768b765f.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 32b69cd7.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

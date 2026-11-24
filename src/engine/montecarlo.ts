@@ -3,7 +3,8 @@
 // source states it (`interval`, `shape`; a 90% log-normal by default), the model computed for each
 // draw. Run at build time (scripts/summaries.ts → generated/distributions.json); the browser only scales
 // the stored shape with the reader's values, so the risk slider and the ranges cost nothing to move.
-import { normInv } from "./expr";
+import { normInv, type Node } from "./expr";
+import type { Domain } from "./domains";
 import { QUANTILES, RISK_OFF, RISK_QUANTILE, assumptionValues, compute, headline, headlineAndRows, pickValue, type Distribution, type Library, type ResolvedModel } from "./model";
 import { uncertainty, type Driver } from "./uncertainty";
 
@@ -24,34 +25,44 @@ const hash = (s: string) => [...s].reduce((h, c) => (Math.imul(h, 31) + c.charCo
 /** `group`: rows drawn together (`drawn_with`) share one z. */
 type Spec = { key: string; draw: (z: number) => number; group?: string };
 
-/** How to draw one input from a standard normal z: split at the best guess, so the best guess is the
- * median and an asymmetric range stays asymmetric. */
-/** `percent`: the row is a percentage (format percent): only then is a negative value an adjustment added to 1. */
-/** `bounded`: the model takes 1 minus this number (a share: efficacy, a probability), so it stays in 0–1. */
-function spec(d: Driver, best: number, interval: number | undefined, shape: string | undefined, share: boolean, percent = false, bounded = false): Spec | undefined {
+/** How to draw one input from a standard normal z, by its kind (`domain`, docs/normalization.md 2.18):
+ * split at the best guess, so the best guess is the median and an asymmetric range stays asymmetric, and
+ * no draw is a number of that kind can't be. `adjustment`: a percentage added to 1 (format percent, below
+ * zero), which never takes away more than everything. */
+function spec(d: Driver, best: number, interval: number | undefined, shape: string | undefined, domain: Domain, adjustment: boolean): Spec | undefined {
   if (!Number.isFinite(best)) return undefined;
   const z = interval ? normInv((1 + interval) / 2) : Z90;
-  const clip = (x: number) => (share ? Math.min(1, Math.max(0, x)) : x);
+  const clip = (x: number) =>
+    domain === "share" ? Math.min(1, Math.max(0, x))
+    : domain === "percent" ? Math.min(100, Math.max(0, x))
+    : domain === "signed" ? x
+    : Math.max(0, x);
+  const odds = (p: number) => Math.log(p / (1 - p));
+  const logistic = (x: number) => 1 / (1 + Math.exp(-x));
   if (!d.published) {
-    // A default spread: symmetric in log space around the best guess; a negative share (an adjustment
-    // added to 1) on the factor 1 + x, so it never takes away more than everything.
-    const sd = (d.spread / Z90);
-    // A share stated as certain (0% or 100%) with no range stays so.
-    if (share && (best === 0 || best === 1)) return undefined;
-    if (percent && best > -1 && best < 0) return { key: d.key, draw: (g) => (1 + best) * Math.exp(g * sd) - 1 };
-    // A share strictly between 0 and 1 spreads on its odds, so it never reaches 0% or 100%.
-    if (best > 0 && best < 1 && (d.high <= 1 || bounded)) {
-      const logit = Math.log(best / (1 - best));
-      return { key: d.key, draw: (g) => 1 / (1 + Math.exp(-(logit + g * sd))) };
+    // A default spread says how far a number may be off, by its kind.
+    const sd = d.spread / Z90;
+    // A share on its odds, so it never reaches 0% or 100%; one stated as certain stays so.
+    if (domain === "share") return best > 0 && best < 1 ? { key: d.key, draw: (g) => logistic(odds(best) + g * sd) } : undefined;
+    if (domain === "percent") return best > 0 && best < 100 ? { key: d.key, draw: (g) => 100 * logistic(odds(best / 100) + g * sd) } : undefined;
+    // A ratio's effect is its distance from 1 (a relative risk of 1.11, of 0.8): spread on that distance,
+    // a rise log-normal, a fall on its odds, so the effect keeps its sign.
+    if (domain === "ratio") {
+      if (best > 1) return { key: d.key, draw: (g) => 1 + (best - 1) * Math.exp(g * sd) };
+      if (best > 0 && best < 1) return { key: d.key, draw: (g) => 1 - logistic(odds(1 - best) + g * sd) };
+      return undefined;
     }
-    return { key: d.key, draw: (g) => clip(best * Math.exp(g * sd)) };
+    // A negative adjustment (−2.5% a year, −40%) scales by its own size and never takes away more than all.
+    if (domain === "signed" && adjustment && best > -1 && best < 0) return { key: d.key, draw: (g) => Math.max(-1, best * Math.exp(g * sd)) };
+    // Anything else scales by its own size, keeping its sign.
+    return { key: d.key, draw: (g) => best * Math.exp(g * sd) };
   }
   const { low, high } = d;
   // A share added to 1 (an adjustment of −42%, its range −72% to −19%) can't take away more than all of
   // it: drawn as the factor 1 + x, log-normal, so the factor stays positive.
-  if (percent && shape !== "normal" && low > -1 && high < 1 && low < 0 && low <= best && best <= high) {
+  if (adjustment && shape !== "normal" && low > -1 && high < 1 && low < 0 && low <= best && best <= high) {
     const lo = Math.log((1 + best) / (1 + low)) / z, hi = Math.log((1 + high) / (1 + best)) / z;
-    return { key: d.key, draw: (g) => clip((1 + best) * Math.exp(g * (g < 0 ? lo : hi)) - 1) };
+    return { key: d.key, draw: (g) => (1 + best) * Math.exp(g * (g < 0 ? lo : hi)) - 1 };
   }
   const normal = shape === "normal" || shape === "beta" || d.absolute || !(low > 0 && high > 0 && best > 0);
   if (normal) {
@@ -63,7 +74,7 @@ function spec(d: Driver, best: number, interval: number | undefined, shape: stri
 }
 
 /** What a simulation needs: the inputs to draw and the result to compare with. */
-type Plan = { lib: Library; m: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; central: number; specs: Spec[]; bounds: string[]; positive: string[]; events: { id: string; p: number; key: string; one_of: boolean }[]; groups: Set<string>; gauss: () => number; random: () => number };
+type Plan = { lib: Library; m: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; central: number; specs: Spec[]; bounds: string[]; events: { id: string; p: number; key: string; one_of: boolean }[]; groups: Set<string>; gauss: () => number; random: () => number };
 
 /** A simulation's plan at assumption values `av` (default: the site's) with the reader's edits fixed:
  * an edited number is the reader's, so it isn't drawn. Undefined for a model with no comparable result or
@@ -88,9 +99,6 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
     kept.push(d);
     acc += d.contribution;
   }
-  // A difference that is positive at the best guess (an effect: a rate times a ratio minus the rate) stays
-  // positive where only default spreads feed it: a default says how far a number may be off, never that
-  // an effect reverses. A published range can still take it below zero (docs/normalization.md 2.18).
   // Inputs with a published range (rows by id, shared facts by "@key"): what they can do, they may.
   const published = new Set(kept.filter((d) => d.published).map((d) => (d.scope === "fact" ? `@${d.id}` : d.id)));
   const feeds = new Map<string, Set<string>>();
@@ -106,50 +114,49 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
     return out;
   };
   const defaultOnly = (id: string) => ![...inputsOf(id)].some((x) => published.has(x));
-  // Shares the model takes the complement of (a row `1 - x`, x between 0 and 1 at the best guess): where
-  // only default spreads feed it, such a row and its x stay between 0 and 1 in every draw. An input x is
-  // drawn on its odds; a draw that pushes a computed one outside (an efficacy times an adjustment above
+  // A calculated share (a row stated `domain: share`, as `1 - efficacy` is) stays between 0 and 1 where
+  // only default spreads feed it: a draw that pushes it outside (an efficacy times an adjustment above
   // 100%) is drawn again. A published range keeps its tails: 1 minus a relative risk whose interval runs
   // past 1 is possible harm, not an impossible share.
-  const bounds: string[] = [], shareInputs = new Set<string>();
-  for (const r of m.rows) {
-    const n = r.node;
-    if (!(n?.type === "bin" && n.op === "-" && n.left.type === "num" && n.left.value === 1)) continue;
-    if (!(values[r.id] >= 0 && values[r.id] <= 1) || !defaultOnly(r.id)) continue;
-    bounds.push(r.id);
-    if (n.right.type === "ref" && n.right.scope === "row") shareInputs.add(n.right.name);
-  }
-
-  const positive = m.rows
-    .filter((r) => r.node?.type === "bin" && r.node.op === "-" && values[r.id] > 0 && defaultOnly(r.id))
-    .map((r) => r.id);
-  // A ratio whose effect is its distance from 1 (a relative risk of 1.11 in `rate × ratio − rate`): where
-  // setting it to 1 zeroes such a difference, a default spread goes on that distance, so the effect keeps
-  // its sign and sits at its best guess.
-  const ratioInputs = new Set<string>();
-  if (positive.length) {
-    for (const d of kept) {
-      // A share the model takes 1 minus is drawn on its odds; setting it to 1 zeroes its complement too.
-      if (d.scope !== "row" || d.published || shareInputs.has(d.id) || !(values[d.id] > 0) || values[d.id] === 1) continue;
-      const fed = positive.filter((id) => inputsOf(id).has(d.id));
-      if (!fed.length) continue;
-      const at1 = headlineAndRows(lib, m, av, { ...edits, [d.id]: 1 }, "charityevals", fed).rows;
-      if (fed.some((id) => Math.abs(at1[id]) <= 1e-9 * Math.abs(values[id]))) ratioInputs.add(d.id);
-    }
-  }
+  const bounds = m.rows.filter((r) => r.node && r.domain === "share" && values[r.id] >= 0 && values[r.id] <= 1 && defaultOnly(r.id)).map((r) => r.id);
+  // Two figures of one series (labels the same but for a year) that a formula divides or subtracts, a trend
+  // or a change: drawn together, as `drawn_with` does, so the trend isn't made of two independent errors.
+  const yearless = (id: string) => m.byId.get(id)?.label?.replace(/\b(19|20)\d\d\b/g, "Y");
+  const series: [string, string][] = [];
+  const pairs = (n: Node | undefined): void => {
+    if (!n) return;
+    if (n.type === "bin") {
+      if ((n.op === "/" || n.op === "-") && n.left.type === "ref" && n.right.type === "ref" && n.left.scope === "row" && n.right.scope === "row" && n.left.name !== n.right.name) {
+        const a = yearless(n.left.name), b = yearless(n.right.name);
+        if (a && a === b && a !== m.byId.get(n.left.name)?.label) series.push([n.left.name, n.right.name]);
+      }
+      pairs(n.left); pairs(n.right);
+    } else if (n.type === "neg") pairs(n.arg);
+    else if (n.type === "call") n.args.forEach(pairs);
+  };
+  for (const r of m.rows) pairs(r.node);
+  // Overlapping pairs (2007 / 2023 and 2020 / 2023) are one series: one draw for all of it.
+  const seriesParent = new Map<string, string>();
+  const seriesRoot = (x: string): string => { const p = seriesParent.get(x) ?? x; if (p === x) return x; const r = seriesRoot(p); seriesParent.set(x, r); return r; };
+  const join = (a: string, b: string) => { const ra = seriesRoot(a), rb = seriesRoot(b); if (ra !== rb) seriesParent.set(rb, ra); };
+  // A series from default spreads only (a published range is the source's own); a row `drawn_with` another
+  // joins that row's draw, so a series and an explicit link to it are one draw.
+  const isPublished = (id: string) => published.has(id);
+  const linked = new Set<string>();
+  for (const [a, b] of series) if (!isPublished(a) && !isPublished(b)) (join(a, b), linked.add(a), linked.add(b));
+  for (const r of m.rows) if (r.drawn_with) (join(r.id, r.drawn_with), linked.add(r.id), linked.add(r.drawn_with));
+  // Each input drawn by its kind; one that doesn't state it (INV-27 fails the build) as a positive number.
   const specs: Spec[] = [];
   for (const d of kept) {
     if (d.scope === "row") {
       const r = m.byId.get(d.id);
       const best = values[d.id];
-      const share = r?.format === "percent" && best >= 0 && best <= 1 && (typeof r.value !== "object" || (r.value.high ?? 1) <= 1);
-      const s = ratioInputs.has(d.id)
-        ? { key: d.id, draw: (g: number) => 1 + (best - 1) * Math.exp(g * (d.spread / Z90)) }
-        : spec(d, best, r?.interval, r?.shape, !!share, r?.format === "percent", shareInputs.has(d.id));
-      if (s) specs.push({ ...s, key: d.id, ...(r?.drawn_with ? { group: r.drawn_with } : {}) });
+      const s = spec(d, best, r?.interval, r?.shape, r?.domain ?? "positive", r?.format === "percent");
+      const group = linked.has(d.id) ? `draw:${seriesRoot(d.id)}` : undefined;
+      if (s) specs.push({ ...s, key: d.id, ...(group ? { group } : {}) });
     } else if (d.scope === "fact") {
       const f = lib.facts.get(d.id);
-      const s = f && spec(d, pickValue(f.value), f.interval, f.shape, false, f.format === "percent");
+      const s = f && spec(d, pickValue(f.value), f.interval, f.shape, f.domain ?? "positive", f.format === "percent");
       if (s) specs.push({ ...s, key: `@${d.id}` });
     }
   }
@@ -168,7 +175,7 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
     return Math.sqrt(-2 * Math.log(a)) * Math.cos(2 * Math.PI * b);
   };
   const groups = new Set(specs.flatMap((s) => (s.group ? [s.group] : [])));
-  return { lib, m, av, edits, central, specs, bounds, positive, events, groups, gauss, random };
+  return { lib, m, av, edits, central, specs, bounds, events, groups, gauss, random };
 }
 
 /** A miss is drawn as a vanishing chance rather than 0, a hit as all but certain: a model that divides by
@@ -182,6 +189,31 @@ const MISS = 1e-9;
 const REDRAWS = 100;
 const inBounds = (p: Plan, rows: Record<string, number>) =>
   p.bounds.every((id) => !(rows[id] < -1e-9 || rows[id] > 1 + 1e-9));
+
+/** For diagnostics (audits, scripts): `n` draws of a model at the defaults, each with its drawn inputs and
+ * its result as a multiple of the best guess. */
+export function sampleDraws(lib: Library, m: ResolvedModel, n = 1000): { inputs: Record<string, number>; x: number }[] {
+  const p: Plan | undefined = plan(lib, m);
+  if (!p) return [];
+  const specs: Spec[] = p.specs, groups: Set<string> = p.groups, gauss: () => number = p.gauss;
+  const out: { inputs: Record<string, number>; x: number }[] = [];
+  for (let i = 0; i < n; i++) {
+    const inputs: Record<string, number> = {};
+    const zs: Record<string, number> = {};
+    for (let k = 0; k < specs.length; k++) {
+      const one: Spec = specs[k];
+      const g: string | undefined = one.group ?? (groups.has(one.key) ? one.key : undefined);
+      const z: number = g ? (zs[g] ??= gauss()) : gauss();
+      inputs[one.key] = one.draw(z);
+    }
+    const x: number = headline(p.lib, p.m, p.av, inputs) / p.central;
+    out.push({ inputs, x });
+  }
+  return out;
+}
+
+/** What turns the model's own result into its headline at the plan's values. */
+const convOf = (p: Plan) => p.central / compute(p.lib, p.m, p.av, p.edits)[p.m.output!.row];
 
 /** `n` draws into `xs` (and `smooth`); returns how many draws had to be drawn again. */
 function drawInto(p: Plan, n: number, xs: number[], smooth: number[]): number {
@@ -229,17 +261,20 @@ function drawInto(p: Plan, n: number, xs: number[], smooth: number[]): number {
 const MAX_IMPOSSIBLE = 0.75;
 
 // A miss drawn as a vanishing chance stores as 0.
-const round = (x: number) => (Math.abs(x) < 1e-6 ? 0 : Number(x.toPrecision(4)));
-function quantiles(xs: number[]) {
+// `scale`: what 1 is in (the best guess, for steps stored in the result's own units), so the cutoff is a
+// miss, never a small result.
+const round = (x: number, scale = 1) => (Math.abs(x) < 1e-6 * Math.abs(scale) ? 0 : Number(x.toPrecision(4)));
+function quantiles(xs: number[], scale = 1) {
   xs.sort((a, b) => a - b);
   const at = (p: number) => {
     const k = p * (xs.length - 1), i = Math.floor(k), f = k - i;
     return i + 1 < xs.length ? xs[i] * (1 - f) + xs[i + 1] * f : xs[i];
   };
-  return QUANTILES.map((p) => round(at(p)));
+  return QUANTILES.map((p) => round(at(p), scale));
 }
 
-function summarise(xs: number[], smooth: number[], draws: number, negative = false, redrawn = 0): Distribution | undefined {
+function summarise(xs: number[], smooth: number[], draws: number, central: number, redrawn = 0, conv?: number): Distribution | undefined {
+  const negative = central < 0;
   if (xs.length < draws / 2) return undefined;
   // Multiples of the best guess, in ascending order: the result's order unless the best guess is below
   // zero (net harm, docs/normalization.md 2.21), where the largest multiple is the most harm. Stored in the
@@ -249,9 +284,24 @@ function summarise(xs: number[], smooth: number[], draws: number, negative = fal
   // Reliability is judged on the smooth draws: a long shot's yes/no is meant to swing.
   const s = smooth.length ? quantiles(smooth) : up;
   const mid = s[9], lo = s[0], hi = s[s.length - 1];
-  // Broken, not just wide: the middle far from the best guess, or an end more than 100× from it (either
-  // way, harm included: a grant can do worse than the money's alternative).
-  const unstable = !(mid > 1 / 3 && mid < 3) || hi / mid > 100 || (lo > 0 ? mid / lo > 100 : -lo / mid > 100) || redrawn / (redrawn + draws) > MAX_IMPOSSIBLE;
+  // Broken: most of what the default spreads would draw is impossible. Wide is not broken (the wide-range
+  // caveat says so), and a middle far from the best guess is a result near zero (a net of large opposite
+  // effects): its range is stored in the result's own units, the reader's values moving it by the change in
+  // the best guess, since multiples of a best guess near zero mean nothing.
+  const unstable = redrawn / (redrawn + draws) > MAX_IMPOSSIBLE;
+  void lo; void hi;
+  if (!(mid > 1 / 3 && mid < 3)) {
+    const abs = quantiles(xs.map((x) => x * central), central);
+    return {
+      q: abs,
+      mean: round(xs.reduce((s, x) => s + x, 0) / xs.length),
+      zero: round(xs.filter((x) => (negative ? x >= -1e-6 : x <= 1e-6)).length / xs.length),
+      additive: true,
+      at: Number(central.toPrecision(6)),
+      ...(conv !== undefined && Number.isFinite(conv) ? { conv: Number(conv.toPrecision(6)) } : {}),
+      ...(unstable ? { unstable: true } : {}),
+    };
+  }
   return {
     q,
     mean: round(xs.reduce((s, x) => s + x, 0) / xs.length),
@@ -270,7 +320,7 @@ export function simulate(lib: Library, m: ResolvedModel, draws = 1000, av?: Reco
   if (!p) return undefined;
   const xs: number[] = [], smooth: number[] = [];
   const redrawn = drawInto(p, draws, xs, smooth);
-  return summarise(xs, smooth, draws, p.central < 0, redrawn);
+  return summarise(xs, smooth, draws, p.central, redrawn, convOf(p));
 }
 
 /** The same, in batches that give the page back between them (a model page re-simulating after the
@@ -286,5 +336,5 @@ export async function simulateInSteps(lib: Library, m: ResolvedModel, av: Record
     redrawn += drawInto(p, Math.min(batch, draws - done), xs, smooth);
     await new Promise((r) => setTimeout(r, 0));
   }
-  return cancelled() ? undefined : summarise(xs, smooth, draws, p.central < 0, redrawn);
+  return cancelled() ? undefined : summarise(xs, smooth, draws, p.central, redrawn, convOf(p));
 }

@@ -25,7 +25,7 @@ A dollar it directs is worth what its grantees achieve, read live under your val
 
 - **Health and economic empowerment** is valued at its grantees with a figure on the rankings (Evidence Action, Clinton Health Access Initiative, Fika, Precision Development, Helen Keller Intl and Save the Children), weighted by their 2025 grants. The accounts don't separate grants to its recommendations from members' other grants, so every modelled grantee on the list is read. Its other grantees there, such as Raising the Village, take their average.
 - **Climate** is valued at Clean Air Task Force and SilverLining, and **catastrophic risks** at SecureBio, its one grantee there with a model here.
-- **Education** has no grantee with a published model here. Education charities are filed under global health, so education takes the global-health charities on the rankings, with equal weights.
+- **Education** has no grantee with a published model here. Education charities are filed under global health, so education takes the global-health portfolio: GiveWell's four Top Charities, weighted by its 2025 funds to them.
 - **System change, global security** and the small unlabelled slices: the chart gives no breakdown of them, so they take the average of the rest.
 
 Its members also gave $163 million to charities it doesn't recommend. The share it caused that is new money is valued at an ordinary charity's worth, as Giving What We Can's model values its donors' giving below its bar, after taking out transfers to other donor-advised funds.

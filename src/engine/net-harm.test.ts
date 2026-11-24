@@ -57,7 +57,11 @@ describe("net harm", () => {
     expect(flags(lib, m, { low: -1000, high: -1, judgment: 0, points: 0 }).map((f) => f.short)).toContain("wide range");
   });
   it("shows the figure with a minus sign, before any prefix", () => {
-    expect(formatYears(-0.0023)).toBe("−0.0023");
+    expect(formatYears(-0.23)).toBe("−0.23");
+    // Below a tenth either way, the site's precision ends.
+    expect(formatYears(-0.0023)).toBe("> −0.1");
+    expect(formatYears(0.0023)).toBe("<0.1");
+    expect(figureIn(METRICS.find((x) => x.id === "dollars")!, 0.001).format(-3)).toBe("> −$0.1");
     expect(formatYears(-250)).toBe("−250");
     const dollars = METRICS.find((x) => x.id === "dollars")!;
     expect(figureIn(dollars, 2).format(-3)).toBe("−$6.0");
@@ -69,4 +73,29 @@ describe("net harm", () => {
     expect(headline(l, models[0], assumptionValues(l.assumptions))).toBeLessThan(0);
     expect(lintModel(l, models[0]).map((f) => f.code)).not.toContain("non-positive");
   }, 60_000);
+});
+
+describe("a result near zero (additive)", () => {
+  const near = { id: "near", name: "near", kind: "charity", cause: "global-health", output: { row: "out", unit: "u", label: "per $" },
+    rows: [input("a", { low: 1, best: 10, high: 100 }), input("b", { low: 1, best: 9.9, high: 98 }), { ...input("c", 1), domain: "positive" }, { id: "out", label: "out", formula: "c * (a - b)" }] };
+  const base = buildLibrary([near], assumptions);
+  const m0 = base.models.get("near")!;
+  const av = assumptionValues(base.assumptions);
+  it("keeps an edited model's range on its own simulation: the edit isn't applied to the spread twice", () => {
+    const edits = { c: 0.5 };
+    const live = simulate(base, m0, 2000, av, edits)!;
+    expect(live.additive).toBe(true);
+    const lib = buildLibrary([near], assumptions, [], [], [], { distributions: { near: live } });
+    const m = lib.models.get("near")!;
+    const central = headline(lib, m, av, edits);
+    const r = plausibleRange(lib, m, central, av, edits)!;
+    expect(r.low).toBeCloseTo(central + live.q[0] - live.at!, 9);
+    expect(r.high).toBeCloseTo(central + live.q[18] - live.at!, 9);
+  });
+  it("keeps a tiny result's spread: only a miss stores as zero", () => {
+    const tiny = simulate(base, m0, 2000, av, { c: 1e-13 })!;
+    expect(tiny.additive).toBe(true);
+    expect(tiny.q[0]).toBeLessThan(0);
+    expect(tiny.q[18]).toBeGreaterThan(0);
+  });
 });

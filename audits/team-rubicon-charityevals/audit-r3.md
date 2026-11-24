@@ -22,7 +22,7 @@ Only the changed rows. `ltr_value_per_home` and `unmodelled_benefits_adj` are la
 Unchanged from round 2: `$missing_data_discount`, `$uov_per_daly`, `resp_counterfactual_adj`, `resp_price_ratio`, `resp_inkind_value`.
 
 Verdict: pass. Findings: 0 high, 0 medium, 3 low.
-Model-sha: 8419e9519e581328d972045245df0ddf1c6094298ea05115863004642e84b4f3
+Model-sha: 5ddbb7980152dda98a75c478c6af51c25cadcfe93fe5c3ff65810d82bd19ee43
 Rules: 0.3.13
 
 Re-stamped after merge: the summary low fixed ("about a fifth" → "about a quarter", computed 23%); no other change.
@@ -37,3 +37,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against c42a537d.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

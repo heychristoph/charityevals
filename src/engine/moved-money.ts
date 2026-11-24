@@ -32,9 +32,9 @@
 // Every destination is read at the figure the site ranks its charity by: the charity's primary
 // evaluator's programme- and location-weighted figure, `#owner:charity` (src/engine/ranking.ts
 // evaluatorFigure), never one of its models alone (a median location sheet can be a fifth of it). A
-// model read by its id (`#id`) only where its charity has no figure on the rankings. A cause's or area's
-// charities on the rankings, equal weights, are `#cause:x` (ranking.ts causeFigure): money that goes to a
-// cause with no recipient modelled.
+// model read by its id (`#id`) only where its charity has no figure on the rankings. A cause's portfolio,
+// named charities weighted by a published fund's grants, is `#cause:x` (ranking.ts causeFigure): money that
+// goes to a cause with no recipient modelled.
 //
 // GiveDirectly, two reads: money that goes to GiveDirectly is a destination like any other, at the
 // figure the rankings show (#givewell:givedirectly, GiveWell's five-country aggregate, 0.00993 units of

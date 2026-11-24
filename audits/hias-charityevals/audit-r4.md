@@ -1,5 +1,5 @@
 # Audit: hias-charityevals, round 4 (scoped)
-Model-sha: 8992558c54cb6105310ee9bc301f7150ce20d375a658e175e5b23a91bb04aec0
+Model-sha: 1e4ca6bde7e440d8e1bee866424a026f0a9be72addd92bb86733667892fe540a
 Rules: 0.3.13
 Scope: only the explainer changes since 04a7b33 (leg_wait_years, leg_removed_if_lost, leg_remit_share) and the write-up's legal bullet and RSC line. No input changed, so the result is unchanged (3.133e-6 daly/$).
 Mechanical: audit-model 0 high / 0 medium / 2 low (far-below, spread; both stated in the summary, unchanged); no files rewritten.
@@ -27,3 +27,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

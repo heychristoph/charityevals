@@ -1,6 +1,6 @@
 # Audit: 1day-sooner-charityevals, round 7 (scoped verification)
 Result: 1.519 years of healthy life per $1,000 (was 1.639, -7.3%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: e611d994cb6afa7a3885a6f9ac13c7ebbbc06456c234c64ab9dbe2eeb5c60054
+Model-sha: c3aa778114db52a26cfa35437c6500eb64fcc225022f229a43af321d661cc3e9
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, never-started-prose and never-started-branches only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -18,3 +18,5 @@ Summary and write-up read. Shares recomputed from w_ times the adjustments: pand
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

@@ -10,7 +10,7 @@ Scope: since round 7 only the explainer of ue_family_tx was reworded (diff: one 
 Previous round: round 7's low finding (explainer wording) resolved.
 
 Verdict: pass (no high, no medium, no low)
-Model-sha: 61c964339b7fb251c90f017d12bc56ea743dd86846b820b6219023ec04491143
+Model-sha: 7b594b9c9888b9b937a0a22724414dcc6ee1b227239940ac8c6e01f7998f56ed
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.00283 → 0.00305.
@@ -21,3 +21,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 4 rows changed, against cc9a04dd.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

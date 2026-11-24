@@ -14,7 +14,7 @@ Checks passed:
 - Explainers: no comparison with other charities, medians or peers (the World Vision mention is gone from both rows).
 
 Verdict: pass
-Model-sha: c0bb9605e1ffba7474ae7f98a9b7c460d6e470ec2febcd8d4c7c8f1b87d6806b
+Model-sha: 58f6c54d29c6078017e024631064eec519eb01edfc88083e8e09ef07b0b79f7b
 Rules: 0.3.13
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2b148c62.
@@ -26,3 +26,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the page's plausible range (placeholders). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against d150f0b2.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

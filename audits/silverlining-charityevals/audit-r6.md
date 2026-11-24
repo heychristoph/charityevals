@@ -1,6 +1,6 @@
 # Audit: silverlining-charityevals, round 6 (scoped verification of round 5's fixes)
 Result: 0.9885 x 0.1989 / 0.1944 = 1.01 tco2e/$ = 0.1989 years of healthy life per 1,000 dollars at mobiliser_share 100%; range not re-run (scoped). Verdict: pass.
-Model-sha: db7a88fb33060263e1ab2a3148d8a210350d5a3ba608c123013cd1ceef29438d
+Model-sha: 1bbd122096f190ab99a4ff3c344b259fdfc58d933d06803e51482b78ba47825f
 Rules: 0.3.13
 Scope: round 5's two findings and the text they touch.
 Preflight: headline 0.198924 reproduced; no blocking line seen (the generated-distributions line ignored as briefed).
@@ -19,3 +19,5 @@ None new (round 5 fetched the SilverLining 5-years page).
 Unchanged from round 5.
 
 Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline 0.1989 → 0.05968 (−70%), 17 rows changed, against 2b24b73c.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

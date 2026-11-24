@@ -437,7 +437,7 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 | Staff pay below market | `@staff_pay.*`: share of cost and pay gap by kind of work (goods, staff-delivered help, research and policy, advocacy, media; GiveDirectly's and New Incentives' own) | as listed | facts/staff_pay.json, our judgment, read by 487 staff-pay rows; only matters with "Credit by share of resources" on |
 | Past average vs the next dollar | `@next_dollar.<charity>` (each charity's own; `@next_dollar.no_evidence` in templates) | per charity (no evidence: 49%, 20–90%) | estimate; every model whose `estimate_basis` is `past_average` (2.10) |
 | Depression on the PHQ-9 | `@depression.dalys_per_phq9_point_year`; one SD = `@depression.phq9_sd` PHQ-9 points (4.21, 3.5–5.5) | 0.031 (0.0244–0.0435) | GBD 2019 weights for mild 0.145, moderate 0.396, severe 0.658 placed at the middle of the PHQ-9 bands (Kroenke et al. 2001; moderate covers 10–19), least-squares slope |
-| "1× cash" | `@cash.uov_per_dollar` (new) | 0.00335 (0.00321–0.00872) | GiveWell's benchmark in 142 sheets; low our judgment, high GiveWell's 2024 GiveDirectly |
+| "1× cash" | `@cash.uov_per_dollar` (new) | 0.00335, no range | GiveWell's benchmark in 142 sheets: a unit (what multiples of cash are stated against), not an estimate |
 | A dollar to GiveDirectly (where shifted money would have gone) | `#givedirectly`, live | 0.00872 | GiveWell's Kenya model, the site's cash benchmark; every meta model reads it, never `@cash` |
 | A dollar to GiveDirectly (where money goes) | `#givewell:givedirectly`, live | 0.00993 | GiveWell's figure for the charity on the rankings, as every destination (2.8) |
 | Currencies (pounds, euros, kroner, rupees; naira, Kenyan and Ugandan shillings, Rwandan francs, kwacha, meticais, leones) | `@fx.usd_per_<cur>_<year>` (its reciprocal where a sheet states local currency per dollar) | yearly averages | IRS where it lists the currency (2021–25 live table, 2015–20 archived), else World Bank WDI, official exchange rate (LCU per US$, period average, PA.NUS.FCRF); the year the evaluator's rate is for. A rate for a particular day (a grant date, "Google, 12 July 2024") stays the evaluator's in `published`; our view uses that year's average. `scripts/link-fx.py` |
@@ -661,9 +661,8 @@ model was removed); INV-12 requires it of any model with a row on its path about
   computed live from its ranked programme models and their locations, src/engine/ranking.ts `evaluatorFigure`);
   before, each was one sheet (Evidence Action's syphilis sheet, 0.0963 units of value per dollar, now 0.0591;
   Malaria Consortium's single SMC location, 0.0490, now 0.0803). Better Futures Guide recommends
-  livelihoods charities and has published none yet: the livelihoods charities the site models, live, equal weights
-  (`value_livelihoods`: GiveDirectly, Bandhan, Village Enterprise, Raising the Village, One Acre Fund), not
-  GiveWell's health charities. CEARCH's research and grants are global-health policy (hypertension and salt, lead,
+  livelihoods charities and has published none yet: the livelihoods portfolio (`#cause:livelihoods`, GiveWell's
+  livelihoods grants), not GiveWell's health charities. CEARCH's research and grants are global-health policy (hypertension and salt, lead,
   tobacco and alcohol taxes): global health, not the across-causes mix. No model used the mix after this, and it
   was removed on 2026-11-02 (above).
 - *Leverage, latest and marginal.* The Life You Can Save's 3-year ratio is 9.19 (2025 report); a ratio of money
@@ -692,8 +691,8 @@ model was removed); INV-12 requires it of any model with a row on its path about
   its money by recipient or cause (`@meta.<org>_moved_*`), live results and the shared destination rows only
   (`isDestinationMix`, INV-12). A recipient with a model is read live, at its figure on the rankings (below); a fund that follows an evaluator, at
   that evaluator's charities (`value_global_health`); a recipient without a model, at its cause's modelled
-  average within the split, or, when none of the cause's recipients is modelled, at the cause's charities
-  on the rankings with equal weights (`#cause:x`, below); other meta charities and causes the site has no published model for, at
+  average within the split, or, when none of the cause's recipients is modelled, at the cause's portfolio
+  (`#cause:x`, below); other meta charities and causes the site has no published model for, at
   the average of the rest (they drop out); recipients below the organisation's own bar, at
   `@meta.prior_vs_cash × #givedirectly`, an ordinary charity, so shifted money to them gains nothing.
 - *Its own effect.* Money moved counts only the giving the organisation caused: recorded donations × the
@@ -719,26 +718,23 @@ own figures instead of the average.
 | CEARCH | 43.5 → 65.5 | 160 → 242 (reads V) |
 | Better Futures Guide | 7.44 → 7.97 | 27.9 |
 
-**November 2026: a cause's average, read live (`#cause:x`).** Money to a cause with no recipient modelled
-was valued at hand-typed equal-weight lists of models, which went stale as models landed (Giving What We
-Can's catastrophic-risk stand-in averaged 4 of the 12 ranked charities). `#cause:x` is the equal-weight
-mean of the charities on the rankings in cause x, or in area x (a charity's `area`: ai, biosecurity,
-nuclear, democracy, livelihoods), each at its primary evaluator's figure, the one the rankings show
-(src/engine/ranking.ts `causeFigure`). Left out: the reading model's own charity, money movers
-(`beneficiaries: "destinations"`), so no model reads itself through its cause, unpublished
-evaluators' models (not in the library), and what `$ignore_old_estimates` leaves off the rankings (2.15):
-an evaluator's old programmes, the next evaluator standing in where none is left, a charity with none
-left (no model moved: the causes read then held none; the animal cause, read since, drops four of ACE's
-2016 estimates, 1.09 → 0.37 × 10⁻⁵). A model added to the cause enters it; buildLibrary reports an
-unknown cause or area, an empty one and any cycle. Not changed: named recipients without shares
-(GiveWell's influenced money), CEARCH (GiveWell's Top Charities) and The Life You Can Save (its own split).
+**November 2026: a cause's portfolio (`#cause:x`).** Money to a cause with no recipient named is valued at
+the cause's portfolio: named charities weighted by what a published fund gave them for that cause's work
+(assumptions `portfolios`, each with its source and the share of the fund's money its members cover), each
+at its primary evaluator's figure on the rankings (src/engine/ranking.ts `causeFigure`). It moves with the
+reader's values, never with which charities are on the site. Members are the fund's grantees that the site
+models and that do the work, whatever cause the site files them under; money movers (80,000 Hours, Longview)
+are left out, as they value moved money through these portfolios. Sources: GiveWell's Top Charities (global
+health) and livelihoods grants, ACE's Recommended Charity Fund, the Giving Green Fund, Coefficient Giving's
+AI, biosecurity and catastrophic-risk funds, and for nuclear and democracy, where no donor fund publishes its
+grants, the Carnegie Corporation's. The reading model's own charity is left out; under
+`$ignore_old_estimates` a member with no estimate left drops out and the others' weights are renormalised.
+buildLibrary reports a cause without a portfolio and a member not on the site. Replaced (23 Nov 2026) the
+equal-weight mean of every ranked charity in the cause, under which adding any charity to the site moved
+every model reading it. Not changed: named recipients without shares (GiveWell's influenced money), CEARCH
+(GiveWell's Top Charities) and The Life You Can Save (its own split).
 
-*Why equal weights (decided 2026-11-18).* Money a meta charity moves goes towards the charities it rates best,
-so the cause's figure has to keep the top of the cause. Weighted by spending it becomes the mainstream mix
-(global health led by the Salvation Army and United Way, animal welfare by the ASPCA): 10 models fell, five
-below zero. The median and a 10% trimmed mean both drop the top (all three Rethink Priorities models below
-zero under either). So the mean stays equal-weight, a young net-harm charity included, as it counts like any
-other. Where money is spread over named charities in proportion to what they spend, a formula weighs them by
+Where money is spread over named charities in proportion to what they spend, a formula weighs them by
 `#spending:<charity>`, the charity's programme spending in USD from its accounts (`spending.programme`,
 ranking.ts `spendingOf`), in `wavg(w1, x1, w2, x2, ...)`: Ambitious Impact's average of the charities it launched, whose money each
 charity spends. Spending is recorded, never guessed: from the charity's accounts, or, without published
@@ -1331,11 +1327,13 @@ The uncertainty engine reads every range at its interval.
 seeded by model id): at the defaults, in our view, 1,000 draws of the inputs that carry 99.9% of the
 model's variance, the reader's own value judgments (the sliders) held fixed. Each input is split at its
 best guess, so an asymmetric range stays asymmetric. Inputs without a range take the default spread by
-kind (judgment ×1.5, estimate ×1.3, data ×1.1), bounded to what the number can be: a share (a percentage,
-or a number the model takes 1 minus) on its odds so it stays between 0 and 1; a ratio whose effect is its
-distance from 1 (a relative risk in rate × ratio − rate) with the spread on that distance, so the effect keeps
-its sign; a negative share added to 1 (an adjustment of −40%) on the factor 1 + x, so it never takes away
-more than everything. A draw that pushes a computed share (a row `1 - x`) outside 0–1 is drawn again; where
+kind of source (judgment ×1.5, estimate ×1.3, data ×1.1), bounded by the kind of number the input states
+(`domain`, INV-27; every input row and shared fact): a `share` (0–1) on its odds so it stays between 0 and 1;
+a `percent` (0–100) the same; a `ratio` whose effect is its distance from 1 (a relative risk) with the spread
+on that distance, so the effect keeps its sign; `positive` log-normal; `signed` scaled by its own size, a
+negative percentage (an adjustment of −40%) never below −100%: a default changes a number's size, never its
+sign. A published range is clipped to the kind. A draw that pushes a calculated share (a row stated `domain:
+share`, as every `1 - x` between 0 and 1 is) outside 0–1 is drawn again; where
 over three in four draws would be impossible, the defaults don't fit the model and the simulation counts
 as unstable; calendar years never vary (a row or fact named a year, a whole number from 1950 to 2150 without
 a published range, such a number named for a time, or a row in unit "Year": a sheet's timeline index). Stored per model: the result at 5%, 10%, …, 95% and its average, as
@@ -1343,19 +1341,20 @@ multiples of the best guess, and the share of draws at zero or below. The browse
 the reader's values. Where the reader's values change a model's structure, not just its size, the shape
 is approximate. On a model's page the simulation runs again at the reader's values and edits.
 
-**Unstable simulations.** Where the simulated middle is more than 3× from the best guess, or the range runs
-more than 100× either side of it, harm included (a result that is a small difference of large numbers, or a
-ratio near zero), the simulation isn't used. Most of the first 26 were calendar years drawn as uncertain
-(fixed above) or results that honestly run below zero (a grant that does worse than the money's alternative),
-which the 50× test of the first version wrongly caught. The rest had causes in how inputs were drawn, now
-fixed for every model: a negative number is an adjustment added to 1 only where the row is a percentage (a
-regression slope of −0.03 drawn as one swung to +0.56); a share stated as certain (0% or 100%) with no range
-stays so; a row compared with a timeline year in a formula (the year a cost period begins) is a position,
-never drawn; figures of one series from one source in other years or places (`drawn_with: <row id>`) share
-one draw, so a trend taken from their differences doesn't swing (Evidence Action's iron and folic acid in
-India); Better Season Project's monthly income falls are floored at −90%, which no best guess reaches, so
-the log stays defined. None is unstable (November 2026). Where one is, the model counts at its best guess at
-every risk setting, its range falls back to every ranged input at its end, and it carries a caveat.
+**Unstable simulations.** A simulation counts as broken only where most of what the default spreads would
+draw is impossible (over three in four draws). A wide range is not broken: the wide-range caveat says so. A
+result near zero, a net of large opposite effects whose simulated middle is more than 3× from the best guess
+(Coalition for Rainforest Nations, Project Drawdown), keeps its simulated range in its own units: the reader's
+values move it by the change in the best guess, and the risk setting doesn't move it, since multiples of a
+best guess near zero mean nothing. Earlier causes, fixed for every model: calendar years drawn as uncertain; a
+negative number added to 1 only where the row is a percentage; a share stated as certain stays so; a row
+compared with a timeline year is never drawn; one series from one source shares one draw (`drawn_with`);
+kinds of number read from the formulas' shapes, missing a percentage written 0 to 100 (Dansk Vegetarisk
+Forening): every input now states its kind, checked against its value and every formula that takes 1 minus
+it (scripts/domains.ts wrote the first ones); two figures of one series (labels the same but for a year)
+that a formula divides or subtracts drawn together. None is
+broken (November 2026). Where one is, it counts at its best guess, its range falls back to every input at its
+end, and it carries a caveat.
 
 **Single events.** A row that is the chance one event happens at all (a new charity succeeds, a law passes,
 GiveWell funds the follow-on), not a share of many people or projects, is marked `single_event`, and the

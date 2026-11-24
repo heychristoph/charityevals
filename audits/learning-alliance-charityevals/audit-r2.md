@@ -1,6 +1,6 @@
 # Audit: learning-alliance-charityevals, round 2
 Result: 0.03881 uov/$ = 19.40 years of healthy life per 1,000 dollars (combined range 1.52–247.5); cause median 0.1169 (×166). Verdict: pass.
-Model-sha: c8de47d2aae10719a0649679cb2f2e0398bde24e95bb667a0c5a2c59fa291add
+Model-sha: 7b8880b7f629b941142cbb53dc448ef1ce90291cdeabaaf5fc2e086b136b50da
 Rules: 0.3.13
 Scope: unchanged from round 1 (one programme, calendar 2025, $240,000 all-in, over 20,000 pupils, 75 schools in Iganga District). Scoped verification: round 1's one medium and the changes made for it, plus any new high or medium those changes introduced. No full re-audit.
 Preflight: pass (la-preflight2.txt; no blocking lines).
@@ -39,3 +39,5 @@ Previous round: finding 1 (medium, decoding_weight / learning_gain_sd): resolved
 Unchanged in kind: `$discount_rate`, `$uov_per_daly`, the shared persistence, resource-sharing and earnings figures, then the model's own `decoding_weight` (judgment, 10.95–27.35 at its ends), `evidence_adj` (judgment, 12.47–26.33), `spm_effect_sd` and `wpm_effect_sd` (measured, verified). `subtask_correlation` does not appear in the top 12. The model's own joint range is −0.41 to 93. The November 2026 endline would improve the model most.
 
 Re-stamped (18 Nov 2026): round 2's optional low applied: subtask_correlation's anchor called a between-school pattern (wording only). Mechanical: headline unchanged, against f7576c62.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

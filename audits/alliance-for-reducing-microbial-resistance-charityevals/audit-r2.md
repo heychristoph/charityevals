@@ -1,6 +1,6 @@
 # Audit: alliance-for-reducing-microbial-resistance-charityevals, round 2
 Result: 1.012e-4 uov/$ = 0.0506 years of healthy life per 1,000 dollars (combined range 0.00045–5.75). Verdict: pass.
-Model-sha: ee4d0ca0e2bdf1251169d49f689e01233ba153858595595e952d9e78e04b3ba8
+Model-sha: 557fa7ee19c7da295dca62b3fb9e01a31487754d64e2530952056c20be5c079b
 Rules: 0.3.13
 Scope: unchanged from round 1 (scoped verification only).
 Preflight: pass (two low lines, generated files stale; regenerate with `npx tsx scripts/summaries.ts` before commit).
@@ -33,3 +33,5 @@ No new high or medium from the changes: the HIC facts are ranged judgments with 
 Unchanged: `eu_subscription_eur_per_year` (judgment), `$mobiliser_share`, `attribution_share_shared`, `eu_additional_share`, `$win_years_counted`. Result 0.0685 → 0.0506, in line with the moves from findings 2, 3, 5 and 6.
 
 Re-stamped (18 Nov 2026): round-2 low L1: the national branch's source now shows the Swiss consultation's date (scienceindustries' response form); wording and source only. Mechanical: headline unchanged, against a36e32dc.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

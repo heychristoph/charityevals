@@ -1,6 +1,6 @@
 # Audit: animal-policy-international-charityevals, round 2
 Result: -50.94 ced/$ = -0.005604 years of healthy life per 1,000 dollars (combined range -0.1178 to -0.000267); cause median 1.214e-4 (×-46). Verdict: pass.
-Model-sha: 355b18233424c2d638626f59d4edb01bf157b45a2741a39d7b03d7711f7b4642
+Model-sha: c587647bb6564421380702177b86247511fc442e744fd538e3dd8f12450d69db
 Rules: 0.3.13
 Scope: unchanged from round 1 (all of API's 2025 work as one programme line, with EU, UK and New Zealand branches); a scoped verification of round 1's highs and mediums.
 Preflight: pass (no blocking lines). Lows: generated/distributions.json and usage.json out of date (run `npx tsx scripts/summaries.ts`). audit-model: no invariant violations, one lint medium (`spread`, 5,622× on the model's own ranges), already answered by the summary's "mostly judgment".
@@ -36,3 +36,5 @@ New-change checks: no double counting between `eu_conversion_share` and `eu_shif
 Unchanged in kind from round 1: `$mobiliser_share`, `$win_years_counted`, `$missing_data_discount` (shared judgments), `@next_dollar.animal_policy_international` (judgment-built, 15-95%), and the EU cost (now an estimate from API's price rise × Eurostat's production value, with the shifted-trade share a ranged judgment). The sign is still set by the site's default chicken weight. What would most improve the model: the Commission's impact assessment of the laying-hen proposal (due by December 2026) for the EU cost, API's real 2025 spending from the Estonian register, and co-advocates' EU spending to anchor `eu_attribution_share_shared`.
 
 Re-stamped (18 Nov 2026): round-2 lows #1 and #2 applied (write-up gives the move in healthy years per 1,000 dollars; `eu_battery_cost_ratio` tagged estimate, explainer notes the base difference). No value changed; headline unchanged.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

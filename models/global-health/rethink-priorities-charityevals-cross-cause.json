@@ -9,7 +9,7 @@
  "estimate_basis": "past_average",
  "charity": "rethink-priorities",
  "owner": "charityevals",
- "summary": "Rethink Priorities' worldview investigations team (cross-cause prioritisation, moral weights, digital minds, movement-building models) and its surveys team (polls and message tests for effective-giving organisations and funders); this model covers both in 2025 ($1.03M, $1.7M with their share of central costs), a branch each. With no published count of what their work changed, we judge that about $0.3M of cause-neutral funders' spending and $0.25M of organisations' spending was steered by them in the year, valued at its gain from an ordinary charity of each cause to that cause's charities on the rankings, live, in our judgment of the teams' 2025 work (global health 25%, animal welfare 35%, AI safety 30%; digital minds and movement work drop out), after a 0.6 evidence step for contested cross-cause judgments and the missing-data discount. At the defaults that is about {{result}} years of healthy life per $1,000, with the next dollar at 31% of the past average; the result is mostly uncertainty in our judgments of the money informed, the share changed and the cause weights (animal welfare's share is worth almost nothing at the site's animal weights, so the result follows the global health and AI shares), and both branches are discounted for missing data.",
+ "summary": "Rethink Priorities' worldview investigations team (cross-cause prioritisation, moral weights, digital minds, movement-building models) and its surveys team (polls and message tests for effective-giving organisations and funders); this model covers both in 2025 ($1.03M, $1.7M with their share of central costs), a branch each. With no published count of what their work changed, we judge that about $0.3M of cause-neutral funders' spending and $0.25M of organisations' spending was steered by them in the year, valued at its gain from an ordinary charity of each cause to that cause's portfolio, live, in our judgment of the teams' 2025 work (global health 25%, animal welfare 35%, AI safety 30%; digital minds and movement work drop out), after a 0.6 evidence step for contested cross-cause judgments and the missing-data discount. At the defaults that is about {{result}} years of healthy life per $1,000, with the next dollar at 31% of the past average; the result is mostly uncertainty in our judgments of the money informed, the share changed and the cause weights (animal welfare's share is worth almost nothing at the site's animal weights, so the result follows the global health and AI shares), and both branches are discounted for missing data.",
  "source": {
   "publisher": "charityevals",
   "title": "charityevals' estimate: Rethink Priorities, worldview investigations and surveys",
@@ -82,6 +82,7 @@
  "rows": [
   {
    "id": "wit_expenses",
+   "domain": "positive",
    "section": "cost",
    "label": "Worldview investigations, 2025 (US$)",
    "format": "usd",
@@ -98,6 +99,7 @@
   },
   {
    "id": "srv_expenses",
+   "domain": "positive",
    "section": "cost",
    "label": "Surveys and data analysis, 2025 (US$)",
    "format": "usd",
@@ -114,6 +116,7 @@
   },
   {
    "id": "accounts_total_expenses",
+   "domain": "positive",
    "section": "cost",
    "label": "Rethink Priorities' total expenses in 2025, sponsored projects included (US$)",
    "format": "usd",
@@ -130,6 +133,7 @@
   },
   {
    "id": "accounts_program_expenses",
+   "domain": "positive",
    "section": "cost",
    "label": "Programme services in 2025, sponsored projects included (US$)",
    "format": "usd",
@@ -146,6 +150,7 @@
   },
   {
    "id": "management_expenses",
+   "domain": "positive",
    "section": "cost",
    "label": "Management and general, 2025 (US$)",
    "format": "usd",
@@ -162,6 +167,7 @@
   },
   {
    "id": "fundraising_expenses",
+   "domain": "positive",
    "section": "cost",
    "label": "Fundraising, 2025 (US$)",
    "format": "usd",
@@ -178,6 +184,7 @@
   },
   {
    "id": "special_projects_expenses",
+   "domain": "positive",
    "section": "cost",
    "label": "Special Projects: fiscally sponsored and incubated projects, 2025 (US$)",
    "format": "usd",
@@ -194,6 +201,7 @@
   },
   {
    "id": "iaps_expenses",
+   "domain": "positive",
    "section": "cost",
    "label": "Institute for AI Policy and Strategy, incubated and sponsored, 2025 (US$)",
    "format": "usd",
@@ -210,6 +218,7 @@
   },
   {
    "id": "core_overhead_share",
+   "domain": "share",
    "section": "cost",
    "label": "Share of management and fundraising that serves Rethink Priorities' own research departments",
    "format": "percent",
@@ -263,6 +272,7 @@
   },
   {
    "id": "wit_money_informed",
+   "domain": "positive",
    "section": "reach",
    "label": "Funders' and organisations' yearly spending its worldview research informed, 2025 (US$)",
    "format": "usd",
@@ -276,6 +286,7 @@
   },
   {
    "id": "wit_share_changed",
+   "domain": "share",
    "section": "reach",
    "label": "Share of that spending whose allocation the worldview research changed",
    "format": "percent",
@@ -296,6 +307,7 @@
   },
   {
    "id": "srv_money_informed",
+   "domain": "positive",
    "section": "reach",
    "label": "Organisations' and funders' yearly spending its surveys informed, 2025 (US$)",
    "format": "usd",
@@ -309,6 +321,7 @@
   },
   {
    "id": "srv_share_changed",
+   "domain": "share",
    "section": "reach",
    "label": "Share of that spending whose use its surveys changed",
    "format": "percent",
@@ -357,7 +370,7 @@
    "label": "Value of a dollar to the causes its cross-cause work informs (live), units of value",
    "format": "small",
    "formula": "(@meta.rp_cross_cause_share_global_health * #cause:global-health + @meta.rp_cross_cause_share_animal_welfare * #cause:animal-welfare + @meta.rp_cross_cause_share_ai * #cause:ai) / (@meta.rp_cross_cause_share_global_health + @meta.rp_cross_cause_share_animal_welfare + @meta.rp_cross_cause_share_ai)",
-   "explainer": "Its cross-cause work and surveys inform cause-neutral funders and organisations in global health, animal welfare and AI safety. No split is published, so the weights are our judgments of the two teams' 2025 work by expenses (facts/meta.json rp_cross_cause_share_*: global health 25%, animal welfare 35%, AI 30%), each at its charities on the rankings, equal weights (#cause:global-health, #cause:animal-welfare and the AI area, #cause:ai); its digital minds and AI consciousness work (no cause on the site) and its effective-giving movement work drop out, valued at the average of the rest (normalization.md 2.8)."
+   "explainer": "Its cross-cause work and surveys inform cause-neutral funders and organisations in global health, animal welfare and AI safety. No split is published, so the weights are our judgments of the two teams' 2025 work by expenses (facts/meta.json rp_cross_cause_share_*: global health 25%, animal welfare 35%, AI 30%), each at its portfolio (#cause:global-health, #cause:animal-welfare and the AI area, #cause:ai); its digital minds and AI consciousness work (no cause on the site) and its effective-giving movement work drop out, valued at the average of the rest (normalization.md 2.8)."
   },
   {
    "id": "moved_dollar_value",
@@ -409,6 +422,7 @@
   },
   {
    "id": "value_per_unit_year",
+   "domain": "positive",
    "section": "effect",
    "label": "Value per unit affected per year, in units of value",
    "format": "small",
@@ -422,6 +436,7 @@
   },
   {
    "id": "p_success",
+   "domain": "share",
    "section": "effect",
    "label": "Probability the change happens because of this work",
    "format": "percent",
@@ -444,6 +459,7 @@
   },
   {
    "id": "years_until_effect",
+   "domain": "positive",
    "section": "effect",
    "label": "Years from the win until the policy takes effect",
    "format": "number",
@@ -557,6 +573,7 @@
   },
   {
    "id": "evidence_adj",
+   "domain": "share",
    "section": "adjustments",
    "label": "Evidence adjustment (internal and external validity), a multiplier",
    "format": "multiple",
@@ -611,6 +628,7 @@
   },
   {
    "id": "research_side_effects",
+   "domain": "share",
    "section": "effect",
    "label": "Side effects of its cross-cause research and surveys beyond the money counted, as a share of its value",
    "format": "percent",
@@ -651,6 +669,7 @@
   },
   {
    "id": "staff_salaries",
+   "domain": "positive",
    "section": "donor",
    "label": "Salaries, 2025 (US$)",
    "format": "usd",
@@ -667,6 +686,7 @@
   },
   {
    "id": "staff_payroll_taxes",
+   "domain": "positive",
    "section": "donor",
    "label": "Payroll taxes, 2025 (US$)",
    "format": "usd",
@@ -682,6 +702,7 @@
   },
   {
    "id": "staff_benefits",
+   "domain": "positive",
    "section": "donor",
    "label": "Employee benefits, 2025 (US$)",
    "format": "usd",

@@ -283,41 +283,43 @@ function partsFigure(lib: Library, charity: string, parts: PlanPart[] | undefine
   return combine(parts.map((p) => ({ ...programmeFigure(lib, c, p.model, one), weight: p.weight }))).central;
 }
 
-const causes = new WeakMap<Library, Map<string, [owner: string, charity: string][]>>();
+const causes = new WeakMap<Library, Map<string, [owner: string, charity: string, weight: number][]>>();
 /** A charity's weight in a mean over charities (`#spending:<charity>`): its programme spending in USD
  * (`spending.programme`); NaN where its record has none, which buildLibrary reports. */
 export function spendingOf(lib: Library, charity: string): number {
   return lib.charities.get(charity)?.spending?.programme ?? NaN;
 }
 
-/** `#cause:x`: the charities on the rankings in cause (or area) x, each by its primary evaluator, the
- * figure the rankings show; money movers (`beneficiaries: "destinations"`) left out, and the reading
- * model's own charity. docs/normalization.md 2.8. */
-export function causeMembers(lib: Library, cause: string, reader?: string): [owner: string, charity: string][] {
+/** `#cause:x`: the cause's portfolio (assumptions `portfolios`: named charities, weights from a published
+ * fund's grants), each charity at the figure the rankings show it by its primary evaluator; the reading
+ * model's own charity left out. Never the charities that happen to be on the site: adding one doesn't
+ * move another's figure. docs/normalization.md 2.8. */
+export function causeMembers(lib: Library, cause: string, reader?: string): [owner: string, charity: string, weight: number][] {
   let cache = causes.get(lib);
   if (!cache) causes.set(lib, (cache = new Map()));
   let all = cache.get(cause);
   if (!all) {
-    all = [...lib.charities.values()].filter((c) => c.cause === cause || c.area === cause).flatMap((c): [string, string][] => {
-      const lead = rankingPlan(lib, c.id)[0];
-      return lead && !lead.parts.some((p) => p.model.beneficiaries === "destinations") ? [[lead.owner, c.id]] : [];
+    all = (lib.assumptions.portfolios?.[cause]?.members ?? []).flatMap((p): [string, string, number][] => {
+      const lead = rankingPlan(lib, p.charity)[0];
+      return lead ? [[lead.owner, p.charity, p.weight]] : [];
     });
     cache.set(cause, all);
   }
   return all.filter(([, c]) => c !== reader);
 }
 
-/** The equal-weight mean of a cause's charities at their figures on the rankings (`#cause:x`). `hidden`
- * says which models the rankings leave out at the reader's values (`$ignore_old_estimates`, model.ts
- * tooOld): as on the rankings (src/lib/use-results.ts computeResults), an evaluator keeps its other
- * programmes, an evaluator with none left gives way to the next, and a charity with none left drops out. */
+/** The weighted mean of a cause's portfolio at its members' figures on the rankings (`#cause:x`).
+ * `hidden` says which models the rankings leave out at the reader's values (`$ignore_old_estimates`,
+ * model.ts tooOld): as on the rankings, an evaluator keeps its other programmes, an evaluator with none
+ * left gives way to the next, and a member with none left drops out, the others' weights renormalised. */
 export function causeFigure(lib: Library, cause: string, reader: string | undefined, figure: (m: ResolvedModel) => number, hidden?: (m: ResolvedModel) => boolean): number {
-  const figures = causeMembers(lib, cause, reader).flatMap(([o, c]) => {
-    if (!hidden) return [evaluatorFigure(lib, o, c, figure)];
+  const figures = causeMembers(lib, cause, reader).flatMap(([o, c, w]) => {
+    if (!hidden) return [{ v: evaluatorFigure(lib, o, c, figure), w }];
     const shown = plansOf(lib, c).map((e) => e.parts.filter((p) => !hidden(p.model))).find((parts) => parts.length);
-    return shown ? [partsFigure(lib, c, shown, figure)] : [];
+    return shown ? [{ v: partsFigure(lib, c, shown, figure), w }] : [];
   });
-  return figures.length ? figures.reduce((s, v) => s + v, 0) / figures.length : NaN;
+  const total = figures.reduce((s, f) => s + f.w, 0);
+  return total > 0 ? figures.reduce((s, f) => s + f.w * f.v, 0) / total : NaN;
 }
 
 /** Every model `#cause:x` may read: each member charity's programmes and locations, by every evaluator

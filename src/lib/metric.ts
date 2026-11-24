@@ -114,6 +114,9 @@ export function figureIn(metric: Metric, factor: number): Figure {
     format: (x) => {
       const s = formatYears(x * factor);
       if (s === "—") return s;
+      // "<0.1" and "> −0.1": the unit's prefix goes on the number ("<$0.1", "> −$0.1").
+      const bound = s.match(/^([<>] ?)(−?)(.*)$/);
+      if (bound) return `${bound[1]}${bound[2]}${metric.prefix ?? ""}${bound[3]}${metric.suffix ?? ""}`;
       // The sign before the prefix: −$0.5, not $−0.5.
       const neg = s.startsWith("−");
       return `${neg ? "−" : ""}${metric.prefix ?? ""}${neg ? s.slice(1) : s}${metric.suffix ?? ""}`;

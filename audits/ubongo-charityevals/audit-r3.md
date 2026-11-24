@@ -1,7 +1,7 @@
 # Audit r3: ubongo-charityevals (scoped verification)
 
 Result: pass (0 high, 0 medium findings of our own; audit-model's far-above medium is explained in round 2 #1 and unchanged)
-Model-sha: d56b7d106a590dcd2da5467655f431d603a237bdd15af649daf50eda59febfb6
+Model-sha: 0ef00b2bc17fe88b4af769859811ec7d36a11a80fee783fba1c5cbb792db599f
 Rules: 0.3.13
 Verdict: pass
 
@@ -20,3 +20,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

@@ -1,6 +1,6 @@
 # Audit: johns-hopkins-center-for-health-security-charityevals, round 8 (scoped verification)
 Result: 2.889 years of healthy life per $1,000 (was 3.205, -9.9%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 630c0aa2c90262dcd6c5a3b338f357936d90fbe04fda394f9646f2bf28a93d6f
+Model-sha: 4f153b15efe78fa7e99b44df3af945ef444552fec6794529028f5e298164f11b
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, never-started-prose and never-started-branches only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes (no blocking problem; low range lints only)
@@ -18,3 +18,5 @@ Summary and write-up read. "Pandemics that end humanity's future about half, sur
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

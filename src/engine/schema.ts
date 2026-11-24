@@ -114,6 +114,13 @@ const rowShape = {
   /** Drawn with another row of this model (its id): the same series in another year or place, from one
    * source, so the simulation moves them together instead of letting their differences swing. */
   drawn_with: z.string().optional(),
+  /** What kind of number an input is, so the simulation keeps every draw within what it can be (an
+   * input's default spread, and a range drawn on its scale): `share`, a part of a whole from 0 to 1 (a
+   * probability, an efficacy, a coverage); `percent`, the same written 0 to 100; `ratio`, a multiplier
+   * whose effect is its distance from 1 (a relative risk of 1.11 in `rate × ratio − rate`); `positive`, a
+   * count, an amount of money or time, a rate or factor above zero; `signed`, a change or adjustment that
+   * can be either side of zero. Every input states it (INV-27); docs/normalization.md 2.18. */
+  domain: z.enum(["share", "percent", "ratio", "positive", "signed"]).optional(),
   single_event: z.union([z.literal(true), z.object({ with: z.string() }).strict(), z.object({ one_of: z.string() }).strict()]).optional(),
 };
 
@@ -423,6 +430,17 @@ export type Facts = z.infer<typeof Facts>;
 
 export const AssumptionGroup = z.object({ id: z.string(), title: z.string(), explainer: z.string().optional() }).strict();
 
+/** Where money given to a cause goes when its recipients aren't named (`#cause:x`): named charities with
+ * weights from a published allocation of real money (a fund's grants), so the figure moves with the
+ * reader's values but never with which other charities are on the site. docs/normalization.md 2.8. */
+export const Portfolio = z
+  .object({
+    source: z.object({ title: z.string(), url: z.string().url(), published: z.string().optional() }).strict(),
+    note: z.string().optional(),
+    members: z.array(z.object({ charity: z.string(), weight: z.number().positive() }).strict()).min(1),
+  })
+  .strict();
+
 export const Assumptions = z
   .object({
     groups: z.array(AssumptionGroup),
@@ -431,6 +449,7 @@ export const Assumptions = z
      * the defaults. A reader who moves a slider from a set is on Custom. */
     presets: z.array(z.object({ id: z.string(), label: z.string(), about: z.string(), values: z.record(z.string(), z.number()) }).strict()).optional(),
     units: z.record(z.string(), Unit),
+    portfolios: z.record(z.string(), Portfolio).optional(),
     common: z.object({
       unit: z.string(),
       benchmark: z.string(),

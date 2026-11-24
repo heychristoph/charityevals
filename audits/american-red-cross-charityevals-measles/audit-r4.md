@@ -1,6 +1,6 @@
 # Audit: american-red-cross-charityevals-measles, round 4
 Result: 2.484e-3 uov/$ = 1.242 years of healthy life per 1,000 dollars (combined range 0.158–9.77); cause median 0.0938 (×13.24). Verdict: pass.
-Model-sha: fd0eaaba80d50e1b67c1c20286eac53226c07dea843e568d2e8bb2c875adaeb0
+Model-sha: 953860bf8cc45065cd529190b30f27ff8bbda2a63bd81f2ca1ee074d4c7f4782
 Rules: 0.3.13
 Scope: scoped to the changes since round 3 (`git diff a0d083b9 b76ba3ed`): the new rows `msl_u5_years_after_five` and `msl_u5_after_five_deaths_per_child`, and the changed `deaths_averted_per_person`, `share_under5`, `benefit_midpoint_years`, `msl_u5_per_household`, `msl_5_14_years_at_risk` and `share_15_49_of_over15`, the summary's changed sentence, and the write-up's measles lines. Programme, year, cost and reach are as in round 3 and not rechecked.
 Mechanical: lint 0 high / 1 medium (`far-above`, ×13.24, dealt with under Peers) / 1 low (the spread, which the summary states). Invariants: none. check.ts: all valid. Simulation stable: 5% 0.19×, 50% 1×, 95% 4.99× the best guess. Nothing written to generated/.
@@ -44,3 +44,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (prose-numbers detection widened) and comparisons with other models removed; no value changed. Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

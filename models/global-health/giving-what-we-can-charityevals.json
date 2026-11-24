@@ -96,6 +96,7 @@
   "rows": [
     {
       "id": "expenses_2023",
+      "domain": "positive",
       "section": "cost",
       "label": "Giving What We Can's expenses in 2023 (US$)",
       "format": "usd",
@@ -116,6 +117,7 @@
     },
     {
       "id": "expenses_2024",
+      "domain": "positive",
       "section": "cost",
       "label": "Giving What We Can's expenses in 2024 (US$)",
       "format": "usd",
@@ -175,6 +177,7 @@
     },
     {
       "id": "units_affected_per_year",
+      "domain": "positive",
       "section": "reach",
       "label": "People or animals per year the policy or research would affect",
       "format": "integer",
@@ -190,6 +193,7 @@
     },
     {
       "id": "new_pledges",
+      "domain": "positive",
       "section": "reach",
       "label": "New 10% Pledges, net of pledges ended, 2023 and 2024",
       "format": "integer",
@@ -206,6 +210,7 @@
     },
     {
       "id": "pledge_recorded_per_year",
+      "domain": "positive",
       "section": "reach",
       "label": "Average yearly donations of a pledger who records giving (US$, 2024 prices)",
       "format": "usd",
@@ -221,6 +226,7 @@
     },
     {
       "id": "pledge_giving_years",
+      "domain": "positive",
       "section": "reach",
       "label": "Years a new pledger gives (pledge to retirement)",
       "format": "number",
@@ -249,6 +255,7 @@
     },
     {
       "id": "pledge_recording_adj",
+      "domain": "positive",
       "section": "reach",
       "label": "Pledgers' total donations as a multiple of what they record",
       "format": "number",
@@ -269,6 +276,7 @@
     },
     {
       "id": "pledge_own_effect",
+      "domain": "share",
       "section": "reach",
       "label": "Share of pledgers' donations that happen only because of Giving What We Can",
       "format": "percent",
@@ -297,6 +305,7 @@
     },
     {
       "id": "trial_pledges",
+      "domain": "positive",
       "section": "reach",
       "label": "New Trial Pledges, 2023 and 2024",
       "format": "integer",
@@ -312,6 +321,7 @@
     },
     {
       "id": "trial_recorded",
+      "domain": "positive",
       "section": "reach",
       "label": "Recorded donations per Trial Pledge (US$)",
       "format": "usd",
@@ -336,6 +346,7 @@
     },
     {
       "id": "other_donations",
+      "domain": "positive",
       "section": "reach",
       "label": "Other donations through its platform, 2023 and 2024 (US$, 2024 prices)",
       "format": "usd",
@@ -351,6 +362,7 @@
     },
     {
       "id": "other_recording_adj",
+      "domain": "positive",
       "section": "reach",
       "label": "Other donors' total donations as a multiple of what the platform records",
       "format": "number",
@@ -370,6 +382,7 @@
     },
     {
       "id": "other_own_effect",
+      "domain": "share",
       "section": "reach",
       "label": "Share of other donors' platform giving that happens only because of Giving What We Can",
       "format": "percent",
@@ -461,6 +474,7 @@
     },
     {
       "id": "value_per_unit_year",
+      "domain": "positive",
       "section": "effect",
       "label": "Value per unit affected per year, in units of value",
       "format": "small",
@@ -474,6 +488,7 @@
     },
     {
       "id": "p_success",
+      "domain": "share",
       "section": "effect",
       "label": "Probability the change happens because of this work",
       "format": "percent",
@@ -496,6 +511,7 @@
     },
     {
       "id": "years_until_effect",
+      "domain": "positive",
       "section": "effect",
       "label": "Years from the win until the policy takes effect",
       "format": "number",
@@ -545,7 +561,7 @@
       "label": "Value of a dollar to the charities Giving What We Can's donors gave to (its 2023–2024 split, live), units of value",
       "format": "small",
       "formula": "(@meta.gwwc_effective_share_2023_24 * (@meta.gwwc_high_impact_2023_24_ghw * (@meta.gwwc_moved_2023_24_global_health_funds * value_global_health + @meta.gwwc_moved_2023_24_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.gwwc_moved_2023_24_givedirectly * #givewell:givedirectly + @meta.gwwc_moved_2023_24_malaria_consortium_smc * #givewell:malaria-consortium + @meta.gwwc_moved_2023_24_malaria_consortium * #givewell:malaria-consortium + @meta.gwwc_moved_2023_24_helen_keller_intl * #givewell:helen-keller-intl + @meta.gwwc_moved_2023_24_new_incentives * #givewell:new-incentives + @meta.gwwc_moved_2023_24_deworm_the_world * #givewell:evidence-action + @meta.gwwc_moved_2023_24_unlimit_health * #sogive:unlimit-health + @meta.gwwc_moved_2023_24_strongminds * #hli:strongminds) / (@meta.gwwc_moved_2023_24_global_health_funds + @meta.gwwc_moved_2023_24_against_malaria_foundation + @meta.gwwc_moved_2023_24_givedirectly + @meta.gwwc_moved_2023_24_malaria_consortium_smc + @meta.gwwc_moved_2023_24_malaria_consortium + @meta.gwwc_moved_2023_24_helen_keller_intl + @meta.gwwc_moved_2023_24_new_incentives + @meta.gwwc_moved_2023_24_deworm_the_world + @meta.gwwc_moved_2023_24_unlimit_health + @meta.gwwc_moved_2023_24_strongminds) + @meta.gwwc_high_impact_2023_24_animals * #ace:the-humane-league + @meta.gwwc_high_impact_2023_24_gcr * #cause:catastrophic-risk) / (@meta.gwwc_high_impact_2023_24_ghw + @meta.gwwc_high_impact_2023_24_animals + @meta.gwwc_high_impact_2023_24_gcr) + (1 - @meta.gwwc_effective_share_2023_24) * @meta.prior_vs_cash * #givedirectly - (1 - @meta.shared_credit_donor_side) * (@meta.gwwc_moved_2023_24_global_health_funds * value_global_health + @meta.gwwc_moved_2023_24_against_malaria_foundation * #givewell:against-malaria-foundation + @meta.gwwc_moved_2023_24_malaria_consortium_smc * #givewell:malaria-consortium + @meta.gwwc_moved_2023_24_malaria_consortium * #givewell:malaria-consortium + @meta.gwwc_moved_2023_24_helen_keller_intl * #givewell:helen-keller-intl + @meta.gwwc_moved_2023_24_new_incentives * #givewell:new-incentives) / (@meta.gwwc_donations_2023_24_pledge + @meta.gwwc_donations_2023_24_other)) / (1 - (1 - @meta.shared_credit_donor_side) * (@meta.gwwc_moved_2023_24_global_health_funds + @meta.gwwc_moved_2023_24_against_malaria_foundation + @meta.gwwc_moved_2023_24_malaria_consortium_smc + @meta.gwwc_moved_2023_24_malaria_consortium + @meta.gwwc_moved_2023_24_helen_keller_intl + @meta.gwwc_moved_2023_24_new_incentives) / (@meta.gwwc_donations_2023_24_pledge + @meta.gwwc_donations_2023_24_other))",
-      "explainer": "Where its donors' money went in 2023–2024 (its donation classification sheet), each recipient at its figure on the rankings under your values (the charity's, its programmes and locations weighted by funding), by the site's rule for a split (normalization.md 2.8). Of the giving, 82% (55–90%) went to recipients it rates high-impact; the rest, to charities it couldn't place, is valued as an ordinary charity (the shared prior multiple of GiveDirectly). The high-impact part by cause, its weights: global health and wellbeing ($40.2M): GiveWell-following funds at GiveWell's Top Charities (value_global_health), and the named charities with a model here (Against Malaria Foundation, GiveDirectly, Malaria Consortium, Helen Keller Intl, New Incentives, Deworm the World at Evidence Action's figure, Unlimit Health, StrongMinds), weighted by their money; the smaller recipients take that average; animal welfare ($9.8M): The Humane League (ACE's figure, the one the rankings show), the only animal recipient it names that the site models (the Animal Welfare Fund, ACE's and its own animal funds take its figure); catastrophic risk ($11.5M): none of its recipients (Long-Term Future Fund, Longview, its Risks and Resilience Fund) has a model, so the catastrophic-risk charities on the rankings, equal weights (#cause:catastrophic-risk). Climate change ($6.3M: no published model of the climate work its donors fund) and movement building ($10.9M: other meta charities) take the average of the rest. The money credited to it holds fewer GiveWell-directed dollars than its donors gave (the rest of their credit is GiveWell's), so that part of the giving is taken out of the mix at one minus the shared split. The pledgers' gifts through Effektiv Spenden are under 1% of the credited money and left in the mix as they are."
+      "explainer": "Where its donors' money went in 2023–2024 (its donation classification sheet), each recipient at its figure on the rankings under your values (the charity's, its programmes and locations weighted by funding), by the site's rule for a split (normalization.md 2.8). Of the giving, 82% (55–90%) went to recipients it rates high-impact; the rest, to charities it couldn't place, is valued as an ordinary charity (the shared prior multiple of GiveDirectly). The high-impact part by cause, its weights: global health and wellbeing ($40.2M): GiveWell-following funds at GiveWell's Top Charities (value_global_health), and the named charities with a model here (Against Malaria Foundation, GiveDirectly, Malaria Consortium, Helen Keller Intl, New Incentives, Deworm the World at Evidence Action's figure, Unlimit Health, StrongMinds), weighted by their money; the smaller recipients take that average; animal welfare ($9.8M): The Humane League (ACE's figure, the one the rankings show), the only animal recipient it names that the site models (the Animal Welfare Fund, ACE's and its own animal funds take its figure); catastrophic risk ($11.5M): none of its recipients (Long-Term Future Fund, Longview, its Risks and Resilience Fund) has a model, so the catastrophic-risk portfolio, weighted by Coefficient Giving's grants (#cause:catastrophic-risk). Climate change ($6.3M: no published model of the climate work its donors fund) and movement building ($10.9M: other meta charities) take the average of the rest. The money credited to it holds fewer GiveWell-directed dollars than its donors gave (the rest of their credit is GiveWell's), so that part of the giving is taken out of the mix at one minus the shared split. The pledgers' gifts through Effektiv Spenden are under 1% of the credited money and left in the mix as they are."
     },
     {
       "id": "moved_dollar_value",
@@ -607,6 +623,7 @@
     },
     {
       "id": "careers_changed",
+      "domain": "positive",
       "section": "careers",
       "label": "Careers changed to high-impact work in the year modelled",
       "format": "integer",
@@ -690,6 +707,7 @@
     },
     {
       "id": "evidence_adj",
+      "domain": "share",
       "section": "adjustments",
       "label": "Evidence adjustment (internal and external validity), a multiplier",
       "format": "multiple",
@@ -703,6 +721,7 @@
     },
     {
       "id": "counterfactual_adj",
+      "domain": "share",
       "section": "adjustments",
       "label": "Share of the outcome that wouldn't have happened anyway",
       "format": "percent",
@@ -716,6 +735,7 @@
     },
     {
       "id": "attribution_share_shared",
+      "domain": "share",
       "section": "adjustments",
       "label": "This charity's share of the resources behind the outcome",
       "format": "percent",

@@ -82,8 +82,8 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
   - every way the work does good or harm is a row: side effects tagged `side_effect`
     (normalization.md 2.16), never-started lives' good `never_started` (2.25), an evaluator's omitted
     step a row in our section; a known effect left out is missing-adjustment;
-  - the simulation (2.18): ranges' `interval` and `shape` as the source states; one-off chances tagged
-    `single_event`, no yearly rate or share of many; no range on a year; no remainder of large figures;
+  - the simulation (2.18): each input's `domain` its real kind; ranges' `interval` and `shape` as stated;
+    one-off chances `single_event`, no yearly rate or share of many; no range on a year or remainder;
   - a past average's `@next_dollar` figure sourced and dated within a year (2.10);
   - missing data (Convention 12, glossary "measured / thin", both ways): a thin branch at 1 is high; so
     is a branch at the slider whose reach the charity counts and whose effect is an RCT's of the same

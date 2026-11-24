@@ -4,7 +4,7 @@ Result: -0.02525 years per $1,000 at the defaults (mobiliser share 100%), the sa
 
 Verdict: pass
 
-Model-sha: 571525ba1889c46f8a08765ab01fa25fe4e890d404ef1c9a2a07dd940adf255f
+Model-sha: c71f4a493e03109eef71d8cacc19a2998b8bb7073a2a6f6336ab84622775e5a0
 Rules: 0.3.13
 
 ## Scope
@@ -25,8 +25,10 @@ The mechanical rewiring after round 7 (credit rule 2.24, step 5): rows no longer
 None.
 
 Verdict: pass
-Model-sha: 571525ba1889c46f8a08765ab01fa25fe4e890d404ef1c9a2a07dd940adf255f
+Model-sha: c71f4a493e03109eef71d8cacc19a2998b8bb7073a2a6f6336ab84622775e5a0
 
 Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds: a death averted, a stillbirth averted, a year of contraception, an income raised and a future kept are read with the births parents forgo, the survivor's descendants and the animals all of them eat, by the beneficiaries' income group; nothing moves by more than 0.2% at the defaults. Mechanical: headline -0.007575 → -0.007576 (−0.0059%), 26 rows changed, against the tree before the rule.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

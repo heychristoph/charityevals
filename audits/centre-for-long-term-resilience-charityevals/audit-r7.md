@@ -1,6 +1,6 @@
 # Audit: centre-for-long-term-resilience-charityevals, round 7 (scoped verification)
 Result: 1.783 years of healthy life per $1,000 (was 1.945, -8.3%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: fefd115e9d8231159a9d5c3b326afd60b0d448436bf42067da2f82d976919900
+Model-sha: 32a19ad41e9db7735cd445eb73e63e0a86d9c48be0a87d9c1104f9116f588d1d
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, never-started-prose and never-started-branches only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes (one low prose line about a typed 17% for rm_covid_scale_share).
@@ -19,3 +19,5 @@ Summary and write-up read. Future, never-started and discount-rate sentences are
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

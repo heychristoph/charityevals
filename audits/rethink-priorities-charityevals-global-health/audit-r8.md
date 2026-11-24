@@ -1,0 +1,27 @@
+# Audit: rethink-priorities-charityevals-global-health, round 8 (scoped verification)
+Result: 1.114 years of healthy life per $1,000 (uov/$ 0.002228; was 0.04752, +2.2e+3%). Range 0.07787 to 12.91, 1% of draws at or below zero (audit-model; stored simulation out of date). Combined range not re-checked beyond that. Verdict: fix needed.
+Model-sha: ac676e1aca0801cdcc4d8826f81d91d0d5c15e405b13693f99fd629da8a5f4c3
+Rules: 0.4.0
+Scope: rule cause-portfolios only (inventory/rule-changes/cause-portfolios.md; docs/normalization.md "November 2026: a cause's portfolio"; assumptions/default.json `portfolios`). The model file is unchanged by the rule except wording; no source or scope re-audit.
+Preflight: passes (no blocking problem); one low (stored simulation out of date).
+Previous round: round 7 had no open high or medium finding; this round adds the one medium below.
+
+## Checks and findings
+- Move explained by the rule alone: Old-rule headline 0.047521, current 1.1138 (= the table). Method: re-ran the model on the same tree with `assumptions.portfolios` replaced by the old rule (every ranked charity of the cause, equal weights, money movers left out) and then with the current portfolios (script in the session scratchpad, `headline()` of the library `buildLibrary` builds): the old-rule headline equals the rule table's 'before' to five digits, so the model's rows, sources and the rest of the library did not move for any other reason; the whole move is the rule's.
+- Rows: Rows reading the cause: `value_destinations` = `#cause:global-health` = 0.05981, the weighted mean of AMF 0.0454 (44.3%), Helen Keller Intl 0.0820 (22.3%), New Incentives 0.0514 (17.4%), Malaria Consortium 0.0779 (16.1%) (GiveWell Metrics Report 2025 funds), where the old equal-weight mean of the ranked global-health charities was 0.01013 (in-model row). Everything below follows: `moved_dollar_value`, `shifted_dollar_value` (x mobiliser share, less GiveDirectly's 0.007919, `prior_dollar_value`, unchanged here), `informed_money_value`, `moved_value`, `outcome_total`, `uov_per_donor_dollar`. The destination value rises x5.9 (0.01013 to 0.05981) and the gain `shifted_dollar_value` x23 (0.000664 to 0.01557), because GiveDirectly's 0.007919 is subtracted from it; that is the headline's x23.
+- Portfolio and sanity: Portfolio against what the model says the money funds: not matching. The row's explainer says the clients' money is global health and development programme funding (family planning, girls' education, credit access, maternal and newborn health, health systems), 'not at GiveWell's Top Charities, which its clients don't fund'. Under the rule `#cause:global-health` now is exactly GiveWell's four Top Charities, so the model values that money at the Top Charities while its own explainer says it should not be (finding 1). The page figure 1.114 sits at the global-health median (1.019), which a donor would find high for a research team steering foundation money: the rule, not the model, puts it there, and the explainer must say so.
+
+## Prose
+Model summary and write-up (writeups/rethink-priorities-charityevals.md) describe the portfolio correctly and source it ('GiveWell's Top Charities weighted by its funds'); no comparison with other charities, median or peers. The explainer of `value_destinations` contradicts them (finding 1). Low: `moved_dollar_value` explainer still says 'the cause's charities on this site' and the row label 'global health charities (live)'.
+
+| # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
+|---|---|---|---|---|---|---|---|
+| 1 | medium | presentation | value_destinations | The explainer ends '...valued at the global-health portfolio, GiveWell's Top Charities weighted by its funds (#cause:global-health), not at GiveWell's Top Charities, which its clients don't fund': self-contradictory, and it states the opposite of the write-up ('steers foundations' money towards GiveWell's Top Charities'). The rule moved the result x23 on this row. | `git diff models/global-health/rethink-priorities-charityevals-global-health.json` line 334; `#cause:global-health` members | Delete the clause 'not at GiveWell's Top Charities, which its clients don't fund'. Say instead that no split by recipient is published, so the money is valued at the site's global-health portfolio (the Top Charities), which probably overstates what family planning, education and credit work buys; carry the same caveat as a weakness in the write-up and the summary. | none (wording) |
+| 2 | low | presentation | moved_dollar_value, row label | 'the cause's charities on this site, live' and 'global health charities (live)' still read as the old mean. | model file | 'the cause's portfolio, live'; label 'global-health portfolio (live)'. | none |
+| L | low | presentation | generated/distributions.json | The stored simulation is out of date (preflight low). | `npx tsx scripts/preflight.ts` | Run `npx tsx scripts/summaries.ts` when the batch is done. | none |
+
+## Sources checked
+Scoped round: the portfolios' sources are in assumptions/default.json `portfolios` (GiveWell Metrics Report 2025, ACE Recommended Charity Fund distributions, Giving Green Fund 2025, Coefficient Giving's funds 2025, Carnegie Corporation grants); their members and weights were read there, not re-fetched.
+
+## Drivers
+Unchanged by the model: the share of decisions changed (judgment 10%), the size of decisions informed, the next-dollar figure. The rule's choice of portfolio now sets the value of a dollar steered (0.0598).

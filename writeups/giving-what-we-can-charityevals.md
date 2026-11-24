@@ -22,7 +22,7 @@ A dollar moved is worth what its recipients achieve. Of the giving, 82% went to 
 
 - **Global health funds** that follow GiveWell (GiveWell's own funds, EA Funds' Global Health and Development Fund, its own Global Health and Wellbeing Fund) are valued at GiveWell's top charities. Named charities with a model here are read directly: Against Malaria Foundation, GiveDirectly, Malaria Consortium, Helen Keller Intl, New Incentives, Deworm the World (at Evidence Action's figure), Unlimit Health and StrongMinds. Other global health recipients are valued at the average of these.
 - **Animal welfare** is valued at The Humane League's figure on the rankings (ACE's). It is the only animal charity among the top recipients that the site models, and the animal funds are valued at its figure.
-- **Catastrophic risk** recipients (the Long-Term Future Fund, Longview, its own Risks and Resilience Fund) have no model here. They are valued at the catastrophic-risk charities on the rankings, weighted equally.
+- **Catastrophic risk** recipients (the Long-Term Future Fund, Longview, its own Risks and Resilience Fund) have no model here. They are valued at the catastrophic-risk portfolio: the charities Coefficient Giving's catastrophic-risk funds paid, weighted by their grants.
 - **Climate**, where no model of the work these donors fund is published here, and **other effective-giving organisations** are valued at the average of the rest.
 - **The remaining 18%**, to charities it couldn't place, is valued as an ordinary charity.
 

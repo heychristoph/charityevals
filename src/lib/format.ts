@@ -49,6 +49,10 @@ export function formatShown(row: { format?: ResolvedRow["format"]; shown_as?: Sh
  * significant figures (24, 4.4, 910). */
 export function formatYears(x: number): string {
   if (!Number.isFinite(x)) return "—";
+  if (x === 0) return "0";
+  // Below a tenth either way, the site's precision ends: "<0.1", or "> −0.1" for a small net harm.
+  if (x > 0 && x < 0.1) return "<0.1";
+  if (x < 0 && x > -0.1) return "> −0.1";
   // Net harm (docs/normalization.md 2.21): the same digits with a minus sign.
   if (x < 0) return `−${formatYears(-x)}`;
   if (x >= 100) return Number(x.toPrecision(SIG)).toLocaleString("en-US");

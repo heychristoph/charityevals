@@ -1,6 +1,6 @@
 # Audit: allfed-charityevals, round 8 (wording check)
 Result: 0.02741 daly/$ = 27.4 years of healthy life per 1,000 dollars, unchanged from round 7. Verdict: pass.
-Model-sha: 05c21280df86f8b515f261303f6b1305b7b829ac42806022d12d5434c63f2fed
+Model-sha: d3df887f3f9330a1a786c4e2b086722cf12f1a80d253f9b5ca27e6126190da5f
 Rules: 0.3.13
 Scope: confirm the round 7 wording fix changed no value, range, formula or class.
 Preflight: not re-run (wording only).
@@ -26,3 +26,5 @@ Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds
 Re-stamped (18 Nov 2026), rule never-started-prose: Wording: the summaries and write-ups of the models that count a future say it counts only where the reader counts lives that never start, give the Long-run value set's figure where they gave a 0.1% discount rate's, and Redwood Research states no range; no row or result changes. Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline 8.169 → 8.169 (−0.00013%), 8 rows changed, against the tree before the rule.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

@@ -59,9 +59,9 @@ export function jointRange(lib: Library, m: ResolvedModel, av: Record<string, nu
 
 /** A model's range around its headline `central`: the simulated 5% to 95% (src/engine/montecarlo.ts),
  * else every input at its ends together. `joint`: those ends already worked out, with the reader's edits
- * (a model page's sensitivity), used instead of the stored ones. */
-export function modelRange(lib: Library, m: ResolvedModel, central: number, av: Record<string, number>, joint?: Range): Range {
-  return plausibleRange(lib, m, central, av) ?? (joint ? { low: Math.min(joint.low, joint.high), high: Math.max(joint.low, joint.high) } : jointRange(lib, m, av));
+ * (a model page's sensitivity), used instead of the stored ones. `edits`: the reader's own numbers, as `central` carries them. */
+export function modelRange(lib: Library, m: ResolvedModel, central: number, av: Record<string, number>, joint?: Range, edits: Record<string, number> = {}): Range {
+  return plausibleRange(lib, m, central, av, edits) ?? (joint ? { low: Math.min(joint.low, joint.high), high: Math.max(joint.low, joint.high) } : jointRange(lib, m, av));
 }
 
 /** Where a range's bar starts on the rankings' log scale: its low end, or for a range reaching zero or
@@ -74,6 +74,13 @@ export function barLow(lib: Library, m: ResolvedModel, range: Range): number | u
   if (low > 0) return low;
   if (!(high > 0)) return undefined;
   const d = lib.distributions?.[m.id];
+  if (d?.additive && !d.unstable) {
+    // Stored in the result's units: every step maps the way the range's ends do (scaled and moved).
+    const q0 = d.q[0], q1 = d.q[d.q.length - 1];
+    const k = q1 !== q0 ? (Math.max(range.low, range.high) - Math.min(range.low, range.high)) / (q1 - q0) : 1;
+    const positive = d.q.map((x) => Math.min(range.low, range.high) + (x - q0) * k).filter((v) => v > 0);
+    return positive.length ? Math.min(...positive) : Number.MIN_VALUE;
+  }
   const q = d?.q;
   const first = q?.[0], last = q?.[q.length - 1];
   const k = q && last ? range.high / last : NaN;

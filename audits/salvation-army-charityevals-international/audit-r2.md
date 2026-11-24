@@ -1,6 +1,6 @@
 # Audit: salvation-army-charityevals-international, round 2 (verification of the overhead explainer and the shared-fact move)
 Result: 2.455e-4 daly/$ = 0.2455 years of healthy life per 1,000 dollars (combined range 0.0379-1.589); cause median 0.1001 (x2.45). Verdict: pass.
-Model-sha: f13b97fc8c4411593e1d361dbbb7997aa77b0c2b414388fc7d4db09e6c45f0f2
+Model-sha: eb720331495c5986fc369e539c821fa661967d73b0affba8306cc23d57ff4577
 Rules: 0.3.13
 Scope: verification of the changes in 646c0f7e only; not a full re-audit. Changed: the overhead_ratio explainer. Also confirmed: the shared fact `@salvation_army.goods_handed_out_share` moved 0.9 to 0.85 (commit 3a3e1602, verified in the US model's audit-r3) and moves this model's result 0.2447 to 0.2455 through the overhead ratio.
 Mechanical: `npx tsx scripts/audit-model.ts models/global-health/salvation-army-charityevals-international.json` lint 0 high / 0 medium / 1 low (spread, 1874x, unchanged from round 1), invariants none; `npx tsx scripts/check.ts salvation-army-charityevals-international` all models valid, 0.25; `npx tsx scripts/simulation-check.ts salvation-army-charityevals-international` stable (5% 0.343, 50% 1, 95% 2.87 x best guess). normalization-audit not run (verification round).
@@ -31,3 +31,5 @@ Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the pag
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against d150f0b2.
 
 Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the typed text or pointed at the evaluator view, and typed results in the summary made placeholders or recomputed at the 30% mobiliser share (no value moves). Mechanical: headline unchanged, against bc9e3979.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

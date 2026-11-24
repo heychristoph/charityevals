@@ -20,7 +20,7 @@ Each risk carries a yearly chance of catastrophe, taken from the experts' foreca
 
 A typical project cuts each risk by a share per dollar, taken from Rethink Priorities' cross-cause model, including its chance that a project backfires. The cut counts for the years such progress would otherwise have taken to come (5 by default), with each year discounted. Deaths are valued across the world's age groups like every death on the site. A catastrophe that ends humanity's future also takes the lives of everyone not yet born, which count only where you count lives that never start (0% by default).
 
-Climate coverage is valued at the site's own average for a dollar of climate work: the mean of the climate charities on the rankings, whose tonnes of greenhouse gas kept out of the air are already turned into healthy years by the site's one conversion.
+Climate coverage is valued at the climate portfolio: the charities the Giving Green Fund paid in 2025, weighted by their grants, whose tonnes of greenhouse gas kept out of the air are already turned into healthy years by the site's one conversion.
 
 ### How the model works
 

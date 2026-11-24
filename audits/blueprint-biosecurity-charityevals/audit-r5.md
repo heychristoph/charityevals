@@ -1,6 +1,6 @@
 # Audit: blueprint-biosecurity-charityevals, round 5 (scoped verification)
 Result: 1.593 years of healthy life per $1,000 (was 1.767, -9.9%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 9d6fa8a417497f950048ef2bd5a7c9c1dd358f411ec7d2cbb3524425e32e530b
+Model-sha: 973c21cbfed453f37eab1188e8fff953593748579f61a49b06a72164e23c5184
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, never-started-prose and never-started-branches only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -18,3 +18,5 @@ Summary and write-up read; the future counts only where lives that never start c
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

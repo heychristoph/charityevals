@@ -1,6 +1,6 @@
 # Audit: first-embrace-charityevals, round 2
 Result: 0.01050 uov/$ = 5.248 years of healthy life per 1,000 dollars (combined range 1.980–13.91); cause median 0.1196 (×43.9). Verdict: pass.
-Model-sha: 25bc434312c9bd10916a477e8209b623a701a9e45e51a24aec59f23d11c2e1b4
+Model-sha: 7e9403e1b4c944420667e7fc7c02bfd0fda2d7185ddde0cc0d6f946847de0e3d
 Rules: 0.3.13
 Scope: unchanged programme (kangaroo care, Kano State), now calendar 2026 at both hospitals: spend $273,930 less set-up spread over its years = $256,245, 1,450 newborns enrolled. charities/first-embrace.json `spending` and its one line carry the same $273,930 with both sources; no accounts exist yet.
 Preflight: pass (one low simulation line on `@newborn_care.kmc_mortality_rr`, checked in round 1: the Cochrane 95% CI). `npx tsx scripts/summaries.ts --check` passes.
@@ -34,3 +34,5 @@ Previous round: scoped verification of round 1's two highs and one medium.
 5. `baseline_mortality_rate` (blend of a 71-newborn cohort and a Kano reference): the best guess is a judged blend; a longer registered baseline at the new hospitals with lost newborns traced would settle it.
 
 Peers (audit only): ×43.9 the cause's median. As in round 1, the gap comes from the programme (a direct neonatal mortality intervention at a high baseline risk), not a counting rule; reach, scope and persistence are one year's flow against one year's cost. Open high or medium: 0.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

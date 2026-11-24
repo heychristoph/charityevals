@@ -1,6 +1,6 @@
 # Audit: the-humane-league-charityevals-corporate-campaigns, round 6 (scoped verification)
 Result: 0.00011005 years of healthy life per $1,000 (was 0.00010604, +3.8%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 10800bc0f86924c96a30df4dca0d463e0728f3582420333c8a82af225489acac
+Model-sha: 60721b0107994301ed6e55ae0eeb16339a3efeb68660139a0bbca02916974989
 Rules: 0.3.13
 Scope: rule pain-default-10h only (inventory/rule-changes/pain-default-10h.md): `daly_per_sad` 0.0011 to 0.0011416 (9.6 to 10 hours of healthy life per day of disabling pain; assumptions/default.json). No source or scope re-audit.
 Preflight: not re-run; the model file is unchanged, so lint and invariants are as in round 5.
@@ -24,3 +24,5 @@ None (scoped round: no source read).
 
 ## Drivers
 Unchanged by this round; the move comes from `daly_per_sad` alone.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

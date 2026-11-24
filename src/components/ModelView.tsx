@@ -39,7 +39,7 @@ export default function ModelView({ id, bulk = false, place, about, children, wa
   const caveats = useMemo(() => {
     if (!Object.keys(edits).length && !live) return r.flags;
     const s = sensitivity(engine, model, av, "charityevals", edits);
-    return modelFlags(engine, model, modelRange(engine, model, s.central, av, { low: s.jointLow, high: s.jointHigh }), { judgment: judgmentOf(u), points: s.pointInputs.length });
+    return modelFlags(engine, model, modelRange(engine, model, s.central, av, { low: s.jointLow, high: s.jointHigh }, edits), { judgment: judgmentOf(u), points: s.pointInputs.length });
   }, [model, av, edits, r.flags, live, engine, u]);
 
   return (

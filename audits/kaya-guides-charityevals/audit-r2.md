@@ -1,6 +1,6 @@
 # Audit: kaya-guides-charityevals, round 2
 Result: 0.01201 wellby/$ = 0.7841 years of healthy life per 1,000 dollars (combined range 0.2003–3.070); cause median 0.1196 (×6.56). Verdict: pass.
-Model-sha: 1e26a9456c19a03cc06b04db9a9768ae5e8ce65fe0ddc1758a70021fac92407a
+Model-sha: 1fc5d6b6cc387509fc567161c6b7efe509b0bc18665ad5d6185c146a8364be07
 Rules: 0.3.13
 Scope: unchanged from round 1 (one programme, the 2025 WhatsApp course with guide calls, $166,981, 2,776 starters); scoped verification only.
 Preflight: pass (kaya-guides section of preflight-r2.txt).
@@ -25,3 +25,5 @@ Previous round: finding 1 (high, effect_duration_years) resolved; finding 2 (hig
 
 ## Drivers
 Per audit-model with the blind exclusion: `effect_duration_years` (0.26-1.54), `daly_per_wellby` (the reader's slider), `evidence_adj` (0.49-1.10, judgment with anchors), the shared household spillover and WELLBYs-per-SD-year. Kaya Guides' own 2026 RCT with longer follow-up would improve duration and external validity most. Result is 6.6 times the cause median: the gap comes from the effect size (about 0.5 SD) and the $60 cost per person, both sourced; no row unexplained.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

@@ -118,54 +118,60 @@ describe("model references (#id)", () => {
     expect(buildLibrary([mine(dest), prog("prog-a", 2), bad], assumptions, [], [charity, other], owners).errors).toContain("bad.out: unknown evaluator or charity #ev:nobody");
   });
 
-  describe("a cause's charities on the rankings (#cause:x)", () => {
+  describe("a cause's portfolio (#cause:x)", () => {
     const owners = [{ id: "ev", name: "Ev", short: "E", url: "https://example.org", kind: "evaluator" }];
     const charity = (id: string, cause = "catastrophic-risk", area?: string) => ({ id, name: id, cause, ...(area ? { area } : {}) });
-    const charities = [charity("a1"), charity("a2"), charity("a3"), charity("mover"), charity("d1", "global-health", "democracy"), charity("other", "global-health")];
+    const charities = [charity("a1"), charity("a2"), charity("a3"), charity("a4"), charity("mover"), charity("d1", "global-health", "democracy"), charity("other", "global-health")];
+    // Named charities, weighted by a fund's grants: a1 $1, a2 $3, a3 $1 for catastrophic risk; d1 for democracy.
+    const src = { title: "A fund's grants", url: "https://example.org" };
+    const withPortfolios = { ...assumptions, portfolios: {
+      "catastrophic-risk": { source: src, members: [{ charity: "a1", weight: 1 }, { charity: "a2", weight: 3 }, { charity: "a3", weight: 1 }] },
+      democracy: { source: src, members: [{ charity: "d1", weight: 1 }] },
+    } };
     const of = (c: string, m: object) => ({ ...m, charity: c, owner: "ev" });
     const ranked = (id: string, c: string, x: number) => of(c, model(id, [input("x", x), { id: "out", label: "out", formula: "x" }]));
-    // A money mover in the cause, valuing its unnamed recipients at the cause's average.
+    // A money mover in the cause, valuing its unnamed recipients at the cause's portfolio.
     const mover = of("mover", model("mover-m", [{ id: "out", label: "out", formula: "2 * #cause:catastrophic-risk" }], "u", { beneficiaries: "destinations" }));
     const reader = of("other", model("reader", [{ id: "out", label: "out", formula: "#cause:catastrophic-risk + #cause:democracy" }]));
     const base = [mine(dest), ranked("a1-m", "a1", 2), ranked("a2-m", "a2", 4), ranked("d1-m", "d1", 10), mover, reader];
     function mine(x: object) { return of("other", x); }
 
-    it("is the equal-weight mean of the cause's (or area's) ranked charities, money movers left out", () => {
-      const l = buildLibrary(base, assumptions, [], charities, owners);
+    it("is the mean of the portfolio's charities on the rankings, weighted by the fund's grants", () => {
+      const l = buildLibrary(base, withPortfolios, [], charities, owners);
       expect(l.errors).toEqual([]);
-      expect(compute(l, l.models.get("reader")!, av).out).toBeCloseTo(3 + 10);
+      // a3 has no model: a1 and a2 at weights 1 and 3.
+      expect(compute(l, l.models.get("reader")!, av).out).toBeCloseTo((2 * 1 + 4 * 3) / 4 + 10);
     });
 
-    it("follows a model added to the cause", () => {
-      const l = buildLibrary([...base, ranked("a3-m", "a3", 9)], assumptions, [], charities, owners);
-      expect(compute(l, l.models.get("reader")!, av).out).toBeCloseTo(5 + 10);
+    it("doesn't move when another charity of the cause joins the site", () => {
+      const l = buildLibrary([...base, ranked("a4-m", "a4", 900)], withPortfolios, [], charities, owners);
+      expect(compute(l, l.models.get("reader")!, av).out).toBeCloseTo((2 * 1 + 4 * 3) / 4 + 10);
     });
 
     it("leaves the reading model's own charity out, so a money mover never reads itself", () => {
-      const l = buildLibrary(base, assumptions, [], charities, owners);
+      const l = buildLibrary(base, withPortfolios, [], charities, owners);
       expect(l.errors.filter((e) => e.includes("cycle"))).toEqual([]);
-      expect(compute(l, l.models.get("mover-m")!, av).out).toBeCloseTo(2 * 3);
-      // A ranked charity reading its own cause's average gets the others'.
+      expect(compute(l, l.models.get("mover-m")!, av).out).toBeCloseTo(2 * 3.5);
+      // A member reading its own cause's portfolio gets the others'.
       const own = of("a1", model("a1-m", [{ id: "out", label: "out", formula: "#cause:catastrophic-risk" }]));
-      const l2 = buildLibrary([mine(dest), own, ranked("a2-m", "a2", 4), ranked("a3-m", "a3", 8)], assumptions, [], charities, owners);
+      const l2 = buildLibrary([mine(dest), own, ranked("a2-m", "a2", 4), ranked("a3-m", "a3", 8)], withPortfolios, [], charities, owners);
       expect(l2.errors).toEqual([]);
-      expect(compute(l2, l2.models.get("a1-m")!, av).out).toBeCloseTo(6);
+      expect(compute(l2, l2.models.get("a1-m")!, av).out).toBeCloseTo((4 * 3 + 8 * 1) / 4);
     });
 
-    it("reports a cycle through two charities' averages, an unknown cause and an empty one", () => {
+    it("reports a cycle through two members' portfolios and a cause without a portfolio", () => {
       const reads = (id: string, c: string) => of(c, model(id, [{ id: "out", label: "out", formula: "#cause:catastrophic-risk" }]));
-      const l = buildLibrary([mine(dest), reads("a1-m", "a1"), reads("a2-m", "a2")], assumptions, [], charities, owners);
+      const l = buildLibrary([mine(dest), reads("a1-m", "a1"), reads("a2-m", "a2")], withPortfolios, [], charities, owners);
       expect(l.errors.some((e) => /model reference cycle (a1-m → a2-m → a1-m|a2-m → a1-m → a2-m)/.test(e))).toBe(true);
       expect(Number.isNaN(headline(l, l.models.get("a1-m")!, av))).toBe(true);
-      const bad = mine(model("bad", [{ id: "out", label: "out", formula: "#cause:nowhere + #cause:climate" }]));
-      const errors = buildLibrary([mine(dest), bad], assumptions, [], charities, owners).errors;
-      expect(errors).toContain("bad.out: unknown cause or area #cause:nowhere");
-      expect(errors).toContain("bad.out: no charity on the rankings in #cause:climate");
+      const bad = mine(model("bad", [{ id: "out", label: "out", formula: "#cause:climate" }]));
+      const errors = buildLibrary([mine(dest), bad], withPortfolios, [], charities, owners).errors;
+      expect(errors.some((e) => e.startsWith("bad.out: #cause:climate has no portfolio"))).toBe(true);
     });
 
     it("leaves out what the rankings leave out under $ignore_old_estimates, the next evaluator standing in", () => {
       const withOld = {
-        ...assumptions,
+        ...withPortfolios,
         rows: [...assumptions.rows, { id: "ignore_old_estimates", section: "g", label: "old", format: "toggle", value: { low: 0, best: 1, high: 1 }, kind: "judgment", explainer: "x" }],
         common: { ...assumptions.common, old_estimate_years: 5, estimate_age_as_of: "2026-07-02" },
       };
@@ -174,7 +180,7 @@ describe("model references (#id)", () => {
         ({ ...ranked(id, c, x), owner, source: { title: id, publisher: owner, url: "https://example.org", retrieved: "2026-11-02", published } });
       const l = buildLibrary([
         mine(dest), reader,
-        dated("a1-old", "a1", 9, "2016"), // only an old estimate: the charity drops out
+        dated("a1-old", "a1", 9, "2016"), // only an old estimate: the member drops out
         dated("a2-new", "a2", 4, "2025"),
         dated("a3-old", "a3", 100, "2016"), dated("a3-ev2", "a3", 6, "2025", "ev2"), // ev's is old: ev2's stands in
         ranked("d1-m", "d1", 10),
@@ -182,8 +188,8 @@ describe("model references (#id)", () => {
       expect(l.errors).toEqual([]);
       const r = l.models.get("reader")!;
       const on = assumptionValues(l.assumptions);
-      expect(compute(l, r, on).out).toBeCloseTo((4 + 6) / 2 + 10);
-      expect(compute(l, r, { ...on, ignore_old_estimates: 0 }).out).toBeCloseTo((9 + 4 + 100) / 3 + 10);
+      expect(compute(l, r, on).out).toBeCloseTo((4 * 3 + 6 * 1) / 4 + 10);
+      expect(compute(l, r, { ...on, ignore_old_estimates: 0 }).out).toBeCloseTo((9 * 1 + 4 * 3 + 100 * 1) / 5 + 10);
       // The toggle is one of the reader's sliders, and the stand-in is among the models it reads.
       expect(usedAssumptions(l, r)).toContain("ignore_old_estimates");
       expect(refTargets(l, "cause:catastrophic-risk").map((m) => m.id).sort()).toEqual(["a1-old", "a2-new", "a3-ev2", "a3-old"]);

@@ -80,9 +80,10 @@ every `expected` (the sheet's cached values).
   the sheet names one. A subjective figure is `judgment` whoever made it: an evaluator's guessed
   probability or "best guess" cost, a credit or responsibility share, years a win counts, a moral
   weight; a figure read from a dataset (GBD, a survey, accounts) is `observed`. Ranges only from the
-  source (GiveWell Inputs tab, ACE bounds, RP intervals), with what they mean: `interval` (GiveWell's
+  source (GiveWell Inputs tab, ACE bounds, RP intervals), meaning: `interval` (GiveWell's
   25th-75th percentiles 0.5; default 0.9) and `shape` where the source's tool says; a range you add says
-  "range is ours". Never a range on a calendar year or a timeline index (unit "Year").
+  "range is ours". No range on a calendar year or timeline index (unit "Year"). Every input states
+  its `domain` (INV-27).
 - Formulas in src/engine/expr.ts syntax; a missing function goes into `FUNCTIONS` with a test.
 - `expected` = the sheet's cached value on every formula row, including the evaluator's bottom line.
   Set `output.native` to that row and its unit (INV-6: the evaluator's bottom line reproduces).

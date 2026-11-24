@@ -349,8 +349,10 @@ export function buildLibrary(
         }
         if (isCauseRef(d)) {
           const cause = d.slice(CAUSE_PREFIX.length);
-          if (!(Cause.options as string[]).includes(cause) && ![...charities.values()].some((c) => c.area === cause)) errors.push(`${m.id}.${r.id}: unknown cause or area #${d}`);
-          else if (!targets(d, m.charity).length) errors.push(`${m.id}.${r.id}: no charity on the rankings in #${d}`);
+          const portfolio = assumptions.portfolios?.[cause];
+          if (!portfolio) errors.push(`${m.id}.${r.id}: #${d} has no portfolio (assumptions portfolios.${cause}): name its charities and weights from a published fund's grants`);
+          else if (portfolio.members.some((p) => !charities.has(p.charity))) errors.push(`assumptions portfolios.${cause}: unknown charity ${portfolio.members.find((p) => !charities.has(p.charity))!.charity}`);
+          else if (!targets(d, m.charity).length) errors.push(`${m.id}.${r.id}: no charity in #${d}'s portfolio is on the rankings`);
           continue;
         }
         if (isCharityRef(d)) {
@@ -381,7 +383,7 @@ export function modelDepsOf(m: ResolvedModel | undefined): string[] {
   return m ? [...new Set(m.rows.flatMap((r) => r.modelDeps ?? []))] : [];
 }
 
-/** `#cause:x`: the ranked charities in a cause or area, combined (ranking.ts causeFigure). */
+/** `#cause:x`: the cause's portfolio of named charities, weighted by a published fund's grants (ranking.ts causeFigure). */
 export const CAUSE_PREFIX = "cause:";
 export const isCauseRef = (ref: string) => ref.startsWith(CAUSE_PREFIX);
 /** `#spending:<charity>`: the charity's weight in a mean over charities, its programme spending in USD
@@ -1074,6 +1076,14 @@ export type Distribution = {
    * more than 100× either side of it, harm included (a small difference of large numbers, a ratio near zero). The model
    * then counts at its best guess at every risk, and carries a caveat. */
   unstable?: boolean;
+  /** A result near zero (a net of large opposite effects, its simulated middle far from the best guess):
+   * `q` holds the result itself, in its own units, at the defaults, whose best guess is `at`; the reader's
+   * values move the range by the change in the best guess, and the risk setting doesn't move it. */
+  additive?: boolean;
+  at?: number;
+  /** For `additive`: the headline per unit of the model's own result at the defaults, so factors applied
+   * after the model (the distance weight, an estimate's age) scale the range as they scale every draw. */
+  conv?: number;
   /** For a model with single-event chances: the middle of the same draws with each chance counted at its
    * value instead of happening or not, as a multiple of the best guess. The risk factor divides by it, so
    * the shape around the best guess is the smooth one's and a long shot's yes/no sits on top. */
@@ -1102,7 +1112,7 @@ export const isRiskFactor = (n: Node) => riskNodes.has(n);
 export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
   if (view === "evaluator" || !lib.assumptions.rows.some((r) => r.id === RISK_QUANTILE)) return undefined;
   const d = lib.distributions?.[m.id];
-  if (!d || d.unstable || !(anchorOf(d) > 0)) return undefined;
+  if (!d || d.unstable || d.additive || !(anchorOf(d) > 0)) return undefined;
   // RISK_OFF (below every stored share) reads 1: the factor off.
   const pts = [num(RISK_OFF), num(1), ...QUANTILES.flatMap((p, i) => [num(p), num(d.q[i] / anchorOf(d))])];
   const n: Node = { type: "call", fn: "interp", args: [assumption(RISK_QUANTILE), ...pts] };
@@ -1111,8 +1121,6 @@ export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityev
   return n;
 }
 
-/** A model's plausible range (5% to 95% of its simulation) around a headline `central` that already
- * carries the reader's risk factor: undefined without a simulation. */
 /** The caveat on a model whose simulation can't be relied on. */
 export function unstableFlag(lib: Library, m: ResolvedModel): { level: "warn"; short: string; text: string } | undefined {
   return lib.distributions?.[m.id]?.unstable
@@ -1120,12 +1128,22 @@ export function unstableFlag(lib: Library, m: ResolvedModel): { level: "warn"; s
     : undefined;
 }
 
-export function plausibleRange(lib: Library, m: ResolvedModel, central: number, a: Record<string, number>): { low: number; high: number } | undefined {
+/** A model's plausible range (5% to 95% of its simulation) around a headline `central` that already
+ * carries the reader's risk factor and `edits` (the reader's own numbers): undefined without a simulation. */
+export function plausibleRange(lib: Library, m: ResolvedModel, central: number, a: Record<string, number>, edits: Record<string, number> = {}): { low: number; high: number } | undefined {
   const d = lib.distributions?.[m.id];
+  if (d && !d.unstable && d.additive && d.at !== undefined) {
+    // The model's own spread around its best guess, times what turns its result into the headline now
+    // against at the defaults: a factor after the model scales every draw, the reader's other values move
+    // the centre.
+    const native = m.output ? compute(lib, m, a, edits)[m.output.row] : NaN;
+    const k = d.conv && Number.isFinite(native) && native !== 0 && Number.isFinite(central / native) ? central / native / d.conv : 1;
+    return { low: central + (d.q[0] - d.at) * k, high: central + (d.q[QUANTILES.length - 1] - d.at) * k };
+  }
   if (!d || d.unstable || !(anchorOf(d) > 0)) return undefined;
   // The best guess from the headline: undefined where the risk factor is 0 (a long shot below its chance).
   const f = riskFactor(lib, m, a);
-  const best = f > 0 ? central / f : headline(lib, m, { ...a, [RISK_QUANTILE]: RISK_OFF });
+  const best = f > 0 ? central / f : headline(lib, m, { ...a, [RISK_QUANTILE]: RISK_OFF }, edits);
   return { low: (best * d.q[0]) / anchorOf(d), high: (best * d.q[QUANTILES.length - 1]) / anchorOf(d) };
 }
 

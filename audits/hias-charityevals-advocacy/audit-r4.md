@@ -1,5 +1,5 @@
 # Audit: hias-charityevals-advocacy, round 4 (scoped)
-Model-sha: bb1d84b7f8bd59a0936f7b3178dac104fe45fee6cc810d28a67994b98c3aa402
+Model-sha: 5242f22ab82fc788a92b63d857a10c8c254e1e3c38ac978c1c9e657fa4653b01
 Rules: 0.3.13
 Scope: the reworded explainer of the read-only counterfactual_adj row.
 Mechanical: audit-model 0 high / 0 medium / 1 low (spread, stated in the summary, unchanged); no files rewritten.
@@ -25,3 +25,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 1 row changed, against cc9a04dd.
 
 Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline 0.3078 → 0.09235 (−70%), 6 rows changed, against 7c76c006.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

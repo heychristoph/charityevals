@@ -1,6 +1,6 @@
 # Audit: environmental-defense-fund-charityevals, round 15 (scoped verification of credit step 5, rule 2.24)
 Result: 0.001046 years of healthy life per $1,000 at mobiliser_share 100% (0.001033 before). Verdict: pass (no high or medium finding).
-Model-sha: 5f3cc9ad4c90d2993d42944b633defd10cb8d9cd26f21bd3e5b50358f844c974
+Model-sha: 0c28689e880f314996c9a32aaaa5b2ef73381d4d59b9b58071c5f8645d5b79d0
 Rules: 0.3.13
 Scope: `msat_attribution_share_shared` (0.6 (0.4-0.8) -> 0.7 (0.5-0.85)), the `research` class on `msat_attribution_share`, and a read of the other branches' share explainers (eumr, usmeth, pwr, veh, ira) for adopters left in a denominator.
 Preflight: pass (only the out-of-date generated/distributions.json line, ignored as instructed).
@@ -34,3 +34,5 @@ All five carry `credit: win` on the used share, multiplying by `mobiliser_share`
 
 ## Drivers
 Not re-assessed (scoped round). The change moves the headline +1.3% at s = 100%.
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.

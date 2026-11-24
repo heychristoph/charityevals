@@ -1,6 +1,6 @@
 # Audit: govai-charityevals, round 12 (scoped verification)
 Result: 2.662 years of healthy life per $1,000 (was 2.710, -1.7%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 57963f9a97d75d97b180a4d28a967a454440f39343bcd717637400f4a632d03e
+Model-sha: b68e854347b6a7e36c2b0dcb1417e7d2e6c45bb98048860ccdfc6b0040705c04
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, never-started-prose and never-started-branches only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -18,3 +18,5 @@ Summary and write-up read. Shares by branch recomputed (weight times adjustments
 | # | Severity | Category | Row | Finding | Evidence | Fix | Effect on result |
 |---|---|---|---|---|---|---|---|
 | - | - | - | - | none | - | - | - |
+
+Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
