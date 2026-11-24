@@ -1059,6 +1059,9 @@ export const RISK_QUANTILE = "risk_quantile";
 /** The risk value that turns the risk factor off (exactly 1): a model read by another (`#id`), the
  * simulation's own runs and the waterfall's start. 50% isn't neutral: a long shot's middle is 0. */
 export const RISK_OFF = -1;
+/** The risk value that counts each model at its simulated average instead of a share of its outcomes:
+ * expected value, what most evaluators maximise (docs/normalization.md 2.18). Above every stored share. */
+export const RISK_AVERAGE = 1;
 export const QUANTILES = Array.from({ length: 19 }, (_, i) => (i + 1) / 20);
 const MIDDLE = 9;
 
@@ -1107,7 +1110,8 @@ const riskNodes = new WeakSet<Node>();
 export const isRiskFactor = (n: Node) => riskNodes.has(n);
 
 /** The factor for the reader's risk: the model's simulated result at $risk_quantile, over its simulated
- * middle, so 50% is the best guess and the shape around it is the simulation's. Undefined in the
+ * middle, so 50% is the best guess and the shape around it is the simulation's; at RISK_AVERAGE its
+ * simulated average over the same middle. Undefined in the
  * evaluator view, without the slider (an old commit's library) or a simulation of the model. */
 export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
   if (view === "evaluator" || !lib.assumptions.rows.some((r) => r.id === RISK_QUANTILE)) return undefined;
@@ -1115,7 +1119,10 @@ export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityev
   if (!d || d.unstable || d.additive || !(anchorOf(d) > 0)) return undefined;
   // RISK_OFF (below every stored share) reads 1: the factor off.
   const pts = [num(RISK_OFF), num(1), ...QUANTILES.flatMap((p, i) => [num(p), num(d.q[i] / anchorOf(d))])];
-  const n: Node = { type: "call", fn: "interp", args: [assumption(RISK_QUANTILE), ...pts] };
+  const shares: Node = { type: "call", fn: "interp", args: [assumption(RISK_QUANTILE), ...pts] };
+  // RISK_AVERAGE: the simulated average over the same middle (a long shot at its odds times its payoff).
+  const average = d.mean > 0 ? num(d.mean / anchorOf(d)) : shares;
+  const n: Node = { type: "call", fn: "if", args: [{ type: "bin", op: ">=", left: assumption(RISK_QUANTILE), right: num(RISK_AVERAGE) }, average, shares] };
   riskNodes.add(n);
   factorLabels.set(n, "For the risk you accept that the impact is lower");
   return n;

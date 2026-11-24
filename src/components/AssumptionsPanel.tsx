@@ -2,7 +2,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { RotateCcw, Link2, Check, ChevronRight, X } from "lucide-react";
 import { lib } from "../lib/data";
-import { pickValue } from "../engine/model";
+import { pickValue, RISK_AVERAGE } from "../engine/model";
 import { COUNTRIES, byCode } from "../engine/countries";
 import { formatAssumption, formatShown, parseTyped } from "../lib/format";
 import { useAssumptionValues } from "../lib/use-results";
@@ -152,6 +152,20 @@ export function Slider({ row, value, compact }: { row: Row; value: number; compa
         <span>{show(ends[0])}</span>
         <span>{show(ends[1])}</span>
       </div>
+      {row.slider?.average && (
+        <label className="average-pick small">
+          <input
+            type="checkbox"
+            checked={value >= RISK_AVERAGE}
+            onChange={(e) => {
+              const v = e.target.checked ? RISK_AVERAGE : best;
+              setAssumption(row.id, v, best);
+              trackAssumption(row.id, v, best);
+            }}
+          />
+          Count each charity at its average instead
+        </label>
+      )}
       {row.explainer && !compact && <div className="explainer small"><Markdown text={row.explainer} /><Technical row={row} /></div>}
     </div>
   );
