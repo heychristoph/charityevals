@@ -1378,8 +1378,9 @@ swung below zero, is one reported figure.
 
 **Best guess, not average.** The ranking stays on the best guess where no single event is drawn. What
 remains between best guess and simulated average elsewhere is the skew of the uncertain inputs, under
-×1.14 for half the models and ×1.6 for nine in ten. The Hits-based value set (unmeasured results in
-full, risk 80%) is the lens for long shots.
+×1.14 for half the models and ×1.6 for nine in ten. Value sets whose camps state they maximise expected
+value count near the average: 60% where most results are health and income, 80% for the catastrophic-risk
+sets, whose models' averages sit near their 80th percentile.
 
 ### 2.19 Catastrophic risks: chances, sizes, a typical dollar's cut (November 2026)
 

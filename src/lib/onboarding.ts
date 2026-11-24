@@ -1,10 +1,10 @@
 import { shouldAsk } from "./analytics";
 
-// The walk through Your values on a first visit to the landing page. Only there, and only when the visit
+// The values screen on a first visit to the landing page. Only there, and only when the visit
 // starts there: a shared link (values in the address), a link to any other page, or a click back home
-// from inside the site goes straight to the page. Once finished or skipped it isn't shown again in this
+// from inside the site goes straight to the page. Once closed it isn't shown again in this
 // browser (local storage, like the values themselves; the values chosen are also in the address).
-// Kept light (no React, no data): the page opens the walk-through from a small script before its islands load.
+// Kept light (no React, no data): the page opens it from a small script before its islands load.
 
 export const ONBOARDED_KEY = "charityevals:onboarded";
 
@@ -24,14 +24,14 @@ export function shouldOnboard(o: { path: string; search: string; referrer: strin
   return true;
 }
 
-/** Whether this page load opens the walk-through. */
+/** Whether this page load opens the values screen. */
 export function onboardingDue(): boolean {
   return shouldOnboard({ path: location.pathname, search: location.search, referrer: document.referrer, origin: location.origin, done: onboarded() });
 }
 
-/** Opens the walk-through's first screen (server-rendered, in the Onboarding island) as soon as the page
+/** Opens the values screen (server-rendered, in the Onboarding island) as soon as the page
  * is parsed, before the island's code has loaded; html[data-onboarding] says whether that screen asks the
- * analytics question ("ask") or only starts ("start"). The island takes over once it hydrates. */
+ * analytics question ("ask") or not ("start"). The island takes over once it hydrates. */
 export function openOnboarding() {
   const d = document.querySelector<HTMLDialogElement>("dialog.onboarding");
   if (!d || d.open || !onboardingDue()) return;

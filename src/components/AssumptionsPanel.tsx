@@ -6,7 +6,7 @@ import { pickValue } from "../engine/model";
 import { COUNTRIES, byCode } from "../engine/countries";
 import { formatAssumption, formatShown, parseTyped } from "../lib/format";
 import { useAssumptionValues } from "../lib/use-results";
-import { setAssumption, resetAssumptions, useOverrides, PRESETS, applyPreset, presetOf, shareUrl, sliderEnds } from "../lib/assumption-state";
+import { setAssumption, resetAssumptions, useOverrides, PRESETS, VALUE_SETS, chooseSet, presetOf, shareUrl, sliderEnds } from "../lib/assumption-state";
 import { cancelAssumptionEvents, track, trackAssumption } from "../lib/analytics";
 import type { Row } from "../engine/schema";
 import InfoTip, { WithTip } from "./InfoTip";
@@ -298,11 +298,11 @@ function Measure() {
 /** Ready-made sets of values; moving any slider from one makes the values Custom. */
 function Presets({ overrides }: { overrides: Record<string, number> }) {
   const active = presetOf(overrides);
-  const about = active === "default"
-    ? "Our best guess for every value."
-    : active === "custom"
+  const about = active === "custom"
     ? "Your own values: at least one slider differs from every set."
-    : PRESETS.find((p) => p.id === active)?.about;
+    : active === "default"
+    ? "Pick a set of values, or move any slider."
+    : VALUE_SETS.find((p) => p.id === active)?.about;
   return (
     <div className="presets-pick measure-pick small tip-host">
       <label className="presets-pick">
@@ -314,12 +314,11 @@ function Presets({ overrides }: { overrides: Record<string, number> }) {
             if (id === "custom") return;
             cancelAssumptionEvents();
             track("preset", { key: id });
-            if (id === "default") resetAssumptions();
-            else applyPreset(id);
+            chooseSet(id);
           }}
         >
-          <option value="default">Default</option>
-          {PRESETS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+          {active === "default" && <option value="default" disabled hidden>Pick a set</option>}
+          {VALUE_SETS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
           {active === "custom" && <option value="custom">Custom</option>}
         </select>
       </label>
