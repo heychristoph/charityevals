@@ -3,13 +3,23 @@
   "name": "Ubongo: educational cartoons for children in Africa (charityevals' estimate)",
   "kind": "charity",
   "cause": "global-health",
-  "beneficiaries": {"TZA":0.35,"KEN":0.2,"NGA":0.15,"RWA":0.05,"UGA":0.05,"MWI":0.05,"GHA":0.05,"ETH":0.05,"ZMB":0.05},
+  "beneficiaries": {
+    "TZA": 0.35,
+    "KEN": 0.2,
+    "NGA": 0.15,
+    "RWA": 0.05,
+    "UGA": 0.05,
+    "MWI": 0.05,
+    "GHA": 0.05,
+    "ETH": 0.05,
+    "ZMB": 0.05
+  },
   "beneficiaries_note": "Our build: Ubongo publishes no audience split by country; weighted to Tanzania, where it began and broadcasts most, then Kenya and Nigeria (its largest other markets) and the other countries whose languages it dubs into (Kinyarwanda, Chichewa and others), a judgment.",
   "template": "cash-income",
   "estimate_basis": "unit_cost",
   "charity": "ubongo",
   "owner": "charityevals",
-  "summary": "Ubongo makes educational cartoons for TV, radio and online in Africa: Akili and Me for children of 3-6 (early literacy, numeracy, English, emotions) and Ubongo Kids for 7-14 (maths and science), broadcast free in about 22 countries; its US arm spent 7.2 million dollars in 2024 and Ubongo counts 42 million households reached a month, so the cost per child is a few cents. Children in poor countries who watch Sesame Street's local versions at home learn about a fifth of a standard deviation more than those who don't (Ubongo's own trials point the same way), and we value that as higher adult earnings after cutting it for occasional viewers, survey and small-study bias, repeat years of viewing and fade-out. That gives about {{result}} years of healthy life per 1,000 dollars, but the result is mostly uncertainty (plausible range about 8 to 270): the size of the home-viewing effect, how much of it lasts into adult earnings, and whether the audience counts are right drive it. The whole programme is discounted for missing data, as no study measures Ubongo's home audience in standard deviations.",
+  "summary": "Ubongo makes educational cartoons for TV, radio and online in Africa: Akili and Me for children of 3-6 (early literacy, numeracy, English, emotions) and Ubongo Kids for 7-14 (maths and science), broadcast free in about 22 countries; its US arm spent 7.2 million dollars in 2024 and Ubongo counts 42 million households reached a month, about 25 cents per child a year. Preschoolers in poor countries who watch Sesame Street's local versions at home learn about a fifth of a standard deviation more in a season, and Tanzanian children who watch Ubongo Kids score about 0.15 standard deviations higher in maths; we spread each gain over the years a child watches, cut it for occasional viewers, survey and small-study bias and fade-out, and value it as higher adult earnings. That gives about {{result}} years of healthy life per 1,000 dollars, but the result is mostly uncertainty: the size of the home-viewing effect, how much of it lasts into adult earnings, and whether the audience counts are right drive it. The whole programme is discounted for missing data, as no controlled study measures Ubongo's home audience in standard deviations.",
   "source": {
     "publisher": "charityevals",
     "title": "charityevals' estimate: Ubongo",
@@ -150,12 +160,8 @@
       "section": "reach",
       "label": "Households reached each month (TV, radio and online)",
       "format": "integer",
-      "value": {
-        "low": 24000000,
-        "best": 42000000,
-        "high": 50000000
-      },
-      "kind": "estimate",
+      "value": 42000000,
+      "kind": "observed",
       "source": {
         "title": "Ubongo, Strategic Plan 2024-2028",
         "url": "https://www.ubongo.org/wp-content/uploads/Ubongo-Strategic-Plan-2024-2028-1.pdf",
@@ -163,7 +169,7 @@
         "quote": "Currently reaching 42 million households monthly on TV, radio and digital in 12 languages and 22 countries",
         "retrieved": "2026-11-15"
       },
-      "explainer": "Ubongo's own count from media ratings and household surveys in its markets (p. 10: character recognition 'measured through nationally representative household surveys'), as of 2024. The plan also says 'By 2024, we have reached 42 million kids' (p. 21), so the unit is loose; an earlier Ubongo fact sheet says media ratings show its content 'regularly viewed and listened to by over 24 million learners' (https://www.ubongo.org/wp-content/uploads/Reach_popup.pdf), the low end. High 50 million for growth since. Ubongo's count, not an independent one: the doubt about who really watches is in implementation_adj."
+      "explainer": "Ubongo's own count from media ratings and household surveys in its markets (p. 10: character recognition 'measured through nationally representative household surveys'), as of 2024. The unit is loose: the plan also says 'By 2024, we have reached 42 million kids' (p. 21), and the count includes radio-only listeners, whose dose is unknown. Taken as Ubongo states it; the doubt about who really watches, and how often, is in watch_share and implementation_adj."
     },
     {
       "id": "household_size",
@@ -202,12 +208,12 @@
       "label": "Share of children aged 3-14 in a reached household who watch or listen",
       "format": "percent",
       "value": {
-        "low": 0.3,
+        "low": 0.35,
         "best": 0.5,
-        "high": 0.8
+        "high": 0.7
       },
       "kind": "judgment",
-      "explainer": "Judgment 50% (30-80%): Ubongo counts households, and not every child in a household that tunes in watches: some are at school when the shows air, some are too old for Akili and Me or too young for Ubongo Kids. Anchor: the result, about 0.7 children per household, against Ubongo's own 'reached 42 million kids' (p. 21), which would be 1 per household; low end for the earlier 24 million 'regular' learners."
+      "explainer": "Judgment 50% (35-70%): Ubongo counts households, and not every child in a household that tunes in watches: some are at school when the shows air, some are too old for Akili and Me or too young for Ubongo Kids. Anchor: the result, about 0.7 children per household, against Ubongo's own 'reached 42 million kids' (p. 21), which would be 1 per household."
     },
     {
       "id": "people_reached",
@@ -215,13 +221,13 @@
       "label": "Children aged 3-14 who watch or listen in a month",
       "format": "integer",
       "formula": "households_reached * household_size * child_share_3_14 * watch_share",
-      "explainer": "About 28 million children, counted as one year's audience against one year's cost."
+      "explainer": "About 28 million children, counted as one year's audience against one year's cost; each is credited with one year of viewing's gain below."
     },
     {
       "id": "effect_sd",
       "domain": "positive",
       "section": "effect",
-      "label": "Learning gain of a child who watches regularly at home (standard deviations)",
+      "label": "Learning gain of a preschooler who watches a season at home (standard deviations)",
       "format": "number",
       "value": {
         "low": 0.076,
@@ -237,21 +243,103 @@
         "quote": "The average effect estimate for surveys conducted in low- and middle-income countries was significant and positive (d = .213, SE = .070, 95% confidence interval = .076-.351, z = 3.04).",
         "retrieved": "2026-11-15"
       },
-      "explainer": "Viewers against non-viewers (or heavy against light viewers) of a broadcast season of Sesame Street's local co-productions, in the six surveys in low- and middle-income countries where children chose to watch at home (29 estimates, 5,967 children): the audience Ubongo counts, watching as they choose. Studies where children were shown the programme find more (cognitive outcomes 0.284, 0.165-0.403, Table 4), a check that the home figure isn't high. For 7-14-year-olds, Watson, Hennessy and Vignoles find Tanzanian children who watch Ubongo Kids score higher in maths within the same household (Uwezo survey, about 39,000 children; a coefficient of 0.126, SE 0.035, on a maths scale with SD 0.84, so about 0.15 SD by our division; the thesis states 0.106 SD, the coefficient multiplied by the SD; British Journal of Educational Technology 52(2), 2021, thesis version https://api.repository.cam.ac.uk/server/api/core/bitstreams/33899038-0e39-4e0b-bb42-6588456cae64/content, PDF p. 169, printed p. 165), cross-sectional, so a check only. Ubongo's own trials find the same direction without standard deviations to pool: four weeks of daily Akili and Me improved Tanzanian pre-schoolers' scores on five of seven outcomes against children shown other programmes (Borzekowski 2018, Journal of Applied Developmental Psychology 54:53-59), a Rwanda trial on eight of ten (Borzekowski and others 2019, International Journal of Early Childhood 51:109-126, https://eric.ed.gov/?id=EJ1215041), while a northern Nigeria study found 'no differences associated with study's initial group assignments' (Borzekowski and others 2023, https://www.ubongo.org/wp-content/uploads/Akili-and-Me-and-the-COVID-19-shutdown-1.pdf, p. 1). Those doubts are in evidence_adj."
+      "explainer": "Viewers against non-viewers (or heavy against light viewers) of a broadcast season of Sesame Street's local co-productions, in the six surveys in low- and middle-income countries where children chose to watch at home (29 estimates, 5,967 children, nearly all preschoolers): the Akili and Me audience, watching as they choose. The pooled d covers literacy and numeracy, world knowledge and social reasoning (Table 2), so those are in the earnings chain already. Studies where children were shown the programme find more (experiments 0.377 against surveys 0.262, Table 4), so there is no sign that home-viewing surveys run high. Ubongo's own trials point the same way: four weeks of daily Akili and Me improved Tanzanian pre-schoolers' scores on five of seven outcomes against children shown other programmes (Borzekowski 2018, Journal of Applied Developmental Psychology 54:53-59), a Rwanda trial on eight of ten (Borzekowski and others 2019, International Journal of Early Childhood 51:109-126, https://eric.ed.gov/?id=EJ1215041), about 0.17 SD on average as Founders Pledge reads them (https://www.founderspledge.com/research/ubongo), while a northern Nigeria study found 'no differences associated with study's initial group assignments', with the control group exposed during the COVID-19 shutdown (Borzekowski and others 2023, https://www.ubongo.org/wp-content/uploads/Akili-and-Me-and-the-COVID-19-shutdown-1.pdf, p. 1). Those doubts are in evidence_adj."
     },
     {
-      "id": "repeat_year_ratio",
+      "id": "preschool_share",
       "domain": "share",
       "section": "effect",
-      "label": "A year of viewing's gain relative to the studies' first exposure",
+      "label": "Share of the child audience aged 3-6 (Akili and Me)",
       "format": "percent",
       "value": {
         "low": 0.3,
-        "best": 0.6,
-        "high": 1
+        "best": 0.36,
+        "high": 0.4
       },
       "kind": "judgment",
-      "explainer": "Judgment 60% (30-100%): the audience is counted every year, and a child watches Akili and Me for about four years (ages 3-6) and Ubongo Kids for up to eight; the surveys compare children after a season of viewing, often their first, and later years repeat some of what was learnt (letters and counting once known). Low 30% if most of the gain comes in the first year of several; 100% if each year's new episodes teach as much as the first."
+      "explainer": "Judgment 36% (30-40%): ages 3-6 are 4 of the 12 years of the audience (3-14), a third, and in the young populations of Tanzania, Kenya and Nigeria each year of age is a slightly larger cohort than the one above it (World Bank, 2024: 37-43% of people are 0-14). Low 30% if older children watch more of the airtime; high 40% if preschoolers, at home in the day, watch more."
+    },
+    {
+      "id": "ak_cumulative_vs_first_season",
+      "domain": "positive",
+      "section": "effect",
+      "label": "Akili and Me: a preschooler's whole gain from all the years watched, relative to one season's",
+      "format": "multiple",
+      "value": {
+        "low": 1,
+        "best": 1.3,
+        "high": 2
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 1.3 (1-2): the surveys measure one season, and later seasons repeat much of it (letters and counting once known); Ubongo's trials find about as much after four weeks of daily viewing (about 0.17 SD) as the surveys after a season (0.21), so the gain comes early and levels off. Low 1 if later years add nothing lasting; high 2 if each of the first two seasons teaches as much."
+    },
+    {
+      "id": "ak_viewing_years",
+      "domain": "positive",
+      "section": "effect",
+      "label": "Akili and Me: years a preschool viewer watches",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 1.5,
+        "best": 2.5,
+        "high": 4
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 2.5 years (1.5-4): the show is for ages 3-6, four years, but many children start late or stop when they start school. The audience is counted every year, so a year of viewing is credited with the whole gain over these years (one cohort a year, one gain)."
+    },
+    {
+      "id": "ak_gain_per_year_sd",
+      "section": "effect",
+      "label": "Akili and Me: gain credited to a year of viewing (standard deviations)",
+      "format": "number",
+      "formula": "effect_sd * ak_cumulative_vs_first_season / ak_viewing_years",
+      "explainer": "A preschooler's whole gain over the years watched, divided by those years, so the audience counted every year adds up to one gain per child, never one per year."
+    },
+    {
+      "id": "uk_effect_sd",
+      "domain": "positive",
+      "section": "effect",
+      "label": "Ubongo Kids: gain of a 7-14-year-old who watches, after the years watched (standard deviations)",
+      "format": "number",
+      "value": {
+        "low": 0.068,
+        "best": 0.15,
+        "high": 0.231
+      },
+      "interval": 0.95,
+      "kind": "estimate",
+      "source": {
+        "title": "Watson (PhD thesis, Cambridge), educational television and learning in Tanzania (Ubongo Kids, Uwezo data); also Watson, Hennessy and Vignoles, British Journal of Educational Technology 52(2), 2021",
+        "url": "https://api.repository.cam.ac.uk/server/api/core/bitstreams/33899038-0e39-4e0b-bb42-6588456cae64/content",
+        "page": "Table 6.1, PDF p. 169 (printed p. 165); maths SD p. 209",
+        "quote": "Ubongo Kids exposure (binary) 0.126 0.035 3.631 0.000",
+        "retrieved": "2026-11-24"
+      },
+      "explainer": "Tanzanian children who had watched Ubongo Kids in the past week against those who hadn't, in Uwezo's 2017 household survey (about 39,000 children aged 6-16): 0.126 on a maths scale whose SD is 0.841, 0.15 SD (SE 0.035/0.841, so 0.07-0.23 at 95%). The show had been on air since January 2014, so this is the difference after the years watched, not one season's. Cross-sectional: viewers may differ from non-viewers, which is in evidence_adj; the regression also holds Kiswahili attainment fixed, which the show may raise too. In the same regression a year of age, with its schooling, is worth 0.075 SD."
+    },
+    {
+      "id": "uk_viewing_years",
+      "domain": "positive",
+      "section": "effect",
+      "label": "Ubongo Kids: years a viewer had watched by the survey",
+      "format": "number",
+      "unit": "years",
+      "value": {
+        "low": 2,
+        "best": 3,
+        "high": 4
+      },
+      "kind": "judgment",
+      "explainer": "Judgment 3 years (2-4): Uwezo's survey was in 2017 and Ubongo Kids had been broadcast in Tanzania since January 2014, up to four years; a viewer in the past week had mostly watched for some of them. Divides the survey's gap to give a year of viewing's share."
+    },
+    {
+      "id": "uk_gain_per_year_sd",
+      "section": "effect",
+      "label": "Ubongo Kids: gain credited to a year of viewing (standard deviations)",
+      "format": "number",
+      "formula": "uk_effect_sd / uk_viewing_years",
+      "explainer": "The viewers' gap after the years watched, divided by those years: one gain per child over the years counted."
     },
     {
       "id": "learning_persistence",
@@ -267,22 +355,31 @@
       "label": "Adult earnings gain per SD of skill held as an adult",
       "format": "percent",
       "formula": "@education.earnings_gain_per_sd_adult_skills_lmic",
-      "explainer": "The site's one figure for low- and middle-income countries (@education.earnings_gain_per_sd_adult_skills_lmic: {{row:earnings_gain_per_sd}}, 10-30%), per SD of reading and maths skill still there in adult life, so it multiplies the persisting share above. A cross-check: Kearney and Levine find more exposure to Sesame Street raised US children's chance of being at the right grade for their age (3.2 points for a 30-point rise in coverage) and a wage effect near the edge of significance (NBER w21229, pp. 24 and 28, https://www.nber.org/system/files/working_papers/w21229/w21229.pdf)."
+      "explainer": "The site's one figure for low- and middle-income countries (@education.earnings_gain_per_sd_adult_skills_lmic: {{row:earnings_gain_per_sd}}, 10-30%), per SD of reading and maths skill still there in adult life, so it multiplies the persisting share above. A cross-check: Kearney and Levine find more exposure to Sesame Street raised US children's chance of being at the right grade for their age (3.2 points for a 30-point rise in coverage), but no significant effect on attainment or wages; their small estimates are consistent with the test-score gains (NBER w21229, pp. 4, 24 and 28, https://www.nber.org/system/files/working_papers/w21229/w21229.pdf)."
     },
     {
-      "id": "years_until_work",
+      "id": "ak_years_to_work",
       "domain": "positive",
       "section": "effect",
-      "label": "Years from viewing to adult earnings",
+      "label": "Akili and Me: years from viewing to adult earnings",
       "format": "number",
+      "unit": "years",
       "value": {
-        "low": 8,
-        "best": 12,
+        "low": 12,
+        "best": 14,
         "high": 16
       },
       "kind": "judgment",
+      "explainer": "Judgment 14 years (12-16): Akili and Me's viewers are 3-6, about 4.5 on average, and start earning at about 16-20."
+    },
+    {
+      "id": "uk_years_to_work",
+      "section": "effect",
+      "label": "Ubongo Kids: years from viewing to adult earnings",
+      "format": "number",
       "unit": "years",
-      "explainer": "Judgment 12 years (8-16): Akili and Me's viewers are 3-6 and start earning at about 16-20, 14 years on; Ubongo Kids' are 7-14, about 9 years on. Anchor: GiveWell's 8 years for school-age children dewormed (@givewell_shared.years_until_income_benefits_deworming), whose children are older than Akili and Me's."
+      "formula": "@education.years_primary_programme_to_work",
+      "explainer": "The site's one figure for primary-age audiences (@education.years_primary_programme_to_work: {{row:uk_years_to_work}} years): Ubongo Kids' viewers are 7-14."
     },
     {
       "id": "working_years",
@@ -314,8 +411,8 @@
       "section": "effect",
       "label": "Gain in ln(consumption) per child, over working life, discounted to today",
       "format": "small",
-      "formula": "ln(1 + effect_sd * repeat_year_ratio * learning_persistence * earnings_gain_per_sd) * pv_annuity_due(1, $discount_rate, working_years) * (1 + $discount_rate) ^ (0 - years_until_work) * resource_sharing_multiplier",
-      "explainer": "ln(1 + learning gain × share for a year of viewing × share lasting into adult life × earnings per SD) in each working year, discounted at the shared rate, after the wait until work, shared with the household. Before the adjustments below."
+      "formula": "(preschool_share * ln(1 + ak_gain_per_year_sd * learning_persistence * earnings_gain_per_sd) * (1 + $discount_rate) ^ (0 - ak_years_to_work) + (1 - preschool_share) * ln(1 + uk_gain_per_year_sd * learning_persistence * earnings_gain_per_sd) * (1 + $discount_rate) ^ (0 - uk_years_to_work)) * pv_annuity_due(1, $discount_rate, working_years) * resource_sharing_multiplier",
+      "explainer": "For each show, ln(1 + a year of viewing's gain × share lasting into adult life × earnings per SD) in each working year, discounted at the shared rate after that show's wait until work; weighted by the audience's ages and shared with the household. Before the adjustments below."
     },
     {
       "id": "spillover_ratio",
@@ -326,11 +423,11 @@
       "value": {
         "low": 0,
         "best": 0.05,
-        "high": 0.2
+        "high": 0.1
       },
       "kind": "judgment",
       "side_effect": "added",
-      "explainer": "A side effect, judgment 5% (0-20%): children over 14 and adults in the household watch too, and Ubongo makes parenting content for caregivers; no study measures what they gain, so it is counted small. Anchor: kept small enough that its range moves the result by under a fifth."
+      "explainer": "A side effect, judgment 5% (0-10%): children over 14 and adults in the household watch too, and Ubongo makes parenting content for caregivers. No study measures what they gain; they are a small part of the audience and most of the content is pitched at children, so a tenth of the children's benefit at most."
     },
     {
       "id": "mortality_uov_ratio",
@@ -358,7 +455,7 @@
         "high": 0.85
       },
       "kind": "judgment",
-      "explainer": "0.55 (0.3-0.85), internal × external. Internal 0.6: the home-viewing estimate comes from surveys, where children who choose to watch may differ from those who don't; the meta-analysis's studies are small, tested on what the show taught (letters, counting), and small education studies find about three times the effect of large ones (Evans and Yuan 2022, https://doi.org/10.3102/01623737221079646); Ubongo's Nigeria study found no difference by assignment. External 0.9: Sesame Street's co-productions are, like Ubongo's shows, local-language curricula broadcast free in poor countries; Ubongo's own trials point the same way. Fade-out before adult life is in the shared persistence figure, not here. Anchor: charityevals' Save the Children education branch (0.6 for the same small-study bias)."
+      "explainer": "0.55 (0.3-0.85), internal × external. Internal 0.6: both effects come from comparisons of children who chose to watch with those who didn't, who may differ; the meta-analysis's studies are small and tested on what the show taught (letters, counting), and small education studies find about three times the effect of large ones (Evans and Yuan 2022, https://doi.org/10.3102/01623737221079646, the source of @education.learning_gain_sd_median_rct_lmic); Ubongo's Nigeria study found no difference by assignment. Against that, Sesame Street experiments find more than its surveys (0.377 against 0.262, Mares & Pan Table 4). External 0.9: Sesame Street's co-productions are, like Akili and Me, local-language curricula broadcast free in poor countries; the Ubongo Kids figure is Ubongo's own audience. Fade-out before adult life is in the shared persistence figure, not here."
     },
     {
       "id": "implementation_adj",
@@ -372,7 +469,7 @@
         "high": 0.8
       },
       "kind": "judgment",
-      "explainer": "Judgment 55% (30-80%): a household counts if it tuned in during the month, while the surveys' viewers watched a broadcast season. Anchor: Ubongo's fact sheet counted 'over 24 million learners' who view or listen regularly, from media ratings of about 2021 (https://www.ubongo.org/wp-content/uploads/Reach_popup.pdf), against the 42 million monthly of 2024, a ratio of 0.57 across years. Gains rise with engagement: in Ubongo's Nigeria study each Akili and Me character a child could name went with about 3% higher literacy and numeracy scores (Borzekowski and others 2023, Table 2, p. 10), so occasional viewers gain less."
+      "explainer": "Judgment 55% (30-80%): a household counts if it tuned in during the month, while the surveys' viewers watched a broadcast season (Akili and Me) or in the past week (Ubongo Kids). Anchors: Ubongo's fact sheet counted 'over 24 million learners' who view or listen regularly, from media ratings of about 2021 (https://www.ubongo.org/wp-content/uploads/Reach_popup.pdf); with watch_share this gives about 15 million regular viewers, 7-24 million across both ranges, the high end Ubongo's own claim. An independent check: Uwezo's 2017 survey found 16.7% of Tanzanian children aged 6-16 had watched Ubongo Kids in the past week, 2.6 million children (Watson, p. 202). Gains rise with engagement: in Ubongo's Nigeria study each Akili and Me character a child could name went with about 3% higher literacy and numeracy scores (Borzekowski and others 2023, Table 2, p. 10), so occasional viewers gain less."
     },
     {
       "id": "counterfactual_adj",
@@ -400,7 +497,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Judgment 85% (60-100%): the audience is reached by the whole Ubongo group (Ubongo International in the US, Ubongo Learning in Tanzania, offices in Kenya and Rwanda); the US return funds its sister organisations with grants ($3.5 million in 2024), but they also take some grants and earn some content and licensing income of their own, which no published account totals. Low 60% if the African entities raise a large share themselves."
+      "explainer": "Judgment 85% (60-100%): the audience is reached by the whole Ubongo group (Ubongo International in the US, Ubongo Learning in Tanzania, offices in Kenya and Rwanda); the US return funds its sister organisations with grants ($3.5 million in 2024), but they also take some grants and earn some content and licensing income of their own. No published account totals the group's 2024 spending; the last group accounts that do, for 2019 (Annual Report 2019, p. 25: expenses $1,278,536), show sales, licensing and co-production as about 5% of revenue, the rest grants and donations, which now flow mostly through Ubongo International. 85% if the African entities spend about $1.3 million a year of their own on top of the US grants; low 60% if they raise a large share themselves."
     },
     {
       "id": "partner_share",
@@ -414,7 +511,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "Judgment 70% (40-100%), Convention 2: over 60 TV and radio stations carry the shows, free to viewers (Strategic Plan, p. 21; Reach_popup.pdf); Ubongo publishes no airtime terms, and its return shows only $103,139 of advertising and $1.59 million of programme service fees, which may include airtime bought. Where stations give the airtime, its value counts on the partners' side; partners who run screenings and hand out toolkits give their own time too. 70% if partners' airtime and time are worth about 40% of Ubongo's own spending; 100% if Ubongo pays for all the airtime; 40% if donated airtime is worth one and a half times its spending."
+      "explainer": "Judgment 70% (40-100%), Convention 2: over 60 TV and radio stations carry the shows, free to viewers (Strategic Plan, p. 21; Reach_popup.pdf); Ubongo publishes no airtime terms, and its return shows only $103,139 of advertising and $1.59 million of other fees for services in its programme expenses (Part IX line 11g), which may include airtime bought. Where stations give the airtime, its value counts on the partners' side; partners who run screenings and hand out toolkits give their own time too. 70% if partners' airtime and time are worth about 40% of Ubongo's own spending; 100% if Ubongo pays for all the airtime; 40% if donated airtime is worth one and a half times its spending."
     },
     {
       "id": "attribution_share_shared",
@@ -445,7 +542,7 @@
         "high": 1
       },
       "kind": "judgment",
-      "explainer": "0.85 (0.6-1.0): in 2024 Ubongo International raised $29.1 million in grants against $7.2 million of spending, and its net assets rose from $10.1 million to $32.0 million (Form 990, Part I lines 8, 18, 20-22), largely multi-year grants for the 2024-28 plan, whose five-year fundraising goal was $28 million (Strategic Plan, p. 31). With the plan largely funded, part of a new gift is money its large funders would have given anyway."
+      "explainer": "0.85 (0.6-1.0): in 2024 Ubongo International raised $29.1 million in grants against $7.2 million of spending, and its net assets rose from $10.1 million to $32.0 million (Form 990, Part I lines 8, 18, 20-22), largely multi-year grants for the 2024-28 plan, whose five-year fundraising goal was $28 million (Strategic Plan, p. 31). With the plan largely funded, part of a new gift is money its large funders would have given anyway. Pledged grants receivable rose from $1.6 million to $20.3 million (Part X line 3); this adjustment carries those committed funds, so the wait before a gift is spent (gift_to_grant_years) counts cash only and isn't lengthened for them too."
     },
     {
       "id": "cash_year_end",
@@ -487,7 +584,7 @@
       "label": "Counted less where the outcome isn't measured for this charity",
       "format": "percent",
       "formula": "$missing_data_discount",
-      "explainer": "Thin (the shared missing-data step): Ubongo's household count, with an effect from Sesame Street's studies (other delivery); Ubongo's own trials publish no standard deviations to pool, and its largest home-viewing study is cross-sectional."
+      "explainer": "Thin (the shared missing-data step): Ubongo's household count, with Akili and Me's effect from Sesame Street's studies (other delivery) and Ubongo Kids' from a cross-sectional survey, not a controlled evaluation; Ubongo's own trials publish no standard deviations to pool."
     },
     {
       "id": "total_adj",
@@ -505,12 +602,12 @@
       "format": "percent",
       "value": {
         "low": -0.1,
-        "best": 0.05,
-        "high": 0.2
+        "best": 0,
+        "high": 0.1
       },
       "kind": "judgment",
       "side_effect": "added",
-      "explainer": "A side effect, judgment +5% (-10% to +20%): social-emotional and health learning (Akili and Me's lessons on emotions and handwashing; Kauffman and others 2022 found gains in both, before-after only) beyond what earnings capture, +10%; less the time a child spends in front of a screen instead of playing, reading or being read to, which observational studies link to slower early development, -5%. The low end lets the harm outweigh."
+      "explainer": "A side effect, judgment 0 (-10% to +10%): health learning not on the studies' tests (Akili and Me's lessons on handwashing; Kauffman and others 2022 found gains, before-after only, https://pmc.ncbi.nlm.nih.gov/articles/PMC9140413/), +5%; less the time a child spends in front of a screen instead of playing, reading or being read to, which observational studies link to slower early development, -5%. Social-emotional learning is in the pooled effect already. Either can outweigh."
     },
     {
       "id": "uov_consumption",

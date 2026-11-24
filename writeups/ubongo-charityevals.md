@@ -14,16 +14,16 @@ Children who watch regularly learn letters, numbers, English and some science. C
 
 The model starts from the households Ubongo counts. We multiply by people per household, the share aged 3 to 14 (World Bank) and a judged share of those children who watch. That gives about 28 million children, counted as one year's audience against one year's cost.
 
-- **Learning.** A child who watches regularly at home gains 0.21 standard deviations. That is the pooled effect of Sesame Street's local versions in surveys in poor countries where children chose to watch. Ubongo's own trials in Tanzania and Rwanda, and a large survey of Ubongo Kids viewers in Tanzania, point the same way but give no figure to pool.
-- **Repeat years.** A year of viewing counts at 60% of that, because children watch for several years and later years repeat some of what they learnt.
-- **Earnings.** 40% of the gain lasts into adult life, and each standard deviation of adult skill raises earnings 20%: the site's shared figures for poorer countries. The gain is spread over working life and shared with the household, discounted for the 12 years until the children start work.
+- **Learning.** A preschooler who watches *Akili and Me* at home for a season gains 0.21 standard deviations: the pooled effect of Sesame Street's local versions in surveys in poor countries where children chose to watch. Ubongo's own trials in Tanzania and Rwanda point the same way. For *Ubongo Kids*, a large survey in Tanzania finds viewers score 0.15 standard deviations higher in maths after the show's first years on air.
+- **Years of viewing.** Children watch for several years, and the audience is counted every year. So each child is credited with one gain over all the years watched, spread across those years. Later seasons of *Akili and Me* add a little to the first; *Ubongo Kids*' figure already covers the years watched.
+- **Earnings.** 40% of the gain lasts into adult life, and each standard deviation of adult skill raises earnings 20%: the site's shared figures for poorer countries. The gain is spread over working life and shared with the household, discounted for the 10 to 14 years until the children start work.
 - **Who watches enough.** About half the children counted watch regularly, like the surveys' viewers; occasional viewers gain less.
 - **Evidence.** We take 0.55 of the effect: children who choose to watch may differ from those who don't, and small studies overstate effects.
 - **Credit and timing.** Ubongo International's share of the group's and partners' resources, including airtime stations may give, is about 60%. Part of a new gift replaces money large funders would have given anyway. A gift waits about {{row:gift_to_grant_years}} years, Ubongo's cash over its spending, before it is spent.
 
 ### What drives the result
 
-The missing-data slider, the discount rate and the size of the home-viewing effect move the result most. How much learning lasts into adult life and the repeat-year share come next. The low cost per child, a few cents, is what keeps the result high after those cuts.
+The missing-data slider, the discount rate and the size of the home-viewing effect move the result most. How much learning lasts into adult life and the share of counted children who watch regularly come next. The low cost per child, about 25 cents a year, is what keeps the result high after those cuts.
 
 ### Biggest uncertainties
 
@@ -33,11 +33,11 @@ The missing-data slider, the discount rate and the size of the home-viewing effe
 
 ### What isn't modelled
 
-Social-emotional and health learning, and the screen time that viewing takes from play and reading, are one judged share (+5%). Learning by caregivers and older children is another (+5%). No mortality effect is counted.
+Health learning not on the studies' tests, and the screen time that viewing takes from play and reading, are one judged share that nets to zero; social-emotional learning is in the measured effect already. Learning by caregivers and older children is another (+5%). No mortality effect is counted.
 
 ### How this model was checked
 
-Independent audits (audits/ubongo-charityevals/). Round 1 found one high finding: the cut for viewers who watch less than the trials' children rested on a misread sentence. The effect is now the meta-analysis's home-viewing estimate, with the share of regular viewers anchored on Ubongo's own counts. Other changes after round 1: the evidence adjustment no longer counts fade-out, which the shared persistence figure now carries. Broadcasters' airtime counts on the partners' side of the credit share. The largest Ubongo study is a cross-check. The model reads the site's new shared figures for education in poorer countries.
+Independent audits (audits/ubongo-charityevals/). Round 1 found one high finding: the cut for viewers who watch less than the trials' children rested on a misread sentence. The effect is now the meta-analysis's home-viewing estimate, with the share of regular viewers anchored on Ubongo's own counts. Other changes after round 1: the evidence adjustment no longer counts fade-out, which the shared persistence figure now carries. Broadcasters' airtime counts on the partners' side of the credit share. The largest Ubongo study is a cross-check. The model reads the site's new shared figures for education in poorer countries. Round 4 found that each year of viewing was credited with a full new gain, so a child watching from 3 to 14 added up to far more than any study finds; a year of viewing now gets its share of one gain per child, and the *Ubongo Kids* survey is that show's effect rather than a cross-check.
 
 ### Sources
 
