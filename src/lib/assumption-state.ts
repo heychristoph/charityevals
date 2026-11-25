@@ -32,7 +32,7 @@ export const LEGACY: Record<string, [string, number]> = {
   // default healthy-year rate), so depression's calibration holds at any healthy-year rate.
   uov_per_wellby: ["daly_per_wellby", 0.5],
   // The value of a life was a multiplier on GiveWell's values (1 = 116.25 doubled-income years for a
-  // young child); it is now in healthy years (× 116.25 ÷ 2, the default healthy-year rate), so moving
+  // young child); it is now in healthy years (× 116.25 ÷ 2, the healthy-year rate's default when those links were made), so moving
   // the healthy-year rate no longer changes how many healthy years a death counts as.
   life_value_multiplier: ["daly_per_child_death", 116.25262 / 2],
 };

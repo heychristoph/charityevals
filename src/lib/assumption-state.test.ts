@@ -112,7 +112,7 @@ describe("share links", () => {
     expect(parseShare("?values=ignore_old_estimates:0.2,home_country:840")).toEqual({ ignore_old_estimates: 0, home_country: 840 });
     expect(parseShare("?values=home_country:12345")).toBeUndefined();
     // At the default: nothing changed.
-    expect(parseShare("?values=uov_per_daly:2")).toBeUndefined();
+    expect(parseShare("?values=uov_per_daly:2.3")).toBeUndefined();
   });
 
   it("read the encoded form and older links", () => {
