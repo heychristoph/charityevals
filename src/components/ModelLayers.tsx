@@ -9,7 +9,7 @@ import type { Driver, Uncertainty } from "../engine/uncertainty";
 import { editText, formatValue, parseEdit } from "../lib/format";
 import { useFigure } from "../lib/metric";
 import { clearEdits, setEdit } from "../lib/edit-state";
-import { fillStory, storyNumber } from "../lib/story";
+import { fillStory, storyNumber, storyValue } from "../lib/story";
 import { Node, pathTo, resolve, rootsOf, type Ctx, type Factor } from "./Working";
 import { wholeOf, type Whole } from "../lib/whole";
 import { ChevronRight } from "lucide-react";
@@ -36,43 +36,16 @@ export default function ModelLayers({ model, values, av, edits, u, engine, about
   const years = (x: number) => fig.format(x);
   const fill = (t: string) => fillStory(t, whole.values, result, years);
 
-  // The working behind a step shows one location's model at a time, the largest first; switching stays on the page.
-  const [place, setPlace] = useState(0);
-  const shownPlace = whole.places[Math.min(place, whole.places.length - 1)];
   // The page model's rows before the reader's own edits: what an edit returns to.
   const unedited = useMemo(() => compute(engine, model, av), [engine, model, av]);
-  // Which numbers in "How it's worked out" are open: a step (`s<i>`), then each number below it.
-  const [open, setOpen] = useState<Set<string>>(() => new Set());
-  const toggle = (key: string) => setOpen((o) => {
-    const x = new Set(o);
-    if (x.has(key)) for (const k of [...x]) { if (k === key || k.startsWith(`${key}/`)) x.delete(k); }
-    else x.add(key);
-    return x;
-  });
-  const lines = useMemo(() => story.steps.map((s, i) => ({ line: `s${i}`, roots: rootsOf(model, s.total ?? s.op ?? "") })), [model, story]);
-  // The bottom line's own working: the model's result turned into years of healthy life per $1,000.
-  const conversion = useMemo(() => {
-    const m = shownPlace.model;
-    const toCommon = m.output ? headlineExprOf(engine, m, { type: "ref", scope: "row", name: m.output.row }) : undefined;
-    const look = lookupFor(engine, m, shownPlace.values, av, "charityevals");
-    const factors: Factor[] = toCommon
-      ? childrenOf(m, rootOf(m, look, toCommon), look).map((n) => ({
-          op: n.op,
-          value: show(m, n),
-          label: labelOf(m, n),
-          key: n.type === "assumption" ? `a:${n.refId}` : n.type === "fact" ? `f:${n.refId}` : n.rowId ? `r:${resolve(m, n.rowId)}` : undefined,
-        }))
-      : [];
-    return { value: fig.format(shownPlace.result), label: fig.metric.unit, factors };
-  }, [shownPlace, engine, fig, av]);
-  const ctx: Ctx = { model: shownPlace.model, values: shownPlace.values, av, open, toggle, conversion };
+  const w = useWorking(model, whole, av, engine);
   const working = useRef<HTMLDetailsElement>(null);
   /** Open "How it's worked out" down to a number (`r:<row>`, `a:<assumption>`, `f:<fact>`). */
   const jump = (target: string) => {
-    const keys = pathTo(model, lines, target, conversion.factors);
+    const keys = pathTo(model, w.lines, target, w.conversion.factors);
     if (!keys) return;
     if (working.current) working.current.open = true;
-    setOpen((o) => new Set([...o, ...keys]));
+    w.setOpen((o) => new Set([...o, ...keys]));
     const last = keys[keys.length - 1];
     setTimeout(() => {
       const el = document.getElementById(`wk-${last}`);
@@ -123,34 +96,7 @@ export default function ModelLayers({ model, values, av, edits, u, engine, about
       <details className="ly-layer" ref={working}>
         <summary><ChevronRight size={18} className="ly-chev" aria-hidden /><h2 className="ly-title">How it's worked out</h2></summary>
         <div className="ly-body">
-          <ol className="ly-chain">
-            {story.steps.map((s, i) => {
-              const { line, roots } = lines[i];
-              const isOpen = open.has(line);
-              const v = s.total !== undefined ? storyNumber(s.total, whole.values, result, years) : fill(s.op ?? "");
-              return (
-                <li key={i} className={`${s.total !== undefined ? "ly-total" : "ly-op"} ${i === story.steps.length - 1 ? "ly-end" : ""} ${roots.length ? "ly-drill" : ""} ${isOpen ? "open" : ""}`}>
-                  {roots.length
-                    ? <button type="button" className="ly-v num" aria-expanded={isOpen} onClick={() => toggle(line)}>{v}</button>
-                    : <span className="ly-v num">{v}</span>}
-                  <span className="ly-t">{fill(s.text)}</span>
-                  {isOpen && (
-                    <div className="wk">
-                      {whole.places.length > 1 && (
-                        <label className="wk-place small">
-                          Worked out for{" "}
-                          <select value={place} onChange={(e) => setPlace(Number(e.target.value))}>
-                            {whole.places.map((p, j) => <option key={p.model.id} value={j}>{p.label}</option>)}
-                          </select>
-                        </label>
-                      )}
-                      {roots.map((r) => <Node key={r} ctx={ctx} at={r} path={line} />)}
-                    </div>
-                  )}
-                </li>
-              );
-            })}
-          </ol>
+          <StoryChain w={w} whole={whole} />
           {whole.places.length > 1 && (
             <table className="ly-places">
               <caption>Each country, by its share of the money</caption>
@@ -171,6 +117,89 @@ export default function ModelLayers({ model, values, av, edits, u, engine, about
         </div>
       </details>
     </section>
+  );
+}
+
+type Working = ReturnType<typeof useWorking>;
+
+/** The state behind a story's chain: which numbers are open (a step `s<i>`, then each number below it),
+ * which location's model the working shows (the largest first), and the bottom line's own working. */
+export function useWorking(model: ResolvedModel, whole: Whole, av: Record<string, number>, engine: Library) {
+  const fig = useFigure(lib, av);
+  const [place, setPlace] = useState(0);
+  const shownPlace = whole.places[Math.min(place, whole.places.length - 1)];
+  const [open, setOpen] = useState<Set<string>>(() => new Set());
+  const toggle = (key: string) => setOpen((o) => {
+    const x = new Set(o);
+    if (x.has(key)) for (const k of [...x]) { if (k === key || k.startsWith(`${key}/`)) x.delete(k); }
+    else x.add(key);
+    return x;
+  });
+  const story = model.story!;
+  const lines = useMemo(() => story.steps.map((s, i) => ({ line: `s${i}`, roots: rootsOf(model, s.total ?? s.op ?? "") })), [model, story]);
+  // The bottom line's own working: the model's result turned into years of healthy life per $1,000.
+  const conversion = useMemo(() => {
+    const m = shownPlace.model;
+    const toCommon = m.output ? headlineExprOf(engine, m, { type: "ref", scope: "row", name: m.output.row }) : undefined;
+    const look = lookupFor(engine, m, shownPlace.values, av, "charityevals");
+    const factors: Factor[] = toCommon
+      ? childrenOf(m, rootOf(m, look, toCommon), look).map((n) => ({
+          op: n.op,
+          value: show(m, n),
+          label: labelOf(m, n),
+          key: n.type === "assumption" ? `a:${n.refId}` : n.type === "fact" ? `f:${n.refId}` : n.rowId ? `r:${resolve(m, n.rowId)}` : undefined,
+        }))
+      : [];
+    return { value: fig.format(shownPlace.result), label: fig.metric.unit, factors };
+  }, [shownPlace, engine, fig, av]);
+  const ctx: Ctx = { model: shownPlace.model, values: shownPlace.values, av, open, toggle, conversion };
+  return { model, story, fig, place, setPlace, open, setOpen, toggle, lines, conversion, ctx };
+}
+
+/** A story's steps from $1,000 to the result, each number opening into its working. `scale`: the share
+ * of $1,000 the steps are for (a programme's share of a charity's money; 1 on its own page). */
+export function StoryChain({ w, whole, scale = 1 }: { w: Working; whole: Whole; scale?: number }) {
+  const { story, fig, lines, open, toggle, place, setPlace, ctx } = w;
+  const years = (x: number) => fig.format(x);
+  const fill = (t: string) => fillStory(t, whole.values, whole.result, years);
+  const total = (spec: string) => {
+    if (scale === 1) return storyNumber(spec, whole.values, whole.result, years);
+    const [src, f] = spec.split("|").map((x) => x.trim());
+    const x = storyValue(src, whole.values, whole.result) * scale;
+    return f === "y" ? years(x) : formatValue(x, f === "$" ? "usd" : f === "%" ? "percent" : "number");
+  };
+  const last = story.steps.length - 1;
+  return (
+    <ol className="ly-chain">
+      {story.steps.map((s, i) => {
+        const { line, roots } = lines[i];
+        const isOpen = open.has(line);
+        const v = s.total !== undefined ? total(s.total) : fill(s.op ?? "");
+        // Scaled to a programme's share, the last step is that programme's part, no longer "per $1,000".
+        const text = scale !== 1 && i === last ? fill(s.text).replace(/ per \$1,000$/, "") : fill(s.text);
+        return (
+          <li key={i} className={`${s.total !== undefined ? "ly-total" : "ly-op"} ${i === last && scale === 1 ? "ly-end" : ""} ${roots.length ? "ly-drill" : ""} ${isOpen ? "open" : ""}`}>
+            {roots.length
+              ? <button type="button" className="ly-v num" aria-expanded={isOpen} onClick={() => toggle(line)}>{v}</button>
+              : <span className="ly-v num">{v}</span>}
+            <span className="ly-t">{text}</span>
+            {isOpen && (
+              <div className="wk">
+                {whole.places.length > 1 && (
+                  <label className="wk-place small">
+                    Worked out for{" "}
+                    <select value={place} onChange={(e) => setPlace(Number(e.target.value))}>
+                      {whole.places.map((p, j) => <option key={p.model.id} value={j}>{p.label}</option>)}
+                    </select>
+                  </label>
+                )}
+                {roots.map((r) => <Node key={r} ctx={ctx} at={r} path={line} />)}
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 

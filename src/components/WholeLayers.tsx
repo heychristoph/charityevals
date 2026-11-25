@@ -3,16 +3,15 @@
 // split across the programmes by their share of the money, each opening into its own story at that share.
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
-import { lib, modelUrl } from "../lib/data";
+import { lib } from "../lib/data";
 import { assumptionValues, compute } from "../engine/model";
 import { uncertainty, type Driver } from "../engine/uncertainty";
 import { formatValue } from "../lib/format";
 import { useFigure } from "../lib/metric";
 import { useAssumptionValues } from "../lib/use-results";
 import { clearEdits, setPageModels, useEdits } from "../lib/edit-state";
-import { fillStory, storyValue } from "../lib/story";
 import { charityOf, fullModel, programsOf, type ProgramFigure } from "../lib/whole";
-import { COVER, Curve, MAX, Question } from "./ModelLayers";
+import { COVER, Curve, MAX, Question, StoryChain, useWorking } from "./ModelLayers";
 import { WaterfallInSlot } from "./Waterfall";
 import "./layers.css";
 
@@ -91,12 +90,6 @@ export default function WholeLayers({ id, children }: { id: string; children?: R
 
   const [open, setOpen] = useState<Set<string>>(() => new Set());
   const toggle = (k: string) => setOpen((o) => { const x = new Set(o); if (x.has(k)) x.delete(k); else x.add(k); return x; });
-  const num = (spec: string, p: ProgramFigure, scale: number) => {
-    const [src, f] = spec.split("|").map((s) => s.trim());
-    const x = storyValue(src, p.whole.values, p.whole.result) * scale;
-    return f === "y" ? fig.format(x) : formatValue(x, f === "$" ? "usd" : f === "%" ? "percent" : "number");
-  };
-  const fill = (t: string, p: ProgramFigure) => fillStory(t, p.whole.values, p.whole.result, (x) => fig.format(x));
 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
@@ -130,7 +123,6 @@ export default function WholeLayers({ id, children }: { id: string; children?: R
             <li className="ly-total"><span className="ly-v num">$1,000</span><span className="ly-t">given to {charity.name}</span></li>
             {c.programs.map((p) => {
               const here = open.has(p.program);
-              const steps = p.model.story?.steps ?? [];
               return (
                 <li key={p.program} className={`wl-prog ${here ? "open" : ""}`}>
                   <button type="button" className="wl-row" aria-expanded={here} onClick={() => toggle(p.program)}>
@@ -139,19 +131,7 @@ export default function WholeLayers({ id, children }: { id: string; children?: R
                     <span className="wl-yrs num">{fig.format(p.share * p.whole.result)}</span>
                     <span className="wl-share" aria-hidden><i style={{ width: `${Math.max(0.5, p.share * 100)}%` }} /></span>
                   </button>
-                  {(
-                    <div className="wl-inner" hidden={!here}>
-                      <ol className="ly-chain">
-                        {steps.map((s, i) => (
-                          <li key={i} className={s.total !== undefined ? "ly-total" : "ly-op"}>
-                            <span className="ly-v num">{s.total !== undefined ? num(s.total, p, p.share) : fill(s.op ?? "", p)}</span>
-                            <span className="ly-t">{i === steps.length - 1 ? fill(s.text, p).replace(/ per \$1,000$/, "") : fill(s.text, p)}</span>
-                          </li>
-                        ))}
-                      </ol>
-                      <p className="small wl-own"><a href={modelUrl(lib, p.model)}>Its own page</a>, with every number behind these</p>
-                    </div>
-                  )}
+                  <div className="wl-inner" hidden={!here}><ProgramChain p={p} av={av} /></div>
                 </li>
               );
             })}
@@ -168,4 +148,10 @@ export default function WholeLayers({ id, children }: { id: string; children?: R
     </section>
     </div>
   );
+}
+
+/** A programme's own steps at its share of the money, each number opening into its working. */
+function ProgramChain({ p, av }: { p: ProgramFigure; av: Record<string, number> }) {
+  const w = useWorking(p.model, p.whole, av, lib);
+  return <StoryChain w={w} whole={p.whole} scale={p.share} />;
 }
