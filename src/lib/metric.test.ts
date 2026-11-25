@@ -15,9 +15,9 @@ describe("measures", () => {
     expect(factor("daly")).toBe(1);
   });
   it("dollars of good: a healthy year per $1, in dollars to someone at the reference income", () => {
-    // 2 units of value per healthy year; $1 at $50,000 is 1.4427 / 50,000 units of value.
-    expect(factor("dollars")).toBeCloseTo((2 / 1000) / (1.4426950408889634 / REFERENCE_INCOME), 6);
-    expect(factor("dollars", { ...av, uov_per_daly: 4 })).toBeCloseTo(2 * factor("dollars"), 9);
+    // 2.3 units of value per healthy year; $1 at $50,000 is 1.4427 / 50,000 units of value.
+    expect(factor("dollars")).toBeCloseTo((2.3 / 1000) / (1.4426950408889634 / REFERENCE_INCOME), 6);
+    expect(factor("dollars", { ...av, uov_per_daly: 4.6 })).toBeCloseTo(2 * factor("dollars"), 9);
   });
   it("WELLBYs follow the WELLBY rate", () => {
     expect(factor("wellby")).toBeCloseTo(1 / av.daly_per_wellby, 12);

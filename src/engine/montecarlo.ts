@@ -76,6 +76,9 @@ function spec(d: Driver, best: number, interval: number | undefined, shape: stri
 /** What a simulation needs: the inputs to draw and the result to compare with. */
 type Plan = { lib: Library; m: ResolvedModel; av: Record<string, number>; edits: Record<string, number>; central: number; specs: Spec[]; bounds: string[]; events: { id: string; p: number; key: string; one_of: boolean }[]; groups: Set<string>; gauss: () => number; random: () => number };
 
+const sig = (x: number) => Number(x.toPrecision(9));
+const keyOf = (d: Driver) => (d.scope === "fact" ? `@${d.id}` : d.id);
+
 /** A simulation's plan at assumption values `av` (default: the site's) with the reader's edits fixed:
  * an edited number is the reader's, so it isn't drawn. Undefined for a model with no comparable result or
  * no uncertain input. */
@@ -89,8 +92,10 @@ function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edi
   const u = uncertainty(lib, m, values, av, "charityevals", edits);
   // The inputs that carry 99.9% of the variance, value judgments and the reader's edits left out.
   const drivers = u.drivers
-    .filter((d) => d.source !== "assumption" && !((d.scope === "fact" ? `@${d.id}` : d.id) in edits))
-    .sort((a, b) => b.contribution - a.contribution);
+    .filter((d) => d.source !== "assumption" && !(keyOf(d) in edits))
+    // Largest first; contributions equal to 9 digits by key, so a last-digit difference between machines
+    // never swaps two inputs' places in the draw order (each takes the next normal draw).
+    .sort((a, b) => sig(b.contribution) - sig(a.contribution) || keyOf(a).localeCompare(keyOf(b)));
   const total = drivers.reduce((s, d) => s + d.contribution, 0);
   const kept: Driver[] = [];
   let acc = 0;

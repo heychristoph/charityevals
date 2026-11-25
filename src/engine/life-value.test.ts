@@ -71,7 +71,7 @@ describe("the value of a life", () => {
 
   it("counts a death as the same healthy years whatever a healthy year is worth; income moves with it", () => {
     expect(t.errors).toEqual([]);
-    // 15–49: GiveWell's 104 units of value over its 116.25 under five, of the slider's 58.1 healthy years.
+    // 15–49: GiveWell's 104 units of value over its 116.25 under five, of the slider's 50.5 healthy years.
     expect(deaths(av)).toBeCloseTo(0.0002 * (104 / U5) * av.daly_per_child_death * 1000, 9);
     for (const k of [0.5, 1.5, 2]) {
       const a = { ...av, uov_per_daly: av.uov_per_daly * k };
@@ -91,7 +91,7 @@ describe("the value of a life", () => {
     expect(usedAssumptions(t, m)).not.toContain("life_value_multiplier");
     const s = sensitivity(t, m, av);
     const life = s.swings.find((x) => x.id === "daly_per_child_death")!;
-    expect(life.atHigh / life.atLow).toBeCloseTo((deaths({ ...av, daly_per_child_death: 81.376834 }) + income(av)) / (deaths({ ...av, daly_per_child_death: 34.875786 }) + income(av)), 9);
+    expect(life.atHigh / life.atLow).toBeCloseTo((deaths({ ...av, daly_per_child_death: 70.762464 }) + income(av)) / (deaths({ ...av, daly_per_child_death: 30.32677 }) + income(av)), 9);
     expect(s.swings.some((x) => x.id === "life_value_multiplier")).toBe(false);
     const u = uncertainty(t, m, compute(t, m, av), av, "charityevals");
     expect(u.drivers.some((d) => d.id === "daly_per_child_death")).toBe(true);
@@ -99,7 +99,7 @@ describe("the value of a life", () => {
 
   it("an evaluator view pins the life slider (and the healthy-year rate), so the evaluator's numbers stay put", () => {
     const amf = lib.models.get("against-malaria-foundation")!;
-    expect(amf.evaluator!.assumptions).toMatchObject({ daly_per_child_death: 58.12631, uov_per_daly: 2 });
+    expect(amf.evaluator!.assumptions).toMatchObject({ daly_per_child_death: 116.25262 / 2.3, uov_per_daly: 2.3 });
     const h = headline(lib, amf, av, {}, "evaluator");
     expect(headline(lib, amf, { ...av, daly_per_child_death: 40, uov_per_daly: 3 }, {}, "evaluator")).toBe(h);
     // Our view: a reader's life slider moves it, the healthy-year rate moves only its income part.

@@ -57,12 +57,12 @@ builds this from the unit's `to_common` and cancels `uov_per_daly`; the recipes 
 
 ### 2.1 Income and other GiveWell value: units of value (`uov`)
 
-`healthy years = UoV / $uov_per_daly` (default 2).
+`healthy years = UoV / $uov_per_daly` (default 2.3, GiveWell's).
 
 GiveWell's own moral weights (116.25 UoV per under-5 death, 1/ln 2 per doubling of consumption,
-2.3 UoV per DALY in iron and water sheets) stay in layer E, linked to `$life_value_multiplier`,
+2.3 UoV per DALY, its Moral Weights page, 2025) stay in layer E, linked to `$life_value_multiplier`,
 `$uov_per_ln_consumption`, `$uov_per_daly` and pinned in the evaluator view. Say plainly on /method
-that a "healthy year" from a GiveWell model is GiveWell's value divided by 2, not a counted DALY.
+that a "healthy year" from a GiveWell model is GiveWell's value divided by 2.3, not a counted DALY.
 
 ### 2.2 Health: DALYs (`daly`)
 
@@ -425,10 +425,10 @@ The shared versions every model's view reads (section 1, "One consistent way"):
 
 | Concept | Shared version | Value (range) | Source |
 |---|---|---|---|
-| Healthy year vs doubled-income year | `$uov_per_daly` (in rows only with the evaluator's implied rate pinned, or inside `$life_value_multiplier`) | 2 (1–4) | judgment, assumptions |
+| Healthy year vs doubled-income year | `$uov_per_daly` (in rows only with the evaluator's implied rate pinned, or inside `$life_value_multiplier`) | 2.3 (1–4), GiveWell's (Moral Weights, 2025; 2 until November 2026) | judgment, assumptions |
 | Income | `$uov_per_ln_consumption` | 1/ln 2 | GiveWell |
 | Life satisfaction | `$daly_per_wellby` (healthy years per WELLBY; unit conversion only, slider; deaths in WELLBY models enter through `wellbys_from_uov`, INV-17) | 0.0652815 (0.05–0.275; slider 0.025–1.5) | calibrated on depression: a PHQ-9 SD-year worth the same via WELLBYs and via GBD weights at any `$uov_per_daly` (2.3); evaluator view of HLI models 0.575 (GiveDirectly, Kenya) |
-| A young child's death in healthy years | `$daly_per_child_death` (slider, "Saving a young child's life is worth … years of healthy life"); `$life_value_multiplier` = `$daly_per_child_death * $uov_per_daly / @moral_weights.uov_per_death_under5`, worked out, no slider | 58.13 (34.9–81.4), GiveWell's 116.25 at 2 | GiveWell moral weights; judgment |
+| A young child's death in healthy years | `$daly_per_child_death` (slider, "Saving a young child's life is worth … years of healthy life"); `$life_value_multiplier` = `$daly_per_child_death * $uov_per_daly / @moral_weights.uov_per_death_under5`, worked out, no slider | 50.54 (30.3–70.8), GiveWell's 116.25 at 2.3 | GiveWell moral weights; judgment |
 | A death | `@moral_weights.<age band>` × `$life_value_multiplier`, the band of the death's age (an age mix from `@death_ages` where deaths of many ages are counted together: climate, GBD DALYs); `_over5` only for deaths of unknown age | 116.25 / 134 / 104 / 42 UoV | GiveWell moral weights |
 | A death in a GiveWell sheet by finer age | `@moral_weights.givewell_age_<group>` (early, late and post-neonatal, 1–4, then five-year groups to 85+) and `givewell_neonatal` (84), × `$life_value_multiplier`; a sheet's age-weighted figure for a programme's deaths (diarrhoeal deaths, Bangladesh's over-fives, alcohol deaths) is the band's value × a measured `*_age_mix` row | 83.6 … 134.3 … 12.4 UoV | GiveWell's 2020 moral weights by age, as its sheets carry them; INV-2d |
 | GiveWell's house constants | `@givewell_shared.*`: resource sharing (2), treatment costs averted (20%), investment of income gains (5%; nets 2.5%, vitamin A 3%, deworming 10%), years long-term gains last (40) and until they start, wage gain per IQ point, value of government / Global Fund / Gavi money, income-to-mortality ratio, value of a year of contraception by country (deaths part × `$life_value_multiplier`), a stillbirth (21), indirect deaths per diarrhoea death, GiveWell's discount rate for figures it states discounted | as listed | facts/givewell_shared.json, GiveWell's current sheets; every GiveWell sheet, and every other evaluator's true copy (SoGive's deworming, Ambitious Impact's LaBri and Lead Research for Action) reads them; INV-13 |
@@ -464,7 +464,7 @@ for its age (`@moral_weights`) × `$life_value_multiplier`, everywhere. Until No
 was a slider of its own, shown as doubled-income years (×116.25), so it overlapped with "One healthy year
 is worth … years of double income": moving the healthy-year rate also changed how many healthy years a
 death counted as. The reader now sets the value of a young child's life in healthy years,
-`$daly_per_child_death` (default 116.25262 / 2 = 58.13, GiveWell's value at the default rate; range 0.6–1.4×),
+`$daly_per_child_death` (default 116.25262 / 2.3 = 50.54, GiveWell's value at its rate; range 0.6–1.4×),
 and the multiplier is a **derived assumption**: an assumptions row with a `formula` over other assumptions
 and facts in place of a value, `$daly_per_child_death * $uov_per_daly / @moral_weights.uov_per_death_under5`
 (1 at the defaults, so no result moved). A death's value is then the slider's healthy years × the
@@ -474,9 +474,10 @@ moves only what is valued through income, the life slider only deaths. Formulas 
 (`expandDerived`: model rows and units' conversions), so the headline, the tree, sensitivity, uncertainty and
 the list of sliders a model reads all see the two sliders, and a derived assumption has no value of its own
 and no slider. An evaluator view never pins it (buildLibrary refuses): it pins `$daly_per_child_death` =
-116.25262 / the evaluator's healthy-year rate and that rate (`$uov_per_daly`, 2 where the evaluator states
+116.25262 / the evaluator's healthy-year rate and that rate (`$uov_per_daly`, GiveWell's 2.3 where the evaluator states
 none), so the multiplier is exactly the evaluator's 1 whatever the reader sets. Links that set the old
-slider (`a.life_value_multiplier = x`) are read as `$daly_per_child_death` = x × 58.13.
+slider (`a.life_value_multiplier = x`) are read as `$daly_per_child_death` = x × 58.13 (116.25 ÷ 2,
+the healthy-year rate's default when those links were made).
 
 **Depression.** An evaluator that leaves its own unit for health turns depression into DALYs its own
 way: SoGive counts 23 points for a year as a full healthy year (1 / 23 = 0.0435, its "rather

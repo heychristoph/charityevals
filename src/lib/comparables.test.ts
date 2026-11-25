@@ -20,7 +20,7 @@ describe("assumption comparables", () => {
   });
 
   it("doubling an income reads as months of healthy life", () => {
-    expect(at("uov_per_ln_consumption")).toBe("A doubled-income year counts as 6 healthy months.");
+    expect(at("uov_per_ln_consumption")).toBe("A doubled-income year counts as 5.2 healthy months.");
     expect(nums(at("uov_per_ln_consumption", 1.803368801))[0]).toBeCloseTo((12 * Math.LN2 * 1.803368801) / defaults.uov_per_daly, 1);
   });
 
