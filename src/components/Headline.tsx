@@ -23,7 +23,7 @@ export function modelOf(id: string, bulk: boolean): ResolvedModel {
  * whose figure combines several programs it tells the edit store which models the page shows. The
  * figure itself is the model's bottom line, the first row of its tree just below, so it isn't repeated
  * under the title. */
-export default function Headline({ id, bulk = false, main = false }: { id: string; bulk?: boolean; place?: string; main?: boolean }) {
+export default function Headline({ id, bulk = false, main = false }: { id: string; bulk?: boolean; main?: boolean }) {
   const model = useMemo(() => modelOf(id, bulk), [id, bulk]);
   const av = useAssumptionValues();
   const urlEdits = useEdits();

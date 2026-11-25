@@ -2,21 +2,18 @@ import type React from "react";
 import { useMemo } from "react";
 import { lib, rawFacts, fullRaw } from "../lib/data";
 import { buildLibrary, compute, type Library } from "../engine/model";
-import { useAssumptionValues, useResultFor } from "../lib/use-results";
+import { useAssumptionValues } from "../lib/use-results";
 import { useOverrides } from "../lib/assumption-state";
 import { useLiveDistribution, withPageDistribution } from "../lib/live-distribution";
 import { editsFor, useEdits } from "../lib/edit-state";
-import ModelTree from "./ModelTree";
 import ModelLayers from "./ModelLayers";
 import { WaterfallInSlot } from "./Waterfall";
 import { uncertainty } from "../engine/uncertainty";
-import { sensitivity } from "../engine/sensitivity";
-import { judgmentOf, modelFlags, modelRange } from "../engine/figures";
 import "./model.css";
 
-/** `place`: the location the model covers, when it is one of several. `about`: who made the model and links to its spreadsheet, file and history, shown under the model.
- * `children`: the evaluation's write-up. Both come from the page as Astro slots. */
-export default function ModelView({ id, bulk = false, place, about, children, waterfall = true }: { id: string; bulk?: boolean; place?: string; about?: React.ReactNode; children?: React.ReactNode; waterfall?: boolean }) {
+/** A model's layered page (ModelLayers). `about`: who made the model and links to its spreadsheet, file
+ * and history. `children`: the evaluation's write-up. Both come from the page as Astro slots. */
+export default function ModelView({ id, bulk = false, about, children, waterfall = true }: { id: string; bulk?: boolean; about?: React.ReactNode; children?: React.ReactNode; waterfall?: boolean }) {
   // `bulk`: the browser has only a summary of this model (lib/browser-models.ts); its page loads the full
   // file before hydrating (client:model, lib/model-directive.ts).
   const raw = bulk ? fullRaw(id) : undefined;
@@ -25,7 +22,6 @@ export default function ModelView({ id, bulk = false, place, about, children, wa
     [id, raw],
   );
   const av = useAssumptionValues();
-  const r = useResultFor(model);
   // The reader's own edits to this model's numbers, from the page's URL: its inputs and facts only.
   const urlEdits = useEdits();
   const edits = useMemo(() => editsFor(model, urlEdits, lib), [model, urlEdits]);
@@ -36,27 +32,13 @@ export default function ModelView({ id, bulk = false, place, about, children, wa
   const overrides = useOverrides();
   const live = useLiveDistribution(lib, model, av, edits, Object.keys(edits).length > 0 || Object.keys(overrides).length > 0);
   const engine: Library = useMemo(() => withPageDistribution(lib, model.id, live), [live, model.id]);
-  // The caveats describe the result on screen, so they follow the edits and the page's simulation.
-  const caveats = useMemo(() => {
-    if (!Object.keys(edits).length && !live) return r.flags;
-    const s = sensitivity(engine, model, av, "charityevals", edits);
-    return modelFlags(engine, model, modelRange(engine, model, s.central, av, { low: s.jointLow, high: s.jointHigh }, edits), { judgment: judgmentOf(u), points: s.pointInputs.length });
-  }, [model, av, edits, r.flags, live, engine, u]);
 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
-      {model.story ? (
-        <ModelLayers model={model} values={values} av={av} edits={edits} u={u} engine={engine} about={about}>
-          {waterfall && <WaterfallInSlot model={model} av={av} edits={edits} engine={engine} />}
-          {children}
-        </ModelLayers>
-      ) : (
-        <>
-          <ModelTree model={model} place={place} values={values} edits={edits} u={u} flags={caveats} engine={engine}>{about}</ModelTree>
-          {waterfall && <WaterfallInSlot model={model} av={av} edits={edits} engine={engine} />}
-          {children}
-        </>
-      )}
+      <ModelLayers model={model} values={values} av={av} edits={edits} u={u} engine={engine} about={about}>
+        {waterfall && <WaterfallInSlot model={model} av={av} edits={edits} engine={engine} />}
+        {children}
+      </ModelLayers>
     </div>
   );
 }

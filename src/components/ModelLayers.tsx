@@ -16,7 +16,7 @@ import { ChevronRight } from "lucide-react";
 import { Markdown, Slider } from "./AssumptionsPanel";
 import InfoTip from "./InfoTip";
 import type { Row } from "../engine/schema";
-import { labelOf, plain, show } from "./ModelTree";
+import { labelOf, plain, show } from "../lib/labels";
 import "./layers.css";
 
 /** Questions shown: enough to cover this share of the uncertainty, at most MAX. */

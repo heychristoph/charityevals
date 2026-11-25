@@ -6,7 +6,7 @@ import { lib } from "../lib/data";
 import { pickValue, type ResolvedModel } from "../engine/model";
 import { formulaText } from "../engine/derive";
 import { formatAssumption, formatValue } from "../lib/format";
-import { filledLabel, plain } from "./ModelTree";
+import { filledLabel, plain } from "../lib/labels";
 
 /** A row, followed through rows that only pass another row along (`a = b`, the same number by another id). */
 export function resolve(model: ResolvedModel, id: string): string {
