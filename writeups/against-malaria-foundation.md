@@ -1,6 +1,6 @@
 ### Summary
 
-The Against Malaria Foundation (AMF) buys long-lasting insecticide-treated bed nets and funds their distribution in mass campaigns run with national malaria programs. GiveWell models eight locations. This page shows the Democratic Republic of Congo, the median one: **{{result}} years of healthy life per $1,000**; GiveDirectly comes to about {{result:givedirectly}}. Across locations the result runs from about 8 (Chad) to 38 (Guinea).
+The Against Malaria Foundation (AMF) buys long-lasting insecticide-treated bed nets and funds their distribution in mass campaigns run with national malaria programs. GiveWell models eight locations.
 
 The model reproduces all 93 of GiveWell's intermediate figures for DRC, and those of every other location.
 

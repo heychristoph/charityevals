@@ -88,6 +88,7 @@
    "explainer": "charityevals' step: the share of the effect due to Malaria Consortium and, with credit by share of resources on, staff's pay below market."
   }
  ],
+ "story": {"sentence":"$1,000 adds vitamin A to the door-to-door malaria medicine for **{1000 * children_reached / total_cost} children** in Bauchi, Nigeria. Every **{total_cost / deaths_total|$}** saves **a child's life**.","questions":{"vas_dose_share":"How much of a year's vitamin A benefit does one dose give?","counterfactual_share":"How much of the effect would not have happened without Malaria Consortium?","vas_mortality_reduction":"How much does vitamin A cut a child's risk of dying?","smc_baseline":"What share of children already got the malaria medicine?","smc_cycle_share":"How much of a season's protection does one round give?"},"steps":[{"total":"1000|$","text":"given to Malaria Consortium"},{"op":"÷ {total_cost / children_reached|$}","text":"per child reached"},{"total":"1000 * children_reached / total_cost","text":"children reached"},{"op":"× {deaths_total / children_reached|%}","text":"have a death averted by the vitamin A and medicine"},{"total":"1000 * deaths_total / total_cost","text":"children's lives saved"},{"op":"× {result / (1000 * deaths_total / total_cost)}","text":"years of healthy life for each, counting what would have happened anyway"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
  "rows": [
   {
    "id": "children_reached",

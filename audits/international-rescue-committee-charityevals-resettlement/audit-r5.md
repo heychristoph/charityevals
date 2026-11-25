@@ -1,7 +1,7 @@
 # Audit: international-rescue-committee-charityevals-resettlement, round 5
 
 Result: 8.355e-6 daly/$ = 0.00836 years of healthy life per $1,000 (combined range 0.00165-0.0423). Verdict: **pass** (no findings above low; none open).
-Model-sha: f71b41e2003e0c5819eb9fff315e110658d6ced05e520d38afb44ff797b7e32f
+Model-sha: b284bb2bf50007302fe1f381c41402b2ca09a65e826ce31f329ed31f8994112d
 Rules: 0.3.13
 
 Scope: scoped verification of one change since round 4 (`git diff d38a65b~1`): `legal_undocumented_ln_gap` changed from a model-own judgment 0.15 (0.05-0.35) to the shared fact `@united_states.legal_status_ln_consumption_gain` (0.1, 0.04-0.25). The beneficiaries field was only reformatted.
@@ -17,7 +17,7 @@ Checks:
 No new findings.
 
 Verdict: **pass** (no findings; the swap to the shared fact is the same concept, sourced, and moves the result by -1.5%).
-Model-sha: f71b41e2003e0c5819eb9fff315e110658d6ced05e520d38afb44ff797b7e32f
+Model-sha: b284bb2bf50007302fe1f381c41402b2ca09a65e826ce31f329ed31f8994112d
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -30,3 +30,5 @@ Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the pag
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against d150f0b2.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

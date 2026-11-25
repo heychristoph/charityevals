@@ -1,6 +1,6 @@
 # Audit: nuclear-threat-initiative-charityevals, round 13 (scoped verification)
 Result: 7.29 years of healthy life per $1,000 (was 7.48, -2.55%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 0e7040706f87885ae0b471009f2538fd8623fbb48c9e638d789c07424f51f96b
+Model-sha: ad35185f9583e44e0cf0768a31019a17ad8c06dcbc0a7c5d884fd726b4134f27
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes (only low lint range lines on four ai/nuclear "smaller" rows, not blocking)
@@ -21,3 +21,5 @@ Summary: the future counts "only where you count lives that never start (0% by d
 Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline unchanged, 1 row changed, against the tree before the rule.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

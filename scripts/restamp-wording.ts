@@ -3,7 +3,9 @@
 // carries the fingerprint of the model as it is at <base>, and whose content differs from <base> only in its
 // `summary`, every occurrence of that Model-sha in the round becomes the current one and one note line is
 // appended. Anything else (other fields changed, an audit on neither version) is listed, not touched.
-//   npx tsx scripts/restamp-wording.ts [--base main] [--note "..."] [--dry]
+//   npx tsx scripts/restamp-wording.ts [--base main] [--fields summary,story] [--note "..."] [--dry]
+// `--fields`: the wording fields that may differ (default `summary`; `story` is a model's plain-words story,
+// docs/story.md, which reads the model's numbers and changes none).
 // Safe to re-run, e.g. after merging other branches: a receipt already on the current content is skipped.
 import { execFileSync } from "node:child_process";
 import { appendFileSync, existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
@@ -24,7 +26,8 @@ const walk = (d: string): string[] => readdirSync(d).flatMap((f) => {
   const p = join(d, f);
   return statSync(p).isDirectory() ? walk(p) : f.endsWith(".json") ? [p] : [];
 });
-const withoutSummary = (m: Record<string, unknown>) => contentSha({ ...m, summary: undefined });
+const fields = flag("--fields", "summary").split(",").map((f) => f.trim());
+const withoutSummary = (m: Record<string, unknown>) => contentSha({ ...m, ...Object.fromEntries(fields.map((f) => [f, undefined])) });
 
 let stamped = 0;
 for (const file of walk(join(root, "models"))) {
@@ -50,7 +53,7 @@ for (const file of walk(join(root, "models"))) {
   // The fingerprint to replace: the base's, or, once this script has stamped the round (its note is there), the
   // receipt's own (a further wording edit since).
   const then = shas.includes(contentSha(old)) ? contentSha(old) : text.includes(note) ? shas[0] : contentSha(old);
-  if (withoutSummary(old) !== withoutSummary(model)) { console.log(`skip ${id}: more than the summary changed since ${base} (needs a verification round)`); continue; }
+  if (withoutSummary(old) !== withoutSummary(model)) { console.log(`skip ${id}: more than ${fields.join(", ")} changed since ${base} (needs a verification round)`); continue; }
   if (!shas.includes(then)) { console.log(`skip ${id}: ${relative(root, roundFile)} isn't on ${base}'s content`); continue; }
   console.log(`${dry ? "would re-stamp" : "re-stamped"} ${relative(root, roundFile)}`);
   stamped++;

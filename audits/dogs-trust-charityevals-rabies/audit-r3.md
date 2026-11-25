@@ -1,7 +1,7 @@
 # Audit: dogs-trust-charityevals-rabies, round 3
 
 Result: 4.834e-4 uov/$ = 0.2417 years of healthy life per $1,000 (combined range 0.041–1.415); global-health median 0.403 (×0.60). Verdict: pass (0 high).
-Model-sha: ff4602322dbe67daa0ae0b559f3519f8ebc398478d7fd2481bef1faafe123aea
+Model-sha: 13f2f8526622c89e2e1041f2cfc02ee409fb7ed43b6c0d50025bc45b0688a5bd
 Rules: 0.3.13
 
 Scope: unchanged from round 2 (the "rabies" line, 20% of the 2025 international line, $6.877m; sister model takes the rest). Round 3 checks only the round-2 highs and mediums and what the changes introduced.
@@ -51,3 +51,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

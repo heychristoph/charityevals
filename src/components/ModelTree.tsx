@@ -124,7 +124,7 @@ function exprLabel(m: ResolvedModel, n: Node): string {
 }
 
 /** A value's label with its blank filled: "Lives that never start count … %" reads "… count 0%". */
-function filledLabel(row: Row, v: number): string {
+export function filledLabel(row: Row, v: number): string {
   if (!row.label.includes("…") || !Number.isFinite(v)) return row.label;
   const shown = formatShown(row, v);
   if (shown === "doesn't count") return row.label;
@@ -133,14 +133,14 @@ function filledLabel(row: Row, v: number): string {
 
 /** Evaluators' jargon in row labels, in plain words: "funging" and "leverage" are other funders'
  * money pushed elsewhere or pulled in. */
-function plain(label: string): string {
+export function plain(label: string): string {
   return label
     .replace(/\s*\((?:funging|leverage)\)/gi, "")
     .replace(/\bleverage and funging\b/gi, (w) => (w[0] === "L" ? "Other funders" : "other funders"))
     .replace(/\bfunging\b/gi, "displaced funding");
 }
 
-function labelOf(m: ResolvedModel, n: TreeNode): string {
+export function labelOf(m: ResolvedModel, n: TreeNode): string {
   return plain(rawLabelOf(m, n));
 }
 
@@ -160,7 +160,7 @@ function rawLabelOf(m: ResolvedModel, n: TreeNode): string {
   return rowLabel(m, n.rowId!);
 }
 
-function show(m: ResolvedModel, n: TreeNode, years = false): string {
+export function show(m: ResolvedModel, n: TreeNode, years = false): string {
   // The top row is the number under the page title, rounded the same way.
   if (years) return formatYears(n.value);
   // The row named in the formula speaks first (it carries the label shown), then the rows it passed
@@ -212,7 +212,20 @@ type Ctx = {
   fig: Figure;
   /** The location this model covers, when it is one of several: kept on the top row's label. */
   place?: string;
+  /** The model's own result per $1,000 in its own unit ("45,000 chicken pain days"), where that unit is
+   * an outcome a reader can picture: beside the top row's healthy years. */
+  native?: string;
 };
+
+/** Units the top row names beside healthy years: outcomes, not an evaluator's accounting unit. */
+const NATIVE_UNITS = new Set(["ced", "tco2e", "wellby"]);
+function nativeOf(m: ResolvedModel, values: Record<string, number>): string | undefined {
+  const o = m.output;
+  if (!o || !NATIVE_UNITS.has(o.unit)) return undefined;
+  const v = values[o.row] * 1000;
+  const unit = lib.assumptions.units[o.unit];
+  return Number.isFinite(v) && unit ? `${formatValue(v, "number")} ${unit.short ?? unit.label}` : undefined;
+}
 
 /** The models that read a shared fact, when more than one does. */
 const readers = (key: string): string[] => (usage as Record<string, string[]>)[key] ?? [];
@@ -446,7 +459,11 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
   const rangedRow = rangedRowOf(ctx.u, n);
   const ranged = !!rangedRow;
   const below = under ?? (ranged ? label : undefined);
-  const kids = isOpen && branch ? childrenOf(m, n, look) : [];
+  const all_ = isOpen && branch ? childrenOf(m, n, look) : [];
+  // Fixed numbers written into a formula (× 1,000 for "per $1,000", ÷ 365) fold into one line under
+  // the parts: they convert units and carry no uncertainty. A formula of nothing else keeps them as rows.
+  const folded = all_.some((k) => k.type !== "const") ? all_.filter((k) => k.type === "const") : [];
+  const kids = all_.filter((k) => !folded.includes(k));
   // The parts with the most leverage, kept in formula order; the rest behind "n more".
   // Inside a published range, by leverage: the range already holds their uncertainty.
   const ranked = [...kids].sort((a, b) => (under || ranged ? Math.abs(b.e ?? 0) - Math.abs(a.e ?? 0) : ctx.weight(b) - ctx.weight(a)));
@@ -487,6 +504,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
           <span className="tn-text">
             <span id={`${id}-l`} className="tn-label"><Glossed text={label} seen={ctx.glossed} /></span>
             {how && label.toLowerCase() !== how.toLowerCase() && <span className="tn-how"> · {how}</span>}
+            {root && ctx.native && <span className="tn-how tn-native num"> · {ctx.native}</span>}
             <Tag ctx={ctx} n={n} id={`${id}-t`} />
             {root && ctx.flags.length > 0 && (
               // The sign opens its own list; it doesn't open or close the row.
@@ -520,7 +538,7 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
       {isOpen && <Detail ctx={ctx} n={n} id={`${id}-d`} lines={lines} />}
       {isOpen && branch && (
         <ul role="group" className="tn-group" data-deep={depth >= 3 ? "" : undefined}>
-          {shown.map((k, i) => <Item key={k.key} ctx={ctx} n={k} depth={depth + 1} pos={i + 1} size={shown.length + (hidden.length ? 1 : 0)} parentLabel={label} under={below} />)}
+          {shown.map((k, i) => <Item key={k.key} ctx={ctx} n={k} depth={depth + 1} pos={i + 1} size={shown.length + (hidden.length ? 1 : 0) + (folded.length ? 1 : 0)} parentLabel={label} under={below} />)}
           {hidden.length > 0 && (
             <li
               role="treeitem"
@@ -539,6 +557,29 @@ function Item({ ctx, n, depth, pos, size, parentLabel, under }: { ctx: Ctx; n: T
                 <span className="tn-name tn-more">
                   <span className="tn-more-label">Show {hidden.length} more {hidden.length === 1 ? "part" : "parts"}</span>
                   <span className="tn-more-note"> · {under || ranged ? `together they move the result ${leverText(hiddenWeight).replace(/^[+−]/, "")} or less` : `together ${shareText(hiddenWeight)} of the uncertainty or less`}</span>
+                </span>
+              </div>
+            </li>
+          )}
+          {folded.length > 0 && (
+            <li
+              role="treeitem"
+              id={domId(`${n.key}.fixed`)}
+              data-key={`${n.key}.fixed`}
+              aria-level={depth + 1}
+              aria-posinset={shown.length + (hidden.length ? 1 : 0) + 1}
+              aria-setsize={shown.length + (hidden.length ? 1 : 0) + 1}
+              tabIndex={ctx.focus === `${n.key}.fixed` ? 0 : -1}
+              className="tn-item tn-fixeditem"
+              onFocus={(ev) => ev.target === ev.currentTarget && ctx.setFocus(`${n.key}.fixed`)}
+            >
+              <div className="tn-row">
+                <span className="tn-twist" aria-hidden />
+                <span className="tn-name tn-more">
+                  <span className="tn-more-note">
+                    {folded.map((k, i) => <Fragment key={k.key}>{i ? ", " : ""}<span className="num">{k.op ?? ""} {fmtNum(k.value)}</span>{k.label ? ` (${k.label})` : k.value === 1000 && /^r\.\d+$/.test(k.key) ? " (per $1,000)" : ""}</Fragment>)}
+                    {" "}· fixed in the formula
+                  </span>
                 </span>
               </div>
             </li>
@@ -752,7 +793,7 @@ export default function ModelTree({ model, values, edits = {}, u, flags = [], pl
     }
   };
 
-  const ctx: Ctx = { m: model, look, open, all, focus, flash, u, flags, weight, toggle, showAll, setFocus, edits, glossed: new Set(), years: toCommon !== undefined, fig, place };
+  const ctx: Ctx = { m: model, look, open, all, focus, flash, u, flags, weight, toggle, showAll, setFocus, edits, glossed: new Set(), years: toCommon !== undefined, fig, place, native: toCommon !== undefined ? nativeOf(model, values) : undefined };
   const orphanRow = orphan ? model.byId.get(orphan) : undefined;
   const rowCount = model.rows.length.toLocaleString("en-US");
 
@@ -765,6 +806,7 @@ export default function ModelTree({ model, values, edits = {}, u, flags = [], pl
         </InfoTip>
       </div>
       {children && <div className="tn-about small">{children}</div>}
+
 
       <div className="tn-tools">
         <div className="tn-actions small">

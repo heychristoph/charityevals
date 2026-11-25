@@ -8,7 +8,11 @@ import VariantList from "./VariantList.tsx";
 import CharityLogo from "./CharityLogo.tsx";
 import SimilarCharities from "./SimilarCharities.tsx";
 import Headline from "./Headline.tsx";
+import StoryLine from "./StoryLine.tsx";
 import WholeCharity, { Locations } from "./WholeCharity.tsx";
+import WholeLayers from "./WholeLayers.tsx";
+import WholeStoryLine from "./WholeStoryLine.tsx";
+import { programsOf } from "../lib/whole";
 import ModelReuse from "./ModelReuse.astro";
 import { plainModelName } from "../lib/format";
 import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf, summarised } from "../lib/data";
@@ -85,6 +89,15 @@ const modelCount = new Set([...others, ...(family.length > 1 ? family : [])].map
 // (their file loads when their branch opens; the island waits for the main one's, client:model).
 const parts = primaryOf(lib, charity.id)?.id === model.id ? rankingPlan(lib, charity.id).find((e) => e.owner === model.owner)?.parts ?? [] : [];
 const whole = parts.length > 1;
+// A model with a story (`story`) gets the simple page: the sentence and the likely range first, everything
+// else in layers that open one by one (ModelLayers); the evaluator tabs, locations and sources at the end.
+// A charity of several programmes gets it too when its programmes split the money (WholeLayers); their
+// full files load before the page hydrates (client:model with every summarised programme's id).
+const programs = whole && model.story ? programsOf(model) : undefined;
+const simple = !!model.story && (!whole || !!programs);
+// Every other model of the charity, linked from the simple page's sources so each has a way in.
+const elsewhere = simple ? [...new Map([...siblings, ...family].filter((m) => m.id !== model.id && m.output).map((m) => [m.id, m])).values()] : [];
+const fetched = programs?.filter((p) => summarised(p.model)).map((p) => p.model.id).join(",") ?? "";
 // One programme funded in several locations: its combined figure above the model (WholeCharity: Locations).
 const located = parts.length === 1 && locationsOf(lib, parts[0].model).length > 1;
 // A few charities doing similar work, to explore from (names only: src/lib/similar.ts).
@@ -97,26 +110,42 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
 ---
 
 <Base title={meta.title} description={meta.description} schema={modelSchema(model, meta.description)} active="rankings">
-  <div class="page layout" style={`--cause: var(--cause-${model.cause})`} data-track-charity={charity.id} data-track-model={model.id}>
+  <div class:list={["page layout", { simple }]} style={`--cause: var(--cause-${model.cause})`} data-track-charity={charity.id} data-track-model={model.id}>
     <div class="main">
       <nav class="crumbs small" aria-label="Breadcrumb"><a href="/">Rankings</a> / <a href={`/causes/${charity.cause}`}>{CAUSE[charity.cause]}</a>{model.kind === "variant" && <> / <a href={modelUrl(lib, lib.models.get(model.extends!)!)}>{charity.name}</a></>}</nav>
       <header class="m-header">
         <div class="m-title">
-          <h1><CharityLogo id={charity.id} name={charity.name} size={40} lazy={false} className="m-logo" /> {charity.name}</h1>
+          <h1 class="m-name">
+            {charity.donate ? (
+              <a class="m-name-link" href={charity.donate} rel="noopener" data-track="donate" data-charity={charity.id} title={`Donate to ${charity.name}${charity.donate_via ? ` via ${charity.donate_via}` : ""}`}>
+                <CharityLogo id={charity.id} name={charity.name} size={40} lazy={false} className="m-logo" /> {charity.name}
+              </a>
+            ) : <><CharityLogo id={charity.id} name={charity.name} size={40} lazy={false} className="m-logo" /> {charity.name}</>}
+          </h1>
           {summarised(model)
             ? <Headline client:model={model.id} id={model.id} bulk place={placeText} main={main} />
             : <Headline client:load id={model.id} place={placeText} main={main} />}
         </div>
-        {(dek || charity.website) && (
+        {simple && current.length > 1 && (
+          <nav class="owners owners-top" aria-label="Evaluators' models of this charity">
+            {current.map((m) => (
+              <a href={modelUrl(lib, m)} aria-current={m.owner === model.owner ? "page" : undefined} class:list={["owner-tab", { here: m.owner === model.owner }]} data-evaluator-tab={m.owner}>
+                {lib.owners.get(m.owner)!.name}
+              </a>
+            ))}
+          </nav>
+        )}
+        {simple ? (
+          <p class="dek story-dek">
+            {programs
+              ? fetched ? <WholeStoryLine client:model={fetched} id={model.id} /> : <WholeStoryLine client:load id={model.id} />
+              : summarised(model) ? <StoryLine client:model={model.id} id={model.id} bulk /> : <StoryLine client:load id={model.id} />}
+          </p>
+        ) : (dek || charity.website) && (
           <p class="dek">
             {dek}
             {charity.website && <> <a class="site-link" href={charity.website} rel="noopener" data-track-kind="charity">{host(charity.website)}</a></>}
           </p>
-        )}
-        {charity.donate && (
-          <div class="donate">
-            <a class="donate-button" href={charity.donate} rel="noopener" data-track="donate" data-charity={charity.id}>Donate to {charity.name}{charity.donate_via && ` via ${charity.donate_via}`}<span aria-hidden="true"> ↗</span></a>
-          </div>
         )}
       </header>
       {model.theoretical && (
@@ -129,6 +158,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           </p>
         </aside>
       )}
+{!simple && (
       <div class="m-model">
         {current.length > 1 && (
           <nav class="owners" aria-label="Evaluators' models of this charity">
@@ -160,14 +190,31 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
           </details>
         )}
       </div>
+      )}
       {/* A model the browser has only as a summary (lib/browser-models.ts) hydrates once its full file has
           loaded (client:model), rather than carrying it as a prop. */}
       {whole ? (
         <>
-        {summarised(model) ? (
+        {programs ? (
+          fetched ? (
+            <WholeLayers client:model={fetched} id={model.id}>
+              <section class="writeup">
+                {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
+                <div class="wf-slot" data-waterfall={model.id}><div class="wf-skeleton" aria-hidden="true"><span class="sk-title"></span><span></span><span></span><span></span><span></span></div></div>
+              </section>
+            </WholeLayers>
+          ) : (
+            <WholeLayers client:load id={model.id}>
+              <section class="writeup">
+                {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
+                <div class="wf-slot" data-waterfall={model.id}><div class="wf-skeleton" aria-hidden="true"><span class="sk-title"></span><span></span><span></span><span></span><span></span></div></div>
+              </section>
+            </WholeLayers>
+          )
+        ) : summarised(model) ? (
           <WholeCharity client:model={model.id} id={model.id}>
-          <section class="writeup" aria-labelledby="writeup-title">
-            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+          <section class="writeup" aria-labelledby={simple ? undefined : "writeup-title"}>
+            {!simple && <h2 id="writeup-title" class="writeup-title">The evaluation</h2>}
             {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
             {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
             <div class="wf-slot" data-waterfall={model.id}><div class="wf-skeleton" aria-hidden="true"><span class="sk-title"></span><span></span><span></span><span></span><span></span></div></div>
@@ -175,23 +222,23 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
         </WholeCharity>
         ) : (
           <WholeCharity client:model={model.id} id={model.id}>
-          <section class="writeup" aria-labelledby="writeup-title">
-            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+          <section class="writeup" aria-labelledby={simple ? undefined : "writeup-title"}>
+            {!simple && <h2 id="writeup-title" class="writeup-title">The evaluation</h2>}
             {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
             {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
             <div class="wf-slot" data-waterfall={model.id}><div class="wf-skeleton" aria-hidden="true"><span class="sk-title"></span><span></span><span></span><span></span><span></span></div></div>
           </section>
         </WholeCharity>
         )}
-        <p class="m-links small">
+        {!programs && <p class="m-links small">
           <a href={`${repo}/blob/main/${file}`} data-track-kind="model-file">Model file</a> · <a href={historyUrl(model)} data-track-kind="history">History</a>
               {audit && <> · <a href={`${repo}/blob/main/${audit.path}`} data-track-kind="audit">Audit</a>{audit.rules && <>, <a href="/changelog">rules {audit.rules}</a>{audit.behind && <span class="muted"> (latest {latestRules})</span>}</>}</>}
           <ModelReuse model={model}>{owner.permission && <span class="muted"> · {owner.permission}</span>}</ModelReuse>
-        </p>
+        </p>}
         </>
       ) : summarised(model) ? (
         <>
-        {located && <Locations client:load id={model.id} />}
+        {located && !simple && <Locations client:load id={model.id} />}
         <ModelView client:model={model.id} id={model.id} bulk place={place}>
           <Fragment slot="about">
             <p>
@@ -206,8 +253,8 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
               <ModelReuse model={model}>{owner.permission && <span class="muted"> · {owner.permission}</span>}</ModelReuse>
             </p>
           </Fragment>
-          <section class="writeup" aria-labelledby="writeup-title">
-            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+          <section class="writeup" aria-labelledby={simple ? undefined : "writeup-title"}>
+            {!simple && <h2 id="writeup-title" class="writeup-title">The evaluation</h2>}
             {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
             {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
             <div class="wf-slot" data-waterfall={model.id}><div class="wf-skeleton" aria-hidden="true"><span class="sk-title"></span><span></span><span></span><span></span><span></span></div></div>
@@ -216,7 +263,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
         </>
       ) : (
         <>
-        {located && <Locations client:load id={model.id} />}
+        {located && !simple && <Locations client:load id={model.id} />}
         <ModelView client:model={model.id} id={model.id} place={place}>
           <Fragment slot="about">
             <p>
@@ -231,8 +278,8 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
               <ModelReuse model={model}>{owner.permission && <span class="muted"> · {owner.permission}</span>}</ModelReuse>
             </p>
           </Fragment>
-          <section class="writeup" aria-labelledby="writeup-title">
-            <h2 id="writeup-title" class="writeup-title">The evaluation</h2>
+          <section class="writeup" aria-labelledby={simple ? undefined : "writeup-title"}>
+            {!simple && <h2 id="writeup-title" class="writeup-title">The evaluation</h2>}
             {Writeup && <div class="writeup-body" data-gloss><Writeup /></div>}
             {/* From the evaluator's figure to the one shown: filled by the model's island (Waterfall). */}
             <div class="wf-slot" data-waterfall={model.id}><div class="wf-skeleton" aria-hidden="true"><span class="sk-title"></span><span></span><span></span><span></span><span></span></div></div>
@@ -241,9 +288,29 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
         </>
       )}
       {resources.length > 0 && (
-        <details class="resources">
-          <summary><h2 id="resources-title">Evidence and sources <span class="muted num">{allResources.length}</span></h2></summary>
-          <p class="muted small">Everything the evaluation links to, to check it yourself.</p>
+        <details class:list={["resources", { "ly-layer": simple }]}>
+          <summary>{simple && <Fragment set:html={'<svg class="ly-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>'} />}<h2 id="resources-title">Evidence and sources{!simple && <> <span class="muted num">{allResources.length}</span></>}</h2></summary>
+          {!simple && <p class="muted small">Everything the evaluation links to, to check it yourself.</p>}
+          {simple && (
+            <div class="tn-about small sources-about">
+              <p>
+                {model.source ? <a href={model.source.url} data-track-kind="source">{plainModelName(model.name)}</a> : <strong>{plainModelName(model.name)}</strong>}
+                {" "}by <a href={`/evaluators/${owner.id}`}>{owner.name}</a>{model.source?.published && <>, {fmtDate(model.source.published)}</>}.{owner.id === "charityevals" ? <> Built and checked by AI agents, by our <a href="/method#our-models">published method</a>.</> : <> Converted to our scale by AI agents, by our <a href="/method">published method</a>.</>}
+                {parent && <> It extends <a href={modelUrl(lib, parent)}>{plainModelName(parent.name)}</a>, inheriting every row and overriding a few.</>}
+              </p>
+              <p class="m-links">
+                {model.source?.sheet && <><a href={model.source.sheet} data-track-kind="spreadsheet">Spreadsheet</a> · </>}
+                <a href={`${repo}/blob/main/${file}`} data-track-kind="model-file">Model file</a> · <a href={historyUrl(model)} data-track-kind="history">History</a>
+                {audit && <> · <a href={`${repo}/blob/main/${audit.path}`} data-track-kind="audit">Audit</a>{audit.rules && <>, <a href="/changelog">rules {audit.rules}</a>{audit.behind && <span class="muted"> (latest {latestRules})</span>}</>}</>}
+                <ModelReuse model={model}>{owner.permission && <span class="muted"> · {owner.permission}</span>}</ModelReuse>
+              </p>
+              {elsewhere.length > 0 && (
+                <p class="m-links">
+                  Other models: {elsewhere.map((m, i) => <>{i > 0 && " · "}<a href={modelUrl(lib, m)}>{plainModelName(m.name)}</a> ({lib.owners.get(m.owner)?.short ?? m.owner})</>)}
+                </p>
+              )}
+            </div>
+          )}
           {resources.map((g) => (
             <div class="res-group">
               <h3>{g.title} <span class="muted small num">{g.items.length}</span></h3>
@@ -305,6 +372,112 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   }
   .resources summary h2 {
     display: inline;
+  }
+  /* The simple page (a model with a story): one column of layers; tabs, locations and sources move to the end. */
+  .dek.story-dek {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.6vw, 28px);
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: none;
+    margin: var(--s2) 0 0;
+    text-wrap: pretty;
+  }
+  .story-dek :global(b) {
+    font-weight: 700;
+    background: linear-gradient(transparent 62%, var(--blue-wash) 62%);
+    padding: 0 2px;
+  }
+  /* Your values on the simple page: no grey box, part of the page; a hairline sets it apart. */
+  @media (min-width: 1001px) {
+    .simple .side {
+      background: var(--paper);
+      border: 0;
+      border-left: 1px solid var(--rule);
+      border-radius: 0;
+    }
+    .simple .side::after {
+      background: linear-gradient(to bottom, transparent, var(--paper));
+    }
+    .simple .side :global(.assumptions.compact) {
+      padding: 0 0 var(--s5) var(--s5);
+    }
+  }
+  .simple .side :global(.assumptions.compact h2) {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .simple .side :global(.compact .group legend) {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .simple .side :global(.assumption-name) {
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .simple .side :global(.value-field) {
+    border-color: var(--rule);
+  }
+  .simple .side :global(.assumption-scale) {
+    font-size: 12px;
+  }
+  /* Inside the "Write-up" layer the write-up starts right under the heading: no rule, no gap. */
+  .simple .writeup {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .simple .writeup-body > :global(:first-child) {
+    margin-top: 0;
+  }
+  .sources-about {
+    padding-bottom: var(--s3);
+    border-bottom: 1px solid var(--rule);
+  }
+  .owners.owners-top {
+    margin: var(--s2) 0 var(--s4);
+    font-size: 15px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .owners-top .owner-tab {
+    white-space: nowrap;
+  }
+  /* One reading width for everything on the simple page: name, layers, write-up, similar charities. */
+  .simple .main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 720px;
+  }
+  .simple .main > :global(.model-view) {
+    order: 1;
+  }
+  .simple .resources {
+    display: block;
+    order: 3;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .simple .similar {
+    order: 4;
+    border-top: 0;
+  }
+  .simple .resources summary h2 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .simple .resources > :not(summary) {
+    margin: 0 0 var(--s4);
   }
   .layout {
     display: grid;
@@ -370,6 +543,19 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
   .m-title {
     display: grid;
     gap: var(--s2);
+  }
+  /* The name and logo are the link to donate. */
+  .m-name {
+    margin: 0;
+  }
+  .m-name-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  .m-name-link:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
   }
   .m-title :global(.m-headline) {
     margin: 0;
@@ -605,25 +791,6 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
     color: var(--ink);
     font-weight: 600;
     text-decoration: none;
-  }
-  .donate {
-    display: flex;
-    gap: var(--s2) var(--s4);
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .donate-button {
-    display: inline-block;
-    background: var(--blue);
-    color: var(--paper);
-    font-weight: 600;
-    text-decoration: none;
-    padding: 9px 18px;
-    border-radius: var(--radius);
-  }
-  .donate-button:hover {
-    background: var(--blue-ink);
-    color: var(--paper);
   }
   @media (max-width: 1000px) {
     .layout {

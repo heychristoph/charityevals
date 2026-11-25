@@ -12,7 +12,7 @@ Checks passed:
 - (c) Summary range text now 0.05-0.80, matching the combined range 0.0496-0.8015; no other stale figure found.
 
 Verdict: pass
-Model-sha: 2bc12514cd9dbbb09573e640811071f2ba629e74c3474d947f76fdd361ded57f
+Model-sha: 1f16b5d0f10e18f9e3ea1bcc2523fb2d3405cad590ef001b5d3653f46cc23442
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -34,3 +34,5 @@ Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the pag
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against d150f0b2.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

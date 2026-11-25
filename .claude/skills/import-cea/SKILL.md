@@ -9,8 +9,7 @@ This skill turns an evaluator's published cost-effectiveness analysis into a cha
 with two views: the **evaluator view** reproduces every number of their sheet; **our view** carries
 their bottom line on to **years of healthy life per 1,000 dollars donated**, the site's one scale, by the
 same steps as every other model, so charities rated by different evaluators can be ranked side by
-side. The loop: import, check that every number reproduces
-(`scripts/preflight.ts`), fix; audit-cea reviews it when asked. Terms (uov, SAD,
+side. The loop: import, check every number reproduces (`scripts/preflight.ts`), fix. Terms (uov, SAD,
 `published`, INV-n): [glossary](../build-cea/references/templates.md#glossary).
 
 Job: **reproduce the evaluator's model faithfully, then normalise it.** Their rows, numbers and
@@ -241,6 +240,7 @@ writeups/sinergia-animal.md and writeups/givedirectly.md:
 - Plain language. Glossary terms (SADs, WELLBYs, DALYs, units of value, funging, leverage,
   counterfactual, moral weight, welfare range) get info tips from src/lib/glossary.ts: don't define
   them inline.
+- **Story** in the model file (docs/story.md).
 
 ## 8. Verify
 

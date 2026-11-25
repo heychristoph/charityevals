@@ -9,7 +9,7 @@ import { usePageDistribution, withPageDistribution } from "../lib/live-distribut
 const built = new Map<string, ResolvedModel>();
 /** A summarised model in full (its page loads the file before hydrating, lib/browser-models.ts); any other
  * model as the library has it. */
-function modelOf(id: string, bulk: boolean): ResolvedModel {
+export function modelOf(id: string, bulk: boolean): ResolvedModel {
   if (!bulk) return lib.models.get(id)!;
   const raw = fullRaw(id);
   if (!raw) return lib.models.get(id)!;

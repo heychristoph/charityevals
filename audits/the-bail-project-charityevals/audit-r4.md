@@ -1,6 +1,6 @@
 # Audit: the-bail-project-charityevals, round 4
 Result: 1.251e-5 daly/$ = 0.0125 years of healthy life per 1,000 dollars, unchanged from round 3. Verdict: pass (no high findings).
-Model-sha: 6cc6a336485281386ebb1ee7af130d588585e15202b11a5b18e1dee5832f4112
+Model-sha: 5e71c5663ee0cd5566ceda49fe43762bb73a37b86752dd745a883ebc635ba8dc
 Rules: 0.3.13
 Scope: scoped verification of the one round-3 low and the changed text only (facts `bailouts_fy2025` source note). No values changed.
 Mechanical: `audit-model.ts` on models/global-health/the-bail-project-charityevals.json: 0 findings.
@@ -11,7 +11,7 @@ Round-3 findings:
 New findings: none.
 
 Verdict: pass (0 high).
-Model-sha: 6cc6a336485281386ebb1ee7af130d588585e15202b11a5b18e1dee5832f4112
+Model-sha: 5e71c5663ee0cd5566ceda49fe43762bb73a37b86752dd745a883ebc635ba8dc
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0125 → 0.0135.
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -23,3 +23,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

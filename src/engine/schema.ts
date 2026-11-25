@@ -200,6 +200,10 @@ export const Charity = z
     /** Set when `donate` goes through an evaluator's form rather than the charity's own page. */
     donate_via: z.string().optional(),
     summary: z.string().optional(),
+    /** For a charity of several programmes, the sentence its page leads with (docs/story.md): what $1,000
+     * pays for, its numbers live from the programmes' models, `{<line id>: <expression>|<format>}` over
+     * that programme's rows, `result` and `share` (the programme's share of the money). */
+    story: z.string().optional(),
     resources: z.array(Resource).default([]),
     /** What the charity spends on its programmes in a year: from its accounts, or, for a charity without
      * published accounts, the annual programme cost its evaluator's model is built on (named in `source`).
@@ -334,6 +338,20 @@ export const Model = z
      * charity's reports, and the studies and data the analysis cites. */
     resources: z.array(Resource).default([]),
     sections: z.array(Section).default([]),
+    /** The model in plain words, for its page's top layers: one sentence, and the steps from $1,000 to the
+     * result. `{expr}` is a live number: an expression over this model's rows and `result` (years of
+     * healthy life per $1,000), optionally `{expr|$}`, `{expr|%}` or `{expr|y}` (in the reader's measure).
+     * A step is a running `total` (an expression) or an `op` (text such as "× {share|%}"), each with its
+     * `text`. Variants inherit their parent's. */
+    story: z
+      .object({
+        sentence: z.string(),
+        steps: z.array(z.object({ total: z.string().optional(), op: z.string().optional(), text: z.string() }).strict()).min(3),
+        /** Plain questions for the evidence a reader can try other values of, by row id or "@fact.key". */
+        questions: z.record(z.string(), z.string()).optional(),
+      })
+      .strict()
+      .optional(),
     rows: z.array(RowPatch),
     /** The bottom line: a row whose value is benefit per dollar, in `unit`. */
     output: z

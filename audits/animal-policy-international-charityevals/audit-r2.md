@@ -1,6 +1,6 @@
 # Audit: animal-policy-international-charityevals, round 2
 Result: -50.94 ced/$ = -0.005604 years of healthy life per 1,000 dollars (combined range -0.1178 to -0.000267); cause median 1.214e-4 (×-46). Verdict: pass.
-Model-sha: c587647bb6564421380702177b86247511fc442e744fd538e3dd8f12450d69db
+Model-sha: 88784066d4aadde02671c977d94e3539f7ae671da6ecf431bbad6c9a759e9a7b
 Rules: 0.3.13
 Scope: unchanged from round 1 (all of API's 2025 work as one programme line, with EU, UK and New Zealand branches); a scoped verification of round 1's highs and mediums.
 Preflight: pass (no blocking lines). Lows: generated/distributions.json and usage.json out of date (run `npx tsx scripts/summaries.ts`). audit-model: no invariant violations, one lint medium (`spread`, 5,622× on the model's own ranges), already answered by the summary's "mostly judgment".
@@ -38,3 +38,5 @@ Unchanged in kind from round 1: `$mobiliser_share`, `$win_years_counted`, `$miss
 Re-stamped (18 Nov 2026): round-2 lows #1 and #2 applied (write-up gives the move in healthy years per 1,000 dollars; `eu_battery_cost_ratio` tagged estimate, explainer notes the base difference). No value changed; headline unchanged.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

@@ -1,7 +1,7 @@
 # Audit: tax-justice-network-charityevals, round 10 (verification of round 9 finding 1 and 2)
 Result: 0.005594 uov/$ = 2.797 years of healthy life per 1,000 dollars. Verdict: pass.
 Verdict: pass
-Model-sha: 4bfd219a5f0f726a0a5744a2740ed8cf71ff4209b8e860d08e7484b42b7f0130
+Model-sha: 979aa56054a1e12ae7391aabdc3cc5be55d6abafd91ba4dcda767d0822c6ba3c
 Rules: 0.3.13
 
 Previous round: finding 1 (medium) resolved: a_movement_credit 0.35 (0.2-0.6) and b_movement_credit 0.5 (0.3-0.8), governments that pushed on their own account (G20 2009, FATCA, EU directives; African Group) named as co-campaigners, only secretariats and applying/enforcing governments as adopters, as proposed. Finding 2 (low) resolved: the adjustments section explainer now reads "civil society's share among those who campaigned for it".
@@ -20,3 +20,5 @@ Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 
 Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline 2.797 → 0.839 (−70%), 14 rows changed, against 1daaf2ba.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

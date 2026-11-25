@@ -5,6 +5,8 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { buildLibrary, assumptionValues, compute, comparable } from "../src/engine/model";
 import { checkModel } from "../src/engine/check-model";
+import { checkCharityStory, checkStory, storyValueSets } from "../src/engine/story";
+import { rankingPlan } from "../src/engine/ranking";
 import { sensitivity } from "../src/engine/sensitivity";
 import { judgmentShare, modelFlags, modelRange } from "../src/engine/figures";
 import { comparisonFindings, namesFor } from "../src/engine/lint";
@@ -34,11 +36,22 @@ const only = process.argv[2];
 const fmt = (x: number) => (Math.abs(x) >= 1000 || Math.abs(x) < 0.01 ? x.toExponential(3) : x.toFixed(3));
 const years = (x: number) => (Math.abs(x) >= 100 ? x.toFixed(0) : Math.abs(x) >= 1 ? x.toFixed(1) : x.toPrecision(2));
 
+const storyAt = storyValueSets(lib);
+// A charity's own sentence (docs/story.md) reads live numbers from its programmes' models.
+for (const c of lib.charities.values()) {
+  if (c.story) errors.push(...new Set(storyAt.flatMap((set) => checkCharityStory(lib, c.id, set)).map((e) => `story: ${e}`)));
+  else if (rankingPlan(lib, c.id).some((e) => e.parts.length > 1 && e.parts.every((p) => p.weight! > 0)))
+    errors.push(`${c.id}: several programmes split its money, so its page needs a sentence (docs/story.md; npx tsx scripts/story.ts --charity ${c.id})`);
+}
 for (const m of lib.models.values()) {
   if (only && m.id !== only) continue;
   const vals = compute(lib, m, av);
   const { errors: own, matched } = checkModel(lib, m, (id) => existsSync(join(root, "writeups", `${id}.md`)), av);
   errors.push(...own);
+  // A story's steps chain to the model's own result, at the defaults and at other values (src/engine/story.ts).
+  // Every model leads its page with a story (docs/story.md); variants inherit their parent's.
+  if (!m.story && m.output) errors.push(`${m.id}: no story (docs/story.md; npx tsx scripts/story.ts ${m.id})`);
+  else for (const set of storyAt) errors.push(...checkStory(lib, m, set).map((e) => `story: ${e}`));
   if (!m.output) { console.log(`${m.id}: template, ${matched} expected values reproduced`); continue; }
   const s = sensitivity(lib, m, av);
   const se = sensitivity(lib, m, av, "evaluator");

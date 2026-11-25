@@ -1,6 +1,6 @@
 # Audit: ambitious-impact-charityevals, round 18 (scoped verification)
 Result: 6.489 years of healthy life per 1,000 dollars at defaults (r17: 8.213; 6.203 after the five new spending records, 6.489 after rule spending-no-fallback); combined range and cause median not re-checked in this scoped round. Verdict: pass.
-Model-sha: 06aacc1561097f0dbe01209ed17a332073a4e7b36e71419f10b6555140a73c41
+Model-sha: afd17cdfba3a52918d6674fe4570aa5509717b1d5cf74f8cc659e87667647c77
 Rules: 0.3.13
 Scope: spending recorded from evaluators' costs; no guessed weights (rule spending-no-fallback)
 Preflight: pass. `npx tsx scripts/preflight.ts ambitious-impact-charityevals` prints "passes".
@@ -35,3 +35,5 @@ Verdict: pass (no high or medium remains).
 Re-stamped (23 Nov 2026), rule cause-portfolios: Money to a cause with no named recipient (#cause:x) is valued at the cause's portfolio: named charities weighted by a published fund's grants (assumptions portfolios), not the average of the charities on the site, so adding a charity moves no other figure (normalization 2.8). Mechanical: headline 6.49 → 6.49 (+0.00033%), 8 rows changed, against the tree before the rule.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

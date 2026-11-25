@@ -132,6 +132,7 @@
    "kind": "ours"
   }
  ],
+ "story": {"sentence":"$1,000 gives vitamin A to **{1000 * reached_total / (cost_total * cost_multiplier)} children**. Every **{cost_total * cost_multiplier / (deaths_averted_total * counterfactual_share)|$}** saves a young child's life.","questions":{"counterfactual_share":"How many of the children reached would not have got vitamin A without Helen Keller Intl?","mortality_reduction":"By how much does vitamin A cut the death rate of the children who get it?","protection_share":"How much of a year does one dose of vitamin A protect a child?","central_cost_share":"How much does Helen Keller Intl spend beyond the country costs, per dollar of them?"},"steps":[{"total":"1000|$","text":"given to Helen Keller Intl for vitamin A"},{"op":"÷ {cost_total * cost_multiplier / reached_total|$}","text":"per child reached, health workers' time and donated capsules included"},{"total":"1000 * reached_total / (cost_total * cost_multiplier)","text":"children given vitamin A"},{"op":"÷ {reached_total / (deaths_averted_total * counterfactual_share)}","text":"children reached for each extra life saved"},{"total":"1000 * deaths_averted_total * counterfactual_share / (cost_total * cost_multiplier)","text":"young children's lives saved"},{"op":"× {result / (1000 * deaths_averted_total * counterfactual_share / (cost_total * cost_multiplier))}","text":"years of healthy life for each, with other gains and your values"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
  "rows": [
   {
    "id": "mortality_reduction",

@@ -1,6 +1,6 @@
 # Audit: center-for-global-development-charityevals, round 6
 Result: 4.28 years of healthy life per $1,000 at mobiliser_share = 100% (unchanged from round 5). Scoped verification of round 5's findings. Verdict: pass.
-Model-sha: 8c2ddfbb9718cf453f2fb4753ffa91649f3bcfc9dfe641c219669c491608c892
+Model-sha: 05e467435e834a2d89f41ce4fc7616ea0b4beef19bb03d37483df2bfaf96285b
 Rules: 0.3.13
 Preflight: not re-run to completion (it timed out); text-only change, headline unchanged at 4.28334.
 Previous round: finding 1 (medium, summary quoted old shares) resolved: the summary now reads {{row:a_cgd_share}}, {{row:b_cgd_share}} and {{row:c_cgd_share}}, so the shares render from the rows (40%, 10%, 30%); the second "10%" in the MCC clause is c_improvement_share and is correct. Finding 2 (medium, other_work_share anchor) resolved: it now says "about a seventh and a twentieth", matching 0.15 and 0.047 of the AMC branch; the 0.4 value stands. Finding 3 (low, a_cgd_share) resolved: the explainer names who holds the rest. No value or range changed.
@@ -17,3 +17,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: the verification round's low finding
 Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

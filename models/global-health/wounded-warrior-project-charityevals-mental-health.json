@@ -94,6 +94,7 @@
       "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
     }
   ],
+  "story": {"sentence":"Every **{cost_total / (people_reached + opt_veterans + opt_family + cns_people)|$}** treats **one veteran or family member** for the mental wounds of war, in intensive programmes, therapy or counselling.","questions":{"effect_duration_years":"For how many years does the improvement last?","wwp_share_of_cash":"How much of the money behind the programmes is Wounded Warrior Project's?","prior_effect_sd_ptsd":"How much does trauma-focused therapy ease post-traumatic stress in veterans?","depression_vs_ptsd_effect":"How much does it ease depression, compared with post-traumatic stress?","opt_counterfactual_adj":"How many in therapy would not have been treated without it?"},"steps":[{"total":"1000|$","text":"given to Wounded Warrior Project for mental health"},{"op":"÷ {cost_total / (people_reached + opt_veterans + opt_family + cns_people)|$}","text":"per veteran or family member treated"},{"total":"1000 * (people_reached + opt_veterans + opt_family + cns_people) / cost_total","text":"people treated"},{"op":"× {result / (1000 * (people_reached + opt_veterans + opt_family + cns_people) / cost_total)}","text":"years of healthy life for each, from feeling better for years"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
   "rows": [
     {
       "id": "program_spend",

@@ -1,6 +1,6 @@
 # Audit: institute-for-ai-policy-and-strategy-charityevals, round 5 (verification round)
 Result: 0.007114 daly/$ = 7.114 years of healthy life per 1,000 dollars at mobiliser_share 100% (unchanged from round 4). Verdict: pass.
-Model-sha: 503d0ba6c9376000c6dfcfb4e049118d4ae1cfffc1098baf6c19806f3e5d2d35
+Model-sha: fac158bcfe757a14ed58c56d43027a13683fc614f38c57673c6fdd34262a88a9
 Rules: 0.3.13
 Scope: round 4's medium (stale `summary`) and low 2 (ai_attribution_share_shared wording). Preflight passes (distributions.json notice ignored). No value changed.
 
@@ -24,3 +24,5 @@ Re-stamped (18 Nov 2026), rule never-started-prose: Wording: the summaries and w
 Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline unchanged, 4 rows changed, against the tree before the rule.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

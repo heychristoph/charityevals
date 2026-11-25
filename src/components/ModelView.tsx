@@ -7,6 +7,7 @@ import { useOverrides } from "../lib/assumption-state";
 import { useLiveDistribution, withPageDistribution } from "../lib/live-distribution";
 import { editsFor, useEdits } from "../lib/edit-state";
 import ModelTree from "./ModelTree";
+import ModelLayers from "./ModelLayers";
 import { WaterfallInSlot } from "./Waterfall";
 import { uncertainty } from "../engine/uncertainty";
 import { sensitivity } from "../engine/sensitivity";
@@ -44,10 +45,18 @@ export default function ModelView({ id, bulk = false, place, about, children, wa
 
   return (
     <div className="model-view" style={{ ["--cause" as string]: `var(--cause-${model.cause})` }}>
-      <ModelTree model={model} place={place} values={values} edits={edits} u={u} flags={caveats} engine={engine}>{about}</ModelTree>
-      {waterfall && <WaterfallInSlot model={model} av={av} edits={edits} engine={engine} />}
-
-      {children}
+      {model.story ? (
+        <ModelLayers model={model} values={values} av={av} edits={edits} u={u} engine={engine} about={about}>
+          {waterfall && <WaterfallInSlot model={model} av={av} edits={edits} engine={engine} />}
+          {children}
+        </ModelLayers>
+      ) : (
+        <>
+          <ModelTree model={model} place={place} values={values} edits={edits} u={u} flags={caveats} engine={engine}>{about}</ModelTree>
+          {waterfall && <WaterfallInSlot model={model} av={av} edits={edits} engine={engine} />}
+          {children}
+        </>
+      )}
     </div>
   );
 }

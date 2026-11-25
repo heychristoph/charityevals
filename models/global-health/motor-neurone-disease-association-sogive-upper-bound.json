@@ -66,6 +66,7 @@
       "explainer": "charityevals' step, not the evaluator's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
     }
   ],
+  "story": {"sentence":"Every **{cost_per_daly_gbp * usd_per_gbp|$}** it spends gives one person a healthy year, mostly through research that pays off years later.","questions":{"research_cost_per_daly_gbp":"What does its research cost for each healthy year it brings?","research_lag_years":"How many years pass before research pays off in health?","care_spend_gbp":"How much does it spend on care and support?","people_supported":"How many people does it support in a year?"},"steps":[{"total":"1000|$","text":"given to the MND Association"},{"op":"÷ {cost_per_daly_gbp * usd_per_gbp|$}","text":"per healthy year, across its care and research"},{"total":"1000 / (cost_per_daly_gbp * usd_per_gbp)","text":"years of healthy life, at its past average"},{"op":"× {timing_factor}","text":"for the next dollar, with research paying off {research_lag_years} years later"},{"op":"× {result / (1000 * timing_factor / (cost_per_daly_gbp * usd_per_gbp))}","text":"the share of the credit that goes to the charity"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
   "rows": [
     {
       "id": "care_spend_gbp",

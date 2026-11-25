@@ -1,6 +1,6 @@
 # Audit: americares-charityevals, round 2 (verification)
 Result: 2.964e-5 uov/$ = 0.0148 years of healthy life per 1,000 dollars (combined range 0.0026-0.0838); cause median 0.338 (x0.044). Verdict: pass (no high or medium finding).
-Model-sha: e86d81c4ea858534f9ebea1da2f7a15df9515c809180de432adc63f490ec556b
+Model-sha: 51d6da6a6171e0fb24ecc56ae3f651815195fcffd8b022f528e8209581401df3
 Rules: 0.3.13
 Scope: unchanged from round 1 (FY2025, Access to Medicine and Clinical Services and Community Health = 92,962k cash of the 133,068k programme total; Emergency is the separate model).
 Mechanical: lint 0 high / 0 medium / 4 low (attribution_share diagnostic, unused hs_clinic_share, far-below, spread), invariants none, normalization-audit none (generated/ reverted).
@@ -42,3 +42,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

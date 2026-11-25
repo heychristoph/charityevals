@@ -68,6 +68,7 @@
       "explainer": "charityevals' step, not the evaluator's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
     }
   ],
+  "story": {"sentence":"$1,000 funds breast cancer research and support. Every **{1000 / (1000 * research_share_of_spend / (cost_per_qaly_gbp * usd_per_gbp))|$}** gains **a year of healthy life** once the findings reach patients.","questions":{"breast_share_of_unlabelled":"What share of unlabelled UK cancer research money goes to breast cancer?","qalys_gained":"How many years of healthy life did breast cancer screening and treatment gain?"},"steps":[{"total":"1000|$","text":"given to Breast Cancer Now"},{"op":"× {research_share_of_spend|%}","text":"goes to research"},{"total":"1000 * research_share_of_spend|$","text":"spent on research"},{"op":"÷ {cost_per_qaly_gbp * usd_per_gbp|$}","text":"per year of healthy life that UK research has gained"},{"total":"1000 * research_share_of_spend / (cost_per_qaly_gbp * usd_per_gbp)","text":"years of healthy life gained"},{"op":"× {result / (1000 * research_share_of_spend / (cost_per_qaly_gbp * usd_per_gbp))|%}","text":"kept after the wait, its share of credit and the next dollar"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
   "rows": [
     {
       "id": "cancer_research_spend_gbp",

@@ -92,6 +92,7 @@
       "unit": "daly"
     }
   },
+  "story": {"sentence":"$1,000 pays Doctors Without Borders to hand out blankets, shelter, nets and kits to displaced families, reaching **{1000 * donor_cost_share * people_reached / cost_total} people**.","questions":{"crisis_mortality_rate":"How many displaced people die each year when the items are handed out?","relief_net_years":"How many years does a distributed net protect?","counterfactual_adj":"How much of the relief would other responders not have delivered?","share_excess_averted":"How many of the extra deaths do the items prevent among the people reached?","relief_net_use":"How many of the families' children sleep under the nets?"},"steps":[{"total":"1000|$","text":"given to Doctors Without Borders for relief and sea rescue"},{"op":"× {donor_cost_share * people_reached / cost_total}","text":"people in the families reached, per dollar"},{"total":"1000 * donor_cost_share * people_reached / cost_total","text":"people in the families reached"},{"op":"× {result / (1000 * donor_cost_share * people_reached / cost_total)}","text":"years of healthy life for each, counting sea rescue too, with your values"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
   "rows": [
     {
       "id": "relief_families",

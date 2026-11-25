@@ -1,6 +1,6 @@
 # Audit: united-way-charityevals, round 4
 Result: 1.138e-5 daly/$ = 0.0114 years of healthy life per 1,000 dollars (combined range 0.0016–0.082); cause median 0.117 (×0.097). Verdict: pass.
-Model-sha: 695244243f888dda9774b5c3cb74587f149f9026af701ed74e5f57be673600d0
+Model-sha: 71fe10b3042de446064fd89b66df2632b06e5bbabaebb98dbae3f3bf8a030177
 Rules: 0.3.13
 Scope: verification of the changes in 646c0f7e only; not a full re-audit.
 Mechanical: lint 0 high / 1 medium (far-below, judged right in kind in rounds 1-3) / 0 low (audit-model.ts); check.ts: all models valid; simulation-check.ts: stable (5% 0.53x, 50% 1x, 95% 2.25x); normalization-audit not run (not asked, and no shared row changed).
@@ -25,3 +25,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

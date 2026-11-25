@@ -76,6 +76,8 @@ function target(m: ResolvedModel, facts: Set<string>, key: string): string | und
     const r = m.byId.get(id);
     if (!r) return undefined;
     if (!r.node) return id;
+    // A calculated row with a published range is varied as a whole (sensitivity), so a reader can set it too.
+    if (r.range) return id;
     if (r.node.type !== "ref" || r.node.scope === "assumption" || r.node.scope === "model") return undefined;
     if (r.node.scope === "fact") return facts.has(r.node.name) ? `@${r.node.name}` : undefined;
     id = r.node.name;

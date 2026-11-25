@@ -140,6 +140,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
 - **Write-up** `writeups/<id>.md` for the charity's main model, following import-cea section 7, plus
   "How this model was checked" (audit rounds and what changed). Model numbers in the summary, write-up
   and explainers are placeholders (`{{result}}`, `{{row:<id>}}`; docs/prose-numbers.md), never typed.
+- **Story** in the model file (docs/story.md).
 - **Charity record** `charities/<id>.json` if missing, with `spending` and `lines`.
 - **A template or family-doc gap** (a missing path, row or recipe): model this charity right, and write
   `.claude/skills/build-cea/templates/proposals/<date>-<slug>.md` (what, why, the diff) instead of a

@@ -20,7 +20,7 @@ A company commits, then (if it follows through) changes its supply by its deadli
 3. Wait: the years until the commitments take effect, discounted (about 4 for cage-free; each pig producer's deadline).
 4. Years counted: how long the change counts before it would have come anyway, the shared "Years a won reform counts before it would have come anyway" (5 by default), where ACE used 15 for cage-free and 1 to 22 for the pig producers.
 
-ACE counts the suffering averted in Ambitious Impact's suffering-adjusted days, which build in Ambitious Impact's own weight for each species (a hen counts as 46% of a person). We take those weights out and count days of each animal's pain, weighed against a chicken's by Rethink Priorities' estimates (a pig about 1.6 chickens, a fish about 0.2). The chicken slider (default 33% of a person) then turns a chicken's pain into healthy years.
+ACE counts the suffering averted in Ambitious Impact's suffering-adjusted days, which build in Ambitious Impact's own weight for each species (a hen counts as 46% of a person). We take those weights out and count days of each animal's pain, weighed against a chicken's by Rethink Priorities' estimates (a pig about 1.6 chickens, a fish about 0.2). The chicken slider then turns a chicken's pain into healthy years.
 
 ### How the model works
 

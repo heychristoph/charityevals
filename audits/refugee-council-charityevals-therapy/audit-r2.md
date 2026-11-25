@@ -1,7 +1,7 @@
 # Audit: refugee-council-charityevals-therapy, round 2 (verification)
 Result: 4.023e-5 WELLBYs/$ = 0.002626 years of healthy life per $1,000 (combined range 0.00043-0.0161). Verdict: pass.
 Verdict: pass
-Model-sha: 9c9ba1051ccc9a6dcf57a95aa60ad4065581c2a52f524e21ef49da8cd8165789
+Model-sha: cb80d8afc8dff44e6165e645aa8112e83c2903896c0ec0652fc0d6925eb104ca
 Rules: 0.3.13
 Mechanical: lint 0 high / 0 medium / 1 low (far-below, summary gives the reason); simulation stable (5% 0.32, 95% 2.92 x best guess); normalization-audit printed no line for this model (generated/ reverted).
 
@@ -28,3 +28,5 @@ Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the pag
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against d150f0b2.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

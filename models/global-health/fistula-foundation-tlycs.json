@@ -78,6 +78,7 @@
    "kind": "ours"
   }
  ],
+ "story": {"sentence":"Every **{cost_per_surgery * cost_multiplier / (repair_success * counterfactual_share)|$}** pays for repair surgeries at partner hospitals that end the leaking of urine or faeces for one woman who would not otherwise be repaired.","questions":{"counterfactual_share":"What share of the women repaired would not have been repaired anyway?","dw_vvf":"How much does a fistula that leaks urine reduce a woman's health?","repair_success":"What share of repairs end the incontinence?","cost_per_surgery_full":"How much does a surgery cost, with the charity's admin costs?"},"steps":[{"total":"1000|$","text":"given to Fistula Foundation"},{"op":"÷ {cost_per_surgery * cost_multiplier|$}","text":"per repair surgery, with its admin costs"},{"total":"1000 / (cost_per_surgery * cost_multiplier)","text":"repair surgeries"},{"op":"× {repair_success * counterfactual_share|%}","text":"end a woman's incontinence who would not have been repaired"},{"total":"1000 * repair_success * counterfactual_share / (cost_per_surgery * cost_multiplier)","text":"women freed of incontinence"},{"op":"× {result / (1000 * repair_success * counterfactual_share / (cost_per_surgery * cost_multiplier))}","text":"years of healthy life for each, with your values"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
  "rows": [
   {
    "id": "surgeries",

@@ -7,6 +7,8 @@ import { formatYears, plainModelName } from "./format";
 import { publisher, repo } from "./site";
 import { licenceOf } from "./licence";
 import { charityHeadline } from "../engine/figures";
+import { charityOf, charitySentence, programsOf, wholeOf } from "./whole";
+import { fillStory } from "./story";
 
 export const SITE = "https://charityevals.org";
 export const SITE_NAME = "charityevals";
@@ -92,6 +94,20 @@ export function seoName(m: ResolvedModel): string {
 
 const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "catastrophic-risk": "Catastrophic risk", climate: "Climate" } as const;
 
+/** A story page's own words at default values: its sentence and its likely range (src/lib/whole.ts). */
+function storyLead(m: ResolvedModel, primary: boolean): string | undefined {
+  if (!m.story) return undefined;
+  const av = assumptionValues(lib.assumptions);
+  const programs = primary ? programsOf(m) : undefined;
+  const c = programs && charityOf(programs, av, {});
+  const w = c ? undefined : wholeOf(m, av, {});
+  const sentence = c ? charitySentence(c) : fillStory(m.story.sentence, w!.values, w!.result, formatYears);
+  const [low, high] = c ? [c.low, c.high] : [w!.low, w!.high];
+  if (!sentence) return undefined;
+  const range = formatYears(low) === formatYears(high) ? formatYears(low) : `${formatYears(low)} to ${formatYears(high)}`;
+  return `${sentence.replace(/\*\*/g, "")} ${range} years of healthy life per $1,000.`;
+}
+
 export function modelMeta(m: ResolvedModel) {
   const charity = lib.charities.get(m.charity)!;
   const owner = lib.owners.get(m.owner)!;
@@ -115,7 +131,10 @@ export function modelMeta(m: ResolvedModel) {
   const by = owner.kind === "charityevals" ? "charityevals' own model" : `${owner.name}'s model${when ? ` (${when})` : ""}`;
   // Long model names are in the title already; the description leads with the charity instead.
   const subject = name.length <= 50 ? name : charity.name;
-  const lead = x !== undefined
+  // A page that leads with a story describes itself the same way: its sentence and the likely range
+  // (never one number), at default values, for the whole charity as its page shows it.
+  const told = storyLead(m, primary);
+  const lead = told ? `${charity.name}: ${told}` : x !== undefined
     ? `${subject}: ${formatYears(x)} years of healthy life per $1,000 on default assumptions, from ${by}.`
     : `${subject}: ${by}, in ${unit ?? "its own unit"} per dollar.`;
   const dek = firstSentence(charity.summary ?? m.summary);

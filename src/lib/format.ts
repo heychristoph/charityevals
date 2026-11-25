@@ -8,7 +8,9 @@ export const SIG = 2;
 const sig = (x: number, digits = SIG) => {
   if (!Number.isFinite(x)) return "—";
   if (x === 0) return "0";
-  const abs = Math.abs(x);
+  // Rounded first, so 999,000,000 reads as 1B, not 1000M.
+  const abs = Math.abs(Number(x.toPrecision(digits)));
+  if (abs >= 1e12) return `${Number((x / 1e12).toPrecision(digits))}T`;
   if (abs >= 1e9) return `${Number((x / 1e9).toPrecision(digits))}B`;
   if (abs >= 1e6) return `${Number((x / 1e6).toPrecision(digits))}M`;
   // Significant digits, not the locale default of three decimals, so 0.00033 doesn't read as 0.
