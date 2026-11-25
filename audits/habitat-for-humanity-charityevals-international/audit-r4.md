@@ -1,6 +1,6 @@
 # Audit r4: habitat-for-humanity-charityevals-international (scoped verification)
 Result: 2.690e-4 uov/$ = 0.1345 years of healthy life per 1,000 dollars (combined range 0.0304-0.595). Verdict line below.
-Model-sha: 975954efc99442af38895569c73a63ce06b0a79a696123d1efb966ac7b50d9dd
+Model-sha: 8fa6d3ffb2ce3f9c6af66d5a8f1b26569910236f7411822c79f8f44676cc0d9d
 Rules: 0.3.13
 Verdict: pass
 
@@ -21,3 +21,5 @@ Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placehol
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 32b69cd7.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

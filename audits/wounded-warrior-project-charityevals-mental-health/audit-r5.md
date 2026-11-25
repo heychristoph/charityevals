@@ -1,7 +1,7 @@
 # Audit: wounded-warrior-project-charityevals-mental-health, round 5 (verification)
 
 Result: 2.478e-5 wellby/$ = 0.001618 years of healthy life per 1,000 dollars (combined range 0.00036-0.0072); cause median 0.104 (x0.0155). Verdict: **pass** (no high findings).
-Model-sha: 096ad0f17a9514d8eee1d0cdfa8452827b91fc8c22d60830129247dd78fa4e94
+Model-sha: 4186606d1ffe224deaab2a321e075b7084118c8239566a43d4bee0435e333d71
 Rules: 0.3.13
 Scope: only the changes since round 4 (diff 09393a2..HEAD; main was merged in between, so the median moved).
 
@@ -33,3 +33,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

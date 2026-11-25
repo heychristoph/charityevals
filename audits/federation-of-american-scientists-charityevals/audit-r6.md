@@ -1,6 +1,6 @@
 # Audit: federation-of-american-scientists-charityevals, round 6 (scoped verification)
 Result: 0.4320 years of healthy life per $1,000 (was 0.4405 on origin/main, -1.9%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 84dfedd1af1ab9c99ef0a40db88acae857f1d72fd10434cc0be7be9c73c6af6c
+Model-sha: f8ae989f188332b38b47e24321159a82776d48693759434bc2b08fa99ab49bf9
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, never-started-prose and never-started-branches only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -19,3 +19,5 @@ Summary and write-up: "counted only where you count lives that never start (0% b
 | - | - | - | - | none | - | - | - |
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

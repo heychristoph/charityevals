@@ -1,0 +1,499 @@
+/* A model with a story, in layers: the top always open, three layers that open one by one. */
+.layers {
+  display: grid;
+  gap: 0;
+}
+/* The range stays in view while the reader scrolls through the layers and moves things. */
+.ly-top {
+  display: grid;
+  gap: var(--s5);
+  padding: var(--s3) 0 var(--s4);
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+/* A changed range lights up for a moment, so the reader sees what their change did. */
+.ly-range-num {
+  border-radius: 3px;
+}
+.ly-range-num.ly-moved {
+  animation: ly-pulse 900ms ease-out;
+}
+@keyframes ly-pulse {
+  from {
+    background: color-mix(in srgb, var(--cause) 28%, white);
+  }
+  to {
+    background: transparent;
+  }
+}
+.ly-story {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: pretty;
+  max-width: 34ch;
+}
+.ly-story b {
+  font-weight: 700;
+  background: linear-gradient(transparent 62%, var(--blue-wash) 62%);
+  padding: 0 2px;
+}
+.ly-range {
+  display: grid;
+  gap: var(--s2);
+}
+.ly-range-line {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+.ly-range-num {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.ly-range-unit {
+  font-size: 17px;
+  color: var(--ink-2);
+}
+.ly-band {
+  position: relative;
+  height: 18px;
+}
+.ly-track {
+  position: absolute;
+  inset: 8px 0 auto;
+  height: 2px;
+  background: var(--rule);
+}
+.ly-fill {
+  position: absolute;
+  top: 3px;
+  height: 12px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--cause) 32%, white);
+  transition: left 350ms cubic-bezier(0.16, 1, 0.3, 1), width 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ly-whose {
+  display: grid;
+  gap: 6px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.ly-whose p {
+  margin: 0;
+}
+.ly-whose b {
+  color: var(--ink);
+}
+.ly-whose-bar {
+  display: flex;
+  gap: 2px;
+  height: 8px;
+  max-width: 420px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ly-whose-bar .ly-v {
+  background: var(--blue);
+}
+.ly-whose-bar .ly-e {
+  background: var(--ink-2);
+}
+
+/* The layers */
+.ly-layer {
+  border-bottom: 1px solid var(--rule);
+}
+.ly-layer > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: var(--s4) 0 var(--s4) 28px;
+  position: relative;
+  display: grid;
+  gap: 2px;
+}
+.ly-layer > summary::-webkit-details-marker {
+  display: none;
+}
+.ly-chev {
+  position: absolute;
+  left: 0;
+  top: 19px;
+  color: var(--ink-2);
+  transition: transform 200ms;
+}
+.ly-layer[open] > summary .ly-chev {
+  transform: rotate(90deg);
+}
+.ly-layer > summary:hover .ly-title {
+  margin: 0;
+  line-height: 1.3;
+  color: var(--blue-ink);
+}
+.ly-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+}
+.ly-body {
+  padding: 0 0 var(--s6);
+  display: grid;
+  gap: var(--s3);
+}
+
+/* Layer 1: the questions */
+.ly-questions {
+  display: grid;
+}
+.ly-q {
+  padding: var(--s3) 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  gap: 4px;
+}
+.ly-q:last-child {
+  border-bottom: 0;
+}
+/* Layer 2: the steps */
+.ly-chain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ly-chain li {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 0 var(--s4);
+  align-items: baseline;
+}
+.ly-total {
+  padding: 5px 0;
+}
+.ly-total .ly-v {
+  text-align: right;
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 700;
+}
+.ly-op .ly-v {
+  text-align: right;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.ly-op .ly-t {
+  font-size: 15px;
+  color: var(--ink-2);
+  border-left: 2px solid var(--rule-strong);
+  padding: 4px 12px;
+}
+.ly-end {
+  border-top: 2px solid var(--ink);
+  margin-top: 6px;
+  padding-top: 10px;
+}
+
+@media (max-width: 640px) {
+  .ly-chain li {
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 0 var(--s3);
+  }
+  .ly-total .ly-v {
+    font-size: 18px;
+  }
+  .ly-range-num {
+    font-size: 28px;
+  }
+  .ly-range-unit {
+    font-size: 15px;
+  }
+  .ly-range-line {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ly-range-num {
+    animation: none;
+  }
+  .ly-fill,
+  .ly-chev {
+    transition: none;
+  }
+}
+
+/* A question opens "Every calculation" at its row. */
+.ly-q-v .assumption-name label:hover {
+  color: var(--blue-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+/* Each country's share of the money and its range, under the steps; the country shown in the sheet. */
+.ly-places {
+  border-collapse: collapse;
+  margin-top: var(--s5);
+  font-size: 15px;
+  width: 100%;
+  max-width: 480px;
+}
+.ly-places caption {
+  text-align: left;
+  font-weight: 600;
+  padding-bottom: var(--s2);
+}
+.ly-places td {
+  padding: 5px 0;
+  border-top: 1px solid var(--rule);
+}
+.ly-places td + td {
+  text-align: right;
+  padding-left: var(--s4);
+  white-space: nowrap;
+}
+
+/* The range is said once, in a question's info tip: no scale under its slider. */
+.ly-questions .assumption-scale {
+  display: none;
+}
+
+/* An open layer's heading pins under the range while its content scrolls past, until the layer ends. */
+.ly-layer[open] > summary {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + var(--ly-top-h, 0px));
+  z-index: 4;
+  background: var(--paper);
+}
+
+/* Inside "Write-up": the attribution line sits below the heading, not tucked under it. */
+.ly-evaluation .tn-about {
+  margin-top: 0;
+}
+
+/* A step's number opens the working behind it. The step looks as before; a faint caret says it opens. */
+.ly-drill > button.ly-v {
+  appearance: none;
+  font-family: var(--sans);
+  line-height: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: right;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 6px;
+}
+.ly-drill > button.ly-v::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid var(--ink-3);
+  border-bottom: 1.5px solid var(--ink-3);
+  transform: translateY(-3px) rotate(-45deg);
+  transition: transform 200ms;
+}
+.ly-drill.ly-total > button.ly-v {
+  font-family: var(--serif);
+}
+.ly-drill > button.ly-v::before {
+  opacity: 0;
+}
+.ly-drill:hover > button.ly-v::before,
+.ly-drill.open > button.ly-v::before,
+.ly-drill > button.ly-v:focus-visible::before {
+  opacity: 1;
+}
+.ly-drill.open > button.ly-v::before {
+  transform: translateY(-4px) rotate(45deg);
+}
+.ly-drill > button.ly-v:hover {
+  color: var(--blue-ink);
+}
+.wk {
+  grid-column: 2;
+  margin: 6px 0 10px;
+  display: grid;
+  gap: 6px;
+}
+.wk-place select {
+  font: inherit;
+  padding: 2px 24px 2px 6px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  background-color: var(--paper);
+  color: var(--ink);
+}
+.wk-node {
+  border-left: 2px solid var(--rule-strong);
+  padding: 4px 0 4px 12px;
+  display: grid;
+  gap: 2px;
+  scroll-margin-top: calc(var(--ly-top-h, 0px) + 80px);
+}
+.wk-node .wk-node {
+  margin-top: 6px;
+}
+.wk-head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s4);
+  align-items: baseline;
+  font-size: 15px;
+}
+.wk-n {
+  font-weight: 600;
+  white-space: nowrap;
+}
+.wk-f {
+  font-size: 14px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.wk-tok {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--ink-3);
+  text-underline-offset: 3px;
+}
+.wk-tok:hover,
+.wk-tok.open {
+  color: var(--blue-ink);
+  text-decoration-color: currentColor;
+}
+.wk-tok.open {
+  font-weight: 600;
+}
+.wk-src {
+  color: var(--ink-3);
+}
+.wk-node.wk-flash {
+  background: var(--blue-wash);
+  transition: background 600ms ease-out;
+}
+.wk-factors {
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.wk-op {
+  display: inline-block;
+  min-width: 1.2em;
+  color: var(--ink-3);
+}
+.ly-chain .wk-factors li {
+  display: block;
+  padding: 0;
+}
+
+/* A charity of several programmes (WholeLayers): $1,000 split across them, each opening into its own steps. */
+.wl-chain .wl-prog {
+  display: block;
+  border-top: 1px solid var(--rule);
+}
+.wl-row {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  gap: 0 var(--s4);
+  align-items: baseline;
+  padding: 10px 0;
+}
+.wl-row:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+.wl-row .ly-v {
+  text-align: right;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 700;
+}
+.wl-label {
+  color: var(--blue);
+  min-width: 0;
+}
+.wl-row:hover .wl-label {
+  text-decoration: underline;
+}
+.wl-chev {
+  color: var(--ink-2);
+  margin-right: 4px;
+  vertical-align: -2px;
+  transition: transform 200ms;
+}
+.wl-prog.open .wl-chev {
+  transform: rotate(90deg);
+}
+.wl-yrs {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.wl-share {
+  grid-column: 2 / 4;
+  height: 4px;
+  margin-top: 6px;
+  border-radius: 2px;
+  background: var(--rule);
+  overflow: hidden;
+}
+.wl-share i {
+  display: block;
+  height: 100%;
+  background: var(--cause);
+}
+.wl-inner {
+  margin: 0 0 var(--s4) 40px;
+  padding-left: var(--s4);
+  border-left: 2px solid var(--rule-strong);
+}
+.wl-inner .ly-chain li {
+  grid-template-columns: 80px minmax(0, 1fr);
+}
+.wl-inner .ly-total .ly-v {
+  font-size: 17px;
+}
+.wl-own {
+  margin: 6px 0 0;
+}
+@media (max-width: 640px) {
+  .wl-row {
+    grid-template-columns: 84px minmax(0, 1fr) auto;
+    gap: 0 var(--s3);
+  }
+  .wl-row .ly-v {
+    font-size: 16px;
+  }
+  .wl-inner {
+    margin-left: 10px;
+  }
+  .wl-inner .ly-chain li {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+}

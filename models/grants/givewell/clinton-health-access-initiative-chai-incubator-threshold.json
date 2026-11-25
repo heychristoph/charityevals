@@ -57,6 +57,7 @@
       "kind": "ours"
     }
   ],
+  "story": {"sentence":"$1,000 helps CHAI develop new health programmes that then get funded for **{pv_years_funded} years**.","questions":{"pv_annual_uov_per_dollar":"How much good does a dollar spent on these programmes do each year?","pv_years_funded":"For how many years do the programmes it develops get funded?"},"steps":[{"total":"1000|$","text":"given to Clinton Health Access Initiative for its incubator"},{"op":"× {pv_annual_uov_per_dollar * result / uov_per_dollar / 1000}","text":"years of healthy life a year per dollar the programmes receive"},{"total":"pv_annual_uov_per_dollar * result / uov_per_dollar","text":"years of healthy life a year from the programmes it develops"},{"op":"× {pv_years_funded}","text":"years the programmes are funded"},{"total":"pv_annual_uov_per_dollar * result / uov_per_dollar * pv_years_funded","text":"years of healthy life over those years"},{"op":"× {result / (pv_annual_uov_per_dollar * result / uov_per_dollar * pv_years_funded)}","text":"after later years count for less, and this charity's share of the credit"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
   "rows": [
     {
       "id": "pv_years_funded",

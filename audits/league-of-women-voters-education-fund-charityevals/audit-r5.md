@@ -1,6 +1,6 @@
 # Audit: league-of-women-voters-education-fund-charityevals, round 5
 Result: 1.118e-5 daly/$ = 0.01118 years of healthy life per 1,000 dollars (combined range 0.00059–0.213; joint low–high of the model's own ranges 0.0077–0.0193). Verdict: **pass**.
-Model-sha: 6595e557fd21bfd2d8efe738902674f62026600ceea98a8d03820619ce7c86bb
+Model-sha: a0f9dd841d31868dc7527d453c67241458d6da7d80366b98b49b6e5e40466943
 Rules: 0.3.13
 Scope: scoped verification of round 5's change (removal of the side effect `vie_uov` and its chain rows); nothing else re-audited.
 Mechanical: audit-model.ts exit 0, Findings (0); `check.ts` all models valid; `simulation-check.ts` stable (5% 0.122, 50% 1, 95% 6.65 x best guess). INV-15 ignored per instructions. normalization-audit not rerun (no standard-step row touched).
@@ -38,3 +38,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, 1 row changed, against 7c76c006.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

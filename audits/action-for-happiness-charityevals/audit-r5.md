@@ -2,7 +2,7 @@
 
 Result: 0.1169 years of healthy life per $1,000 (0.001791 wellby/$), unchanged from round 4; the r4 low finding is fixed.
 Verdict: pass
-Model-sha: 90e393b9981ae3f7b588430ea82ae6a2d5f6d7c176696c92dd114b99f1f7e157
+Model-sha: ee496671f5c1b80686708042cfb2b2fee0af5d424be6364b20ed0b8c6fc3cb8f
 Rules: 0.3.13
 
 | # | Check | Outcome |
@@ -26,3 +26,5 @@ Re-stamped (16 Nov 2026): the summary's typed combined range replaced by the pag
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against d150f0b2.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

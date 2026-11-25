@@ -83,6 +83,7 @@
       "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
     }
   ],
+  "story": {"sentence":"Every **{cost_total / households_reached|$}** pays volunteers to **clean out, sanitise or repair** one disaster-hit home in the US.","questions":{"resp_counterfactual_adj":"How much of this help would not have happened without volunteers?","mg_price":"What would a contractor charge to muck out a flooded home?","resp_vs_poorest_fifth":"How well off are the households it helps?","vol_hours_per_volunteer":"How many hours does each volunteer work?","unmodelled_benefits_adj":"How much good or harm lies outside what is counted?","rep_value_per_home":"What would a home's repairs cost from contractors?"},"steps":[{"total":"1000|$","text":"given to All Hands and Hearts"},{"op":"× {households_reached / cost_total}","text":"homes helped per dollar it spends in the US"},{"total":"1000 * households_reached / cost_total","text":"homes cleaned out, sanitised or repaired"},{"op":"× {people_reached / households_reached}","text":"people live in each"},{"total":"1000 * people_reached / cost_total","text":"people back in a safe home"},{"op":"× {result / (1000 * people_reached / cost_total)}","text":"years of healthy life for each, counting what would have happened anyway"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
   "rows": [
     {
       "id": "program_expenses_audited",

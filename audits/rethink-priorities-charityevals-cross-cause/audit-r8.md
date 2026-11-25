@@ -1,6 +1,6 @@
 # Audit: rethink-priorities-charityevals-cross-cause, round 8 (scoped verification)
 Result: 0.07512 years of healthy life per $1,000 (uov/$ 1.502e-4; was 0.004128, +1.7e+3%). Range 0.009801 to 0.5252, 0% of draws at or below zero; cause median 1.114 (x0.0674). Verdict: pass.
-Model-sha: 4819895044e2b609978cf2133d45d973d1486acc38a6d8e8a81cbddc98c08e8a
+Model-sha: 2a29fbe541c47ca49fbddf392bb75dce7561d011757da481fec2f5df2b62132a
 Rules: 0.4.0
 Scope: rule cause-portfolios only (inventory/rule-changes/cause-portfolios.md; docs/normalization.md "November 2026: a cause's portfolio"; assumptions/default.json `portfolios`). The model file is unchanged by the rule except wording; no source or scope re-audit.
 Preflight: passes (no blocking problem); two lows (stored simulation out of date, the typed 31% next-dollar in the summary).
@@ -27,3 +27,5 @@ Scoped round: the portfolios' sources are in assumptions/default.json `portfolio
 Cause weights (judgment 25/35/30), money informed and share changed (judgments); the portfolio values now set the scale (global health 0.0598, AI 0.0014).
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

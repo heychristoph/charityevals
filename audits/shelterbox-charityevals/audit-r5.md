@@ -12,7 +12,7 @@ Scope: only the methane_share change: new row methane_share and the rewritten br
 None.
 
 Verdict: pass
-Model-sha: e7be6eab3fcb9fa75ae6c076f92c024847f636166e0083ec50ccf8ca6b3a2c9e
+Model-sha: f61dfc52fa14a16f2b9542566f55338e0b1f24322dcc4c457b954462a7b7a646
 Rules: 0.3.13
 Re-stamped (15 Nov 2026): shared in-kind, water-time and shelter-night facts (consistency, mechanical)
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
@@ -28,3 +28,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against c42a537d.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

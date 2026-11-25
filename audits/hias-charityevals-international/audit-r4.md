@@ -1,5 +1,5 @@
 # Audit: hias-charityevals-international, round 4 (scoped)
-Model-sha: aa5ec88b8a75efd8ce4ee64a5dbbf502d00ea1382226b22ab47fc8c8ad603cde
+Model-sha: b6cba92b469e7c6c73dc9bc6f4018eb12fb7c1e024c5d15f59f26bdd508c1fa1
 Rules: 0.3.13
 Scope: rsc_people (now 200, range 50-600) and the write-up's RSC line.
 Mechanical: audit-model 0 high / 0 medium / 0 low; no files rewritten.
@@ -30,3 +30,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the typed text or pointed at the evaluator view, and typed results in the summary made placeholders or recomputed at the 30% mobiliser share (no value moves). Mechanical: headline unchanged, against bc9e3979.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

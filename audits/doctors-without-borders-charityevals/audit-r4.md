@@ -1,7 +1,7 @@
 # Audit: doctors-without-borders-charityevals, round 4
 Result: 0.001677 uov/$ = 0.839 years of healthy life per 1,000 dollars (combined range 0.315–2.231); the cause median was not re-read in this scoped round. Verdict: pass.
 Verdict: pass
-Model-sha: 829f1f982f7b62a3ea314e3417f247936666ed16241e05e4933da5c81d308e41
+Model-sha: c80a2dbad7ebb7fd5b90dee50c2afc958874178df69d49678a479cbffc6f3a75
 Rules: 0.3.13
 Scope: verification round only: commits 36d2fd53 and 1f524029 (g4 cleanup): ln 2 row replaced by @givewell_shared.ln_consumption_per_doubling; cholera and other-admissions 5-14 shares read @death_ages.crisis_share_5_14_of_over5; WASH death rate and reduction read the @humanitarian_response facts; wash_years format; eight rewritten explainers. Programmes, year and the rest of the model were not re-audited.
 Mechanical: audit-model: 0 findings, result 0.8386 (round 3: 0.8390, about -0.05%, the WASH facts); preflight passes, with two low "generated files out of date" lines (run npx tsx scripts/summaries.ts); other scripts not re-run.
@@ -45,3 +45,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

@@ -55,6 +55,8 @@ function kindOf(r: RowLike, uses: { share: boolean; percent: boolean; ratio: boo
   if (xs.some((x) => x < 0)) return "signed";
   if (uses.ratio && best !== 1 && !amount && fits("ratio", ...xs)) return "ratio";
   if (r.format === "percent") return fits("share", ...xs) ? "share" : "positive";
+  // A number in dollars is an amount, whatever its label says ("Grant size", "Training").
+  if (r.format === "usd") return "positive";
   // A point 0 or 1 is a share only by its label (a count of 0 people, a month flag of 1 are not).
   if ((best === 0 || best === 1) && typeof r.value !== "object" && !SHARE_WORDS.test(r.label ?? "")) return "positive";
   if (fits("share", ...xs) && !(r.unit && !SHARE_UNIT.test(r.unit)) && !amount) return "share";

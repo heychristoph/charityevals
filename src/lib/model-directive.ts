@@ -1,4 +1,5 @@
 // client:model="<id>": hydrates a model's page island once its full file and the facts' text have arrived.
+// Several ids, comma-separated ("a,b"): a page showing several models in full (a charity's programmes).
 //
 // The browser bundle carries most models only as summaries (lib/browser-models.ts), but the island renders
 // the full model, and hydration needs the same data the server rendered with. Passing the file as an
@@ -8,14 +9,15 @@
 import type { ClientDirective } from "astro";
 
 const model: ClientDirective = async (load, opts) => {
-  const id = String(opts.value);
+  const ids = String(opts.value).split(",").map((x) => x.trim()).filter(Boolean);
+  const id = ids.join(", ");
   try {
     const json = (url: string) => fetch(url).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))));
     const g = globalThis as { __charityevalsFactTextLoad?: Promise<Record<string, Record<string, unknown>>>; __charityevalsAddFactText?: (t: Record<string, Record<string, unknown>>) => void };
     // The facts' text (explainers, sources), once per page for every island that shows a tree.
     const text = (g.__charityevalsFactTextLoad ??= json("/fact-text.json"));
-    const [hydrate, raw, facts] = await Promise.all([load(), json(`/models/${id}.json`), text]);
-    (globalThis.__charityevalsModels ??= {})[id] = raw;
+    const [hydrate, raws, facts] = await Promise.all([load(), Promise.all(ids.map((x) => json(`/models/${x}.json`))), text]);
+    ids.forEach((x, i) => ((globalThis.__charityevalsModels ??= {})[x] = raws[i]));
     g.__charityevalsAddFactText?.(facts);
     await hydrate();
   } catch (e) {

@@ -14,7 +14,7 @@ Companies make pledges; some implement them, on a timeline the campaigns can bri
 
 ### Where we differ from ACE
 
-- **A chicken against a person.** ACE's figures count a hen's suffering at 35% of a person's (Ambitious Impact's weight in ACE's 2025 SADs); we take that weight out. We count days of a chicken's pain and let the chicken slider (default 33%) set how they compare with a person's, as in every animal model.
+- **A chicken against a person.** ACE's figures count a hen's suffering at 35% of a person's (Ambitious Impact's weight in ACE's 2025 SADs); we take that weight out. We count days of a chicken's pain and let the chicken slider set how they compare with a person's, as in every animal model.
 - **Years brought forward (changed for consistency).** ACE's dates "if not for" the campaigns are 1 to 15 years after the expected ones; we use the shared "Years a won reform counts before it would have come anyway" (5 by default) for every group, counted and discounted from the expected date as ACE does.
 - **Pledges kept (changed for consistency).** ACE's own probabilities (30% for the European Chicken Commitment, 80% to 90% for cage-free) become the shared figures: 30% for broiler pledges and 77% of cage-free commitments fulfilled (Chicken Watch).
 - **Salary sacrifice (off by default).** Turn on "Credit by share of resources" and we count staff's forgone pay as an in-kind donation: we guess staff are 65% of program cost and earn 35% less than in comparable for-profit jobs, about 35% of cash spending. That leaves each donated dollar about 74% of the credit ACE gives it. Both numbers are guesses with wide ranges; replace them with the charity's real figures when we have them.

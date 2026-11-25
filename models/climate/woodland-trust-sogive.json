@@ -84,6 +84,7 @@
       "explainer": "charityevals' step, not the evaluator's: with credit by share of resources on, staff's pay below what they could earn elsewhere counts as an in-kind contribution and gets its share of the outcome. Off by default."
     }
   ],
+  "story": {"sentence":"Every **{cost_per_tonne_gbp * cost_ratio_to_sogive * usd_per_gbp|$}** it spends planting, restoring and protecting woodland takes up and keeps **one tonne of carbon dioxide**.","questions":{"years_until_avoided":"How many years until the carbon is taken up?","permanence_share":"How much of the carbon stays stored?","tree_survival_share":"How many of the trees planted survive?","tonnes_per_tree":"How much carbon dioxide does a tree take up over 100 years?"},"steps":[{"total":"1000|$","text":"given to the Woodland Trust"},{"op":"÷ {cost_per_tonne_gbp * cost_ratio_to_sogive * usd_per_gbp|$}","text":"per tonne of carbon dioxide taken up and kept"},{"total":"1000 / (cost_per_tonne_gbp * cost_ratio_to_sogive * usd_per_gbp)","text":"tonnes of carbon dioxide taken up"},{"op":"× {tco2e_per_donor_dollar * 1000 / (1000 / (cost_per_tonne_gbp * cost_ratio_to_sogive * usd_per_gbp))|%}","text":"counts, as the trees take decades to grow"},{"total":"1000 * tco2e_per_donor_dollar","text":"tonnes, counted for the wait"},{"op":"× {result / (1000 * tco2e_per_donor_dollar)}","text":"years of healthy life per tonne, from fewer heat deaths and damage"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
   "rows": [
     {
       "id": "create_cost_gbp",

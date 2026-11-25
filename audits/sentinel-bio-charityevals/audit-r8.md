@@ -1,6 +1,6 @@
 # Audit: sentinel-bio-charityevals, round 8 (scoped verification)
 Result: 2.123 years of healthy life per $1,000 (was 2.093, +1.4%). Range 0.5761 to 12.74, 0% of draws at or below zero; cause median 2.181 (x0.974). Verdict: pass.
-Model-sha: 667903404bdf15b796eb19748e5c9f9db1660600b35b816c1c7dedba8202f509
+Model-sha: 3559e54673cbc3c30a95dfd2291eda4de1184d7357c1f4f7ac98c26c795a95b1
 Rules: 0.4.0
 Scope: rule cause-portfolios only (inventory/rule-changes/cause-portfolios.md; docs/normalization.md "November 2026: a cause's portfolio"; assumptions/default.json `portfolios`). The model file is unchanged by the rule except wording; no source or scope re-audit.
 Preflight: passes (no blocking problem); one low (stored simulation out of date).
@@ -27,3 +27,5 @@ Scoped round: the portfolios' sources are in assumptions/default.json `portfolio
 How much a dollar of pandemic work cuts the risk (Rethink's placeholders), the Council on Strategic Risks's figure, the next-dollar figure; the rule moves only the advised gift.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

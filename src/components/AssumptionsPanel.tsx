@@ -345,7 +345,7 @@ export default function AssumptionsPanel({ compact = true, groups }: { compact?:
   const overrides = useOverrides();
   const [copied, setCopied] = useState(false);
   // In the side panel each group folds; the values about people and animals, which move the ranking most, start open.
-  const [open, setOpen] = useState<Record<string, boolean>>({ people: true, animals: true });
+  const [open, setOpen] = useState<Record<string, boolean>>({});
   const changedCount = Object.keys(overrides).length;
   const shown = lib.assumptions.groups.filter((g) => !groups || groups.includes(g.id));
   // On a narrow screen the side panel is a sheet over the lower part of the screen (global.css, .side):

@@ -1,6 +1,6 @@
 # Audit: salvation-army-charityevals, round 5 (verification of fc4276a5)
 Result: 5.239e-6 daly/$ = 0.005239 years of healthy life per 1,000 dollars (combined range 0.000029-0.31 as check.ts prints it); cause median 0.1169 (x0.045). Verdict: pass.
-Model-sha: 9c3dddfd1db23ce9ff5da4058677a64a31eb904e8b4dbf2c73ba0539e942d11e
+Model-sha: 92b141b026236ad266ae1f00febc8070177c84cd482b5ea7901d49be7dd2140c
 Rules: 0.3.13
 Scope: verification of fc4276a5 only; not a full re-audit. Changed row: inkind_cash_equivalence (formula).
 Mechanical: `npx tsx scripts/audit-model.ts models/global-health/salvation-army-charityevals.json` lint 0 high / 1 medium (far-below, 0.0448x the median; judged correct in earlier rounds) / 0 low, no invariant violations; `npx tsx scripts/check.ts salvation-army-charityevals` all models valid, 0.0052; `npx tsx scripts/simulation-check.ts salvation-army-charityevals` stable (5% 0.572, 50% 1, 95% 1.77 x best guess). normalization-audit not run (verification round).
@@ -32,3 +32,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

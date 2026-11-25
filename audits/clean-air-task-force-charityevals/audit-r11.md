@@ -1,6 +1,6 @@
 # Audit: clean-air-task-force-charityevals, round 11 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: 0.005801 tco2e/$ = 0.003461 years of healthy life per 1,000 dollars (summary and write-up say 0.0035; round 10 plus the non-death change 0.0062). Verdict: pass.
-Model-sha: c827585096d13124f75007f51d415cc2969b173fcfd928e7e5f318491c1cd9b1
+Model-sha: 004aab74aa3fc0b62aeebaed407000b4d9f2a0ebbdfc50d1a5f6f0a21fcb38bc
 Rules: 0.3.13
 Scope: ccs_evidence_adj, ccs_total_adj, ccs_implementation_adj; nuc_pathway_first_year, nuc_pathway_last_year, nuc_middle_year, nuc_pathway_counted_share and their use in nuc_downstream, fus_downstream, nuc_extra_power_cost_uov; us_power_twh_2023, us_fossil_power_twh_2023, nuc_fossil_share, pcge_rate_position, nuc_premium_usd_per_mwh; public_payer_uov_per_dollar, ccs_public_usd_per_year, ccs_public_cost_uov, compliance_uov_per_year, tco2e_from_uov (side-effect form); summary and write-up headline. Nothing else re-audited.
 Mechanical: audit-model.ts 0 findings (warnings only); check.ts "all models valid". Conversion-section rows (methane_share, fuel_share, fuel_smoke_factor) read no shared assumption (INV-2b clean).
@@ -38,3 +38,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against ca214e5f.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

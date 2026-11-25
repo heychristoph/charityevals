@@ -1,6 +1,6 @@
 # Audit: arms-control-association-charityevals, round 4 (scoped verification)
 Result: 12.17 years of healthy life per $1,000 (was 12.40, -1.9%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 5aec3e1097cedf65b5a7fd984426cbda8dac1db84ae6a4ca97eeaa0627c20648
+Model-sha: c78c5d3b386743f39ec4b940fee718721eb7732a33b4ea76a65f75096e91326d
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -21,3 +21,5 @@ Summary: "the future lost counted only where you count lives that never start (0
 Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk family the mark for lives that never start moves from the sum of the future to each branch's future row, so the branch weights that average the adjustments count the future as the outcome does (they counted it in full); the future's farmed animals read the branches' own formulas. Mechanical: headline unchanged, 1 row changed, against the tree before the rule.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

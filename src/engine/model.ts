@@ -295,6 +295,7 @@ export function buildLibrary(
       charity: file.charity ?? parent?.charity ?? "",
       owner: file.owner ?? parent?.owner ?? "",
       sections,
+      story: file.story ?? parent?.story,
       output,
       evaluator: file.evaluator ?? parent?.evaluator,
       rows: resolved,

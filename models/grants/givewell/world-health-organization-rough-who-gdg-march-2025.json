@@ -59,6 +59,7 @@
       "kind": "ours"
     }
   ],
+  "story": {"sentence":"Every **{cost_of_funding_guidelines_review / expected_deaths_averted_through_this_grant|$}** of this grant saves **one life** from malaria, by getting a drug that curbs its spread recommended three years sooner.","questions":{"how_many_more_hospitalizations_per_year_in_a_high_resistance":"How many more malaria hospital stays a year would drug resistance cause?","probability_this_grant_expedites_guidelines_by_3_years":"How likely is it that the grant speeds up the guidelines by three years?","how_much_does_sld_primaquine_reduce_the_risk_of_a_high_resis":"How much does the drug cut the risk of high drug resistance?","of_hospitalizations_that_result_in_death":"How many of those hospital stays end in death?"},"steps":[{"total":"1000|$","text":"given to the World Health Organization for a guidelines review"},{"op":"÷ {cost_of_funding_guidelines_review / expected_deaths_averted_through_this_grant|$}","text":"per death from malaria averted, as an average over what might happen"},{"total":"1000 * expected_deaths_averted_through_this_grant / cost_of_funding_guidelines_review","text":"lives saved from malaria"},{"op":"× {result / (1000 * expected_deaths_averted_through_this_grant / cost_of_funding_guidelines_review)}","text":"years of healthy life for each life, with your values"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
   "rows": [
     {
       "id": "value_per_death_averted",

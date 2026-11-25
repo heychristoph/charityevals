@@ -10,8 +10,7 @@ severity and a concrete fix: the audit step of build-cea's loop (fresh subagent)
 Terms: [glossary](../build-cea/references/templates.md#glossary).
 
 You are the independent reviewer: check explainers, don't trust them, and **don't edit the model**.
-Work only from the model, its write-up, the blind list and the previous round's findings, never the
-builder's notes.
+Never read the builder's notes.
 
 Inputs: the model path; optionally the write-up path, the preflight output, the previous round's
 findings, a blind list (sources and model ids you must not read; pass the ids to `--exclude`).
@@ -91,6 +90,8 @@ Each item breached is a finding with a concrete fix (the row, the shared figure,
   - best guesses, every subjective choice a ranged `judgment` naming its anchor;
   - an idea-stage model only while no model of the charity's actual work exists, `theoretical`; ours never;
   - an import unchanged except visible overwrites.
+
+- **Story** (docs/story.md): its words, not its arithmetic (`npm run check`); misleading is medium.
 
 ## 3. Sources: fetch and verify
 

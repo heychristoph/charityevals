@@ -1,6 +1,6 @@
 # Audit: longview-philanthropy-charityevals, round 7 (scoped verification)
 Result: 0.3662 years of healthy life per $1,000 (uov/$ 7.324e-4; was 0.2346, +56%). Range 0.1183 to 1.155, 0% of draws at or below zero; cause median 2.181 (x0.168). Verdict: pass.
-Model-sha: 00b61d9c125a67c7a3abef48fcfd79db867be0e351e8a4445628a66fc4408f3f
+Model-sha: 3f597e7f649a1a72182c1104e73b1868ef2977737e8c69fb8e6808409f7349c8
 Rules: 0.4.0
 Scope: rule cause-portfolios only (inventory/rule-changes/cause-portfolios.md; docs/normalization.md "November 2026: a cause's portfolio"; assumptions/default.json `portfolios`). The model file is unchanged by the rule except wording; no source or scope re-audit.
 Preflight: passes (no blocking problem); one low (stored simulation out of date).
@@ -27,3 +27,5 @@ Scoped round: the portfolios' sources are in assumptions/default.json `portfolio
 Area split (81/12/3), the share Longview's advice changed, next-dollar figure, MATS's share.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

@@ -94,7 +94,8 @@ export function summaries({ raws, lib }: ReturnType<typeof library>, dist?: Reco
     // Leaves `$assumption`, `@fact.row` and `#model-id` alone.
     const rename = (f: string) => f.replace(/#[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)?|(?<![$@.\w])[a-z_][a-z0-9_]*\b(?!\s*\()/gi, (w) => (w.startsWith("#") ? w : short.get(w) ?? w));
     const compact = rows.map((r) => ({ ...r, id: short.get(r.id as string), ...(typeof r.formula === "string" ? { formula: rename(r.formula) } : {}), ...(typeof r.drawn_with === "string" ? { drawn_with: short.get(r.drawn_with) ?? r.drawn_with } : {}) }));
-    const { rows: _rows, sections: _sections, resources: _resources, ...meta } = raw;
+    // A story names rows a stand-in folds away; the model's own page loads its full file.
+    const { rows: _rows, sections: _sections, resources: _resources, story: _story, ...meta } = raw;
     // A reference read as a destination stays one only where a kept row still reads it.
     const reads = compact.map((r) => (typeof r.formula === "string" ? r.formula : "")).join(" ");
     if (Array.isArray(meta.destination_reads)) {

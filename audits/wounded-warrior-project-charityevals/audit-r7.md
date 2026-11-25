@@ -1,6 +1,6 @@
 # Audit: wounded-warrior-project-charityevals, round 7 (verification)
 Result: 6.4620e-6 daly/$ = 0.006462 years of healthy life per 1,000 dollars. Verdict: pass.
-Model-sha: 8ca2131e79109926608beb63a5a4ce4e6c2b8acea9c228385f814d36939da2df
+Model-sha: 0bfbe3d22a42b19ac8cbaae58ec764fefc660bf19c288970a48a95e18386bc9a
 Rules: 0.3.13
 Scope: only the change of commit 480880ba: `phys_event_years` 0.25 (0.05-0.5) -> 0.125 (0.05-0.25) with a new explainer.
 Mechanical: preflight no high or medium lines (two lows: a simulation note on the shared payer multiple, stale generated distributions); lint 0 high/0 medium; headline 0.0064628 -> 0.00646196.
@@ -33,3 +33,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mechanical: headline unchanged, 2 rows changed, against cc9a04dd.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

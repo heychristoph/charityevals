@@ -18,7 +18,9 @@ Mechanical: scripts/check.ts valid (warnings on range and judgment share only, a
 | 2 | low | adv_share_of_campaigners | A pure judgment with no data anchor; the explainer says what it rests on, which is enough. The 15% to 40% range is wide enough for ASH and the colleges. | None. |
 
 Verdict: pass
-Model-sha: 83a1c9ebffd92ec61a3071df6d4a0eaef042b6fad6de32469bb7d2d4217f06d9
+Model-sha: 38ba4bb6448293f665869fe09d4e4ee58dd1ea75520d42781ad56360f9603103
 Rules: 0.3.13
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

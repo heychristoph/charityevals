@@ -1,6 +1,6 @@
 # Audit: imagine-worldwide-charityevals, round 3 (scoped to the changes since round 2)
 Result: 0.004626 uov/$ = 2.313 years of healthy life per 1,000 dollars, unchanged from round 2 (the shared facts have the same best values, 20% and 40%). Verdict: pass.
-Model-sha: f2454f263e70753bfbc3ba8ca1e43428057f8f6324a32c418f4e5dc8f3753ee8
+Model-sha: 4a780521cfea82c0f8e541430ab7a05153dd3a6feab77d395f400c26d899fea0
 Rules: 0.3.13
 Scope: only the changes since 4423e385 (tablets_in_service_2023, edu_earnings_per_sd, edu_persistence, write-up).
 Mechanical: audit-model 0 high, 1 medium (far-above, 28.8x the cause median; reasoning unchanged from rounds 1-2); the round-2 spread finding no longer appears. check.ts: all models valid. generated/ unchanged.
@@ -29,3 +29,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against 5724c36c.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

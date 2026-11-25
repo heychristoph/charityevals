@@ -16,7 +16,9 @@ Only the fixes to round 5: `value_destinations` reweighted by the credit share, 
 | 1 | low | `moved_per_dollar` label; summary | Label "Money moved it caused per dollar" now holds the credited money (0.55); the summary's "it causes about one dollar of discounted giving per dollar it spends" is the caused figure (0.95), correct but different from the row. | Relabel the row "Money moved credited to it per dollar of its own costs"; in the summary say "about {{row:moved_per_dollar}} of discounted giving credited to it per dollar it spends". |
 
 Verdict: pass
-Model-sha: d993f7033bdfd08abb38908bfb6aeda623663744f24cdeef64786d1985f3cbc5
+Model-sha: 7247c72757eb865f969eefa20634a0718cbe6fbdf90406b2b1ddfadad1e3bf07
 Rules: 0.3.13
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

@@ -1,6 +1,6 @@
 # Audit: samaritans-purse-charityevals, round 6
 Result: 5.071e-5 daly/$ = 0.05071 years of healthy life per 1,000 dollars (combined range 0.01222–0.2104); cause median 0.1132 (×0.4478). Verdict: pass.
-Model-sha: 8d5f569fe402e12d2100fa9344be85d596e2c1467edef1958ddb6375d1541315
+Model-sha: ad129a8ace77f5098cf51ed07fc66b518b346da4ff6b057fc00af34e22303ae4
 Rules: 0.3.13
 Scope: verification of the one change since round 5: us_evidence_adj 0.95 (0.8-1) judgment to formula 1 with a new explainer, and the write-up edits ("US relief" added to the no-evidence-step list; sentence on the site-wide pass 0.047 to 0.051 in "How this model was checked"); summary and write-up figures against the live result. Not a full re-audit.
 Mechanical: audit-model 0 findings; check.ts all valid; simulation-check stable (5% 0.553, 50% 1, 95% 1.8 x best); normalization-audit not rerun (coordinator ran it: none).
@@ -15,7 +15,7 @@ Figures check: summary "about 0.05 ... about half the site's global-health media
 Drivers note: unchanged; the result is still dominated by the missing-data discount (0.5 on every branch), the shoebox worth and relief cost per person. The change moves the result by +0.04%.
 
 Verdict: pass
-Model-sha: 8d5f569fe402e12d2100fa9344be85d596e2c1467edef1958ddb6375d1541315
+Model-sha: ad129a8ace77f5098cf51ed07fc66b518b346da4ff6b057fc00af34e22303ae4
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -33,3 +33,5 @@ Re-stamped (16 Nov 2026): text only: typed figures replaced by placeholders (pro
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against cc9a04dd.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

@@ -1,6 +1,6 @@
 # Audit: 80000-hours-charityevals, round 10 (scoped verification)
 Result: 0.2487 years of healthy life per $1,000 (uov/$ 4.975e-4; range 0.03627 to 1.617, 0% of draws at or below zero). Verdict: pass.
-Model-sha: abc117ae158a28c36ee781d4471f73b56a3253a505fed639cfe8d3605445cc88
+Model-sha: 3bbee6b1db9399dbf7224b214120489fba5ab80c2cf0f94cbd26ad3535ef59bb
 Rules: 0.4.0
 Scope: scoped verification of round 9's findings for rule cause-portfolios only; no source or scope re-audit.
 Preflight: passes (no blocking problem); lows only.
@@ -17,3 +17,5 @@ Previous round: round 9's medium (stale 'about half' for biosecurity and nuclear
 Pass: no open high or medium.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

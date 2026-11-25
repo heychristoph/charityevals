@@ -15,8 +15,10 @@ None.
 
 Verdict: pass
 Rules: 0.3.13
-Model-sha: b49409499f6e8e9fc1fbe9b671d99f2ae4b162a31ceb6beabd39427233224675
+Model-sha: 89203727f475fabab97b7620f5480e6ddca69ad0a05a484ba2b003ec76115721
 
 Re-stamped (18 Nov 2026): glob_evidence_adj now reads the shared facts/tobacco.json lmic_wins_evidence_adj (same 0.8, 0.5 to 1), which the Concentric Policies model also reads. Mechanical: headline unchanged, against HEAD.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

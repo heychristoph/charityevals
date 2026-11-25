@@ -1,6 +1,6 @@
 # Audit: project-drawdown-charityevals, round 14 (scoped verification)
 Result: -2.388e-4 years of healthy life per $1,000 (tco2e/$ -4.025e-4; range as audit-model prints it -0.002078 to 0.008125, 48% of draws at or below zero). Verdict: pass.
-Model-sha: 55abe0b5b953c01a90ce6a8eb99b8deb8faa951000e1d82a04cfa3223358eb7a
+Model-sha: b756c81906a6f9e401e282206e3a6e92da48b589ce5e3f631e093c16e4c6de7d
 Rules: 0.4.0
 Scope: scoped verification of round 13's findings for rule cause-portfolios only; no source or scope re-audit.
 Preflight: passes (no blocking problem); lows only.
@@ -21,3 +21,5 @@ Pass: no open high or medium.
 Re-stamped (23 Nov 2026): Wording only: the summary says the climate portfolio (the charities the Giving Green Fund paid), not the ranked climate charities (round 14's low); no value changed. Mechanical: headline unchanged, against HEAD.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.

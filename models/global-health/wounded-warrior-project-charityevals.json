@@ -88,6 +88,7 @@
       "explainer": "Staff who earn less than they could elsewhere pay part of the cost in kind. With credit by share of resources, your dollar is credited with its share of the full cost only."
     }
   ],
+  "story": {"sentence":"Every **{cost_total / (ben_people + people_reached + emp_placed * household_size)|$}** helps one person in a veteran's household win disability benefits, get an emergency grant or find a job.","questions":{"ben_consumption_share":"How well off are the households helped to a benefit award, compared with the average?","ben_income_years":"For how many years does an award bring added payments?","ben_counterfactual_adj":"How many of these awards would not have been won without its help?","fing_counterfactual_adj":"How many emergency grants would not have been paid without it?"},"steps":[{"total":"1000|$","text":"given to Wounded Warrior Project"},{"op":"÷ {cost_total / (ben_people + people_reached + emp_placed * household_size)|$}","text":"per person in a household helped with a benefit, grant or job"},{"total":"1000 * (ben_people + people_reached + emp_placed * household_size) / cost_total","text":"people in households helped"},{"op":"× {result / (1000 * (ben_people + people_reached + emp_placed * household_size) / cost_total)}","text":"years of healthy life for each, from higher incomes and wider help"},{"total":"result|y","text":"years of healthy life per $1,000"}]},
   "rows": [
     {
       "id": "con_spend",

@@ -1,7 +1,7 @@
 # Audit: make-a-wish-charityevals, round 3
 
 Result: 1.981e-5 wellby/$ = 0.001293 years of healthy life per $1,000 (combined range 2.98e-4 – 5.61e-3); cause median 0.3585 (×0.0036). Verdict: pass.
-Model-sha: 099411f61c3b09d3fa7c607273e70cf442341019b46a56288f7d6a20fae0065b
+Model-sha: 9ffe33504e336a669d9fd74907d9a5a4028f275af2f2f706efd50ca643106566
 Rules: 0.3.13
 
 Scope: unchanged and right (whole US network, fiscal 2024, programme services $201.4M, 16,295 wishes). Round 3 checks only the seven changes made after round 2.
@@ -48,3 +48,5 @@ Re-stamped (16 Nov 2026): peer mentions removed from the text (no value change).
 Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Mechanical: headline unchanged, against c42a537d.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
+
+Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
