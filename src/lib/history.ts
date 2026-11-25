@@ -25,6 +25,11 @@ export type HistoryEntry = {
   note?: string;
 };
 
+/** False with SKIP_HISTORY=1: the build leaves out the history pages, which rebuild every past version of
+ * each model (about 45 minutes when the engine or the assumptions change). CI on pull requests skips them;
+ * the deploy builds them. */
+export const historyPages = process.env.SKIP_HISTORY !== "1";
+
 const git = (root: string, args: string[]) =>
   execFileSync("git", args, { cwd: root, encoding: "utf8", maxBuffer: 64 * 1024 * 1024, stdio: ["ignore", "pipe", "ignore"] });
 

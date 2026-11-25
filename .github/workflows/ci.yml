@@ -17,13 +17,14 @@ concurrency:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    # A cold history cache rebuilds the library at every past model commit (about 45 minutes); warm, a few.
-    timeout-minutes: 90
+    # The history pages are left out (SKIP_HISTORY): the deploy builds them, so an engine or assumptions
+    # change pays their cold rebuild once, not again on every pull request and on main.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
-          fetch-depth: 0 # the history pages rebuild every past version of each model
+          fetch-depth: 0
 
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
@@ -31,13 +32,6 @@ jobs:
           cache: npm
 
       - run: npm ci
-      # The history pages' per-commit results (src/lib/history.ts): a past commit never changes, so
-      # only an engine change makes the cache cold.
-      - uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: .cache/history
-          key: history-${{ github.sha }}
-          restore-keys: history-
       - name: Validate models
         run: npm run check
       - run: npm test
@@ -45,9 +39,5 @@ jobs:
         run: npx tsc --noEmit && npx tsc -p worker
       - name: Build site
         run: npx astro build
-      # Saved even when a later step fails, so a cold cache warms up once rather than on every run.
-      - uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        if: always()
-        with:
-          path: .cache/history
-          key: history-${{ github.sha }}
+        env:
+          SKIP_HISTORY: "1"

@@ -53,7 +53,7 @@ jobs:
       # wrangler is pinned through package-lock.json.
       - run: npm ci
 
-      # The history pages' per-commit results (src/lib/history.ts), shared with CI's.
+      # The history pages' per-commit results (src/lib/history.ts); only the deploy builds them (CI skips them).
       - uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: .cache/history
