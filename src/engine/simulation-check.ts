@@ -4,7 +4,7 @@
 // alone at an end of their range, flip the result's sign or move it more than tenfold (the usual causes of
 // an unstable simulation: a calendar year drawn, a remainder of large figures, a net near zero in a
 // denominator). scripts/simulation-check.ts prints it; scripts/preflight.ts gates on it.
-import { assumptionValues, compute, headline, RISK_OFF, RISK_QUANTILE, type Library, type ResolvedModel } from "./model";
+import { assumptionValues, compute, headline, RISK_OFF, RISK_SETTING, type Library, type ResolvedModel } from "./model";
 import { simulate } from "./montecarlo";
 import { uncertainty } from "./uncertainty";
 
@@ -40,7 +40,7 @@ export function simulationCheck(lib: Library, m: ResolvedModel, draws = 2000): S
     out.brokenEvents = harm ? misses >= 0.999 : d.zero >= 0.999 || (d.zero === 0 && d.q[0] / mid < 1e-3);
   }
   // One input at a time at each end of its range.
-  const av = { ...assumptionValues(lib.assumptions), [RISK_QUANTILE]: RISK_OFF };
+  const av = { ...assumptionValues(lib.assumptions), [RISK_SETTING]: RISK_OFF };
   const c = headline(lib, m, av);
   const values = compute(lib, m, av);
   const u = uncertainty(lib, m, values, av, "charityevals");

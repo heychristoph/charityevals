@@ -47,7 +47,7 @@ export type Library = {
   facts: Map<string, FactRow>;
   errors: string[];
   /** Per model, its result as a distribution from a Monte Carlo at the defaults, value judgments left out:
-   * what $risk_quantile and the plausible ranges read (generated/distributions.json). */
+   * what $long_shot_value and the plausible ranges read (generated/distributions.json). */
   distributions?: Record<string, Distribution>;
 };
 
@@ -1053,16 +1053,16 @@ export function missingDataFactor(lib: Library, m: ResolvedModel, a: Record<stri
 
 // --- Risk (docs/normalization.md 2.18) ---------------------------------------------------------------
 
-/** The share of risk the reader accepts that a charity's real impact is lower than shown: 50% counts its
- * best guess, less counts a surer, lower figure, more a likelier-to-miss, higher one. */
-export const RISK_QUANTILE = "risk_quantile";
-/** The shares of a model's simulated result stored (src/engine/montecarlo.ts): 5% to 95% in steps of 5. */
+/** How much a long shot counts: what a 1-in-10 chance of 100 healthy years is worth to the reader in healthy
+ * years for sure, from 10 (its odds times its payoff, the average) down to 1 (docs/normalization.md 2.18).
+ * The power a on each chance is 2 − log10 of it: 1 at 10, 2 at 1. */
+export const RISK_SETTING = "long_shot_value";
 /** The risk value that turns the risk factor off (exactly 1): a model read by another (`#id`), the
- * simulation's own runs and the waterfall's start. 50% isn't neutral: a long shot's middle is 0. */
+ * simulation's own runs and the waterfall's start. */
 export const RISK_OFF = -1;
-/** The risk value that counts each model at its simulated average instead of a share of its outcomes:
- * expected value, what most evaluators maximise (docs/normalization.md 2.18). Above every stored share. */
-export const RISK_AVERAGE = 1;
+/** The powers each model's risk-weighted result is stored at (src/engine/montecarlo.ts): 1 to 2 in tenths. */
+export const RISK_POWERS = Array.from({ length: 11 }, (_, i) => 1 + i / 10);
+/** The shares of a model's simulated result stored (src/engine/montecarlo.ts): 5% to 95% in steps of 5. */
 export const QUANTILES = Array.from({ length: 19 }, (_, i) => (i + 1) / 20);
 const MIDDLE = 9;
 
@@ -1074,6 +1074,9 @@ export type Distribution = {
   q: number[];
   /** The average result, as a multiple of the best guess. */
   mean: number;
+  /** The result with long shots weighed at each of RISK_POWERS (1 is the average), as multiples of the best
+   * guess: what the risk setting reads. */
+  rw?: number[];
   /** The share of draws at zero or below: the chance the programme does no good (or harm). */
   zero: number;
   /** The simulation can't be relied on: its middle is more than 3× from the best guess, or its range runs
@@ -1110,22 +1113,20 @@ const anchorOf = (d: Distribution) => d.middle ?? d.q[MIDDLE];
 const riskNodes = new WeakSet<Node>();
 export const isRiskFactor = (n: Node) => riskNodes.has(n);
 
-/** The factor for the reader's risk: the model's simulated result at $risk_quantile, over its simulated
- * middle, so 50% is the best guess and the shape around it is the simulation's; at RISK_AVERAGE its
- * simulated average over the same middle. Undefined in the
+/** The factor for the reader's risk: the model's risk-weighted result at the reader's setting over its
+ * simulated middle, so the shape around the best guess is the simulation's; at 10 its average (a long shot
+ * at its odds times its payoff), lower settings counting chances at a power of themselves. Undefined in the
  * evaluator view, without the slider (an old commit's library) or a simulation of the model. */
 export function riskNode(lib: Library, m: ResolvedModel, view: View = "charityevals"): Node | undefined {
-  if (view === "evaluator" || !lib.assumptions.rows.some((r) => r.id === RISK_QUANTILE)) return undefined;
+  if (view === "evaluator" || !lib.assumptions.rows.some((r) => r.id === RISK_SETTING)) return undefined;
   const d = lib.distributions?.[m.id];
-  if (!d || d.unstable || d.additive || !(anchorOf(d) > 0)) return undefined;
-  // RISK_OFF (below every stored share) reads 1: the factor off.
-  const pts = [num(RISK_OFF), num(1), ...QUANTILES.flatMap((p, i) => [num(p), num(d.q[i] / anchorOf(d))])];
-  const shares: Node = { type: "call", fn: "interp", args: [assumption(RISK_QUANTILE), ...pts] };
-  // RISK_AVERAGE: the simulated average over the same middle (a long shot at its odds times its payoff).
-  const average = d.mean > 0 ? num(d.mean / anchorOf(d)) : shares;
-  const n: Node = { type: "call", fn: "if", args: [{ type: "bin", op: ">=", left: assumption(RISK_QUANTILE), right: num(RISK_AVERAGE) }, average, shares] };
+  if (!d || d.unstable || d.additive || !d.rw || !(anchorOf(d) > 0)) return undefined;
+  const power: Node = { type: "bin", op: "-", left: num(2), right: { type: "call", fn: "log10", args: [{ type: "call", fn: "max", args: [assumption(RISK_SETTING), num(0.01)] }] } };
+  const weighted: Node = { type: "call", fn: "interp", args: [power, ...RISK_POWERS.flatMap((a, i) => [num(a), num(d.rw![i] / anchorOf(d))])] };
+  // RISK_OFF reads 1: the factor off.
+  const n: Node = { type: "call", fn: "if", args: [{ type: "bin", op: "<", left: assumption(RISK_SETTING), right: num(0) }, num(1), weighted] };
   riskNodes.add(n);
-  factorLabels.set(n, "For the risk you accept that the impact is lower");
+  factorLabels.set(n, "For how much long shots count");
   return n;
 }
 
@@ -1151,7 +1152,7 @@ export function plausibleRange(lib: Library, m: ResolvedModel, central: number, 
   if (!d || d.unstable || !(anchorOf(d) > 0)) return undefined;
   // The best guess from the headline: undefined where the risk factor is 0 (a long shot below its chance).
   const f = riskFactor(lib, m, a);
-  const best = f > 0 ? central / f : headline(lib, m, { ...a, [RISK_QUANTILE]: RISK_OFF }, edits);
+  const best = f > 0 ? central / f : headline(lib, m, { ...a, [RISK_SETTING]: RISK_OFF }, edits);
   return { low: (best * d.q[0]) / anchorOf(d), high: (best * d.q[QUANTILES.length - 1]) / anchorOf(d) };
 }
 
@@ -1209,11 +1210,11 @@ const readers = new WeakMap<Record<string, number>, Record<string, number>>();
  * resources credited in full (`$mobiliser_share` = 1, docs/normalization.md 2.24), so that view never
  * applies them, however deep. One object per `av`, so modelResult's cache still hits. */
 export function readerValues(av: Record<string, number>, view: View): Record<string, number> {
-  const riskMoves = RISK_QUANTILE in av && av[RISK_QUANTILE] !== RISK_OFF;
+  const riskMoves = RISK_SETTING in av && av[RISK_SETTING] !== RISK_OFF;
   const shareMoves = MOBILISER_SHARE in av && av[MOBILISER_SHARE] !== 1;
   if (view !== "evaluator" || (!av[AGE_DISCOUNT] && !av[DISTANCE_DISCOUNT] && !(MISSING_DATA_DISCOUNT in av && av[MISSING_DATA_DISCOUNT] !== 1) && !(SIDE_EFFECT_WEIGHT in av && av[SIDE_EFFECT_WEIGHT] !== 1) && !av[NEVER_STARTED_WEIGHT] && !av[LIVES_ADDED] && !riskMoves && !shareMoves)) return av;
   let r = readers.get(av);
-  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}), ...(NEVER_STARTED_WEIGHT in av ? { [NEVER_STARTED_WEIGHT]: 0 } : {}), ...(LIVES_ADDED in av ? { [LIVES_ADDED]: 0 } : {}), ...(RISK_QUANTILE in av ? { [RISK_QUANTILE]: RISK_OFF } : {}), ...(MOBILISER_SHARE in av ? { [MOBILISER_SHARE]: 1 } : {}) }));
+  if (!r) readers.set(av, (r = { ...av, [AGE_DISCOUNT]: 0, [DISTANCE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in av ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(SIDE_EFFECT_WEIGHT in av ? { [SIDE_EFFECT_WEIGHT]: 1 } : {}), ...(NEVER_STARTED_WEIGHT in av ? { [NEVER_STARTED_WEIGHT]: 0 } : {}), ...(LIVES_ADDED in av ? { [LIVES_ADDED]: 0 } : {}), ...(RISK_SETTING in av ? { [RISK_SETTING]: RISK_OFF } : {}), ...(MOBILISER_SHARE in av ? { [MOBILISER_SHARE]: 1 } : {}) }));
   return r;
 }
 
@@ -1241,10 +1242,10 @@ export function refValues(m: ResolvedModel, av: Record<string, number>, view: Vi
     return n;
   }
   const missingMoves = MISSING_DATA_DISCOUNT in r && r[MISSING_DATA_DISCOUNT] !== 1;
-  const riskMoves = RISK_QUANTILE in r && r[RISK_QUANTILE] !== RISK_OFF;
+  const riskMoves = RISK_SETTING in r && r[RISK_SETTING] !== RISK_OFF;
   if (!r[DISTANCE_DISCOUNT] && !r[AGE_DISCOUNT] && !missingMoves && !riskMoves) return r;
   let n = neutral.get(r);
-  if (!n) neutral.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0, [AGE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in r ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(RISK_QUANTILE in r ? { [RISK_QUANTILE]: RISK_OFF } : {}) }));
+  if (!n) neutral.set(r, (n = { ...r, [DISTANCE_DISCOUNT]: 0, [AGE_DISCOUNT]: 0, ...(MISSING_DATA_DISCOUNT in r ? { [MISSING_DATA_DISCOUNT]: 1 } : {}), ...(RISK_SETTING in r ? { [RISK_SETTING]: RISK_OFF } : {}) }));
   return n;
 }
 
@@ -1309,7 +1310,7 @@ export function usedAssumptions(lib: Library, m: ResolvedModel, view: View = "ch
   if (m.rows.some((r) => r.modelDeps.some(isCauseRef)) && lib.assumptions.rows.some((r) => r.id === IGNORE_OLD)) used.add(IGNORE_OLD);
   // The evaluator view never discounts an estimate for its age, its own or a model's it reads, never
   // weighs it by distance and never discounts an imported model for missing data.
-  if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, SIDE_EFFECT_WEIGHT, RISK_QUANTILE].forEach((x) => used.delete(x));
+  if (view === "evaluator") [AGE_DISCOUNT, DISTANCE_DISCOUNT, HOME_COUNTRY, SIDE_EFFECT_WEIGHT, RISK_SETTING].forEach((x) => used.delete(x));
   // Nor does it count lives that never start, unless the evaluator did (the model pins the weight).
   if (view === "evaluator" && !(m.evaluator && NEVER_STARTED_WEIGHT in m.evaluator.assumptions)) used.delete(NEVER_STARTED_WEIGHT);
   if (view === "evaluator" && !m.rows.some((r) => r.assumptionDeps.includes(MISSING_DATA_DISCOUNT))) used.delete(MISSING_DATA_DISCOUNT);

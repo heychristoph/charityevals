@@ -47,6 +47,10 @@ export function upgrade(o: Overrides): Overrides {
     const legacy = LEGACY[k];
     if (legacy && !(legacy[0] in out)) out[legacy[0]] = v * legacy[1];
   }
+  // The risk setting was a share of each result's outcomes, or 1 for its average (docs/normalization.md
+  // 2.18): an old link's average is the new setting's 10; a share has no counterpart and is dropped.
+  if (o.risk_quantile >= 1 && !("long_shot_value" in out)) out.long_shot_value = 10;
+  delete out.risk_quantile;
   return out;
 }
 

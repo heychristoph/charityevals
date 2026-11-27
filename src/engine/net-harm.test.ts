@@ -14,7 +14,7 @@ const assumptions = {
   groups: [{ id: "g", title: "G" }],
   rows: [
     { id: "uov_per_daly", section: "g", label: "healthy year", value: 1, kind: "judgment", explainer: "x" },
-    { id: "risk_quantile", section: "g", label: "risk", format: "percent", value: 0.5, slider: { low: 0.05, high: 0.95, linear: true }, kind: "judgment", explainer: "x" },
+    { id: "long_shot_value", section: "g", label: "risk", format: "number", value: 10, slider: { low: 1, high: 10 }, kind: "judgment", explainer: "x" },
   ],
   units: { u: { label: "u", short: "u", to_common: "1" } },
   common: { unit: "u", benchmark: "none" },
@@ -41,10 +41,9 @@ describe("net harm", () => {
     for (let i = 1; i < 19; i++) expect(best * harm.q[i]).toBeGreaterThanOrEqual(best * harm.q[i - 1]);
     expect(harm.zero).toBe(1);
   });
-  it("counts more harm at a low risk and less at a high one; the range runs low to high", () => {
-    const at = (q: number) => headline(lib, m, { ...av, risk_quantile: q });
-    expect(at(0.05)).toBeLessThan(best);
-    expect(at(0.95)).toBeGreaterThan(best);
+  it("counts more harm the more cautious the setting; the range runs low to high", () => {
+    const at = (v: number) => headline(lib, m, { ...av, long_shot_value: v });
+    expect(at(1)).toBeLessThan(at(10));
     const r = plausibleRange(lib, m, best, av)!;
     expect(r.low).toBeLessThan(best);
     expect(r.high).toBeGreaterThan(best);

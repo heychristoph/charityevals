@@ -16,7 +16,7 @@ const same = (a: { central: number; low: number; high: number }, b: { central: n
 
 const values = {
   "the defaults": assumptionValues(lib.assumptions),
-  "other values": assumptionValues(lib.assumptions, { discount_rate: 0.01, risk_quantile: 0.2, chicken_vs_person: 0.3, ignore_old_estimates: 0 }),
+  "other values": assumptionValues(lib.assumptions, { discount_rate: 0.01, long_shot_value: 3, chicken_vs_person: 0.3, ignore_old_estimates: 0 }),
 };
 
 describe.each(Object.entries(values))("at %s", (_, av) => {

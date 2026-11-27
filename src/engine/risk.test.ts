@@ -1,73 +1,61 @@
-// The reader's risk ($risk_quantile, docs/normalization.md 2.18): each result counted at that share of
-// its log-normal plausible range, 1 at 50%, never in the evaluator view.
+// The reader's risk ($long_shot_value, docs/normalization.md 2.18): each result counted with every chance
+// of reaching it raised to the power 2 − log10(setting), so 10 is the simulated average and 1 the most
+// cautious; never in the evaluator view.
 import { describe, expect, it } from "vitest";
-import { normInv } from "./expr";
-import { QUANTILES, RISK_AVERAGE, RISK_OFF, assumptionValues, buildLibrary, bottomLine, headline, plausibleRange, usedAssumptions } from "./model";
+import { QUANTILES, RISK_OFF, RISK_POWERS, assumptionValues, buildLibrary, bottomLine, headline, plausibleRange, usedAssumptions } from "./model";
+import { simulate } from "./montecarlo";
 
 const assumptions = {
   groups: [{ id: "g", title: "G" }],
   rows: [
     { id: "uov_per_daly", section: "g", label: "healthy year", value: 1, kind: "judgment", explainer: "x" },
-    { id: "risk_quantile", section: "g", label: "risk", format: "percent", value: 0.5, slider: { low: 0.05, high: 0.95, linear: true }, kind: "judgment", explainer: "x" },
+    { id: "long_shot_value", section: "g", label: "risk", format: "number", value: 10, slider: { low: 1, high: 10 }, kind: "judgment", explainer: "x" },
   ],
   units: { u: { label: "u", short: "u", to_common: "1" } },
   common: { unit: "u", benchmark: "none" },
 };
 const model = (id: string) => ({ id, name: id, kind: "charity", cause: "global-health", rows: [{ id: "out", label: "out", value: 2, kind: "judgment", explainer: "x" }], output: { row: "out", unit: "u", label: "per $" }, evaluator: { name: "E", assumptions: {} } });
-// A simulated result: the best guess's multiple at 5%, 10%, ..., 95%, log-normal with half log-width S at 5-95%.
-const S = 1.2;
-const Q = QUANTILES.map((p) => Math.exp((normInv(p) / 1.6448536269514722) * S));
-const lib = buildLibrary([model("wide"), model("none")], assumptions, [], [], [], { distributions: { wide: { q: Q, mean: 1, zero: 0 } } });
+const Q = QUANTILES.map((p) => 0.5 + p);
+// Risk-weighted results falling from 1.4 (the average) to 0.8 at the most cautious.
+const RW = RISK_POWERS.map((a) => 1.4 - 0.6 * (a - 1));
+const lib = buildLibrary([model("wide"), model("none")], assumptions, [], [], [], { distributions: { wide: { q: Q, mean: 1.4, zero: 0, rw: RW, middle: 1 } } });
 const av = assumptionValues(lib.assumptions);
-const at = (q: number) => ({ ...av, risk_quantile: q });
+const at = (v: number) => ({ ...av, long_shot_value: v });
 const m = (id: string) => lib.models.get(id)!;
+const best = headline(lib, m("wide"), at(RISK_OFF));
 
 describe("risk", () => {
-  it("the normal quantile", () => {
-    expect(normInv(0.5)).toBe(0);
-    expect(normInv(0.05)).toBeCloseTo(-1.6448536, 6);
-    expect(normInv(0.975)).toBeCloseTo(1.959964, 5);
-  });
-  it("counts the best guess at 50% and the range's ends at 5% and 95%", () => {
+  it("counts the average at 10 and the most cautious figure at 1, along the powers between", () => {
     expect(lib.errors).toEqual([]);
-    const best = headline(lib, m("wide"), av);
-    expect(headline(lib, m("wide"), at(0.05)) / best).toBeCloseTo(Math.exp(-S), 6);
-    expect(headline(lib, m("wide"), at(0.95)) / best).toBeCloseTo(Math.exp(S), 6);
-    expect(bottomLine(lib, m("wide"), at(0.05)).common / bottomLine(lib, m("wide"), av).common).toBeCloseTo(Math.exp(-S), 6);
-    // Between stored shares, straight interpolation; the plausible range doesn't move with the slider.
-    expect(headline(lib, m("wide"), at(0.125)) / best).toBeCloseTo((Q[1] + Q[2]) / 2, 6);
-    const r = plausibleRange(lib, m("wide"), headline(lib, m("wide"), at(0.2)), at(0.2))!;
-    expect(r.low / best).toBeCloseTo(Math.exp(-S), 6);
-    expect(r.high / best).toBeCloseTo(Math.exp(S), 6);
+    expect(headline(lib, m("wide"), at(10)) / best).toBeCloseTo(1.4, 6);
+    expect(headline(lib, m("wide"), at(1)) / best).toBeCloseTo(0.8, 6);
+    // 10^0.5 ≈ 3.16 is the power 1.5, halfway.
+    expect(headline(lib, m("wide"), at(10 ** 0.5)) / best).toBeCloseTo(1.1, 6);
+    expect(bottomLine(lib, m("wide"), at(1)).common / bottomLine(lib, m("wide"), at(RISK_OFF)).common).toBeCloseTo(0.8, 6);
+    // Past the slider's ends it holds.
+    expect(headline(lib, m("wide"), at(20)) / best).toBeCloseTo(1.4, 6);
+    expect(headline(lib, m("wide"), at(0.5)) / best).toBeCloseTo(0.8, 6);
   });
-  it("counts the simulated average at RISK_AVERAGE, and the plausible range stays", () => {
-    const avg = buildLibrary([model("wide")], assumptions, [], [], [], { distributions: { wide: { q: Q, mean: 1.4, zero: 0 } } });
-    const w = avg.models.get("wide")!;
-    const best = headline(avg, w, av);
-    expect(headline(avg, w, at(RISK_AVERAGE)) / best).toBeCloseTo(1.4, 6);
-    const r = plausibleRange(avg, w, headline(avg, w, at(RISK_AVERAGE)), at(RISK_AVERAGE))!;
-    expect(r.low / best).toBeCloseTo(Math.exp(-S), 6);
-    // Off still means off.
-    expect(headline(avg, w, at(RISK_OFF))).toBe(best);
+  it("leaves the plausible range where it is", () => {
+    const r = plausibleRange(lib, m("wide"), headline(lib, m("wide"), at(1)), at(1))!;
+    expect(r.low / best).toBeCloseTo(Q[0], 6);
+    expect(r.high / best).toBeCloseTo(Q[18], 6);
   });
   it("moves nothing without a simulation, and never the evaluator view", () => {
-    expect(headline(lib, m("none"), at(0.05))).toBe(headline(lib, m("none"), av));
-    expect(headline(lib, m("wide"), at(0.05), {}, "evaluator")).toBe(headline(lib, m("wide"), av, {}, "evaluator"));
-    expect(usedAssumptions(lib, m("wide"))).toContain("risk_quantile");
-    expect(usedAssumptions(lib, m("wide"), "evaluator")).not.toContain("risk_quantile");
+    expect(headline(lib, m("none"), at(1))).toBe(headline(lib, m("none"), av));
+    expect(headline(lib, m("wide"), at(1), {}, "evaluator")).toBe(headline(lib, m("wide"), av, {}, "evaluator"));
+    expect(usedAssumptions(lib, m("wide"))).toContain("long_shot_value");
+    expect(usedAssumptions(lib, m("wide"), "evaluator")).not.toContain("long_shot_value");
   });
+});
 
-  it("a long shot shows 0 below its chance and its payoff above; off, its best guess", () => {
-    // A 1-in-4 chance of 4× the best guess; its smooth middle at the best guess.
-    const q = QUANTILES.map((p) => (p < 0.75 ? 0 : 4));
-    const shot = buildLibrary([model("shot")], assumptions, [], [], [], { distributions: { shot: { q, mean: 1, zero: 0.75, middle: 1 } } });
-    const s = shot.models.get("shot")!;
-    const best = headline(shot, s, at(RISK_OFF));
-    expect(best).toBe(2000);
-    expect(headline(shot, s, at(0.5))).toBe(0);
-    expect(headline(shot, s, at(0.9)) / best).toBe(4);
-    const r = plausibleRange(shot, s, 0, at(0.5))!;
-    expect(r.low).toBe(0);
-    expect(r.high / best).toBe(4);
+describe("the risk-weighted results the simulation stores", () => {
+  // A 1-in-10 chance of 10× an input, else nothing: the chance drawn as happens or doesn't.
+  const shot = { ...model("shot"), rows: [{ id: "p", label: "chance", value: { low: 0.05, best: 0.1, high: 0.2 }, kind: "judgment", explainer: "x" }, { id: "out", label: "out", formula: "p" }] };
+  it("start at the average and fall with each power", () => {
+    const base = buildLibrary([shot], assumptions);
+    const d = simulate(base, base.models.get("shot")!, 2000)!;
+    expect(d.rw![0]).toBeCloseTo(d.mean, 3);
+    for (let i = 1; i < d.rw!.length; i++) expect(d.rw![i]).toBeLessThanOrEqual(d.rw![i - 1]);
   });
 });

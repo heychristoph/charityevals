@@ -1313,14 +1313,19 @@ evaluator's own figure in `published`; side effects as in 2.16.
 
 ### 2.18 Risk: how sure the counted figure is (November 2026)
 
-One slider, "Accept a … % risk that the real impact is lower than shown" (`$risk_quantile`, 5–95%,
-default 50%), or the simulated average (`RISK_AVERAGE`, stored as 1, "Count each charity at its average
-instead"): expected value, what GiveWell, HLI, Coefficient Giving and longtermist funders say they maximise,
-and what the value sets for evidence, high risk, the long run and AI use (the animal set keeps ACE's best
-guess, 50%). Each model's result counts at that share of its simulated distribution, or at its average, over
-the distribution's middle, so 50% is the best guess (src/engine/model.ts `riskNode`, in the headline beside
-the age, distance and missing-data factors; never in the evaluator view). Below 50% is risk-averse,
-above risk-seeking. The rankings' plausible range is the same distribution's 5% to 95%.
+One slider, "A 1-in-10 chance of 100 healthy years counts as … healthy years for sure" (`$long_shot_value`,
+1–10, default 3). Each model's simulated result counts with every step up its sorted outcomes weighed by the
+chance of reaching it raised to the power a = 2 − log10(setting) (risk-weighted expected utility, Buchak;
+Rethink Priorities' DMREU in its cross-cause model): at 10, a = 1, the average, expected value, what GiveWell,
+HLI, Coefficient Giving and longtermist funders say they maximise and what the value sets for evidence, big
+bets, the future and AI use; at 1, a = 2, a chance p of a payoff counts p² of it. A long shot shrinks
+smoothly, never to a cliff; harm counts more the lower the setting. The default, 3 (a ≈ 1.5, Rethink
+Priorities' moderate risk aversion), is the setting whose ranking is closest to the best guesses' (November
+2026: the same top 10, 28 of the top 30), so the animal set, which keeps ACE's best guess, sets nothing. The
+simulation stores the result at a = 1, 1.1, …, 2 (`rw`, src/engine/montecarlo.ts `riskWeighted`), and the
+factor is it over the distribution's middle (src/engine/model.ts `riskNode`, in the headline beside the age,
+distance and missing-data factors; never in the evaluator view). Links from before with the average (1) read
+as 10; a share is dropped. The rankings' plausible range is the same distribution's 5% to 95%.
 
 **Ranges as their sources state them.** A range's `interval` is the share of the time the true value lies
 inside it (default 0.9; GiveWell's 25th–75th percentiles 0.5), its `shape` how it spreads (log-normal by
@@ -1362,17 +1367,16 @@ end, and it carries a caveat.
 
 **Single events.** A row that is the chance one event happens at all (a new charity succeeds, a law passes,
 GiveWell funds the follow-on), not a share of many people or projects, is marked `single_event`, and the
-simulation draws it as happens or doesn't: a 1-in-4 long shot is about 0 at every risk up to 75% and its
-payoff (4× the best guess) above. Events that move together share a key (`{ with }`: with and without
+simulation draws it as happens or doesn't: a 1-in-4 long shot is 0 in three draws of four and its payoff
+(4× the best guess) in the fourth. Events that move together share a key (`{ with }`: with and without
 the charity, one event under several funding bars, drawn so the likelier happens whenever the less likely
 does); a model's scenarios split one draw (`{ one_of }`). A miss is drawn as a vanishing chance and a hit
 as all but certain, so a cost per success (1/p) or scenarios given no failure (1/(1 − p)) stay numbers.
-The risk factor divides by the middle of the same draws with each chance at its value (`middle`), so 50%
-is the best guess for every model without such a row; the unstable test reads those smooth draws too.
-Because 50% is no longer always ×1, `RISK_OFF` (−1) turns the factor off: a model read by another
+The risk factor divides by the middle of the same draws with each chance at its value (`middle`); the
+unstable test reads those smooth draws too. `RISK_OFF` (−1) turns the factor off: a model read by another
 (`#id`), the simulation's own runs and the waterfall's start. Not marked: yearly rates (a law passing
 anyway each year, a chance per year), and shares across many grants or companies. November 2026: 343 rows in
-30 models; 8 show about 0 at the default 50%. Where a model is a ratio of expected good to expected cost
+30 models. Where a model is a ratio of expected good to expected cost
 (Ambitious Impact's cost per successful charity), a draw's figure is that world's own good over its own
 cost, so the simulated average can sit below the best guess. GiveWell's in-line chlorination marks each
 state's chance the programme is still running at each stage, drawn together so a later stage never
@@ -1619,7 +1623,7 @@ weights apply (a second-order change in the number of lives, 2.16). A marked row
 row is an error. The row keeps its own value. The evaluator view counts none, unless the model pins the
 weight for an evaluator who counted them.
 
-**Why 0%.** Outside catastrophic risk it is what every model already assumed. The Long-run value set puts the
+**Why 0%.** Outside catastrophic risk it is what every model already assumed. The Future-focused value set puts the
 weight at 100%.
 
 **Future generations** (rules never-started-weight, never-started-branches): the future's healthy years are

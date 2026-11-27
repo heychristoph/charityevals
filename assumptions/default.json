@@ -435,20 +435,18 @@
       "explainer": "Besides what a programme is for, it often does other good or harm: benefits to people around those it helps, effects on other health outcomes, work it pushes elsewhere. Evaluators estimate some of these; we estimate the rest. This says how much they count.\n\nThe default, 100%, counts them in full. 0% counts only the programme's main effect."
     },
     {
-      "id": "risk_quantile",
+      "id": "long_shot_value",
       "section": "evidence",
-      "label": "Accept a … % risk that the real impact is lower than shown",
-      "technical": "Where in each result's simulated outcomes the figure counted sits: the share of outcomes below it (the reader's own value judgments left out; a single event's chance drawn as happens or doesn't, so a long shot is 0 below its chance). 50% is the best guess where no such event is drawn, less is risk-averse, more risk-seeking; 100% stands for the simulated average instead, expected value (docs/normalization.md 2.18)",
-      "format": "percent",
-      "value": 0.5,
+      "label": "A 1-in-10 chance of 100 healthy years counts as … healthy years for sure",
+      "technical": "How much a long shot counts: each charity's simulated result with every chance of reaching a result raised to the power a = 2 − log10 of this value, so 10 is the average (expected value), 1 counts a 1-in-10 chance at 1/100 of its payoff (risk-weighted expected utility, Rethink Priorities' DMREU); the reader's own value judgments left out (docs/normalization.md 2.18)",
+      "format": "number",
+      "value": 3,
       "slider": {
-        "low": 0.05,
-        "high": 0.95,
-        "linear": true,
-        "average": true
+        "low": 1,
+        "high": 10
       },
       "kind": "judgment",
-      "explainer": "At 50% each charity counts at our best guess, as likely too high as too low, or at 0 if it rests on one event with less than even odds. Less counts a lower figure, one the real impact is more likely to reach: charities with very uncertain results drop, predictable ones barely move. More bets on long shots. Or count each charity at its average, as most evaluators do: a long shot then counts at its odds times its payoff."
+      "explainer": "Some charities are a gamble: a small chance of doing a lot of good. At 10 a gamble counts at its odds times its payoff, as hits-based funders count it. Lower numbers favour charities that are sure to do some good.\n\nThe default, 3, ranks charities most like their best guesses do (Rethink Priorities' moderate setting)."
     },
     {
       "id": "rp_species_weights",
@@ -741,7 +739,7 @@
       "about": "Counts each charity's average result; results nobody measured count 13% and side effects a quarter.",
       "values": {
         "missing_data_discount": 0.13,
-        "risk_quantile": 1,
+        "long_shot_value": 10,
         "mobiliser_share": 1,
         "side_effect_weight": 0.25
       }
@@ -762,7 +760,7 @@
     },
     {
       "id": "longtermist",
-      "label": "Long-run",
+      "label": "Future-focused",
       "about": "Future generations count almost as much as people alive today, and AI, pandemics and nuclear war together have a 13% chance of ending humanity this century. Each charity counts at its average, side effects a quarter, and a chicken's suffering a four-hundredth of a person's.",
       "values": {
         "discount_rate": 0.0018,
@@ -770,19 +768,19 @@
         "ai_catastrophe_chance": 0.1,
         "bio_catastrophe_chance": 0.0334,
         "nuclear_catastrophe_chance": 0.001,
-        "risk_quantile": 1,
+        "long_shot_value": 10,
         "chicken_vs_person": 0.0025,
         "side_effect_weight": 0.25
       }
     },
     {
       "id": "hits-based",
-      "label": "High risk",
+      "label": "Big bets",
       "about": "Each charity counts at its average result, long shots included, side effects count a quarter, and each funder gets credit only for its share. A healthy year is worth 2.9 years of double income, and AI and pandemics are twice as likely to end humanity as by default.",
       "values": {
         "uov_per_daly": 2.885,
         "resource_shares": 1,
-        "risk_quantile": 1,
+        "long_shot_value": 10,
         "ai_catastrophe_chance": 0.1,
         "bio_catastrophe_chance": 0.02,
         "side_effect_weight": 0.25
@@ -795,7 +793,7 @@
       "values": {
         "ai_catastrophe_chance": 0.2,
         "never_started_weight": 1,
-        "risk_quantile": 1,
+        "long_shot_value": 10,
         "side_effect_weight": 0.25
       }
     }

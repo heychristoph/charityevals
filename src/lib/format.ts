@@ -32,7 +32,7 @@ export function formatValue(x: number, format: ResolvedRow["format"] = "number")
 
 /** A shared assumption's value as it reads on screen: some are multipliers shown in the site's own
  * terms (`shown_as`), the same wherever they appear. */
-export function formatAssumption(row: { format?: ResolvedRow["format"]; shown_as?: ShownAs; control?: "country"; slider?: { average?: boolean } }, v: number): string {
+export function formatAssumption(row: { format?: ResolvedRow["format"]; shown_as?: ShownAs; control?: "country" }, v: number): string {
   // A country is stored as its ISO numeric code.
   if (row.control === "country") return byCode.get(v)?.name ?? "not set";
   return formatShown(row, v);
@@ -42,9 +42,7 @@ export type ShownAs = { factor: number; format?: ResolvedRow["format"]; inverse?
 
 /** A value in its on-screen terms: × factor, or factor ÷ value for an inverse one (a chicken's 33% of a
  * person reads as 3 chickens to one person; 0 as "doesn't count"). */
-export function formatShown(row: { format?: ResolvedRow["format"]; shown_as?: ShownAs; slider?: { average?: boolean } }, v: number): string {
-  // The risk setting's average stop (src/engine/model.ts RISK_AVERAGE).
-  if (row.slider?.average && v >= 1) return "average";
+export function formatShown(row: { format?: ResolvedRow["format"]; shown_as?: ShownAs }, v: number): string {
   const s = row.shown_as;
   if (s?.inverse) return v === 0 ? "doesn't count" : formatValue(s.factor / v, s.format ?? row.format);
   return formatValue(v * (s?.factor ?? 1), s?.format ?? row.format);

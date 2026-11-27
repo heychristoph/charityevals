@@ -2,7 +2,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { RotateCcw, Link2, Check, ChevronRight, X } from "lucide-react";
 import { lib } from "../lib/data";
-import { pickValue, RISK_AVERAGE } from "../engine/model";
+import { pickValue } from "../engine/model";
 import { COUNTRIES, byCode } from "../engine/countries";
 import { formatAssumption, formatShown, parseTyped } from "../lib/format";
 import { useAssumptionValues } from "../lib/use-results";
@@ -122,15 +122,13 @@ export function Slider({ row, value, compact }: { row: Row; value: number; compa
   const { show } = shownAs(row);
   const changed = Math.abs(value - best) > Math.abs(best) * 1e-9;
   const av = useAssumptionValues();
-  // At its average stop the risk setting has no percentage: the checkbox below says what counts.
-  const atAverage = !!row.slider?.average && value >= RISK_AVERAGE;
   return (
-    <div className={`assumption tip-host ${changed ? "changed" : ""} ${atAverage ? "at-average" : ""}`} id={`a-${row.id}`}>
+    <div className={`assumption tip-host ${changed ? "changed" : ""}`} id={`a-${row.id}`}>
       <div className="assumption-head">
         {compact && row.explainer ? (
           <LabelWithTip htmlFor={id} text={row.label}><InfoTip label="Why this value"><Markdown text={row.explainer} /></InfoTip></LabelWithTip>
         ) : <label htmlFor={id} className="assumption-name">{row.label}</label>}
-        {!atAverage && <ValueField row={row} value={value} best={best} log={scale.log && !scale.zero} />}
+        <ValueField row={row} value={value} best={best} log={scale.log && !scale.zero} />
       </div>
       <div className="slider-wrap" style={{ ["--default" as string]: `${scale.toStep(best) / STEPS}` }}>
         <span className="default-tick" aria-hidden />
@@ -154,20 +152,6 @@ export function Slider({ row, value, compact }: { row: Row; value: number; compa
         <span>{show(ends[0])}</span>
         <span>{show(ends[1])}</span>
       </div>
-      {row.slider?.average && (
-        <label className="average-pick small">
-          <input
-            type="checkbox"
-            checked={value >= RISK_AVERAGE}
-            onChange={(e) => {
-              const v = e.target.checked ? RISK_AVERAGE : best;
-              setAssumption(row.id, v, best);
-              trackAssumption(row.id, v, best);
-            }}
-          />
-          Count each charity at its average instead
-        </label>
-      )}
       {row.explainer && !compact && <div className="explainer small"><Markdown text={row.explainer} /><Technical row={row} /></div>}
     </div>
   );
