@@ -144,6 +144,9 @@ function publish(av: object, value: Rankings) {
   running = undefined;
   busy(false);
   rankingListeners.forEach((l) => l());
+  // The reader's own values are on screen: what waited for them shows (Base.astro, html.awaiting-values).
+  // After the islands' re-render and effects (Headline writes into the page), not before.
+  if (typeof document !== "undefined" && av === valuesOf(getOverrides())) setTimeout(() => document.documentElement.classList.remove("awaiting-values"), 50);
 }
 
 function schedule(av: Record<string, number>) {

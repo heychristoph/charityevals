@@ -14,7 +14,7 @@ export default function SimilarCharities({ items }: { items: Item[] }) {
   const { results } = useResults();
   const byId = new Map(results.map((r) => [r.charity.id, r]));
   return (
-    <ul className="sim-list">
+    <ul className="sim-list" data-awaits-values>
       {items.map((s) => {
         const r = byId.get(s.id);
         const cause = lib.charities.get(s.id)?.cause;
