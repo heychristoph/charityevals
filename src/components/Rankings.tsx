@@ -112,7 +112,7 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
   const flipRef = useFlip(results.map((r) => r.charity.id).join());
 
   return (
-    <figure className="rankings" aria-labelledby="rankings-caption">
+    <figure className="rankings" aria-labelledby="rankings-caption" data-awaits-values>
       <div className="r-axis">
         <div className="r-unit tip-host">
           <span id="rankings-caption">{fig.metric.unit}</span>{"\u00a0"}<InfoTip label={`What's ${fig.metric.label.toLowerCase()}?`}>

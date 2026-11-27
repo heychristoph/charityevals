@@ -62,14 +62,18 @@ const nav = [
     <noscript><style>.wf-skeleton { display: none; }</style></noscript>
     {/* The page is built at the default values. A reader with values of their own (stored, or in the link:
         src/lib/assumption-state.ts) would see the defaults flash until the islands run, so until each
-        island has hydrated it holds its place unseen; after 4 s whatever is there shows. */}
-    <style is:inline>html.own-values astro-island[ssr] { visibility: hidden; }</style>
+        island has hydrated it holds its place unseen; after 4 s whatever is there shows. What the rankings'
+        computation fills in (the rankings, a charity's headline, similar charities: data-awaits-values) stays
+        unseen until it has run at those values (src/lib/use-results.ts), not just until it hydrates, so
+        nothing shows the defaults and then re-sorts; after 15 s whatever is there shows. */}
+    <style is:inline>html.own-values astro-island[ssr], html.awaiting-values [data-awaits-values], html.awaiting-values [data-figure=headline] { visibility: hidden; }</style>
     <script is:inline>
       try {
         var q = location.search, s = localStorage.getItem("charityevals:assumptions");
         if (/[?&](values|set|a\.[a-z_]+)=/.test(q) || (s && s !== "{}")) {
-          document.documentElement.classList.add("own-values");
+          document.documentElement.classList.add("own-values", "awaiting-values");
           setTimeout(function () { document.documentElement.classList.remove("own-values"); }, 4000);
+          setTimeout(function () { document.documentElement.classList.remove("awaiting-values"); }, 15000);
         }
       } catch (e) {}
     </script>
@@ -134,8 +138,9 @@ const nav = [
 
 <style>
   /* The beta ribbon across the top-right corner of every page: the link opens the feedback form. */
+  /* Stays in the corner while the page scrolls, like the header. */
   .beta-ribbon {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 120px;
