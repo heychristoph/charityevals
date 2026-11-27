@@ -61,6 +61,18 @@ export type Waterfall = {
   reported?: { value: number; unit: string; row: string };
 };
 
+/** A step as the page writes it: "× 0.85". */
+export const stepTimes = (r: number) => `× ${r >= 10 ? Math.round(r) : Math.abs(r - 1) < 0.01 ? r.toFixed(3) : r >= 0.1 ? Number(r.toPrecision(2)) : Number(r.toPrecision(1))}`;
+
+/** How the page tags each kind of step. */
+export const STEP_KIND: Record<Step["kind"], string> = {
+  change: "Changed for consistency",
+  value: "The site's shared value",
+  yours: "Your setting",
+  site: "Site-wide",
+  other: "",
+};
+
 /** The site-wide adjustments: their slider, the value that turns them off, and their label. */
 const SITE: { id: string; off: number; label: string; anchor: string }[] = [
   { id: AGE_DISCOUNT, off: 0, label: "How old the estimate is", anchor: "estimate-age" },

@@ -306,7 +306,7 @@ export const TOOLS: Tool[] = [
   {
     name: "get_model",
     title: "Read a model",
-    description: `A model's figure at the default values (${YEARS}, plausible range), summary, caveats, the inputs that move it most (with their ranges and explanations), its source and its page. Given a charity id: the charity's figure, its models and its main model.`,
+    description: `A model's figure at the default values (${YEARS}, plausible range), its story in plain words, caveats, the questions it depends on most (with their ranges), how the evaluator's figure becomes ours, its write-up, sources and page. Given a charity id: the charity's figure, its models and its main model.`,
     inputSchema: { type: "object", properties: { id: { type: "string", description: "A model id or a charity id (search_charities finds them)." } }, required: ["id"] },
     run: getModel,
   },

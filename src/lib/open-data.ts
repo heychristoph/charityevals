@@ -4,11 +4,11 @@
 // leaves out the evaluators who asked us not to publish, owners.json `published: false`).
 import { lib, modelUrl, primaryOf, rankable, rawFacts } from "./data";
 import { assumptionValues, comparable, headline, plausibleRange, compute, type ResolvedModel } from "../engine/model";
-import { sensitivity, type Swing } from "../engine/sensitivity";
 import { modelRange } from "../engine/figures";
 import { licenceOf, OWN_LICENCE } from "./licence";
 import { abs } from "./seo";
 import { formatYears, plainModelName } from "./format";
+import { pageText } from "./page-text";
 import rawAssumptions from "../../assumptions/default.json";
 import rawOwners from "../../owners.json";
 import bulkSummaries from "../../generated/bulk-summaries.json";
@@ -26,18 +26,17 @@ export function unitOf(m: ResolvedModel): string {
   return comparable(lib, m) ? HEALTHY_YEARS : `${lib.assumptions.units[m.output!.unit]?.label ?? m.output!.unit} per dollar`;
 }
 
-export type Figure = { headline: number; low: number; high: number; drivers: Swing[] };
+export type Figure = { headline: number; low: number; high: number };
 
 const figures = new Map<string, Figure>();
-/** A model's figure as its page shows it at the default assumptions: the headline, its range
- * (src/engine/figures.ts modelRange) and what drives it most. */
+/** A model's figure at the default assumptions: the headline and its range (src/engine/figures.ts modelRange). */
 export function figureOf(m: ResolvedModel): Figure {
   let f = figures.get(m.id);
   if (!f) {
     const av = assumptionValues(lib.assumptions);
-    const s = sensitivity(lib, m, av);
-    const range = modelRange(lib, m, s.central, av);
-    figures.set(m.id, (f = { headline: s.central, low: range.low, high: range.high, drivers: s.swings.slice(0, 5) }));
+    const central = headline(lib, m, av);
+    const range = modelRange(lib, m, central, av);
+    figures.set(m.id, (f = { headline: central, low: range.low, high: range.high }));
   }
   return f;
 }
@@ -90,7 +89,6 @@ export function modelsJson() {
 }
 
 export function modelJson(m: ResolvedModel) {
-  const f = figureOf(m);
   const values = compute(lib, m, assumptionValues(lib.assumptions));
   const owner = lib.owners.get(m.owner)!;
   return {
@@ -105,10 +103,10 @@ export function modelJson(m: ResolvedModel) {
     ...(m.source && { source: m.source }),
     ...(m.estimate_basis && { estimate_basis: m.estimate_basis }),
     output: m.output,
-    drivers: f.drivers.map((s) => ({ id: s.id, label: s.label, scope: s.scope, low: s.low, high: s.high, at_low: num(s.atLow), at_high: num(s.atHigh) })),
+    // What the model's page says, as it says it (src/lib/page-text.ts).
+    ...pageText(m),
     sections: m.sections,
     rows: m.rows.map(({ node: _n, deps: _d, assumptionDeps: _a, factDeps: _f, modelDeps: _m, livesAdded: _l, livesFacts: _lf, inheritedFrom: _i, overridden: _o, expected: _e, ...r }) => ({ ...r, computed: num(values[r.id]) })),
-    resources: m.resources,
   };
 }
 
@@ -163,14 +161,25 @@ function modelText(m: ResolvedModel, seen: Set<string>): string {
   const out = [`### ${plainModelName(m.name)}`, "", `By ${owner.name}. ${abs(modelUrl(lib, m))} (data: ${abs(dataUrl(m.id))})`];
   if (m.theoretical) out.push("Purely theoretical: an estimate of the idea from before the charity existed.");
   out.push(`Result: ${show(m, f.headline)} ${unitOf(m)} (plausible range ${show(m, f.low)} to ${show(m, f.high)}), default assumptions.`);
+  const t = pageText(m);
+  const a = t.across_locations;
+  if (a) out.push(`Its page, across the ${a.places.length} locations it funds by their share of the money: ${a.result} (plausible range ${a.low} to ${a.high}).`);
+  if (t.story?.sentence) out.push("", t.story.sentence);
   if (m.summary) out.push("", m.summary.trim());
-  if (f.drivers.length) {
-    out.push("", "Top drivers (each input alone from its low to its high end):");
-    for (const s of f.drivers) out.push(`- ${s.label}: ${show(m, s.atLow)} to ${show(m, s.atHigh)}`);
+  if (t.story?.steps) out.push("", "How it's worked out:", ...t.story.steps.map((s) => `- ${s}`));
+  for (const p of t.story?.programmes ?? []) out.push("", `${p.programme} (${p.dollars} of the $1,000, ${p.result} ${HEALTHY_YEARS.replace(" per $1,000", "")}):`, ...(p.steps ?? []).map((s) => `- ${s}`));
+  if (t.depends_on.length) {
+    out.push("", "What it depends on (most of the uncertainty in the result):");
+    for (const q of t.depends_on) out.push(`- ${q.question} ${q.value} (plausible ${q.low} to ${q.high}; ${q.kind}${q.programme ? `, ${q.programme}` : ""})`);
   }
+  if (t.from_evaluator) {
+    const w = t.from_evaluator;
+    out.push("", `How the ${m.owner === "charityevals" ? "model's" : "evaluator's"} figure becomes the one shown:`, `- ${w.start}: ${w.value}`, ...w.steps.map((s) => `- ${s.step}: ${s.times}`), `- As shown: ${w.shown}`);
+  }
+  if (t.writeup) out.push("", `Write-up: ${abs(modelUrl(lib, m))} (in full at ${abs(dataUrl(m.id))}).`);
   const sources = [
     ...(m.source ? [{ title: m.source.title.startsWith(m.source.publisher) ? m.source.title : `${m.source.publisher}, ${m.source.title}`, url: m.source.url }] : []),
-    ...m.resources,
+    ...t.sources,
   ].filter((r) => !seen.has(r.url) && seen.add(r.url));
   if (sources.length) out.push("", "Sources:", ...sources.map((r) => `- ${r.title === r.url ? r.url : `${r.title}: ${r.url}`}`));
   out.push("", `Licence: ${licenceOf(m).name}.`);

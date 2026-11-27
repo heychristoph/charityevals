@@ -46,7 +46,12 @@ function driver(lib: Library, m: ResolvedModel, s: Swing, vals: Record<string, n
   };
 }
 
-function modelDetail(lib: Library, cat: Catalogue, figs: Figures, m: ResolvedModel, av: Record<string, number>): Json {
+/** What a model's page says beyond the figures (src/lib/page-text.ts: story, the page's questions, how the
+ * evaluator's figure becomes ours, write-up, sources), which the build adds to the stored answers. */
+export type PageText = (m: ResolvedModel) => { across_locations?: unknown; story?: unknown; depends_on: unknown[]; from_evaluator?: unknown; writeup?: string; sources: { title: string; url: string }[] } | undefined;
+
+function modelDetail(lib: Library, cat: Catalogue, figs: Figures, m: ResolvedModel, av: Record<string, number>, page?: PageText): Json {
+  const p = page?.(m);
   const s = sensitivity(lib, m, av);
   const vals = compute(lib, m, av);
   const big = s.swings.some((x) => x.logSwing === Infinity);
@@ -66,13 +71,19 @@ function modelDetail(lib: Library, cat: Catalogue, figs: Figures, m: ResolvedMod
     at: "default values",
     ...(evaluatorView !== undefined ? { evaluator_view: { result: evaluatorView, note: "The evaluator's model as published, at its own values and conversions, in the same unit." } } : {}),
     summary: rendered(lib, m, (x) => x.summary),
+    ...(p?.across_locations ? { across_locations: p.across_locations } : {}),
+    ...(p?.story ? { story: p.story } : {}),
     caveats: caveats(lib, m, av),
-    top_drivers: top.map((x) => driver(lib, m, x, vals, av)),
+    // The page's "What it depends on" where the build has it; else each input alone from its low to its high end.
+    ...(p ? { depends_on: p.depends_on } : { top_drivers: top.map((x) => driver(lib, m, x, vals, av)) }),
+    ...(p?.from_evaluator ? { from_evaluator: p.from_evaluator } : {}),
     assumptions_used: usedAssumptions(lib, m).filter((id) => sets.has(id)),
     ...(m.source ? { source: { publisher: m.source.publisher, title: m.source.title, url: m.source.url, ...(m.source.published ? { published: m.source.published } : {}) } } : {}),
     url: abs(modelPath(cat, m.id)),
     history: abs(`${modelPath(cat, m.id)}/history`),
     full_model: abs(`/data/models/${m.id}.json`),
+    ...(p ? { sources: p.sources.map((x) => ({ title: x.title, url: x.url })) } : {}),
+    ...(p?.writeup ? { writeup: p.writeup } : {}),
     licence: licence(modelLicence(cat, m.id)),
     // As the model page and /data/models/<id>.json show it: the evaluator's permission beside its licence.
     ...(lib.owners.get(m.owner)?.permission ? { permission: lib.owners.get(m.owner)!.permission } : {}),
@@ -81,15 +92,15 @@ function modelDetail(lib: Library, cat: Catalogue, figs: Figures, m: ResolvedMod
 
 /** get_model's answer for an id (a model's, else a charity's), at the default values `av` with their
  * figures `figs`; undefined for an id that names neither. */
-export function getModelAnswer(lib: Library, cat: Catalogue, figs: Figures, av: Record<string, number>, id: string): Json | undefined {
-  if (id in cat.models) return modelDetail(lib, cat, figs, lib.models.get(id)!, av);
+export function getModelAnswer(lib: Library, cat: Catalogue, figs: Figures, av: Record<string, number>, id: string, page?: PageText): Json | undefined {
+  if (id in cat.models) return modelDetail(lib, cat, figs, lib.models.get(id)!, av, page);
   const c = cat.charities[id];
   if (!c) return undefined;
   const f = figs.charity(id);
   return {
     charity: f ? charityItem(cat, id, f, DEFAULTS) : { type: "charity", id, name: c.name, cause: c.cause, on_rankings: false, url: abs(`/${id}`) },
     models: c.models.slice(0, 20).map((x) => ({ id: x, name: cat.models[x].name, evaluator: ownerName(cat, cat.models[x].owner), ...figure(figs.model(x)!), unit: cat.models[x].unit })),
-    main_model: modelDetail(lib, cat, figs, lib.models.get(c.main)!, av),
+    main_model: modelDetail(lib, cat, figs, lib.models.get(c.main)!, av, page),
     licence: licence(modelLicence(cat, c.main)),
   };
 }
