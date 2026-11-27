@@ -39,6 +39,8 @@ export function openOnboarding() {
   // Before the island hydrates, Escape mustn't close it either.
   d.addEventListener("cancel", (e) => e.preventDefault());
   d.showModal();
+  // The browser would focus the first card, which then looks chosen; the title takes focus instead.
+  d.querySelector<HTMLElement>("#onboarding-title")?.focus();
 }
 
 export function onboarded(): boolean {
