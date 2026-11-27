@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { lib } from "../lib/data";
 import { assumptionValues, headline, unitFormula, type Library, type ResolvedModel } from "../engine/model";
 import { parse, type Node } from "../engine/expr";
-import { waterfall, type Step, type StepTarget } from "../engine/waterfall";
+import { STEP_KIND, stepTimes, waterfall, type StepTarget } from "../engine/waterfall";
 import { formatYears, possessive } from "../lib/format";
 import { useFigure } from "../lib/metric";
 
@@ -13,9 +13,7 @@ const fmtNative = (x: number) => (Math.abs(x) >= 1000 ? Math.round(x).toLocaleSt
 const UNIT_SECTION: Record<string, string> = { sad: "animals", ced: "animals", wellby: "wellbeing", tco2e: "climate" };
 
 /** "× 1.4", "× 0.52", "× 0.004". */
-const times = (r: number) => `× ${r >= 10 ? Math.round(r) : Math.abs(r - 1) < 0.01 ? r.toFixed(3) : r >= 0.1 ? Number(r.toPrecision(2)) : Number(r.toPrecision(1))}`;
-/** "GiveWell's", "Animal Charity Evaluators'". */
-
+const times = stepTimes;
 /** Where a step's link goes: a row of the model below (#row-<id>, which the tree opens), a slider, or
  * the method page's section on a site-wide adjustment. */
 function hrefOf(t?: StepTarget): string | undefined {
@@ -85,13 +83,7 @@ function conversionFactors(unit: string, model: ResolvedModel, evaluator: boolea
   return out;
 }
 
-const KIND: Record<Step["kind"], string> = {
-  change: "Changed for consistency",
-  value: "The site's shared value",
-  yours: "Your setting",
-  site: "Site-wide",
-  other: "",
-};
+const KIND = STEP_KIND;
 
 /** From the evaluator's figure to the one this page shows (src/engine/waterfall.ts): each difference a
  * bar on one log scale, labelled with how much it multiplies the figure, linked to where it lives. A

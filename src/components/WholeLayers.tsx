@@ -5,17 +5,16 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 import { lib } from "../lib/data";
 import { assumptionValues, compute } from "../engine/model";
-import { uncertainty, type Driver } from "../engine/uncertainty";
+import { uncertainty } from "../engine/uncertainty";
 import { formatValue } from "../lib/format";
 import { useFigure } from "../lib/metric";
 import { useAssumptionValues } from "../lib/use-results";
 import { clearEdits, setPageModels, useEdits } from "../lib/edit-state";
 import { charityOf, fullModel, programsOf, type ProgramFigure } from "../lib/whole";
-import { COVER, Curve, MAX, Question, StoryChain, useWorking } from "./ModelLayers";
+import { Curve, Question, StoryChain, useWorking } from "./ModelLayers";
+import { charityDrivers } from "../lib/page-drivers";
 import { WaterfallInSlot } from "./Waterfall";
 import "./layers.css";
-
-type Ask = { d: Driver; p: ProgramFigure; weight: number };
 
 export default function WholeLayers({ id, children }: { id: string; children?: ReactNode }) {
   const model = lib.models.get(id)!;
@@ -53,28 +52,7 @@ export default function WholeLayers({ id, children }: { id: string; children?: R
 
   // The questions: each programme's drivers, weighted by how much of the charity's result it gives. A
   // number that two programmes name alike is left out (an edit to it would land in both).
-  const rank = () => {
-    const seen = new Map<string, Ask>();
-    for (const p of c.programs) {
-      const values = compute(lib, p.model, av, p.edits);
-      const u = uncertainty(lib, p.model, values, av, "charityevals", p.edits);
-      const part = c.result ? (p.share * p.whole.result) / c.result : p.share;
-      for (const d of u.drivers) {
-        if (d.scope === "model" || (d.scope === "row" && (!p.model.byId.has(d.id) || c.programs.some((o) => o !== p && o.model.byId.has(d.id))))) continue;
-        const prev = seen.get(d.key);
-        const weight = (prev?.weight ?? 0) + part * d.share;
-        seen.set(d.key, { d, p: prev && prev.p.share > p.share ? prev.p : p, weight });
-      }
-    }
-    const out: Ask[] = [];
-    let covered = 0;
-    for (const a of [...seen.values()].sort((x, y) => y.weight - x.weight)) {
-      if (out.length >= MAX || covered >= COVER || a.weight < 0.01) break;
-      out.push(a);
-      covered += a.weight;
-    }
-    return out.map((a) => ({ key: a.d.key, program: a.p.program }));
-  };
+  const rank = () => charityDrivers(c, av).map((a) => ({ key: a.d.key, program: a.p.program }));
   // Ranked on arrival, then held from the reader's first change, as on a one-programme page.
   const [asks, setAsks] = useState(rank);
   const [held, setHeld] = useState(false);

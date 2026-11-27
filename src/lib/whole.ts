@@ -4,7 +4,7 @@
 // in Chad are not DRC's).
 import { buildLibrary, compute, headline, type Library, type ResolvedModel } from "../engine/model";
 import { modelRange } from "../engine/figures";
-import { declaredLocations, locationsOf, rankingPlan } from "../engine/ranking";
+import { declaredLocations, locationsOf, locationWeights, programmeFigure, rankingPlan } from "../engine/ranking";
 import { fullRaw, lib, rawFacts, summarised } from "./data";
 import { editsFor } from "./edit-state";
 import { fillStory, storyValue } from "./story";
@@ -27,8 +27,17 @@ export type Whole = {
 /** The places a model's money goes to, with their shares of it; a model without declared locations is
  * one place. */
 export function placesOf(model: ResolvedModel): Place[] {
-  const parts = declaredLocations(lib.charities.get(model.charity), locationsOf(lib, model))?.filter((p) => p.weight > 0);
-  if (!parts?.length) return [{ label: "", share: 1, model }];
+  const charity = lib.charities.get(model.charity);
+  const family = locationsOf(lib, model);
+  const parts = declaredLocations(charity, family)?.filter((p) => p.weight > 0);
+  if (!parts?.length) {
+    // Without declared funding, the sheet's own grant sizes, as the rankings weigh them (programmeFigure).
+    const weights = locationWeights(lib, family);
+    if (!weights) return [{ label: "", share: 1, model }];
+    const sum = weights.reduce((s, w) => s + w, 0);
+    const named = (x: ResolvedModel) => x.name.replace(charity?.name ?? "", "").trim().replace(/^\((.*)\)$/, "$1") || x.name;
+    return family.map((m, i) => ({ label: named(m), share: weights[i] / sum, model: m })).sort((a, b) => b.share - a.share);
+  }
   const total = parts.reduce((s, p) => s + p.weight, 0);
   return parts
     .flatMap((p) => p.models.map((m) => ({ label: p.models.length > 1 ? `${p.label}: ${m.name}` : p.label, share: p.weight / total / p.models.length, model: m })))
@@ -62,13 +71,22 @@ export function wholeOf(model: ResolvedModel, av: Record<string, number>, edits:
     return out;
   };
   const pageValues = places.find((p) => p.model.id === model.id)?.values ?? pageBase;
+  // The figure combines the places exactly as the rankings do (an entry over several locations whose
+  // split isn't published counts at their median); the rows above are means, for the story's numbers.
+  const placed = new Map(places.map((p) => [p.model.id, p]));
+  const fig = programmeFigure(lib, lib.charities.get(model.charity), model, (x) => {
+    const p = placed.get(x.id);
+    if (p) return { central: p.result, low: p.low, high: p.high };
+    const central = headline(lib, x, av);
+    return { central, ...modelRange(lib, x, central, av) };
+  });
   return {
     places,
     values: rowMean((p) => p.values, pageValues),
     base: rowMean((p) => p.base, pageBase),
-    result: mean((p) => p.result),
-    low: mean((p) => p.low),
-    high: mean((p) => p.high),
+    result: fig.central,
+    low: Math.min(fig.low, fig.high),
+    high: Math.max(fig.low, fig.high),
   };
 }
 

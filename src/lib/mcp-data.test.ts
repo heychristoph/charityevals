@@ -31,7 +31,11 @@ describe("MCP files", () => {
     expect(answer.summary).toBeTruthy();
     expect(answer.summary).not.toContain("{{");
     expect(answer.licence.name).toBeTruthy();
-    expect(answer.top_drivers.some((d: { explainer?: string }) => d.explainer)).toBe(true);
+    // As the page shows it: its story, its questions with their explanations, its write-up and sources.
+    expect(answer.story.sentence).toBeTruthy();
+    expect(answer.depends_on.some((d: { explainer?: string }) => d.explainer)).toBe(true);
+    expect(answer.writeup).not.toContain("{{");
+    expect(answer.sources.length).toBeGreaterThan(0);
   });
 
   it("give a library half the size of library.json that computes the same figures", async () => {

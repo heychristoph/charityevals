@@ -43,7 +43,8 @@ describe("data files", () => {
     expect(Number.isFinite(row.computed)).toBe(true);
     expect(m.rows.every((r: { node?: unknown; deps?: unknown }) => r.node === undefined && r.deps === undefined)).toBe(true);
     expect(m.licence.name).toBeTruthy();
-    expect(m.drivers.length).toBeGreaterThan(0);
+    expect(m.depends_on.length).toBeGreaterThan(0);
+    expect(m.story.steps.length).toBeGreaterThan(1);
   });
 
   it("carry the shared data and charities with their licence", async () => {

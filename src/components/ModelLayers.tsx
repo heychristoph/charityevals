@@ -12,6 +12,7 @@ import { clearEdits, setEdit } from "../lib/edit-state";
 import { fillStory, storyNumber, storyValue } from "../lib/story";
 import { Node, pathTo, resolve, rootsOf, type Ctx, type Factor } from "./Working";
 import { wholeOf, type Whole } from "../lib/whole";
+import { pickDrivers } from "../lib/page-drivers";
 import { ChevronRight } from "lucide-react";
 import { Markdown, Slider } from "./AssumptionsPanel";
 import InfoTip from "./InfoTip";
@@ -19,9 +20,6 @@ import type { Row } from "../engine/schema";
 import { labelOf, plain, show } from "../lib/labels";
 import "./layers.css";
 
-/** Questions shown: enough to cover this share of the uncertainty, at most MAX. */
-export const COVER = 0.8;
-export const MAX = 5;
 
 
 export default function ModelLayers({ model, values, av, edits, u, engine, about, children }: { model: ResolvedModel; values: Record<string, number>; av: Record<string, number>; edits: Record<string, number>; u: Uncertainty; engine: Library; about?: ReactNode; children?: ReactNode }) {
@@ -248,17 +246,6 @@ function editable(model: ResolvedModel, id: string): boolean {
   return false;
 }
 
-function pick(u: Uncertainty, model: ResolvedModel): Driver[] {
-  const ranked = u.drivers.filter((d) => d.scope !== "model" && (d.scope !== "row" || model.byId.has(d.id))).sort((a, b) => b.share - a.share);
-  const out: Driver[] = [];
-  let covered = 0;
-  for (const d of ranked) {
-    if (out.length >= MAX || covered >= COVER || d.share < 0.01) break;
-    out.push(d);
-    covered += d.share;
-  }
-  return out;
-}
 
 /** An evidence number the reader can set, drawn exactly like a value's slider (AssumptionsPanel): the
  * number in a box to type into, an info tip saying where it comes from, the default marked, the ends. */
@@ -307,9 +294,9 @@ function EvidenceSlider({ label, format, value, best, low, high, settable, set, 
 function Questions({ model, u, whole, av, edits, pageBase, jump }: { model: ResolvedModel; u: Uncertainty; whole: Whole; av: Record<string, number>; edits: Record<string, number>; pageBase: Record<string, number>; jump: (target: string) => void }) {
   // The questions and their order come from the values the reader arrives with (a shared link, their saved
   // values), then hold still: from the first thing they change on the page, nothing re-ranks until a reload.
-  const [drivers, setDrivers] = useState(() => pick(u, model));
+  const [drivers, setDrivers] = useState(() => pickDrivers(u, model));
   const [held, setHeld] = useState(false);
-  useEffect(() => { if (!held) setDrivers(pick(u, model)); }, [u, model, held]);
+  useEffect(() => { if (!held) setDrivers(pickDrivers(u, model)); }, [u, model, held]);
   useEffect(() => {
     const hold = () => setHeld(true);
     window.addEventListener("input", hold, { capture: true, once: true });

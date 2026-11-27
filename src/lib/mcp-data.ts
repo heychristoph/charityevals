@@ -11,6 +11,7 @@ import type { LibraryInput } from "../../worker/mcp/library";
 import { slimLibrary } from "../../worker/mcp/slim";
 import { lib } from "./data";
 import { libraryJson } from "./open-data";
+import { pageText } from "./page-text";
 
 let results: Precomputed | undefined;
 export const mcpResults = () => (results ??= precompute(lib));
@@ -21,5 +22,5 @@ export const mcpAnswerIds = () => answerIds(mcpResults().catalogue);
 
 export function mcpAnswer(id: string) {
   const r = mcpResults();
-  return getModelAnswer(lib, r.catalogue, new StoredFigures(r.scenarios.default), assumptionValues(lib.assumptions), id);
+  return getModelAnswer(lib, r.catalogue, new StoredFigures(r.scenarios.default), assumptionValues(lib.assumptions), id, pageText);
 }

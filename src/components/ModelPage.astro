@@ -11,6 +11,7 @@ import StoryLine from "./StoryLine.tsx";
 import WholeLayers from "./WholeLayers.tsx";
 import WholeStoryLine from "./WholeStoryLine.tsx";
 import { programsOf } from "../lib/whole";
+import { sourcesOf, writeupIdOf } from "../lib/page-text";
 import ModelReuse from "./ModelReuse.astro";
 import { plainModelName, possessive } from "../lib/format";
 import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf, summarised } from "../lib/data";
@@ -34,17 +35,10 @@ const siblings = modelsOf(lib, charity.id);
 const current = currentModelsOf(lib, charity.id);
 const file = modelFile(model);
 const writeups = import.meta.glob<{ Content: any }>("../../writeups/*.md", { eager: true });
-// Variants share their parent's write-up unless they have their own. The charity's main page falls
-// back to the write-up filed under its first model: a hand-written evaluation stays on the main page
-// when a newer sheet becomes the main model.
-const isMain = primaryOf(lib, charity.id)?.id === model.id;
-const writeupId = [model.id, ...model.chain.slice(1), ...(isMain ? [siblings[0]?.id] : [])].find((id) => id && writeups[`../../writeups/${id}.md`]);
+// Variants share their parent's write-up unless they have their own; a charity's main page keeps the one
+// filed under its first model (src/lib/page-text.ts, as the MCP server and data files give it).
+const writeupId = writeupIdOf(model);
 const Writeup = writeupId ? writeups[`../../writeups/${writeupId}.md`].Content : undefined;
-// A write-up's own "Sources" list would sit right above Evidence and sources, so its links join that
-// list instead and the section is hidden.
-const writeupRaw = import.meta.glob<string>("../../writeups/*.md", { eager: true, query: "?raw", import: "default" });
-const sourcesMd = writeupId ? (writeupRaw[`../../writeups/${writeupId}.md`] ?? "").split(/^### Sources\s*$/m)[1]?.split(/^#{2,3} /m)[0] ?? "" : "";
-const writeupLinks = [...sourcesMd.matchAll(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g)].map((x) => ({ title: x[1], url: x[2], type: "other" as const }));
 const parent = model.extends ? lib.models.get(model.extends) : undefined;
 const root = parent && model.kind === "variant" ? parent : model;
 const family = [root, ...rankable.filter((m) => m.extends === root.id && m.kind === "variant")];
@@ -56,7 +50,8 @@ const RES_GROUPS = [
   ["charity", "From the charity"],
   ["other", "Other sources"],
 ] as const;
-const allResources = [...(charity.resources ?? []), ...(model.resources ?? []), ...writeupLinks].filter((r, i, all) => all.findIndex((x) => x.url === r.url) === i);
+// A write-up's own "Sources" list joins Evidence and sources (its section is hidden).
+const allResources = sourcesOf(model);
 const resources = RES_GROUPS.map(([type, title]) => ({ type, title, items: allResources.filter((r) => r.type === type) })).filter((g) => g.items.length);
 const CAUSE = { "global-health": "Global health", "animal-welfare": "Animal welfare", "catastrophic-risk": "Catastrophic risk", climate: "Climate" } as const;
 const meta = modelMeta(model);
