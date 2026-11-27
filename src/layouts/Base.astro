@@ -267,8 +267,14 @@ const nav = [
     max-width: var(--page);
   }
   @media (max-width: 640px) {
+    /* The links have the row to themselves; the ribbon may overlap its end. */
+    .bar {
+      padding-right: var(--s4);
+    }
     nav {
-      gap: var(--s4);
+      gap: var(--s2) var(--s4);
+      /* The narrowest phones (320px) wrap Subscribe under the links rather than cut it off. */
+      flex-wrap: wrap;
     }
   }
 </style>
