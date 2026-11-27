@@ -1,6 +1,6 @@
 # Audit: ican-charityevals, round 6 (scoped verification)
 Result: 2.54515 years of healthy life per $1,000 (was 2.59357, -1.87%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: c6957490e259c2751cfe8183dae8e5a7e3856ec9ce88c71e7254341e6107934c
+Model-sha: bfe94a00cdbb8f28d0592374e895434d5b5ba50d4aa3efdef82142aa5f5ac040
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -23,3 +23,5 @@ Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

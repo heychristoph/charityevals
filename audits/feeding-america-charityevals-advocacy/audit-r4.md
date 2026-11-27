@@ -1,7 +1,7 @@
 # Audit: feeding-america-charityevals-advocacy, round 4
 Re-stamped: `destination_reads` added for the shared moved-money rows (GiveWell's four top charities and the GiveDirectly prior, read as destinations at their figures on the rankings, docs/normalization.md 2.12); no formula or value changed and the result is unchanged (the money-moved branch is 0 here), so round 3's pass stands.
 Verdict: pass
-Model-sha: 4ebcdc5e957cdfe3694ad276ef6d349ef58d71cf6addf2cdb078e979fa7302ad
+Model-sha: ee33bc47e6ca0c1d2466bb3fdbbcecfd8fbb89f9c65d3cd61e68cedaed2f4ed8
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.104 → 0.0875.
@@ -23,3 +23,5 @@ Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

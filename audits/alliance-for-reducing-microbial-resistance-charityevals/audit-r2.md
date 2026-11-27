@@ -1,6 +1,6 @@
 # Audit: alliance-for-reducing-microbial-resistance-charityevals, round 2
 Result: 1.012e-4 uov/$ = 0.0506 years of healthy life per 1,000 dollars (combined range 0.00045–5.75). Verdict: pass.
-Model-sha: b2a7d825bb18979555cddd5b4c033a56107467922b380e500c175f96ae3af724
+Model-sha: 7dee3d31a1caa7ba7bbd31ba32ed191adbe29fa535d41ebe00d45b210b07ba0d
 Rules: 0.3.13
 Scope: unchanged from round 1 (scoped verification only).
 Preflight: pass (two low lines, generated files stale; regenerate with `npx tsx scripts/summaries.ts` before commit).
@@ -37,3 +37,5 @@ Re-stamped (18 Nov 2026): round-2 low L1: the national branch's source now shows
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

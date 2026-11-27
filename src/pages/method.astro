@@ -260,19 +260,16 @@ const toc = [
     </svg>
   </figure>
   <p>
-    Both have the same best guess, which counts every chance at its odds: a 1-in-4 chance of 4 is 1. The slider sets how much risk you accept that the real impact is lower than the figure counted. At 20%, the real impact is lower one time in five; at 80%, four times in five.
+    Both have the same best guess: a 1-in-4 chance of 4 is 1. The slider says how much a gamble counts. At 10, a 1-in-10 chance of 100 healthy years counts as 10, its odds times its payoff. Lower, long shots count less and sure things win; at 1 that chance counts as 1.
   </p>
-  <div class="risk-table" role="table" aria-label="The two examples at three risk settings">
-    <div role="row"><span role="columnheader">Accept a risk of</span><span role="columnheader">20%</span><span role="columnheader">50% (default)</span><span role="columnheader">80%</span></div>
-    <div role="row"><span role="rowheader">Sure thing</span><span role="cell">a little below best</span><span role="cell">about best</span><span role="cell">a little above</span></div>
-    <div role="row"><span role="rowheader">Long shot</span><span role="cell">0</span><span role="cell">0</span><span role="cell">4× best</span></div>
+  <div class="risk-table" role="table" aria-label="The two examples at three settings">
+    <div role="row"><span role="columnheader">Setting</span><span role="columnheader">1</span><span role="columnheader">3 (default)</span><span role="columnheader">10</span></div>
+    <div role="row"><span role="rowheader">Sure thing</span><span role="cell">a little below best</span><span role="cell">about best</span><span role="cell">a little above best</span></div>
+    <div role="row"><span role="rowheader">Long shot</span><span role="cell">¼ of best</span><span role="cell">½ of best</span><span role="cell">best</span></div>
   </div>
-  <p id="average">
-    <strong>Or count the average.</strong> Instead of a point in the range, each charity can count at its average result: every possible outcome weighed by its odds. A long shot then counts at its odds times its payoff, the sure thing at about its best guess. This is the expected value most evaluators say they maximise, and the value sets for evidence, high risk, the long run and AI use it. For most health charities the average is about 15% above the best guess; for catastrophic-risk charities, whose rare successes are very large, it is about 2.7 times.
-  </p>
-  <Setting client:load ids={["risk_quantile"]} />
+  <Setting client:load ids={["long_shot_value"]} />
   <p id="hits">
-    <a href="https://coefficientgiving.org/research/hits-based-giving/">Hits-based giving</a> (Coefficient Giving, formerly Open Philanthropy) argues for accepting that most bets fail when the few that succeed do far more. At the default 50%, a long shot with less than even odds counts as 0.
+    At 10 every charity counts at its average result, as <a href="https://coefficientgiving.org/research/hits-based-giving/">hits-based giving</a> (Coefficient Giving) and most evaluators count. The default, 3, ranks charities most like their best guesses do; it is the moderate setting of <a href="https://www.rethinkpriorities.org/publications/how-can-risk-aversion-affect-your-cause-prioritization">Rethink Priorities' model</a>.
   </p>
 
   <h3 id="climate">Climate</h3>

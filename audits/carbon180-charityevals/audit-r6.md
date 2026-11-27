@@ -1,6 +1,6 @@
 # Audit: carbon180-charityevals, round 6 (verification of the round 5 text fixes)
 Result: -0.01505 tco2e/$ = -0.002959 years of healthy life per $1,000, unchanged. Verdict: pass (no high or medium finding).
-Model-sha: 8c68c767ff4a547a2d8503e7fedda75a68452c9f30714ce636035ded9b6c897f
+Model-sha: 67f8340519ac701a375e75ad2cdfef913551d334846ce14c07fd34c169f7c4c3
 Rules: 0.3.13
 Scope: round 5's mediums (1, 2) and lows (3, 4) only, in the uncommitted diff of the model and write-up.
 Mechanical: audit-model.ts 0 findings; check.ts all models valid, -0.002959.
@@ -28,3 +28,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

@@ -10,7 +10,7 @@ Scope: since round 7 only the explainer of ue_family_tx was reworded (diff: one 
 Previous round: round 7's low finding (explainer wording) resolved.
 
 Verdict: pass (no high, no medium, no low)
-Model-sha: 44c4c17ffe73b0c5a3438f1010b94fc39bf9e0f27ad3f6442f6330568fa63bc7
+Model-sha: fc1a7f5ae6ab410f2bf0ca6fb776d01f58429c5d2f221533cfee8a546c637193
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.00283 → 0.00305.
@@ -25,3 +25,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source links point to the models' pages (the old /<model-id> addresses were 404s); values unchanged.

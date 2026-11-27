@@ -1,6 +1,6 @@
 # Audit: doctors-without-borders-charityevals-advocacy, round 8 (scoped verification of round 7's findings)
 Result: 1.322e-4 uov/$ = 0.0661 years of healthy life per 1,000 dollars (combined range 0.0046-0.95). Verdict: pass.
-Model-sha: 91b530002b3a43c5429689cbf33cff78de29d6b2c5269b6737ab8627aa79f60f
+Model-sha: 22271094d886cd69772b7e6b05e1a1bc85252cf88c3373a45386aa8a70f25e49
 Rules: 0.3.13
 Verdict: pass
 Scope: only round 7's findings and the changes made for them.
@@ -27,3 +27,5 @@ Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

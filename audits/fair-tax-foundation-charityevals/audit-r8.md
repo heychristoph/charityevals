@@ -1,7 +1,7 @@
 # Audit: fair-tax-foundation-charityevals, round 8 (scoped verification, credit rule 2.24, step 5)
 Result: 0.0967 years of healthy life per $1,000 at mobiliser_share 100% (0.0953 in round 7).
 Verdict: pass
-Model-sha: 86b2e4af512eedeb6fa48c4175aa99b06e06385a6dbea87977b5deba01b87233
+Model-sha: 7df56d4039a794f26f0d3e7e0de8aceb0df7b55e17d6c997e24c9c5ff77a555f
 Rules: 0.3.13
 
 Scope: round 7's one low finding, b_movement_credit, and the text that follows.
@@ -19,3 +19,5 @@ Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

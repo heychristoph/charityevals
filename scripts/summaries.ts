@@ -129,7 +129,7 @@ function same(a: unknown, b: unknown, path = ""): boolean {
 let firstDiff = "";
 
 /** Per model, its result as a distribution from a Monte Carlo at the defaults (src/engine/montecarlo.ts),
- * the reader's own value judgments left out: what the risk slider ($risk_quantile) and the plausible
+ * the reader's own value judgments left out: what the risk slider ($long_shot_value) and the plausible
  * ranges read (docs/normalization.md 2.18). Seeded by model id, so the file only changes when a model does. */
 export function distributions(lib: Library): Record<string, Distribution> {
   const out: Record<string, Distribution> = {};

@@ -1,6 +1,6 @@
 # Audit: novah-charityevals, round 2
 Result: 1.270e-4 uov/$ = 0.0635 years of healthy life per 1,000 dollars (combined range 0.0071–0.5677; joint low–high of the model's own ranges 8.73e-5–2.957); cause median about 0.117 (×0.54, from round 1's median). Verdict: pass.
-Model-sha: de912dac88c9adc9f06922c00d2ffa59c6cd790f1544dcd7c47551075a027fa7
+Model-sha: 33f7fa9fec67c379335bb52cdd987b324e6edb2f3d2ab929883c7e47aebc47e8
 Rules: 0.3.13
 Scope: unchanged from round 1 (the Twubakane radio drama, all 2025 spending of $173,600, 2025's reach). Not re-audited; round 2 is a scoped verification.
 Preflight: pass (scratchpad/build/preflight-novah-r2.txt). Two lows, generated/distributions.json and generated/usage.json out of date, are refreshed by `npx tsx scripts/summaries.ts` before commit.
@@ -39,3 +39,5 @@ No new observed or estimate input was added in the changed rows (the two new row
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

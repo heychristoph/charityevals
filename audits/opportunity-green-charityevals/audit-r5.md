@@ -1,6 +1,6 @@
 # Audit: opportunity-green-charityevals, round 5 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.2352 tco2e/$ = -0.4376 years of healthy life per $1,000 (combined range -10.92 to -0.0175). Verdict: pass.
-Model-sha: 48cd24e46f38a52ee12d7dd296a4a7bb768fd00299d8d634d1544ca994f03428
+Model-sha: 8cc03f9b8bc79539d9a3834089e5e6da8915fe0aa7fcdd5b4b85e5161ca86307
 Rules: 0.3.13
 Scope: only the rows changed in commit 7e73f6cd (imo_low_income_payer_consumption, new imo_levy_payer_uov, uov_per_year, explainers of imo_fund_revenue_per_year and imo_jet_uov, the bridge's side-effect-weight term) and the summary and write-up sentences stating the result.
 Mechanical: lint 0 findings (3 warn/info only), invariants none, normalization-audit none for this model; check.ts all models valid.
@@ -34,3 +34,5 @@ Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

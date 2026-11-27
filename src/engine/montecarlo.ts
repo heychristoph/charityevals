@@ -5,7 +5,7 @@
 // the stored shape with the reader's values, so the risk slider and the ranges cost nothing to move.
 import { normInv, type Node } from "./expr";
 import type { Domain } from "./domains";
-import { QUANTILES, RISK_OFF, RISK_QUANTILE, assumptionValues, compute, headline, headlineAndRows, pickValue, type Distribution, type Library, type ResolvedModel } from "./model";
+import { QUANTILES, RISK_OFF, RISK_POWERS, RISK_SETTING, assumptionValues, compute, headline, headlineAndRows, pickValue, type Distribution, type Library, type ResolvedModel } from "./model";
 import { uncertainty, type Driver } from "./uncertainty";
 
 const Z90 = 1.6448536269514722;
@@ -85,7 +85,7 @@ const keyOf = (d: Driver) => (d.scope === "fact" ? `@${d.id}` : d.id);
 function plan(lib: Library, m: ResolvedModel, avIn?: Record<string, number>, edits: Record<string, number> = {}): Plan | undefined {
   if (!m.output) return undefined;
   // The reader's risk is applied to the result, never inside the draws.
-  const av = { ...(avIn ?? assumptionValues(lib.assumptions)), [RISK_QUANTILE]: RISK_OFF };
+  const av = { ...(avIn ?? assumptionValues(lib.assumptions)), [RISK_SETTING]: RISK_OFF };
   const central = headline(lib, m, av, edits);
   if (!Number.isFinite(central) || central === 0) return undefined;
   const values = compute(lib, m, av, edits);
@@ -278,6 +278,21 @@ function quantiles(xs: number[], scale = 1) {
   return QUANTILES.map((p) => round(at(p), scale));
 }
 
+/** The result counted with long shots weighed by the reader's caution (docs/normalization.md 2.18): each
+ * step up the sorted results counts by the chance of reaching it raised to the power a, so a = 1 is the
+ * average and a higher a counts a chance p of a payoff at p^a of it (Buchak's risk-weighted expected
+ * utility, Rethink Priorities' DMREU). At each of RISK_POWERS, as multiples of the best guess. */
+function riskWeighted(xs: number[], negative: boolean): number[] {
+  // In the result's own order: for a negative best guess a larger multiple is more harm.
+  const r = xs.map((x) => (negative ? -x : x)).sort((p, q) => p - q);
+  const n = r.length;
+  return RISK_POWERS.map((a) => {
+    let v = r[0];
+    for (let i = 1; i < n; i++) v += (r[i] - r[i - 1]) * ((n - i) / n) ** a;
+    return round(negative ? -v : v);
+  });
+}
+
 function summarise(xs: number[], smooth: number[], draws: number, central: number, redrawn = 0, conv?: number): Distribution | undefined {
   const negative = central < 0;
   if (xs.length < draws / 2) return undefined;
@@ -310,6 +325,7 @@ function summarise(xs: number[], smooth: number[], draws: number, central: numbe
   return {
     q,
     mean: round(xs.reduce((s, x) => s + x, 0) / xs.length),
+    rw: riskWeighted(xs, negative),
     // Draws whose result is at zero or below: multiples at or below zero, or for a negative best guess at or above.
     zero: round(xs.filter((x) => (negative ? x >= -1e-6 : x <= 1e-6)).length / xs.length),
     ...(unstable ? { unstable: true } : {}),

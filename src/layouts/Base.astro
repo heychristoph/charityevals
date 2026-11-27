@@ -60,6 +60,19 @@ const nav = [
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#2f5fb3" />
     <noscript><style>.wf-skeleton { display: none; }</style></noscript>
+    {/* The page is built at the default values. A reader with values of their own (stored, or in the link:
+        src/lib/assumption-state.ts) would see the defaults flash until the islands run, so until each
+        island has hydrated it holds its place unseen; after 4 s whatever is there shows. */}
+    <style is:inline>html.own-values astro-island[ssr] { visibility: hidden; }</style>
+    <script is:inline>
+      try {
+        var q = location.search, s = localStorage.getItem("charityevals:assumptions");
+        if (/[?&](values|set|a\.[a-z_]+)=/.test(q) || (s && s !== "{}")) {
+          document.documentElement.classList.add("own-values");
+          setTimeout(function () { document.documentElement.classList.remove("own-values"); }, 4000);
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div class="beta-ribbon">

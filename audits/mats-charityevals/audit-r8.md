@@ -1,6 +1,6 @@
 # Audit: mats-charityevals, round 8 (scoped verification)
 Result: 3.066 years of healthy life per $1,000. Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 2a4e4482606ee73097c8351a7c444ba285af4aaa6f8adfd4cd92dae4179773d7
+Model-sha: 34b239bf0c16035da553261d1fbc6a8e05687c070c6ba13fb730aad8eaefdca9
 Rules: 0.3.13
 Scope: the previous round's findings only (rules never-started-weight, lives-added, never-started-prose and never-started-branches). No source or scope re-audit.
 Preflight: passes
@@ -17,3 +17,5 @@ Previous round: round 7, fix needed: slider named as 3% beside the shared 5%.
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

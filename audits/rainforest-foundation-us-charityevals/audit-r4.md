@@ -31,7 +31,7 @@ The headline 0.01157 rounds to the 0.012 in the summary and write-up.
 None.
 
 Verdict: pass (0 high, 0 medium, 0 low).
-Model-sha: e3bcc8587902bd4881bb75202d2b44b93b7fe2a3e3185494677c804990405f82
+Model-sha: e3ff299588bc17cd43a5a0eb22209c2d4d865c612f654d7b64bf43dd778521b3
 Rules: 0.3.13
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
@@ -56,3 +56,5 @@ Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

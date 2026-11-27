@@ -1,7 +1,7 @@
 # Audit: common-cause-education-fund-charityevals, round 3 (scoped: movement figures read from shared facts)
 
 Result: 0.0225563 years of healthy life per $1,000, unchanged from round 2 (0.0226). Verdict: pass.
-Model-sha: b0f9e924764b7a3ad65c426191900c7f2c82dc21b0f6080f35ba067d6ef81387
+Model-sha: efa8ec033fc8c8cef4a55ece7d3fe29780b21614f5e13a37949313191d65e0c4
 Rules: 0.3.13
 Scope: scoped verification; only that eight rows now read shared facts in facts/democracy.json instead of holding their own values.
 Mechanical: audit-model findings (0); `npx tsx scripts/headlines.ts` gives 0.0225563 for this model (Brennan Center 0.0701159).
@@ -35,3 +35,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

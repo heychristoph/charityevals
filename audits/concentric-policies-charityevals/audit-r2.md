@@ -1,6 +1,6 @@
 # Audit: concentric-policies-charityevals, round 2
 Result: 3.100e-5 daly/$ = 0.0310 years of healthy life per 1,000 dollars (combined range 0.0015–0.63); cause median 0.112 (×0.28). Verdict: pass.
-Model-sha: 45c5d4d2a20aec0b17e21a2a07fcc277f865c7c6e62cbc35a54781f0cf291b6a
+Model-sha: 8144ed6fdd530f4cfe4183259c306b8e88c1663d6daeb53c036f46a25d1f007a
 Rules: 0.3.13
 Scope: unchanged from round 1 (first year, about October 2023 to September 2024, about $80,000; Liberia and Guinea-Bissau; branches: stopped 2024 order, first-year share of the 2025 act, Guinea-Bissau 2022 tax). This round is a scoped verification of round 1's highs and mediums.
 Preflight: pass (no blocking lines; two low "generated" lines: run `npx tsx scripts/summaries.ts` for the distributions and usage files). audit-model shows no invariant violations.
@@ -51,3 +51,5 @@ Re-stamped (18 Nov 2026): the round's three lows fixed, wording and links only (
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

@@ -1,6 +1,6 @@
 # Audit: terrapraxis-charityevals, round 7 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: 0.01493 years of healthy life per $1,000 (was 0.0219 after the non-death change); cause median 0.001421 (x10.5). Verdict: pass (no high or medium except the explained far-above; two lows).
-Model-sha: 0b22110ee3d657179323d8897d7d66aaa4a619529bd581074af718f004f4df9b
+Model-sha: 2f320f4ce9ca0ab9029ee61e61d1ced0673b9f8ec5c5fc8abc592c9469c71ae4
 Rules: 0.3.13
 Scope: commit 7e73f6cd on this model and its write-up: (1) the tripling pathway read at the middle of the years counted (pathway_first_year, pathway_last_year, pathway_middle_year, pathway_counted_share and the four rows that multiply by it), (2) rate_position clamped to 3%-7%, (3) unmodelled_benefits_adj tagged side_effect: added, and the bridge's `1 + $side_effect_weight × ratio`. Rule 2.23 (public money) has no branch here. Row values dumped from the live model (temporary script, deleted).
 Mechanical: audit-model: 0 high, 1 medium (far-above, below), 3 low (the reading-only summary rows, already labelled). check.ts: all models valid. Receipt above.
@@ -42,3 +42,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

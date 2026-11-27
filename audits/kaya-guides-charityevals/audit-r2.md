@@ -1,6 +1,6 @@
 # Audit: kaya-guides-charityevals, round 2
 Result: 0.01201 wellby/$ = 0.7841 years of healthy life per 1,000 dollars (combined range 0.2003–3.070); cause median 0.1196 (×6.56). Verdict: pass.
-Model-sha: 6f38dabca77b87e85523df8f503414c6b3f0356b165cfede2c7b45a2ab2639b2
+Model-sha: 89924457eaa0b22e72e6a1cf17614c59d802ec4d7b010014276c663e5b682e3d
 Rules: 0.3.13
 Scope: unchanged from round 1 (one programme, the 2025 WhatsApp course with guide calls, $166,981, 2,776 starters); scoped verification only.
 Preflight: pass (kaya-guides section of preflight-r2.txt).
@@ -29,3 +29,5 @@ Per audit-model with the blind exclusion: `effect_duration_years` (0.26-1.54), `
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

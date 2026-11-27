@@ -1,6 +1,6 @@
 # Audit: industrious-labs-charityevals, round 4 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.006819 tco2e/$ = -0.001835 years of healthy life per 1,000 dollars (combined range -1.811 to -1.9e-6). Verdict: pass.
-Model-sha: c3edde1a0b79e13f785b35dd75d45005398aa231c47447f5b938d9e356f46cac
+Model-sha: 892fa2366eef522c857dcbf58c8dbe06db39fb05d1077c9c660635198384344e
 Rules: 0.3.13
 Scope: the changed rows only: `uov_per_year`, the explainers of `air_morbidity_share` and `iis_deaths_per_year`, the tonnes bridge's damage-beyond-deaths factor, and the write-up's headline sentence. No public-money branch (its EPA and district rules carry compliance costs through the 2.21 compliance rows; no credit, grant or levy), so rule 2.23 adds no row here.
 Mechanical: audit-model 0 findings (warnings only: range runs from harm to good, 90% judgment share); check.ts all models valid; invariants none.
@@ -22,7 +22,7 @@ Checked:
 | `@climate.us_iron_steel_neshap_2024_deaths_per_year` | gao.gov/products/b-336203 | verified (round 3), unchanged | the figure includes illness, which is why the share leaves it |
 
 Verdict: pass (no findings).
-Model-sha: c3edde1a0b79e13f785b35dd75d45005398aa231c47447f5b938d9e356f46cac
+Model-sha: 892fa2366eef522c857dcbf58c8dbe06db39fb05d1077c9c660635198384344e
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 2492e3fc.
 
@@ -35,3 +35,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

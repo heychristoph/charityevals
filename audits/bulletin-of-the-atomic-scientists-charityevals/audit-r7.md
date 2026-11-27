@@ -1,6 +1,6 @@
 # Audit: bulletin-of-the-atomic-scientists-charityevals, round 7 (scoped verification)
 Result: 4.761 years of healthy life per $1,000 (was 4.866, -2.2%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: ae34eecd9dabd0cb3daa9eaed777129a8eaf3201d947c89cdb62c3765173031a
+Model-sha: 025439341f71f5c0a27c96d3e8062aab3b81be08222b5117566359a119b46ab1
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, never-started-prose and never-started-branches only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes (one low prose line: nuclear_cost_share typed as "45%", not blocking)
@@ -24,3 +24,5 @@ Re-stamped (23 Nov 2026), rule cause-portfolios: Money to a cause with no named 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

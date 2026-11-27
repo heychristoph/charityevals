@@ -1,6 +1,6 @@
 # Audit: effektiv-spenden-charityevals, round 10 (scoped verification)
 Result: 3.312 years of healthy life per $1,000 (uov/$ 0.006625; was 3.439, -3.7%). Range 0.2637 to 10.15, 3% of draws at or below zero; cause median 1.019 (x3.25). Verdict: pass.
-Model-sha: 59b3bd2af7c8d1e992b1157e9bf2992f85cf28550accaf55bc0260b5c53eae91
+Model-sha: 9a23053da32787813ba964ef80ef07e4d58cbb6585144b55f8ab669f6bd38d30
 Rules: 0.4.0
 Scope: rule cause-portfolios only (inventory/rule-changes/cause-portfolios.md; docs/normalization.md "November 2026: a cause's portfolio"; assumptions/default.json `portfolios`). The model file is unchanged by the rule except wording; no source or scope re-audit.
 Preflight: passes (no blocking problem); one low (stored simulation out of date).
@@ -28,3 +28,5 @@ The poverty half (named GiveWell charities), shared credit rows, next dollar.
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

@@ -24,14 +24,15 @@ export function formatValue(x: number, format: ResolvedRow["format"] = "number")
     case "usd": return `$${sig(x)}`;
     case "integer": return Math.round(x).toLocaleString("en-US");
     case "multiple": return `${Number(x.toPrecision(SIG))}×`;
-    case "small": return x.toExponential(SIG - 1).replace("e-", " × 10⁻").replace(/(\d)$/, "$1").replace(/⁻(\d+)/, (_, d) => "⁻" + [...d].map((c: string) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[+c]).join(""));
+    // Powers of ten only where plain digits would run long (0.00012); 0 and 1,300 read as they are.
+    case "small": return x === 0 || Math.abs(x) >= 1e-3 ? sig(x) : x.toExponential(SIG - 1).replace("e-", " × 10⁻").replace(/(\d)$/, "$1").replace(/⁻(\d+)/, (_, d) => "⁻" + [...d].map((c: string) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[+c]).join(""));
     default: return sig(x);
   }
 }
 
 /** A shared assumption's value as it reads on screen: some are multipliers shown in the site's own
  * terms (`shown_as`), the same wherever they appear. */
-export function formatAssumption(row: { format?: ResolvedRow["format"]; shown_as?: ShownAs; control?: "country"; slider?: { average?: boolean } }, v: number): string {
+export function formatAssumption(row: { format?: ResolvedRow["format"]; shown_as?: ShownAs; control?: "country" }, v: number): string {
   // A country is stored as its ISO numeric code.
   if (row.control === "country") return byCode.get(v)?.name ?? "not set";
   return formatShown(row, v);
@@ -41,9 +42,7 @@ export type ShownAs = { factor: number; format?: ResolvedRow["format"]; inverse?
 
 /** A value in its on-screen terms: × factor, or factor ÷ value for an inverse one (a chicken's 33% of a
  * person reads as 3 chickens to one person; 0 as "doesn't count"). */
-export function formatShown(row: { format?: ResolvedRow["format"]; shown_as?: ShownAs; slider?: { average?: boolean } }, v: number): string {
-  // The risk setting's average stop (src/engine/model.ts RISK_AVERAGE).
-  if (row.slider?.average && v >= 1) return "average";
+export function formatShown(row: { format?: ResolvedRow["format"]; shown_as?: ShownAs }, v: number): string {
   const s = row.shown_as;
   if (s?.inverse) return v === 0 ? "doesn't count" : formatValue(s.factor / v, s.format ?? row.format);
   return formatValue(v * (s?.factor ?? 1), s?.format ?? row.format);
@@ -105,6 +104,13 @@ export function plainModelName(name: string): string {
   const s = name
     .replace(/\s*\(CEA\)/g, "")
     .replace(/_/g, " ")
+    // A spreadsheet copy's leftovers: "Copy of", "(GiveWell copy)", "[Borno copy]", "[Copy for …]".
+    .replace(/\bCopy of\s+/gi, "")
+    .replace(/\s*\((?:GiveWell )?copy\)/gi, "")
+    .replace(/\[\s*copy\s+(?:for\s+)?/gi, "[")
+    .replace(/\s+copy\s*\]/gi, "]")
+    // A note in brackets before the name reads after it.
+    .replace(/^\s*(\[[^\]]*\])\s*(.+)$/, "$2 $1")
     // A date in brackets reads as a date: "[July 2024]" → ", July 2024".
     .replace(/\s*\[((?:(?:\w+ )?(?:\d{1,2}, )?)?(?:19|20)\d\d)\]/g, ", $1")
     .replace(/(?<![A-Za-z])BOTECs(?![A-Za-z])/g, "rough estimates")
@@ -118,3 +124,6 @@ export function plainModelName(name: string): string {
     .trim();
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
+
+/** "GiveWell's", "Animal Charity Evaluators'", "charityevals'". */
+export const possessive = (name: string) => (name.endsWith("s") ? `${name}'` : `${name}'s`);

@@ -1,6 +1,6 @@
 # Audit round 10 (scoped verification): Prison Policy Initiative
 Result: 0.0546 years of healthy life per 1,000 dollars at the defaults (was 0.05399). Verdict: pass.
-Model-sha: 8596f1f7e4f2a091814e8df3c2a8a8d35549b411bb63f93139d7538adc1ad22f
+Model-sha: 7dabf453f50e9a9b20413774f4c1624ece15632c7a33e12d8b3d3ce860d95541
 Rules: 0.3.13
 
 ## Scope
@@ -21,10 +21,12 @@ Credit rule 2.24, step 5 (re-judged shares): st_attribution_share_shared (4% to 
 No high or medium findings.
 
 Verdict: pass
-Model-sha: 8596f1f7e4f2a091814e8df3c2a8a8d35549b411bb63f93139d7538adc1ad22f
+Model-sha: 7dabf453f50e9a9b20413774f4c1624ece15632c7a33e12d8b3d3ce860d95541
 
 Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's text made placeholders or recomputed at the 30% mobiliser share, and wrong prose placeholders corrected; no row changes. Mechanical: headline 0.05462 → 0.01639 (−70%), 22 rows changed, against bc9e3979.
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

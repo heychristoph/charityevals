@@ -15,7 +15,7 @@ Checked:
 | 1 | low | text | pol_attribution_share_shared | The list of campaigning groups omits Cats Protection and the Conservative Animal Welfare Foundation, both named in the bill's debates. | Hansard, Commons, 14 May and 4 July 2025. | Add them (or say "and others") and put the equal split at 1/8 to 1/9; the 20% still stands as "above an equal share". | none |
 
 Verdict: pass (0 high, 0 medium, 1 low)
-Model-sha: ac16eed2bcaa858f4bf45e2d3b5e3a6f2f9bbddbc4ff36710f562bb39dec1f1d
+Model-sha: 5f4bad1bb373c5591487ed706c5e774d3a4e929aa311e19cdc67d1aea0fa6da4
 Rules: 0.3.13
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
@@ -23,3 +23,5 @@ Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for th
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

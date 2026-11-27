@@ -3,7 +3,7 @@ import { upgrade, presetOf, PRESETS, parseShare, serialise, shareUrl, shortNumbe
 import { assumptionValues } from "../engine/model";
 import assumptions from "../../assumptions/default.json";
 
-/** The Long-run value set's own values, as the share links carry them. */
+/** The Future-focused value set's own values, as the share links carry them. */
 const LONG_RUN = PRESETS.find((p) => p.id === "longtermist")!.values;
 
 describe("old assumption links", () => {
@@ -46,11 +46,9 @@ describe("value sets", () => {
   it("set only sliders that exist, within their ends", () => {
     for (const p of PRESETS)
       for (const [id, v] of Object.entries(p.values)) {
-        const r = assumptions.rows.find((x) => x.id === id) as { value: number | { low: number; high: number }; slider?: { low?: number; high?: number; average?: boolean }; fixed?: boolean } | undefined;
+        const r = assumptions.rows.find((x) => x.id === id) as { value: number | { low: number; high: number }; slider?: { low?: number; high?: number }; fixed?: boolean } | undefined;
         expect(r, `${p.id}: ${id}`).toBeDefined();
         expect(r!.fixed, `${p.id}: ${id}`).toBeFalsy();
-        // The risk setting's average option sits above its slider (src/engine/model.ts RISK_AVERAGE).
-        if (r!.slider?.average && v === 1) continue;
         // The slider's ends where it has them, else the value's range.
         const range = typeof r!.value === "number" ? { low: r!.value, high: r!.value } : r!.value;
         expect(v).toBeGreaterThanOrEqual(r!.slider?.low ?? range.low);
@@ -156,6 +154,13 @@ describe("on load", () => {
     expect(JSON.parse(store.get("charityevals:assumptions")!)).toEqual(LONG_RUN);
   });
 
+  it("a link with nothing usable keeps the stored values, and the URL says so", async () => {
+    href = "https://charityevals.org/?m=wellby&set=nonexistent&values=bogus:3,discount_rate:abc";
+    const s = await import("./assumption-state");
+    expect(s.getOverrides()).toEqual({ uov_per_daly: 3 });
+    expect(href).toBe("https://charityevals.org/?m=wellby&values=uov_per_daly:3");
+  });
+
   it("without one, the stored values apply; each change rewrites the URL in place", async () => {
     href = "https://charityevals.org/?m=wellby";
     const s = await import("./assumption-state");
@@ -169,5 +174,22 @@ describe("on load", () => {
     expect(href).toBe("https://charityevals.org/?m=wellby");
     s.applyPreset("ai-concerned");
     expect(href).toBe("https://charityevals.org/?m=wellby&set=ai-concerned");
+  });
+});
+
+describe("value sets", () => {
+  it("only set values that differ from the defaults by more than 10%: a near-default value changes nothing a reader can see", () => {
+    const best = assumptionValues(assumptions as never, {});
+    const near = PRESETS.flatMap((p) => Object.entries(p.values)
+      .filter(([id, v]) => best[id] !== 0 && Math.abs(v / best[id] - 1) <= 0.1)
+      .map(([id, v]) => `${p.id}: ${id} ${v} (default ${best[id]})`));
+    expect(near).toEqual([]);
+  });
+});
+
+describe("the old risk setting", () => {
+  it("maps an old link's average to 10 and drops a share", () => {
+    expect(upgrade({ risk_quantile: 1 })).toEqual({ long_shot_value: 10 });
+    expect(upgrade({ risk_quantile: 0.2, discount_rate: 0.02 })).toEqual({ discount_rate: 0.02 });
   });
 });

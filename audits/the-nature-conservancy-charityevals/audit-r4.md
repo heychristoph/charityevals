@@ -18,7 +18,7 @@ Findings:
 - Low: the new best guesses (0.4, 0.3, 0.15, 0.3, 0.25, 0.4, 0.5, 0.6, 0.6, 0.4, 0.6) are stated judgments anchored on who is named in the denominator, with no counts of co-advocates; the explainers say so. Acceptable.
 
 Verdict: pass
-Model-sha: 46f4f68e81afa80fb6f22fa3a424acbed5ae4c3046948d459aad25b5c3d5db0c
+Model-sha: 8b00e3dec9726025d338b8fb81a678f37a85e77e742d4356679e411949c6d0b9
 Rules: 0.3.13
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
@@ -30,3 +30,5 @@ Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

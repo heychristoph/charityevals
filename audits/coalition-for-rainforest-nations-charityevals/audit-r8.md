@@ -4,7 +4,7 @@ Result: -0.02525 years per $1,000 at the defaults (mobiliser share 100%), the sa
 
 Verdict: pass
 
-Model-sha: 091dcea75d5f0c3670c9c0a3274d6372c662a0258dd38b504a1d8ae6dfa50e19
+Model-sha: 497a531e4d1bea192625145f810bc9b35ca7cb4f7a67f37392c2959ed5caf3b5
 Rules: 0.3.13
 
 ## Scope
@@ -25,7 +25,7 @@ The mechanical rewiring after round 7 (credit rule 2.24, step 5): rows no longer
 None.
 
 Verdict: pass
-Model-sha: 091dcea75d5f0c3670c9c0a3274d6372c662a0258dd38b504a1d8ae6dfa50e19
+Model-sha: 497a531e4d1bea192625145f810bc9b35ca7cb4f7a67f37392c2959ed5caf3b5
 
 Re-stamped (18 Nov 2026), rule never-started-weight: Lives that never start count times a slider, 0% by default (the suffering in them always counts); future generations are the first rows it weighs, so the discount rate is time preference only. Mechanical: headline unchanged, against the tree before the rule.
 
@@ -34,3 +34,5 @@ Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

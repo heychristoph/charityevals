@@ -1,6 +1,6 @@
 # Audit: respira-health-charityevals, round 2
 Result: 7.612e-6 uov/$ = 0.0038 years of healthy life per 1,000 dollars (combined range 0.00058–0.025). Verdict: pass.
-Model-sha: df7f08f4e8849132048463ece437cac3793b72a27bdd10e7b62e7551403161a5
+Model-sha: 644e14382e59ed1aa345a835018f26bf59ee568ce5b1795a8f6327e69fe9bddc
 Rules: 0.3.13
 Scope: unchanged from round 1 (one programme, April 2025 to March 2026, estimated $170,000; no accounts exist; charities/respira-health.json matches). Scoped verification only.
 Preflight: pass (no blocking lines; re-run, "passes").
@@ -31,3 +31,5 @@ Once the second year's enrolment and spending are published, move the model to t
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

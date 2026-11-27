@@ -7,6 +7,7 @@ import { primaryModel, type Basis } from "../../src/engine/ranking";
 import type { Assumptions } from "../../src/engine/schema";
 import { licenceOf, type Licence } from "../../src/lib/licence";
 import { charityFigure, modelFigure, rankings, type CharityFigure, type Figure } from "./figures";
+import { plainModelName } from "../../src/lib/format";
 
 export const YEARS = "years of healthy life per $1,000";
 
@@ -78,7 +79,7 @@ export function catalogueOf(lib: Library): Catalogue {
   for (const m of answerable(lib)) {
     owners[m.owner] = lib.owners.get(m.owner)?.name ?? m.owner;
     models[m.id] = {
-      name: m.name,
+      name: plainModelName(m.name),
       charity: m.charity,
       owner: m.owner,
       unit: comparable(lib, m) ? YEARS : `${lib.assumptions.units[m.output!.unit]?.label ?? m.output!.unit} per dollar`,

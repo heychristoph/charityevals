@@ -1,6 +1,6 @@
 # Audit: world-central-kitchen-charityevals, round 6
 Result: 1.223e-4 daly/$ = 0.122 years of healthy life per 1,000 dollars; cause median 0.0898 (×1.36). Verdict: **pass**.
-Model-sha: 66a1dd00c8fb76065480ba2b863d4818e24aa99380c97ce4ca3f87ec83a5fae4
+Model-sha: 317cda1618008c2f3d634df8e9ecb4f6c93ddcdb9b8af1bea52e1e1133aa6617
 Rules: 0.3.13
 Scope: verification of round 5's low finding 1 only (attribution_share_shared 0.9 (0.75-1) → 0.95 (0.8-1), new explainer; summary and write-up sentences). Not the whole model.
 Mechanical: audit-model 0 findings; check.ts valid; simulation-check 5% 0.533, 50% 1.00, 95% 1.84 × best guess; normalization-audit not rerun (coordinator).
@@ -19,7 +19,7 @@ None new.
 Unchanged from round 5: missing-data discount, the dollars-per-DALY bridge, Gaza counterfactual share, baseline consumption in Gaza, the consumption-to-UoV step.
 
 Verdict: pass
-Model-sha: 66a1dd00c8fb76065480ba2b863d4818e24aa99380c97ce4ca3f87ec83a5fae4
+Model-sha: 317cda1618008c2f3d634df8e9ecb4f6c93ddcdb9b8af1bea52e1e1133aa6617
 
 Re-stamped (16 Nov 2026): Pre-audit cleanup (16 Nov 2026): shared figures read from facts at the same values (@myanmar.household_consumption_share_of_gdp, @survey_consumption.disaster_affected_share_of_survey_mean, @volunteering.disaster_volunteer_ls_gain_year); judgments' reference classes named from sources; volunteer-hours labels name the charity. Values unchanged. Mechanical: headline unchanged, against 2b6e501e.
 
@@ -36,3 +36,5 @@ Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the type
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

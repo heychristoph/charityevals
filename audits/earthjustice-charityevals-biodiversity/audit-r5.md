@@ -1,7 +1,7 @@
 # Audit: earthjustice-charityevals-biodiversity, round 5 (verification of the compliance-cost rule 2.21, text fixes of round 4)
 Result: 7.148e-10 daly/$ = 7.148e-7 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
-Model-sha: 60942d1c8d159f46fdd74a31cf855524344bdc1e7240d815ad7bb89cd635a241
+Model-sha: e6d0fc6525935dd87301fd5f21d054cf672bdebf46f57e0e4ab6f34db075b00b
 Rules: 0.3.13
 
 Scope: scoped verification of the compliance-cost sentence on `tongass_acres`.
@@ -24,7 +24,7 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: 60942d1c8d159f46fdd74a31cf855524344bdc1e7240d815ad7bb89cd635a241
+Model-sha: e6d0fc6525935dd87301fd5f21d054cf672bdebf46f57e0e4ab6f34db075b00b
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
 
@@ -41,3 +41,5 @@ Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

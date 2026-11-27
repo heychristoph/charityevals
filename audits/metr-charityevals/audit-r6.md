@@ -1,6 +1,6 @@
 # Audit: metr-charityevals, round 6 (scoped verification)
 Result: 0.02748 years of healthy life per $1,000 (was 0.03230, -14.9%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 62c60a70041aa6229aaa4bad98d44c544a4e61273ec837698ecf297a67e492be
+Model-sha: 85121fa7602ed6a4022b73bc1e93f6e9ccc9c673bcea697d04ab3f43ea1bfb7f
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes (no blocking problem; only low lint notes)
@@ -24,3 +24,5 @@ Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

@@ -7,8 +7,9 @@ import { renderText } from "../../src/engine/prose";
 import { sensitivity, type Swing } from "../../src/engine/sensitivity";
 import { caveats } from "./figures";
 import { YEARS, type Catalogue, type Figures } from "./catalogue";
-import { abs, charityItem, figure, licence, modelLicence, modelPath, ownerName, r3, short, type Json } from "./items";
+import { abs, charityItem, charityRef, figure, licence, modelLicence, modelPath, ownerName, r3, short, type Json } from "./items";
 import { DEFAULTS, settable } from "./values";
+import { plainModelName } from "../../src/lib/format";
 
 const DRIVERS = 8;
 
@@ -56,8 +57,8 @@ function modelDetail(lib: Library, cat: Catalogue, figs: Figures, m: ResolvedMod
   return {
     type: "model",
     id: m.id,
-    name: m.name,
-    charity: { id: m.charity, name: cat.charities[m.charity]?.name ?? m.charity },
+    name: plainModelName(m.name),
+    charity: charityRef(cat, figs, m.charity),
     evaluator: ownerName(cat, m.owner),
     cause: m.cause,
     ...figure(figs.model(m.id)!),

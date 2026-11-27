@@ -38,7 +38,7 @@ describe("browser models", () => {
   });
 
   it("match the full models under other assumptions, in both views and on the headline", () => {
-    const over = { daly_per_child_death: 80, discount_rate: 0.01, uov_per_daly: 4, chicken_vs_person: 0.3, risk_quantile: 0.2, missing_data_discount: 0.8 };
+    const over = { daly_per_child_death: 80, discount_rate: 0.01, uov_per_daly: 4, chicken_vs_person: 0.3, long_shot_value: 3, missing_data_discount: 0.8 };
     const avF = assumptionValues(full.assumptions, over), avB = assumptionValues(browser.assumptions, over);
     const diffs: string[] = [];
     const close = (a: number, b: number) => (Number.isNaN(a) && Number.isNaN(b)) || Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(a));

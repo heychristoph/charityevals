@@ -76,11 +76,50 @@ export type Ctx = {
   conversion: { value: string; label: string; factors: Factor[] };
 };
 
-function tokenButtons(ctx: Ctx, key: string, formula: string) {
-  return tokens(formula, ctx.model, ctx.values, ctx.av).map((t, i) =>
-    t.key ? (
-      <button key={i} type="button" className={`wk-tok num ${ctx.open.has(`${key}/${t.key}`) ? "open" : ""}`} aria-expanded={ctx.open.has(`${key}/${t.key}`)} onClick={() => ctx.toggle(`${key}/${t.key}`)}>{t.text}</button>
-    ) : <span key={i}>{t.text}</span>,
+/** What a number in a formula is, by its key. */
+function labelOf(ctx: Ctx, key: string): string {
+  const id = key.slice(2);
+  if (key.startsWith("a:")) {
+    const a = lib.assumptions.rows.find((x) => x.id === id);
+    return a ? filledLabel(a, ctx.av[id]) : id;
+  }
+  if (key.startsWith("f:")) return lib.facts.get(id)?.label ?? id;
+  const r = ctx.model.byId.get(id);
+  return r ? plain(r.label) : id;
+}
+
+function tokButton(ctx: Ctx, key: string, t: Token, i: number) {
+  const k = `${key}/${t.key}`;
+  return <button key={i} type="button" className={`wk-tok num ${ctx.open.has(k) ? "open" : ""}`} aria-expanded={ctx.open.has(k)} onClick={() => ctx.toggle(k)}>{t.text}</button>;
+}
+
+/** A formula with every number named. A plain sum or product (`a + b + c`, `a × b ÷ c`) is one number a
+ * line, each with what it is; anything else is the formula, then each number it reads with what it is. */
+function formulaBody(ctx: Ctx, key: string, formula: string): ReactNode {
+  const ts = tokens(formula, ctx.model, ctx.values, ctx.av);
+  const ops = ts.filter((_, i) => i % 2 === 0).map((t) => t.text.trim());
+  const operands = ts.filter((_, i) => i % 2 === 1);
+  const flat = operands.length > 1 && operands.every((t) => t.key) && ops[0] === "" && ops[ops.length - 1] === "" &&
+    (ops.slice(1, -1).every((o) => o === "+" || o === "-") || ops.slice(1, -1).every((o) => o === "×" || o === "÷"));
+  if (flat)
+    return (
+      <ul className="wk-factors wk-terms">
+        {operands.map((t, i) => (
+          <li key={i}><span className="wk-op">{i ? ops[i].replace("-", "−") : "="}</span> {tokButton(ctx, key, t, i)} <span className="wk-src">{labelOf(ctx, t.key!)}</span></li>
+        ))}
+      </ul>
+    );
+  const seen = new Set<string>();
+  const named = ts.filter((t) => t.key && !seen.has(t.key) && seen.add(t.key));
+  return (
+    <>
+      = {ts.map((t, i) => (t.key ? tokButton(ctx, key, t, i) : <span key={i}>{t.text}</span>))}
+      {named.length > 0 && (
+        <ul className="wk-factors wk-terms wk-legend">
+          {named.map((t, i) => <li key={i}><span className="num">{t.text}</span> <span className="wk-src">{labelOf(ctx, t.key!)}</span></li>)}
+        </ul>
+      )}
+    </>
   );
 }
 
@@ -119,9 +158,7 @@ export function Node({ ctx, at, path }: { ctx: Ctx; at: string; path: string }) 
     const f = computed(ctx.model, id);
     label = plain(r.label);
     value = formatValue(ctx.values[id], r.format === "integer" ? "number" : r.format);
-    body = f ? (
-      <>= {tokenButtons(ctx, key, f)}</>
-    ) : (
+    body = f ? formulaBody(ctx, key, f) : (
       <span className="wk-src">{r.kind === "judgment" ? "A judgment" : r.kind === "observed" ? "Observed data" : "An estimate"}{ctx.model.evaluator?.name ? ` by ${ctx.model.evaluator.name}` : ""}{r.source?.title ? <>, {r.source.url ? <a href={r.source.url} rel="noopener">{r.source.title}</a> : r.source.title}</> : ""}</span>
     );
   }

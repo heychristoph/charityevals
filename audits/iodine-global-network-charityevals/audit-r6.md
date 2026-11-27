@@ -1,6 +1,6 @@
 # Audit: iodine-global-network-charityevals, round 6 (follow-up after wording fixes)
 Result: 0.006344 uov/$ = 3.17 years of healthy life per 1,000 dollars (combined range 0.094-107). Verdict: pass.
-Model-sha: 4c6b1e720eab57a2d56ce0d6587be6681701353c1568393f50bf157e543c6edd
+Model-sha: b823a05203a68466489ed1115d0d34d39e055fef19030298fb97cc12c83caa56
 Rules: 0.3.13
 Scope: wording changes since round 5 only.
 Preflight: pass as in round 5 (not re-run; headline unchanged at 3.17176).
@@ -25,3 +25,5 @@ Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

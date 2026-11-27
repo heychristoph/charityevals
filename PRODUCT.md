@@ -34,7 +34,7 @@ Every number is inspectable: each input has a source, a low/best/high range, a k
 
 ## Capabilities and Constraints
 
-- Each result is a Monte Carlo of 1,000 draws (bar from 5% to 95%), plus a one-at-a-time tornado. Rankings use the figure at the visitor's risk setting (the median by default).
+- Each result is a Monte Carlo of 1,000 draws (bar from 5% to 95%), plus a one-at-a-time tornado. Rankings use the figure at the visitor's setting for how much long shots count (3 by default; 10 is the average).
 - Every model ends on one scale, years of healthy life (DALYs averted); evaluators' units convert to it through visible, user-set rates.
 - Sensitivity flags: spread over 100×, share of uncertainty from judgment, inputs without ranges, stale sources (over 18 months), assumptions that flip the ranking.
 - Prefer "unmodelled" over forcing a model to fit.

@@ -1,6 +1,6 @@
 # Audit: american-red-cross-charityevals, round 3 (verification of the r2 fixes)
 Result: 4.296e-6 daly/$ = 0.004296 years of healthy life per 1,000 dollars (combined range 0.001812–0.01018); cause median 0.2028 (×0.021). Verdict: pass.
-Model-sha: 0cb53ed972f4dc69dd92a729c6940fadcc0e4cff57d83bd321fa5918b33a179b
+Model-sha: 57878e73bade7d8690685b375ac2ecf668c8be5a292588de7b0188555a104c3b
 Rules: 0.3.13
 Scope: scoped to the two r2 fixes only: volunteer_hours (now 10,300,000, FY2025) and the hf_counterfactual_adj explainer (NFPA sentence).
 Mechanical: lint not rerun beyond audit-model (far-below medium as in r2, summary gives the reason), invariants none, check.ts all valid, simulation-check stable (5% 0.613, 50% 1, 95% 1.56 x best guess), normalization-audit not rerun (coordinator: none).
@@ -20,7 +20,7 @@ Previous round: r2 finding 1 (volunteer_hours 9M vs 10.3M) resolved: row is 10,3
 Unchanged: uov_per_daly, inc_cf_large, uov_per_ln_consumption, unmodelled_benefits_adj, large_vs_poorest_fifth. The explainers still make no comparison with other charities or models and no effective-altruism mention.
 
 Verdict: pass
-Model-sha: 0cb53ed972f4dc69dd92a729c6940fadcc0e4cff57d83bd321fa5918b33a179b
+Model-sha: 57878e73bade7d8690685b375ac2ecf668c8be5a292588de7b0188555a104c3b
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 768b765f.
 
@@ -35,3 +35,5 @@ Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the type
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

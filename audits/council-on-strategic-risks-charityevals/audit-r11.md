@@ -1,6 +1,6 @@
 # Audit: council-on-strategic-risks-charityevals, round 11 (scoped verification)
 Result: 9.117 years of healthy life per $1,000 (was 9.609 on origin/main, -5.1%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 6d27fddf7ad65cadced6a49aba6a61893f0638c87126fe9a3c4161bfd94fce3c
+Model-sha: 095c88fbb0e7d4ad7e30a3a72f3892b28ede93f8f2fee9be6abd63abd5f0d507
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, never-started-prose and never-started-branches only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -21,3 +21,5 @@ Summary and write-up: the future "counted only where you count lives that never 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

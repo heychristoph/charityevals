@@ -1,6 +1,6 @@
 # Audit: labri-charityevals, round 2
 Result: 0.003157 uov/$ = 1.579 years of healthy life per 1,000 dollars (combined range 0.0207–120.3); cause median 0.1196 (×13.2). Verdict: **pass** (scoped verification: no open high or medium; 3 low for the builder).
-Model-sha: ba64185ce100e13d34cd9048863360fa2cf6f643e4080ec25ecdcb3feb409959
+Model-sha: 484840bd456ef8c48b794faeeed02c6931bd088f9c4cba94491f16d59b464464
 Rules: 0.3.13
 Scope: unchanged from round 1 (the whole charity, one programme, April 2025 to October 2026; no accounts exist). Not re-audited; only round 1's three mediums, the changes made for them and what those changes introduced.
 Preflight: pass (no blocking lines). One low: generated/distributions.json is out of date for this model.
@@ -59,3 +59,5 @@ Best improvements: a measured share of Philippine children's blood lead from unl
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

@@ -1,6 +1,6 @@
 # Audit: allfed-charityevals, round 8 (wording check)
 Result: 0.02741 daly/$ = 27.4 years of healthy life per 1,000 dollars, unchanged from round 7. Verdict: pass.
-Model-sha: 41c8d8f2a311564aea31c861dca84e036d5f926fb909c7368d4b55e6197faec5
+Model-sha: eb8f969cacac86b9fe88cd6ee4318456c44fb5a2090c603c1df3464ad169c0b4
 Rules: 0.3.13
 Scope: confirm the round 7 wording fix changed no value, range, formula or class.
 Preflight: not re-run (wording only).
@@ -30,3 +30,5 @@ Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

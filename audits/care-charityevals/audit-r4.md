@@ -33,7 +33,7 @@ Unchanged from round 3: missing-data discount, `$uov_per_daly`, `livelihood_cons
 Findings by severity: high 0, medium 0, low 1.
 
 Verdict: pass
-Model-sha: a6c610ff1f068bd00110c49bea81f74cc1e6cdd058fffbb5c694eea1bc984d3d
+Model-sha: 28f10d7b529469a9b60356ebfabce427a263c47bc4627d93e2aaf31e7d4ea649
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): consumption surveys carried forward by 0.7 of real growth (the shared line-up rule); 0.331 → 0.332.
@@ -51,3 +51,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

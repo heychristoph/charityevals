@@ -17,7 +17,7 @@ Checked:
 | 2 | low | source | mmc_attribution_share_shared | "Partners help collect the 4Mi surveys" is stated without a source; 90% (70-100%) rests on it. | Explainer text only. | Cite the Mixed Migration Centre's own description of 4Mi data collection (partners and enumerators) or say "our judgment: DRC runs and pays for most of it". | none |
 
 Verdict: pass (0 high, 0 medium, 2 low)
-Model-sha: f53ca814cc3d942510f16312dfb345e23ac484d40827ad315d4ea768e34c2e80
+Model-sha: ab32abda5493ca819ae7d6ba8bb0b4139bad6b9650598a6839fc6a1b8fee6c2b
 Rules: 0.3.13
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
@@ -25,3 +25,5 @@ Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for th
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

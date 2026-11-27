@@ -47,6 +47,10 @@ export function upgrade(o: Overrides): Overrides {
     const legacy = LEGACY[k];
     if (legacy && !(legacy[0] in out)) out[legacy[0]] = v * legacy[1];
   }
+  // The risk setting was a share of each result's outcomes, or 1 for its average (docs/normalization.md
+  // 2.18): an old link's average is the new setting's 10; a share has no counterpart and is dropped.
+  if (o.risk_quantile >= 1 && !("long_shot_value" in out)) out.long_shot_value = 10;
+  delete out.risk_quantile;
   return out;
 }
 
@@ -124,6 +128,14 @@ function ensureLoaded() {
     const fromUrl = parseShare(window.location.search);
     current = fromUrl ?? stored();
     if (fromUrl) save();
+    // The URL then says what is shown: a link's unknown set or unusable values don't stay in it.
+    if ([...new URLSearchParams(window.location.search).keys()].some(STATE_PARAM)) {
+      try {
+        history.replaceState(history.state, "", shareUrl(window.location.href, current));
+      } catch {
+        /* no history (a test or an old browser): the values still apply */
+      }
+    }
     try {
       localStorage.removeItem(OLD_VIEW_KEY);
     } catch {

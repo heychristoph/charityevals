@@ -1,7 +1,7 @@
 # Audit r3: habitat-for-humanity-charityevals (scoped verification)
 
 Result: 4.933e-6 daly/$ = 0.00493 years of healthy life per $1,000 (unchanged from r2; combined range 0.00112–0.0217).
-Model-sha: c5bf4481b17c83abc5def1b56bce8190b5e874ec3a0692504a3d814dd8ca5daf
+Model-sha: 272ac50a6322eb1ec2a55586a7dfb3443d3f46a12dcb0897ff1381f3edbc1529
 Rules: 0.3.13
 Verdict: pass
 
@@ -26,3 +26,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

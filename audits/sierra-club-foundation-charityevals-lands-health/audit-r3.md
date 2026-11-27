@@ -1,7 +1,7 @@
 # Audit: sierra-club-foundation-charityevals-lands-health, round 3 (verification of the compliance-cost rule 2.21)
 Result: 9.286e-7 daly/$ = 0.0009286 years of healthy life per 1,000 dollars (combined range 6.1e-5 to 0.0142); cause median 0.001995 (x0.47). Round 2: 0.001075, so -14%. Verdict: pass.
 Verdict: pass
-Model-sha: e82dce5636ddcfdf2faa20150d32c1fbc54fb5e7cee6f7af22f17e3d18c54f28
+Model-sha: 4e0c5042a6cf6be15857803fa1189027f49d2d97995175c29338f393783de76e
 Rules: 0.3.13
 
 Scope: scoped verification of the changed rows (`pm_compliance_uov`, `uov_bridged`, `summary`, and the figure in writeups/sierra-club-foundation-charityevals.md). Unchanged rows not re-audited.
@@ -32,7 +32,7 @@ Checks:
 Unchanged: the Sierra Club's share of the rule (4%), the next dollar, the delivered share. The compliance row removes about 21% of the soot benefit.
 
 Verdict: pass
-Model-sha: e82dce5636ddcfdf2faa20150d32c1fbc54fb5e7cee6f7af22f17e3d18c54f28
+Model-sha: 4e0c5042a6cf6be15857803fa1189027f49d2d97995175c29338f393783de76e
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
 Re-stamped (15 Nov 2026): damage beyond deaths at EPA's 0.6 in the tco2e bridge copy, read through the side-effects weight (2.5, 2.16; mechanical); summary figure updated where it changed
@@ -50,3 +50,5 @@ Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

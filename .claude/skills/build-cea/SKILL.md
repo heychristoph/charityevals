@@ -93,7 +93,7 @@ Copy `templates/<family>.json` to the output path and fill it in.
 - `id` `<charity>-charityevals`, `kind: "charity"`, `charity`, `owner: "charityevals"`, `template`,
   `cause`, `estimate_basis`, `summary` (2–4 plain sentences: what the charity does, where, the year,
   the result in years of healthy life per 1,000 dollars, the biggest uncertainty, branches discounted
-  for missing data), `source` (`publisher: "charityevals"`, `title`, `url: https://charityevals.org/<id>`,
+  for missing data), `source` (`publisher: "charityevals"`, `title`, `url`: its page, `https://charityevals.org/<charity>` for the charity's main model, else `/<charity>/<id>`,
   `published` = the build date, `retrieved`) and `resources`. No `evaluator` block.
 - `beneficiaries` (INV-20): add to OURS in scripts/beneficiary-countries.ts and run it.
 - **Keep every canonical row id, `output` and the section kinds**. Replace every `TEMPLATE:` explainer

@@ -1,5 +1,5 @@
 # Audit: hias-charityevals-advocacy, round 4 (scoped)
-Model-sha: 10bf30a3bd7c944da96afde8bbb1bf0d93dde8c260d36a6beb8bc0510b67799c
+Model-sha: 985d5c54a12378a532ddf72985216df89c4fa80dcb5d54228b61749a06301a24
 Rules: 0.3.13
 Scope: the reworded explainer of the read-only counterfactual_adj row.
 Mechanical: audit-model 0 high / 0 medium / 1 low (spread, stated in the summary, unchanged); no files rewritten.
@@ -29,3 +29,5 @@ Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

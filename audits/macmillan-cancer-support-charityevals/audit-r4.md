@@ -1,7 +1,7 @@
 # Audit: macmillan-cancer-support-charityevals, round 4 (verification of the changes since round 3)
 
 Result: 2.110e-6 daly/$ = 0.002110 years of healthy life per $1,000 (combined range 4.1e-4 – 0.0108; joint low–high on the model's own ranges 8.4e-5 – 0.047); cause median 0.3585 (×0.0059). Verdict: pass.
-Model-sha: 79c42ccaae5113fe8ca8c4d36b594113078f51150a6a18f15e829075e1ddd193
+Model-sha: 772b9ff35e1f600fc412a98f6784923f6e3114d6268ad813e62c0dbe6912eea9
 Rules: 0.3.13
 
 Scope: only the changes in commit 4cfb259 (model rows, write-up). Mechanical: audit-model.ts gives 0 high / 0 medium / 5 low, the same five as round 3 (evidence_adj diagnostic, three unused context rows, far-below with its explanation in the summary). The result moved from 2.111e-6 to 2.110e-6 daly/$ (under 0.1%), as expected from adding `wait_discount` to a branch worth about 4%. generated/ untouched (git status clean apart from this file).
@@ -28,3 +28,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

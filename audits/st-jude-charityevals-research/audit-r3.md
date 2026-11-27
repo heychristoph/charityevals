@@ -1,6 +1,6 @@
 # Audit: st-jude-charityevals-research, round 3
 Result: 2.251e-6 daly/$ = 0.002251 years of healthy life per 1,000 dollars (combined range 0.000189–0.0268); cause median 0.1085 (×0.021). Verdict: pass.
-Model-sha: a33c7a3b066650ec4c5eff877bb32b577dcb8d1d195fa15bc3a21f950e1a7afd
+Model-sha: 8f8a317e2d489c661bc3225bb5199ddf9291a1df164993054d0d4badd47ac1d5
 Rules: 0.3.13
 Scope: scoped verification of commit a1555789 (the corrected quote in `nc_flu_deaths_over5_per_year`) and round 2's items. Scope of the model (own-funded research, FY2025) unchanged.
 Mechanical: lint 0 high / 1 medium (`far-below`, explained in round 1's Drivers, unchanged) / 1 low (`spread`, the summary states it). Invariants: none. `scripts/check.ts st-jude-charityevals-research`: all models valid. normalization-audit and simulation-check not re-run (no structural change). generated/ untouched.
@@ -39,3 +39,5 @@ Re-stamped (17 Nov 2026), rule mobiliser-share-30: the summary's typed range rep
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.
