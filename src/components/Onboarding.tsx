@@ -37,7 +37,7 @@ export default function Onboarding() {
   return (
     <dialog ref={dialog} className="onboarding" aria-labelledby="onboarding-title" onCancel={(e) => e.preventDefault()} suppressHydrationWarning>
       <div className="onboarding-body">
-        <h2 id="onboarding-title">Your values first</h2>
+        <h2 id="onboarding-title" tabIndex={-1}>Your values first</h2>
         <p className="onboarding-lead">Pick the set closest to yours.</p>
         <ValueSets picked={picked} onPick={pick} short />
         {/* Shown only while the analytics question is open; html[data-onboarding] says which (onboarding.css). */}
