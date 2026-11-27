@@ -63,6 +63,7 @@ export function filledLabel(row: Row, v: number): string {
   if (!row.label.includes("…") || !Number.isFinite(v)) return row.label;
   const shown = formatShown(row, v);
   if (shown === "doesn't count") return row.label;
+  if (shown === "average") return "Each charity counted at its average";
   return row.label.replace(/…\s*%/, shown.endsWith("%") ? shown : `${shown}%`).replace("…", shown);
 }
 

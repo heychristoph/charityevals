@@ -122,13 +122,15 @@ export function Slider({ row, value, compact }: { row: Row; value: number; compa
   const { show } = shownAs(row);
   const changed = Math.abs(value - best) > Math.abs(best) * 1e-9;
   const av = useAssumptionValues();
+  // At its average stop the risk setting has no percentage: the checkbox below says what counts.
+  const atAverage = !!row.slider?.average && value >= RISK_AVERAGE;
   return (
-    <div className={`assumption tip-host ${changed ? "changed" : ""}`} id={`a-${row.id}`}>
+    <div className={`assumption tip-host ${changed ? "changed" : ""} ${atAverage ? "at-average" : ""}`} id={`a-${row.id}`}>
       <div className="assumption-head">
         {compact && row.explainer ? (
           <LabelWithTip htmlFor={id} text={row.label}><InfoTip label="Why this value"><Markdown text={row.explainer} /></InfoTip></LabelWithTip>
         ) : <label htmlFor={id} className="assumption-name">{row.label}</label>}
-        <ValueField row={row} value={value} best={best} log={scale.log && !scale.zero} />
+        {!atAverage && <ValueField row={row} value={value} best={best} log={scale.log && !scale.zero} />}
       </div>
       <div className="slider-wrap" style={{ ["--default" as string]: `${scale.toStep(best) / STEPS}` }}>
         <span className="default-tick" aria-hidden />

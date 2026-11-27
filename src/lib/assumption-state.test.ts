@@ -171,3 +171,13 @@ describe("on load", () => {
     expect(href).toBe("https://charityevals.org/?m=wellby&set=ai-concerned");
   });
 });
+
+describe("value sets", () => {
+  it("only set values that differ from the defaults by more than 10%: a near-default value changes nothing a reader can see", () => {
+    const best = assumptionValues(assumptions as never, {});
+    const near = PRESETS.flatMap((p) => Object.entries(p.values)
+      .filter(([id, v]) => best[id] !== 0 && Math.abs(v / best[id] - 1) <= 0.1)
+      .map(([id, v]) => `${p.id}: ${id} ${v} (default ${best[id]})`));
+    expect(near).toEqual([]);
+  });
+});

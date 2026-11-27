@@ -24,7 +24,8 @@ export function formatValue(x: number, format: ResolvedRow["format"] = "number")
     case "usd": return `$${sig(x)}`;
     case "integer": return Math.round(x).toLocaleString("en-US");
     case "multiple": return `${Number(x.toPrecision(SIG))}×`;
-    case "small": return x.toExponential(SIG - 1).replace("e-", " × 10⁻").replace(/(\d)$/, "$1").replace(/⁻(\d+)/, (_, d) => "⁻" + [...d].map((c: string) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[+c]).join(""));
+    // Powers of ten only where plain digits would run long (0.00012); 0 and 1,300 read as they are.
+    case "small": return x === 0 || Math.abs(x) >= 1e-3 ? sig(x) : x.toExponential(SIG - 1).replace("e-", " × 10⁻").replace(/(\d)$/, "$1").replace(/⁻(\d+)/, (_, d) => "⁻" + [...d].map((c: string) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[+c]).join(""));
     default: return sig(x);
   }
 }
