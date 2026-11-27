@@ -271,7 +271,7 @@ async function listAssumptions(ctx: Context): Promise<Json> {
       };
     }),
     value_sets: (a.presets ?? []).map((p) => ({ id: p.id, label: p.label, about: p.about, values: p.values })),
-    url: abs("/assumptions"),
+    url: abs("/method#value-sets"),
     licence: licence(OWN_LICENCE),
   };
 }

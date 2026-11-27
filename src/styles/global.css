@@ -51,6 +51,8 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* A link to a heading lands below the sticky header. */
+  scroll-padding-top: var(--header-h, 0px);
   scrollbar-color: var(--rule-strong) transparent;
 }
 
@@ -178,8 +180,8 @@ code {
    bottom is below the window, and only the page's scroll brings it into view. */
 .side {
   position: sticky;
-  top: var(--s4);
-  max-height: calc(100vh - var(--s5));
+  top: calc(var(--header-h, 0px) + var(--s4));
+  max-height: calc(100vh - var(--header-h, 0px) - var(--s5));
   overflow-y: auto;
   background: var(--paper-2);
   border: 1px solid var(--rule);

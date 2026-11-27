@@ -205,9 +205,6 @@ export default function Rankings({ cause, owner }: { cause?: string; owner?: str
         })}
       </ol>
 
-      <p className="r-notes small muted">
-        <a href="/method">How we compare charities</a>
-      </p>
     </figure>
   );
 }
