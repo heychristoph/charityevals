@@ -9,7 +9,7 @@
   gap: var(--s5);
   padding: var(--s3) 0 var(--s4);
   position: sticky;
-  top: env(safe-area-inset-top, 0px);
+  top: calc(var(--header-h, 0px) + env(safe-area-inset-top, 0px));
   z-index: 5;
   background: var(--paper);
   border-bottom: 1px solid var(--rule);
@@ -272,7 +272,7 @@
 /* An open layer's heading pins under the range while its content scrolls past, until the layer ends. */
 .ly-layer[open] > summary {
   position: sticky;
-  top: calc(env(safe-area-inset-top, 0px) + var(--ly-top-h, 0px));
+  top: calc(var(--header-h, 0px) + env(safe-area-inset-top, 0px) + var(--ly-top-h, 0px));
   z-index: 4;
   background: var(--paper);
 }

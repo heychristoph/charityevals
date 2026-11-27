@@ -85,9 +85,26 @@ const nav = [
           {nav.map((n) => (
             <a href={n.href} aria-current={active === n.id ? "page" : undefined}>{n.label}</a>
           ))}
+          <a class="nav-cta" href="https://charityevals.substack.com/" rel="noopener">Subscribe</a>
         </nav>
       </div>
     </header>
+    <script is:inline>
+      // Where the links wrap under the wordmark (a phone), only their row stays: the header sticks with
+      // the wordmark's row above the screen. --header-h is what stays, for what sticks below it and for
+      // links to a heading (global.css).
+      (() => {
+        const h = document.querySelector(".site-header");
+        const nav = h.querySelector("nav"), mark = h.querySelector(".wordmark");
+        const set = () => {
+          const hide = nav.offsetTop > mark.offsetTop + mark.offsetHeight / 2 ? Math.max(0, nav.offsetTop - 8) : 0;
+          h.style.top = `${-hide}px`;
+          document.documentElement.style.setProperty("--header-h", `${h.offsetHeight - hide}px`);
+        };
+        set();
+        if (typeof ResizeObserver !== "undefined") new ResizeObserver(set).observe(h);
+      })();
+    </script>
     <main>
       <slot />
     </main>
@@ -100,7 +117,7 @@ const nav = [
           <a href="/method">Method</a>
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
-          <a href="/legal">Legal notice</a>
+          <a href="/about#legal-notice">Legal notice</a>
           <a href="https://github.com/heychristoph/charityevals">GitHub</a>
           <a href="mailto:hello@charityevals.org">hello@charityevals.org</a>
         </nav>
@@ -153,7 +170,11 @@ const nav = [
       padding-right: 112px;
     }
   }
+  /* The header stays at the top, Subscribe in reach; what else sticks sits below it (--header-h). */
   .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 25;
     border-bottom: 1px solid var(--rule);
     background: var(--paper);
   }
@@ -177,6 +198,7 @@ const nav = [
   }
   nav {
     display: flex;
+    align-items: baseline;
     gap: var(--s5);
     font-size: 15px;
   }
@@ -189,6 +211,19 @@ const nav = [
   }
   nav a:hover {
     color: var(--ink);
+  }
+  /* The one call to action: the newsletter. */
+  nav a.nav-cta {
+    color: #fff;
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: var(--radius);
+    padding: 4px 14px;
+  }
+  nav a.nav-cta:hover {
+    color: #fff;
+    background: var(--blue-ink);
+    border-color: var(--blue-ink);
   }
   nav a[aria-current="page"] {
     color: var(--ink);

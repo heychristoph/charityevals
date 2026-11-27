@@ -17,7 +17,7 @@ models/<cause>/<id>.json     a model of one charity by one owner (several per ch
                              or a country/program variant of one
 writeups/<id>.md             one-page evaluation shown on the charity's page
 assumptions/default.json     moral weights, exchange rates, accounting toggles, units
-brand/final/                 logo masters (colour, black, white, symbol); brand/concepts/ holds earlier rounds
+brand/final/                 logo masters (colour, black, white, symbol)
 facts/<place>.json           shared data (PPP, mortality…) referenced as @kenya.ppp_factor_2017
 src/engine/                  formula language, model resolution (extends), compute, sensitivity
 src/pages, src/components    Astro site with React islands

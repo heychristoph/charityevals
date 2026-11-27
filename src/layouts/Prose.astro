@@ -118,8 +118,8 @@ const { title, description, updated, active, toc } = Astro.props;
     grid-column: 2;
     grid-row: 1;
     position: sticky;
-    top: var(--s5);
-    max-height: calc(100vh - 2 * var(--s5));
+    top: calc(var(--header-h, 0px) + var(--s5));
+    max-height: calc(100vh - var(--header-h, 0px) - 2 * var(--s5));
     overflow-y: auto;
     margin-top: calc(var(--s6) + 64px);
   }
@@ -159,7 +159,7 @@ const { title, description, updated, active, toc } = Astro.props;
       scroll-margin-top: 56px;
     }
     .toc {
-      top: 0;
+      top: var(--header-h, 0px);
       z-index: 5;
       max-height: none;
       overflow: visible;
