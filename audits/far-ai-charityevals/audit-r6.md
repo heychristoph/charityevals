@@ -1,6 +1,6 @@
 # Audit: far-ai-charityevals, round 6 (scoped: merged pandemic death-age rule and funging = 1)
 Result: 9.578e-4 daly/$ = 0.9578 years of healthy life per 1,000 dollars (combined range 0.0195–47.0); cause median 0.0733 (×13.1). Verdict: pass.
-Model-sha: cb3353e4e08cb08ca24347a4caa4bfca9641d9af4644550da987b41f24a5e843
+Model-sha: a3b7e4a1bdba536a52dd3b6029a7d3f9b32f0b863dabf12c2b2d3b8dca3e56ae
 Rules: 0.3.13
 Scope: unchanged from round 3 (all four programmes, 2024); this round checks that the two changes verified on separate branches (round 4: COVID-scale death ages; round 5: `leverage_funging_adj` = 1) are both present in the merged model and consistent with each other.
 Mechanical: audit-model lint no high or medium; invariants none (INV-15 included); normalization-audit none (full run, "all models valid", 0 violations); `scripts/check.ts far-ai-charityevals` passes.
@@ -53,3 +53,5 @@ Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

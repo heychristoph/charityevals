@@ -22,7 +22,7 @@ Only the changed rows. `ltr_value_per_home` and `unmodelled_benefits_adj` are la
 Unchanged from round 2: `$missing_data_discount`, `$uov_per_daly`, `resp_counterfactual_adj`, `resp_price_ratio`, `resp_inkind_value`.
 
 Verdict: pass. Findings: 0 high, 0 medium, 3 low.
-Model-sha: 1889a5121247901f98f79c6d05809337a4bf59db25e287ad2698ddaab2d3db82
+Model-sha: 9e7c5cb37c57dc283ab1ac8e5e26b6f88f6ed5a02702c5b25414339286b79264
 Rules: 0.3.13
 
 Re-stamped after merge: the summary low fixed ("about a fifth" → "about a quarter", computed 23%); no other change.
@@ -41,3 +41,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

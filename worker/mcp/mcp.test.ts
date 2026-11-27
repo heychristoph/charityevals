@@ -155,6 +155,8 @@ describe("MCP tools", () => {
     expect(out.full_model).toBe("https://charityevals.org/data/models/cash.json");
     expect(out.licence.name).toBe("CC BY-NC-SA 3.0 US");
     expect(out.licence.attribution).toContain("GiveWell");
+    // The model shares its charity's id: its answer also gives the charity's figure as ranked.
+    expect(out.charity).toMatchObject({ id: "cash", as_ranked: { result: expect.any(Number) } });
   });
 
   it("get_model takes a charity id, and pages a variant under its charity", async () => {
@@ -243,6 +245,7 @@ describe("MCP tools", () => {
     expect(malaria.rankings.map((r: { id: string }) => r.id)).toEqual(["nets"]);
     expect(malaria.page).toBe("https://charityevals.org/causes/global-health");
     expect((await call("rank", { limit: 0 })).error).toContain("limit");
+    expect((await call("rank", { limit: 500 })).error).toContain("limit");
   });
 
   it("list_assumptions lists what a reader can set, the value sets and the licence", async () => {

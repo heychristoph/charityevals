@@ -1,7 +1,7 @@
 # Audit: world-vision-charityevals-domestic, round 3
 
 Result: 5.540e-6 daly/$ = 0.00554 years of healthy life per 1,000 dollars; global-health median 0.338 (x0.016). Verdict: pass (0 high)
-Model-sha: a7c16552cc919c4cb1c2ca5f7a5a7ba52b559afe8c40bfd25243558ae1954b89
+Model-sha: 91937a9147fdf2717d46a6cc33e63ffa34eeb3473319d3b07a2c32750c87e56d
 Rules: 0.3.13
 
 Scope: unchanged. Only the changes after round 2 were checked.
@@ -28,3 +28,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

@@ -1,6 +1,6 @@
 # Audit: learning-alliance-charityevals, round 2
 Result: 0.03881 uov/$ = 19.40 years of healthy life per 1,000 dollars (combined range 1.52–247.5); cause median 0.1169 (×166). Verdict: pass.
-Model-sha: 3ee9af457ee7b4b6c64b7a543c26ff47291b09257ac03806c9fd3149f314b9c2
+Model-sha: 43dfabe8e2ef6fd0f790a71f54f2feee988e09c55b9db94f2c28e544c5ce7168
 Rules: 0.3.13
 Scope: unchanged from round 1 (one programme, calendar 2025, $240,000 all-in, over 20,000 pupils, 75 schools in Iganga District). Scoped verification: round 1's one medium and the changes made for it, plus any new high or medium those changes introduced. No full re-audit.
 Preflight: pass (la-preflight2.txt; no blocking lines).
@@ -43,3 +43,5 @@ Re-stamped (18 Nov 2026): round 2's optional low applied: subtask_correlation's 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

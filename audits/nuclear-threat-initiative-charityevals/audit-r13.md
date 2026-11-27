@@ -1,6 +1,6 @@
 # Audit: nuclear-threat-initiative-charityevals, round 13 (scoped verification)
 Result: 7.29 years of healthy life per $1,000 (was 7.48, -2.55%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: ad35185f9583e44e0cf0768a31019a17ad8c06dcbc0a7c5d884fd726b4134f27
+Model-sha: 69963ddb29b95498b846bb092395901d0377179faef75ed9443233d9b819db1e
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes (only low lint range lines on four ai/nuclear "smaller" rows, not blocking)
@@ -23,3 +23,5 @@ Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

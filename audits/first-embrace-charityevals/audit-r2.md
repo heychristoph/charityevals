@@ -1,6 +1,6 @@
 # Audit: first-embrace-charityevals, round 2
 Result: 0.01050 uov/$ = 5.248 years of healthy life per 1,000 dollars (combined range 1.980–13.91); cause median 0.1196 (×43.9). Verdict: pass.
-Model-sha: 70df6a78652563d4084e67aca0892c5268137ddd621114b3a33f8a0487e20a6e
+Model-sha: e5f24ca2b5105a11803e7bbd4e30d3ab2cb7b524fda099a9d13f8f349f29b239
 Rules: 0.3.13
 Scope: unchanged programme (kangaroo care, Kano State), now calendar 2026 at both hospitals: spend $273,930 less set-up spread over its years = $256,245, 1,450 newborns enrolled. charities/first-embrace.json `spending` and its one line carry the same $273,930 with both sources; no accounts exist yet.
 Preflight: pass (one low simulation line on `@newborn_care.kmc_mortality_rr`, checked in round 1: the Cochrane 95% CI). `npx tsx scripts/summaries.ts --check` passes.
@@ -38,3 +38,5 @@ Peers (audit only): ×43.9 the cause's median. As in round 1, the gap comes from
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

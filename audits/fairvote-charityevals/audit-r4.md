@@ -1,6 +1,6 @@
 # Audit: fairvote-charityevals, round 4
 Result: 2.264e-5 daly/$ = 0.0226 years of healthy life per 1,000 dollars (combined range 0.0014–0.38); cause median 0.0693 (×0.33). Verdict: pass.
-Model-sha: 1cea695bb0a5ba9904e44cfcf9909522b50be0270475cf4f8f598096d7aca34e
+Model-sha: a6f784595e9f009166f1b5d64120751b4896858d2a437d5f688dfa217aca2723
 Rules: 0.3.13
 Scope: scoped verification of commit 61b6097 only (the answer to round 3's 3 low findings): facts/democracy.json (rcv_local_coverage, rcv_state_federal_coverage, us_pr_movement_resources_per_year, local_offices_weight explainer), the model's rcv_implementation_adj and the explainers that state its numbers, charities/fairvote.json summary, the write-up. Everything else as in rounds 1-3.
 Mechanical: audit-model lint 0 findings; invariants none; check.ts "all models valid" (this and protect-democracy-charityevals); simulation-check stable (5% 0.155×, 50% 1.00×, 95% 5.46× the best guess); normalization-audit not re-run (no row of the kinds it checks changed; scoped round). No script wrote generated/ (working tree clean). Result moved from 0.0230 to 0.0226 (-1.6%), no move above 2×.
@@ -45,3 +45,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

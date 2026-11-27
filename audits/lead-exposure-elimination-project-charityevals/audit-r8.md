@@ -1,6 +1,6 @@
 # Audit: lead-exposure-elimination-project-charityevals, round 8
 Result: 0.01084 uov/$ = 5.419 years of healthy life per 1,000 dollars (combined range 0.19–68.8 on the model's own ranges); cause median 0.1196 (×45.3). Verdict: pass.
-Model-sha: 8fec72919934fbdda408e88178c194f755135f7a9f54ef4df766d71f47b905c5
+Model-sha: dcd09d5a2650c641d414ffee49b57be3dce03b491e454a404577e3d840c8eafc
 Rules: 0.1.0
 Scope: a scoped verification of the round-7 medium and its fix only. Programmes and year modelled are unchanged from round 6.
 Preflight: passes (no blocking line); two low "generated" lines (stale generated/distributions.json and usage.json), the builder's to refresh with `npx tsx scripts/summaries.ts` before commit.
@@ -23,3 +23,5 @@ Unchanged: discount_rate, mobiliser_share, win_years_counted (site judgments), p
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

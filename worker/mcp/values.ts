@@ -41,6 +41,7 @@ function fromString(s: string): Record<string, unknown> {
 
 /** Why the models can't run on a value the share-link rules drop. */
 function whyNot(r: AssumptionRow, v: number): string {
+  if (r.format === "toggle") return `${r.id} is on or off: 1 or 0.`;
   if (r.control === "country") return `${r.id} is a country's ISO 3166 numeric code (0 for none), and ${v} is none.`;
   if (v < 0) return `${r.id} can't be negative.`;
   if (r.format === "percent" && v > 1) return `${r.id} is a share, given as a fraction: at most 1 (100%).`;
@@ -73,7 +74,7 @@ export function parseValues(a: Assumptions, raw: unknown): Values {
     }
     const n = typeof v === "string" && v.trim() !== "" ? Number(v) : v;
     if (typeof n !== "number" || !Number.isFinite(n)) throw new ToolError(`${id} must be a number, got ${JSON.stringify(v)}.`);
-    const ok = r.control === "country" ? n === 0 || byCode.has(n) : r.format === "toggle" || runnable(r, n);
+    const ok = r.control === "country" ? n === 0 || byCode.has(n) : r.format === "toggle" ? n === 0 || n === 1 : runnable(r, n);
     if (!ok) throw new ToolError(whyNot(r, n));
     user[id] = n;
   }

@@ -1,6 +1,6 @@
 # Audit: campaign-legal-center-charityevals, round 3 (verification of round 2's two lows)
 Result: 1.444e-5 daly/$ = 0.0144 years of healthy life per 1,000 dollars (combined range 0.00076–0.274); cause median 0.0642 (×0.225). Verdict: pass.
-Model-sha: 7eed46e400043df360708ab8cbc9cde7f3299f34f590fcadba7944dc94c4f1a0
+Model-sha: d6229190b5fab7cb6f614d1559b9b821752f69119ca6fec1d38e4c73482644f3
 Rules: 0.3.13
 Scope: unchanged from rounds 1 and 2.
 Mechanical: audit-model run on the current model: result, range and joint ranges identical to round 2; no other script re-run (scoped verification of two wording lows).
@@ -32,3 +32,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

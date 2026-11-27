@@ -18,9 +18,11 @@ Only the fixes to round 4: `value_tlycs_recommended` replaced by its own split `
 | 1 | low | summary; `value_destinations` explainer | Stale typed counts, not from this change: the explainer says "The 13 charities with a model here took $11.3 million of the $24.1 million" and the summary "18 of its 33 recipient charities and its emergency fund (53% of the money) have no model"; `facts/meta.json` (and the engine template) say 20 charities modelled with $16.7 million, 11 charities and the Rapid Response Fund ($7.4 million, 31%) not modelled. | Correct both to the fact's figures (20 modelled, $16.7M; 11 and the fund, $7.4M, 31%), or drop the typed numbers. |
 
 Verdict: pass
-Model-sha: 8b9e8b6d717ffe5e6cdc4886f1a13a72c91359dcb6023d0a936652db227e4ec0
+Model-sha: d1924574b109a177aa4a1d9bfce1f4862bb35d6343a251e01c4c397c55c4c884
 Rules: 0.3.13
 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

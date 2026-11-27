@@ -1,7 +1,7 @@
 # Audit: american-cancer-society-charityevals-support, round 2 (verification of the changes since round 1)
 
 Result: 3.630e-6 daly/$ = 0.00363 years of healthy life per $1,000 (combined range 8.4e-4 – 0.0157); cause median 0.338 (x0.011). Verdict: pass.
-Model-sha: 36d8f2705ef5f472f33bcd126bffc1f8bf8f252074be865827f4d1249fcd58a9
+Model-sha: 835ab703aae44e267365f3839bf0ebdfc1f685fd4528e98a6f8245b4ac0d5806
 Rules: 0.3.13
 
 Mechanical: `scripts/audit-model.ts` gives 0 high, 0 medium, 1 low (far-below; the summary's reason still matches the rows). Result moved from 0.00378 to 0.00363 (-4%), inside the builder's stated 0.0038 to 0.0036. Peers unchanged (Red Cross 0.0045, Salvation Army 0.0052, Habitat 0.0054). Only the changes were checked; no new source other than Ambroggi was fetched.
@@ -49,3 +49,5 @@ Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the type
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

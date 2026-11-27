@@ -154,6 +154,13 @@ describe("on load", () => {
     expect(JSON.parse(store.get("charityevals:assumptions")!)).toEqual(LONG_RUN);
   });
 
+  it("a link with nothing usable keeps the stored values, and the URL says so", async () => {
+    href = "https://charityevals.org/?m=wellby&set=nonexistent&values=bogus:3,discount_rate:abc";
+    const s = await import("./assumption-state");
+    expect(s.getOverrides()).toEqual({ uov_per_daly: 3 });
+    expect(href).toBe("https://charityevals.org/?m=wellby&values=uov_per_daly:3");
+  });
+
   it("without one, the stored values apply; each change rewrites the URL in place", async () => {
     href = "https://charityevals.org/?m=wellby";
     const s = await import("./assumption-state");

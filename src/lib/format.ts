@@ -104,6 +104,13 @@ export function plainModelName(name: string): string {
   const s = name
     .replace(/\s*\(CEA\)/g, "")
     .replace(/_/g, " ")
+    // A spreadsheet copy's leftovers: "Copy of", "(GiveWell copy)", "[Borno copy]", "[Copy for …]".
+    .replace(/\bCopy of\s+/gi, "")
+    .replace(/\s*\((?:GiveWell )?copy\)/gi, "")
+    .replace(/\[\s*copy\s+(?:for\s+)?/gi, "[")
+    .replace(/\s+copy\s*\]/gi, "]")
+    // A note in brackets before the name reads after it.
+    .replace(/^\s*(\[[^\]]*\])\s*(.+)$/, "$2 $1")
     // A date in brackets reads as a date: "[July 2024]" → ", July 2024".
     .replace(/\s*\[((?:(?:\w+ )?(?:\d{1,2}, )?)?(?:19|20)\d\d)\]/g, ", $1")
     .replace(/(?<![A-Za-z])BOTECs(?![A-Za-z])/g, "rough estimates")
@@ -117,3 +124,6 @@ export function plainModelName(name: string): string {
     .trim();
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
+
+/** "GiveWell's", "Animal Charity Evaluators'", "charityevals'". */
+export const possessive = (name: string) => (name.endsWith("s") ? `${name}'` : `${name}'s`);

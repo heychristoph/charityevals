@@ -106,8 +106,8 @@ function causeArg(cat: Catalogue, args: Args): string | undefined {
 
 function limitArg(args: Args, fallback: number, max: number): number {
   const n = args.limit === undefined ? fallback : Number(args.limit);
-  if (!Number.isInteger(n) || n < 1) throw new ToolError(`limit must be a whole number from 1 to ${max}.`);
-  return Math.min(n, max);
+  if (!Number.isInteger(n) || n < 1 || n > max) throw new ToolError(`limit must be a whole number from 1 to ${max}.`);
+  return n;
 }
 
 // --- search_charities ----------------------------------------------------------------------------

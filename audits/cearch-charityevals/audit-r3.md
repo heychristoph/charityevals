@@ -1,6 +1,6 @@
 # Audit: cearch-charityevals, round 3
 Result: 0.006531 uov/$ = 3.27 years of healthy life per 1,000 dollars (combined range 0.28–37.4); cause median 0.112 (×29.2). Verdict: pass.
-Model-sha: c32b249d3443584a7a321277d0fbfdb1e18d1f3280393a462524e4aada3a4f2e
+Model-sha: c650b75c42d26b0fa298f2f74f0f768e3449557a1b8153ea931450487e9b8f0e
 Rules: 0.3.13
 Scope: unchanged from round 2 (all of CEARCH's work, October 2022 to May 2025). Scoped verification of round 2's one open medium (finding 11) only.
 Preflight: pass. Two low lines (generated/distributions.json, generated/usage.json stale): run `npx tsx scripts/summaries.ts` before commit.
@@ -26,3 +26,5 @@ Re-stamped (23 Nov 2026), rule cause-portfolios: Money to a cause with no named 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

@@ -4,7 +4,7 @@ import { lib } from "../lib/data";
 import { assumptionValues, headline, unitFormula, type Library, type ResolvedModel } from "../engine/model";
 import { parse, type Node } from "../engine/expr";
 import { waterfall, type Step, type StepTarget } from "../engine/waterfall";
-import { formatYears } from "../lib/format";
+import { formatYears, possessive } from "../lib/format";
 import { useFigure } from "../lib/metric";
 
 /** "1,700", "0.052", "3.2e-5": a native result per dollar. */
@@ -15,7 +15,6 @@ const UNIT_SECTION: Record<string, string> = { sad: "animals", ced: "animals", w
 /** "× 1.4", "× 0.52", "× 0.004". */
 const times = (r: number) => `× ${r >= 10 ? Math.round(r) : Math.abs(r - 1) < 0.01 ? r.toFixed(3) : r >= 0.1 ? Number(r.toPrecision(2)) : Number(r.toPrecision(1))}`;
 /** "GiveWell's", "Animal Charity Evaluators'". */
-const possessive = (name: string) => (name.endsWith("s") ? `${name}'` : `${name}'s`);
 
 /** Where a step's link goes: a row of the model below (#row-<id>, which the tree opens), a slider, or
  * the method page's section on a site-wide adjustment. */

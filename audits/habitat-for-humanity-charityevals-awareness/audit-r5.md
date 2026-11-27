@@ -1,6 +1,6 @@
 # Audit r5: habitat-for-humanity-charityevals-awareness (scoped verification, credit rule 2.24)
 Result: 1.501e-5 uov/$ = 0.0075 years of healthy life per 1,000 dollars (combined range 1.1e-5 to 4.97; model's own ranges -0.078 to +4.47). Verdict: pass.
-Model-sha: 48bba979eebe3866471f8ec50af9cc13a39f98d4265c97ee418cd3bdc9b33c8d
+Model-sha: 1d025368eef8521ed8e900996e05b3010204cae4d78fe58d0ce0da23a71c8999
 Rules: 0.3.13
 Scope: only the credit re-judgement for he_coalition_share, the unchanged shares us_coalition_share, us_hfhi_share, he_hfhi_share, and the classes on us_attribution_share and he_attribution_share.
 Preflight: pass (only low simulation notes and the stale generated/distributions.json, ignored).
@@ -32,3 +32,5 @@ Re-stamped (17 Nov 2026): Credit step 6 loose ends: the previous round's low fin
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

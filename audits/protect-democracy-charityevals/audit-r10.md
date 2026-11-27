@@ -1,6 +1,6 @@
 # Audit: protect-democracy-charityevals, round 10
 Result: 1.797e-5 daly/$ = 0.01797 years of healthy life per 1,000 dollars (combined range 0.00076–0.423); cause median 0.0652 (×0.28). Verdict: pass.
-Model-sha: d61a0a2b25099498a4fee857c5c1dcd4b5583e8545a03a5cfe70dd88fc41f385
+Model-sha: 6aae1e93dcc6d80421b6e939fbfac49884ea902e102c8d42a18708ab201adbda
 Rules: 0.3.13
 Scope: scoped verification of the change in commit 8fb7156 only (the answer to finding 4 of representus-education-fund-charityevals audit r1: the slide's severity moved inside the log). Rows bs_ln_gain, bs_severity, bs_evidence_adj, the canonical reading rows, the summary and the write-up. Nothing else re-audited.
 Mechanical: audit-model lint 0 findings. Result moved from 0.017370 to 0.017974 (+3.5%), no move above 2x.
@@ -39,3 +39,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

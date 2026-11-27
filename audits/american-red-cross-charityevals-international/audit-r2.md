@@ -1,7 +1,7 @@
 # Audit: american-red-cross-charityevals-international, round 2
 Re-stamped: label-only change (summary 'far below' → 'below' the median (round 1's low)); no formula or value changed since round 1, which passed.
 Verdict: pass
-Model-sha: b387b82632046355e1f6889fefc7edb39793876ca6e0817a9c564e0058cf2825
+Model-sha: f154370589d5cdd7bb8a589f5b30b8b51211439d7664ab0ee2c659ff71e891e8
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -19,3 +19,5 @@ Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the type
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

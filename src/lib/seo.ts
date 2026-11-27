@@ -3,7 +3,7 @@
 // results are the page's own default-assumption figures, and models are credited to whoever made them.
 import { lib, modelUrl, primaryOf, modelFile, rankable } from "./data";
 import { assumptionValues, comparable, headline, modelsOf, type ResolvedModel } from "../engine/model";
-import { formatYears, plainModelName } from "./format";
+import { formatYears, plainModelName, possessive } from "./format";
 import { publisher, repo } from "./site";
 import { licenceOf } from "./licence";
 import { charityHeadline } from "../engine/figures";
@@ -60,7 +60,9 @@ export function charityDefaultYears(charity: string): number | undefined {
   const main = primaryOf(lib, charity);
   if (!main || !comparable(lib, main)) return undefined;
   const v = charityHeadline(lib, charity, assumptionValues(lib.assumptions));
-  return v !== undefined && Number.isFinite(v) && v !== 0 ? v : undefined;
+  // A charity off the rankings (no ranked programme) leads with its main model's figure.
+  if (v === undefined) return defaultYears(main);
+  return Number.isFinite(v) && v !== 0 ? v : undefined;
 }
 
 const spaced = (s: string) => s.replace(/\s+/g, " ").trim();
@@ -128,7 +130,7 @@ export function modelMeta(m: ResolvedModel) {
   const x = primary ? charityDefaultYears(charity.id) : defaultYears(m);
   const unit = m.output ? lib.assumptions.units[m.output.unit]?.label : undefined;
   const when = monthYear(m.source?.published);
-  const by = owner.kind === "charityevals" ? "charityevals' own model" : `${owner.name}'s model${when ? ` (${when})` : ""}`;
+  const by = owner.kind === "charityevals" ? "charityevals' own model" : `${possessive(owner.name)} model${when ? ` (${when})` : ""}`;
   // Long model names are in the title already; the description leads with the charity instead.
   const subject = name.length <= 50 ? name : charity.name;
   // A page that leads with a story describes itself the same way: its sentence and the likely range

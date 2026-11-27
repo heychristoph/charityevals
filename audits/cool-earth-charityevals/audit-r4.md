@@ -1,6 +1,6 @@
 # Audit: cool-earth-charityevals, round 4 (verification of the round-3 fix)
 Result: 1.099e-4 daly/$ = 0.110 years of healthy life per 1,000 dollars (unchanged). Verdict: pass (no findings).
-Model-sha: f8d4455b5a499a59e8812d432b5a3253a3280c7c1609373a2bb3561f1ea46180
+Model-sha: dc1ed03f47bf2dd987d334de17ffcdbc6295085181401479f956b56bd80b064b
 Rules: 0.3.13
 Mechanical: `scripts/audit-model.ts` reports 0 findings.
 
@@ -33,3 +33,5 @@ Re-stamped (18 Nov 2026), rule lives-added: The people and animals a result adds
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

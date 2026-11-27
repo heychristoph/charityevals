@@ -1,7 +1,7 @@
 # Audit: boys-girls-clubs-of-america-charityevals, round 3
 Re-stamped: label-only change (wellbys_bridged and dalys_direct labels now say after the children's branch's adjustments, which their formulas apply); no formula or value changed since round 2, which passed.
 Verdict: pass
-Model-sha: c7c4571fbc815eea15394383e7a76c54a5c1c59a1811eff01d9b6a5c02fe6e52
+Model-sha: f35a24088a80181ea6f7fdf2d87295723b660c95d79497dd1b4278059c8c4dbb
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -15,3 +15,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

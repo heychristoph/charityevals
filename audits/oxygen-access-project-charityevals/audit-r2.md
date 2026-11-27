@@ -1,6 +1,6 @@
 # Audit: oxygen-access-project-charityevals, round 2
 Result: 0.006910 uov/$ = 3.45 years of healthy life per 1,000 dollars (combined range 0.70–17.1; the model's own ranges, shared figures at their best, −0.024–27.4); cause median 0.110 (×31). Verdict: pass.
-Model-sha: 97f24126d237f5da0021aebe9358d14e1566b5c137d07e9c1da4037f6fe01d6c
+Model-sha: fd6e744dde484e1f179181654b173dc3c08152d307c2500b9a8bb191f0cc6297
 Rules: 0.3.13
 Scope: Unchanged from round 1 (oxygen care in 23 Gombe State facilities, 14 February to 31 December 2025, the whole £85,293 of the independently examined accounts). Round 2 is a scoped verification only.
 Preflight: pass (no blocking lines).
@@ -36,3 +36,5 @@ Unchanged in kind: `$missing_data_discount` (shared slider), `internal_validity_
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

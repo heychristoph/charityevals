@@ -10,7 +10,7 @@ Checked: value 0.15 (0.05-0.35) unchanged; the four classes unchanged (tcl, gavi
 No findings.
 
 Verdict: pass
-Model-sha: 57410f5fa00ceeea95df853ac75a45a9a07aa891871fac3561d9044579bfd913
+Model-sha: 01ba7174475bcc63fedbc88e44aba0ed783121fffbe1caa0de155e53cc2f7a84
 Rules: 0.3.13
 
 Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 6: the co-funder switch counts co-funders only; the donors whose money a mover moves are mobilised (under mobiliser_share), so their new money leaves donor_cost_share. Only results with the switch on move. Mechanical: headline unchanged, against the tree before the rule.
@@ -18,3 +18,5 @@ Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

@@ -1,6 +1,6 @@
 # Audit: union-of-concerned-scientists-charityevals-climate, round 8 (scoped verification of rule 2.23 and the 15 Nov fix-ups)
 Result: -0.004510 t CO₂e/$ = -0.001514 years of healthy life per $1,000 (combined range -0.5057 to -4.534e-6), against 0.0018 after the non-death change (sign change). Verdict: pass.
-Model-sha: 9b53b35335ce0f8e3c241dc96cecc50c24ffe6e62bedaa2219eb0f2c9ea611bc
+Model-sha: 93be3faabf9d25e0bcb896bcf118314308ca8c233d3f5be98ee8967031e0b155
 Rules: 0.3.13
 Scope: the rows added or changed by commit 7e73f6cd: ira_public_usd_per_year, ira_public_cost_uov, uov_counted_per_year, the bridge row (0.6 side-effect form), the summary and the write-up sentence stating the result. Programmes and sources of earlier rounds not re-audited.
 Mechanical: audit-model exit 0, "Findings (0)"; check.ts all valid.
@@ -23,7 +23,7 @@ Previous round: round 7's two lows were fixed earlier; not re-examined.
 The law's public cost (cost figure, payer multiple) against the value of its tonnes; UCS's attribution share cancels between them (it scales both), the sign rests on the cost per tonne.
 
 Verdict: pass (no high or medium finding; two lows).
-Model-sha: 9b53b35335ce0f8e3c241dc96cecc50c24ffe6e62bedaa2219eb0f2c9ea611bc
+Model-sha: 93be3faabf9d25e0bcb896bcf118314308ca8c233d3f5be98ee8967031e0b155
 Re-stamped (15 Nov 2026): round 8's low fixed: summary's gross tonnes per dollar 0.0052 -> 0.0053 (text only)
 
 Re-stamped (16 Nov 2026): EPA methane rule and Advanced Clean Cars II dates read the shared facts (climate.us_oil_gas_methane_rule_*_year, climate.ca_advanced_clean_cars_ii_*_year); same values. Mechanical: headline unchanged, against 2492e3fc.
@@ -39,3 +39,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24 wired at s = 1 (no value change). Mec
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

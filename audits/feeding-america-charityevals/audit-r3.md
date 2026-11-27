@@ -23,7 +23,7 @@ Round 2 findings: all low or resolved; the round-2 low about `fuel_share` having
 None.
 
 Verdict: pass
-Model-sha: 17c076d11a14da7771409eaf053a4730c97669c26880e93c79b987e31fb56621
+Model-sha: 78d5ebfb2f9dd18593a1f6748c8dbe7d01a9d84a8935ae9a56b9c7bfef73b3a3
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): one consumption scale for US public money (normalization.md 2.14); 0.0183 → 0.0169.
@@ -46,3 +46,5 @@ Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the type
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

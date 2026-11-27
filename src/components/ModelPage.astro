@@ -12,7 +12,7 @@ import WholeLayers from "./WholeLayers.tsx";
 import WholeStoryLine from "./WholeStoryLine.tsx";
 import { programsOf } from "../lib/whole";
 import ModelReuse from "./ModelReuse.astro";
-import { plainModelName } from "../lib/format";
+import { plainModelName, possessive } from "../lib/format";
 import { lib, rankable, modelUrl, historyUrl, modelFile, primaryOf, summarised } from "../lib/data";
 import { similarTo } from "../lib/similar";
 import { auditOf, latestRules } from "../lib/audits";
@@ -114,7 +114,7 @@ const fmtDate = (d?: string) => (d ? new Date(d).toLocaleDateString("en-GB", { y
       {model.theoretical && (
         <aside class="theory-note" role="note" aria-label="Purely theoretical estimate">
           <p>
-            <strong>Purely theoretical.</strong> This is {owner.name}'s estimate of the idea, written before {charity.name} existed, not of
+            <strong>Purely theoretical.</strong> This is {possessive(owner.name)} estimate of the idea, written before {charity.name} existed, not of
             the charity's own results. We show it because {charity.name} runs this programme today
             (<a href={model.theoretical.url} rel="noopener">checked {fmtDate(model.theoretical.checked)}</a>: {model.theoretical.runs.replace(/\.$/, "")})
             and no model of its actual work exists yet.

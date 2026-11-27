@@ -1,6 +1,6 @@
 # Audit: americares-charityevals-emergency, round 3 (verification of the rule 1/2/4 changes)
 Result: 4.125e-5 daly/$ = 0.04125 years of healthy life per 1,000 dollars (combined range 0.00846–0.2011); cause median 0.1100 (×0.37). Verdict: pass.
-Model-sha: b7b9aeb6f348e69d747f11f651f4f5002b885de10b7ca5a291c0e080dffb1fea
+Model-sha: 1c84de0112eeec9a1b0ca909978640aef396beeafde6a50d8f3ca35b72d6fddf
 Rules: 0.3.13
 Scope: verification only: ln_gain_usa/_lebanon/_ukraine/_myanmar, the split of the single adjustment branch into deaths-and-illness and goods, the reading-only averages, bridge/outcome labels, the summary and the write-up sentences on the emergency model. Programmes and year unchanged (emergency response, year to June 2025, 40.1M cash). Rule 3 (livelihood mortality step) does not apply: the model has no livelihood branch.
 Mechanical: lint 0 findings (3 info/warn notes: range width, judgment share, 8 point inputs), invariants none, normalization-audit none (coordinator's run; not rerun), check.ts all valid, simulation-check stable (5% 0.384, 50% 1, 95% 2.33 x best guess).
@@ -26,7 +26,7 @@ None needed: no source or observed input changed.
 Missing-data discount (shared), uov_per_daly (shared), counterfactual_adj (judgment, 0.3-0.8, OCHA funding anchor), em_goods_share (judgment, 0.15-0.5), affected_consumption_share (judgment). All judgments carry anchors; result remains 0.37 × the cause median, explained in the summary (US third, few deaths averted per person reached).
 
 Verdict: pass
-Model-sha: b7b9aeb6f348e69d747f11f651f4f5002b885de10b7ca5a291c0e080dffb1fea
+Model-sha: 1c84de0112eeec9a1b0ca909978640aef396beeafde6a50d8f3ca35b72d6fddf
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
 
@@ -45,3 +45,5 @@ Re-stamped (17 Nov 2026): wording: wrong prose placeholders restored to the type
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

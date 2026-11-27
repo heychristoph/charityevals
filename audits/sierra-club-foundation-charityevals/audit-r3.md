@@ -1,6 +1,6 @@
 # Audit: sierra-club-foundation-charityevals, round 3 (verification of the compliance-cost rule 2.21)
 Result: 0.01589 t CO₂e/$ = 0.005929 years of healthy life per $1,000 (combined range 2.149e-4–0.1636); cause median 0.001704 (×3.48). Verdict: pass.
-Model-sha: 2bd886c18d62eeb18297f6ff7377f0002211f0355a2e074e2e6febfeda4ffc64
+Model-sha: 611f4bd6b392e856eb57c005ff8491635952652c7918e220f2751bdbf619b21c
 Rules: 0.3.13
 Scope: scoped verification of the changed rows (usmeth/pwr/veh/accii_compliance_uov, compliance_uov_per_year, the `bridges` section's tco2e_from_uov, outcome_total, summary, write-up figure). Programmes and year as in earlier rounds, not re-audited.
 Mechanical: lint 0 high / 0 medium / 0 low (audit-model exit 0, "Findings (0)"), invariants none, normalization-audit not re-run (changed rows only)
@@ -54,3 +54,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

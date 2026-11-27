@@ -44,6 +44,13 @@ export function unknownId(cat: Catalogue, id: string): ToolError {
   return new ToolError(`No charity or model "${id}".${near.length ? ` Did you mean: ${near.join(", ")}?` : ""} search_charities finds ids.`);
 }
 
+/** The charity a model is about, with its figure as ranked where it has one: a charity's main model
+ * often shares its id, and the two figures differ when the charity has several programmes. */
+export function charityRef(cat: Catalogue, figs: Figures, id: string): Json {
+  const f = figs.charity(id);
+  return { id, name: cat.charities[id]?.name ?? id, ...(f ? { as_ranked: figure(f) } : {}) };
+}
+
 /** One model's figure at the reader's values. */
 export function modelItem(cat: Catalogue, id: string, figs: Figures, v: Values): Json {
   const m = cat.models[id];
@@ -51,7 +58,7 @@ export function modelItem(cat: Catalogue, id: string, figs: Figures, v: Values):
     type: "model",
     id,
     name: m.name,
-    charity: { id: m.charity, name: cat.charities[m.charity]?.name ?? m.charity },
+    charity: charityRef(cat, figs, m.charity),
     evaluator: ownerName(cat, m.owner),
     ...figure(figs.model(id) ?? { central: NaN, low: NaN, high: NaN }),
     unit: m.unit,

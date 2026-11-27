@@ -1,6 +1,6 @@
 # Audit: machine-intelligence-research-institute-charityevals, round 8 (scoped verification)
 Result: 0.0312 years of healthy life per $1,000 (was 0.0366, -14.9%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 0bb1e2cd38e34e682159b643c8a1fdb8212e21079d8372cdceaed823092114c5
+Model-sha: c6ba6ec86e3954595a62e3cdc1abe6f4ec9d47fc30ad4593469d3b2746d48e8d
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -23,3 +23,5 @@ Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

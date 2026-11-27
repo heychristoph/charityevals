@@ -1,6 +1,6 @@
 # Audit: founders-pledge-charityevals, round 5 (scoped verification)
 Result: 6.666 years of healthy life per $1,000 (uov/$ 0.01333; was 3.597, +85%). Range 2.204 to 19.93, 0% of draws at or below zero; cause median 1.019 (x6.54). Verdict: pass.
-Model-sha: 382f1f2c575bade206fbda2300dd7f6e8b66e3c9bb807ff0cbc1bac9da2dd133
+Model-sha: 089437f61d6aa91dea6a27bfd64a948e47b0edf10abf61d095c2bcc69f97e71b
 Rules: 0.4.0
 Scope: rule cause-portfolios only (inventory/rule-changes/cause-portfolios.md; docs/normalization.md "November 2026: a cause's portfolio"; assumptions/default.json `portfolios`). The model file is unchanged by the rule except wording; no source or scope re-audit.
 Preflight: passes (no blocking problem); one low (stored simulation out of date).
@@ -30,3 +30,5 @@ Its cause split (impact report), the education share valued at the global-health
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

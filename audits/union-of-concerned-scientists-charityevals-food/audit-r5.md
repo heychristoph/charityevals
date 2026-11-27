@@ -1,7 +1,7 @@
 # Audit: union-of-concerned-scientists-charityevals-food, round 5 (verification of the compliance-cost rule 2.21, text fixes of round 4)
 Result: 5.069e-7 uov/$ = 2.534e-4 years of healthy life per 1,000 dollars (unchanged from round 4). Verdict: pass.
 Verdict: pass
-Model-sha: dbe938e4240e16a2dbee5b8faf9b1c0c3a26faf0f24de73f9c33b2141baf5bcb
+Model-sha: 6fc0af2eb2dbddb4988f9105edba483de3c8a05bd734bfc24e6697e643f68675
 Rules: 0.3.13
 
 Scope: scoped verification of the compliance-cost sentence on `wetland_flood_damage_study`.
@@ -24,7 +24,7 @@ None in scope (no regulator figure read by the changed text).
 Unchanged: text-only fixes.
 
 Verdict: pass
-Model-sha: dbe938e4240e16a2dbee5b8faf9b1c0c3a26faf0f24de73f9c33b2141baf5bcb
+Model-sha: 6fc0af2eb2dbddb4988f9105edba483de3c8a05bd734bfc24e6697e643f68675
 Re-stamped (15 Nov 2026): merged with the one-consumption-scale and no-comparison changes; compliance-cost rows (2.21) now on the survey scale (2.14); headline moves under 2×.
 Re-stamped (15 Nov 2026): side-effect tags (2.16, mechanical; headline unchanged)
 
@@ -45,3 +45,5 @@ Re-stamped (17 Nov 2026), rule mobiliser-share-30: typed results in the model's 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

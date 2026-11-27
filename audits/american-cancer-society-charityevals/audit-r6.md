@@ -17,7 +17,7 @@ Credit rule 2.24, step 5: `adv_attribution_share_shared`, `tob_attribution_share
 | 2 | low | screen_attribution_share_shared | Insurers are in the denominator while `screen_counterfactual_adj` already cuts "insurance changes and habit". Insurers' coverage decisions are not promotion, so they are cut twice (small effect, the share is 15%). | Name only CDC's programmes, health systems' outreach and other charities in the explainer; keep the 15% (5-30%). |
 
 Verdict: pass
-Model-sha: 558cd30d2e9a40706c5af4dcdef31447a10e60eb68e8acb79617a2dd35e1a2cb
+Model-sha: 53c2d05d0b84c0cc7cd9d758fc113e213c8cd0924b88190b764d83610350ca14
 Rules: 0.3.13
 
 Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for the rainforest model, rows no longer read removed and the branch weights kept free of the mobiliser's share); no value changed at a 100% mobiliser share.
@@ -25,3 +25,5 @@ Re-stamped (17 Nov 2026): the round's low findings fixed in wording (and, for th
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

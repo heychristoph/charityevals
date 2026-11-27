@@ -1,7 +1,7 @@
 # Audit: norwegian-refugee-council-charityevals-advocacy, round 9
 Re-stamped: `destination_reads` added for the shared moved-money rows (GiveWell's four top charities and the GiveDirectly prior, read as destinations at their figures on the rankings, docs/normalization.md 2.12); no formula or value changed and the result is unchanged (the money-moved branch is 0 here), so round 8's pass stands.
 Verdict: pass
-Model-sha: d0e8e11cdbca77072ddb7898aa31ac342931dc8f057bce3af51e55c7d6b2128a
+Model-sha: 2641411a3b4a849a4a2690dc6a8e3e885020b8360e508e3f74295cf22d5b428b
 Rules: 0.3.13
 
 Re-stamped (15 Nov 2026): peer comparison removed from the summary; no value changed.
@@ -26,3 +26,5 @@ Re-stamped (17 Nov 2026), rule credit-switch-co-funders: Credit rule 2.24, step 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

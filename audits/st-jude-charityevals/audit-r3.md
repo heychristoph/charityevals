@@ -1,6 +1,6 @@
 # Audit: st-jude-charityevals, round 3
 Result: 7.206e-6 uov/$ = 0.003603 years of healthy life per 1,000 dollars (combined range 0.00047–0.0276); cause median 0.1085 (×0.033). Verdict: pass.
-Model-sha: 4b5a96706ef6224847f0bff916ddc2e4999126ecade151f25a352f1e95831205
+Model-sha: 8e1a177fb16dd25e5d67dd37036d16e796f42c8f03aeb878da8bc1b212b14638
 Rules: 0.3.13
 Scope: scoped verification of commit a1555789 (the two deleted rows and the three reworded explainers) and round 2's items. Scope of the model itself (FY2025, all programmes) unchanged since round 1 and not re-audited.
 Mechanical: lint 0 high / 1 medium (`far-below`, explained in round 1 #3, unchanged) / 1 low (`spread`, the summary states it); the two `unused` lows of round 2 are gone. Invariants: none. `scripts/check.ts st-jude-charityevals`: all models valid. normalization-audit and simulation-check not re-run (no shared-figure conversion touched). generated/ untouched (git status clean).
@@ -37,3 +37,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

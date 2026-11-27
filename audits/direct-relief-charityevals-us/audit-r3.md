@@ -23,7 +23,7 @@ Result: 6.248e-6 uov/$ = 0.003124 years of healthy life per $1,000 (combined ran
 
 No high or medium findings. check.ts and normalization-audit were not re-run beyond audit-model (the round-2 pass stands; the changes touch one formula, two explainers and one template formula). generated/ untouched.
 
-Model-sha: 5fb85ee1b51ed3eca90cc76e86349ba7cb02075d66edc2ec03f756f0c7463799
+Model-sha: 2cf5ef2036ec8f2c5e1afd54ccf3f038edb905c17d297558311464cc3e3414e8
 Rules: 0.3.13
 
 **Verdict: pass** (0 high, 0 medium, 2 low).
@@ -39,3 +39,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

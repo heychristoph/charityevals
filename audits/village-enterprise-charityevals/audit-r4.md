@@ -17,7 +17,7 @@ Mechanical: audit-model reports no high finding; the one medium (far-above) is t
 No findings.
 
 Verdict: pass. Findings: 0 high, 0 medium, 0 low.
-Model-sha: a603d34083a4e2deeb0dfb0b26fdc73752619e6ddb3524c27b7c10beae01cad3
+Model-sha: 4d964fa4556d721671183fc576ed136ea1b84b51a81088b9f6561f4041c985cc
 Rules: 0.3.13
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 32c25050.
@@ -31,3 +31,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

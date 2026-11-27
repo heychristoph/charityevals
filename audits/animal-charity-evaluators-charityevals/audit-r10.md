@@ -1,6 +1,6 @@
 # Audit: animal-charity-evaluators-charityevals, round 10 (scoped verification)
 Result: 1.517e-4 years of healthy life per $1,000 (uov/$ 3.033e-7; range 4.834e-5 to 4.863e-4, 0% of draws at or below zero). Verdict: pass.
-Model-sha: 6e714bcbfcd4c6e60633476193a0268d71c8527aed0c36edd5ea83c0c0d37a66
+Model-sha: faae6e12968c49bf937df68fbaef2de629ecbc4bf42298aac745c638bc0e1747
 Rules: 0.4.0
 Scope: scoped verification of round 9's findings for rule cause-portfolios only; no source or scope re-audit.
 Preflight: passes (no blocking problem); lows only.
@@ -20,3 +20,5 @@ Pass: no open high or medium.
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

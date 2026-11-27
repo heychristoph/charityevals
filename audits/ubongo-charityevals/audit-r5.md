@@ -1,7 +1,7 @@
 # Audit r5: ubongo-charityevals (scoped verification)
 
 Result: 27.7 years of healthy life per 1,000 dollars (range 5.0–122, 0% of draws at or below zero). Verdict: pass.
-Model-sha: 8d025f263c79e3e2acd0a40890ff7dd17c41fdf8cba1c88083659950bb0b1317
+Model-sha: 905207cdab8511896e20eb135add490a5358d5fdf2b205f5966c3c41ca8d1469
 Rules: 0.4.3
 
 Scope: round 4's high and mediums and the changes made for them. Preflight passes.
@@ -16,3 +16,5 @@ Scope: round 4's high and mediums and the changes made for them. Preflight passe
 No double count between `evidence_adj` and the new rows. No new high or medium.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

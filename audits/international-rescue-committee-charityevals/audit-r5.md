@@ -9,7 +9,7 @@ Checked:
 No findings.
 
 Verdict: pass.
-Model-sha: 4dc4daea0000d21814a810cdb06bdc36936578b00708ba2cb3004c794c762c9d
+Model-sha: 108600d01a9e092be1bcc12b1ea2312b95129b9c693a36a9a6b907426af2a1de
 Rules: 0.3.13
 
 Re-stamped (16 Nov 2026): typed figures in the model's text replaced by placeholders rendered from the model (scripts/prose-numbers.ts). Mechanical: headline unchanged, against 52be53be.
@@ -23,3 +23,5 @@ Re-stamped (17 Nov 2026): credit rule 2.24: branch classes (no value change). Me
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

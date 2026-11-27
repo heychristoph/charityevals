@@ -1,6 +1,6 @@
 # Audit: union-of-concerned-scientists-charityevals, round 3 (scoped verification)
 Result: 4.645 years of healthy life per $1,000 (was 4.734, -1.87%). Combined range not re-run (scoped round). Verdict: pass.
-Model-sha: 5522b9b295e81217ba04bf9c1bf45548f88eeb96908f13950971b0908cb03df9
+Model-sha: 4a1891bd4e412579449af93cc59581b9331fbad73a2c98eb5ba26dd0c84dc02e
 Rules: 0.3.13
 Scope: rules never-started-weight, lives-added, animals-never-bred and never-started-prose only (inventory/rule-changes/). No source or scope re-audit.
 Preflight: passes
@@ -24,3 +24,5 @@ Re-stamped (19 Nov 2026), rule never-started-branches: In the catastrophic-risk 
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

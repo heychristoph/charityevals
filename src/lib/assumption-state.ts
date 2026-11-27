@@ -128,6 +128,14 @@ function ensureLoaded() {
     const fromUrl = parseShare(window.location.search);
     current = fromUrl ?? stored();
     if (fromUrl) save();
+    // The URL then says what is shown: a link's unknown set or unusable values don't stay in it.
+    if ([...new URLSearchParams(window.location.search).keys()].some(STATE_PARAM)) {
+      try {
+        history.replaceState(history.state, "", shareUrl(window.location.href, current));
+      } catch {
+        /* no history (a test or an old browser): the values still apply */
+      }
+    }
     try {
       localStorage.removeItem(OLD_VIEW_KEY);
     } catch {

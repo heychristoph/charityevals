@@ -1,6 +1,6 @@
 # Audit: lead-research-for-action-charityevals, round 3
 Result: 2.630e-4 uov/$ = 0.1315 years of healthy life per 1,000 dollars (combined range 0.00128–13.55); cause median about 0.12 (round 1's figure, not re-printed; ×1.1). Verdict: **pass** (0 high, 0 medium, 0 new low; round 2's L2 and L3 remain with the builder).
-Model-sha: 183d162a6b3c190a0eb878e00d61f6f6e70f5984c6c7245830c0767a7cc83ca2
+Model-sha: 5497491a77ccba208be96866418652661f038551610fff66ddebcb523a11b989
 Rules: 0.3.13
 Scope: unchanged from round 2: the whole charity, one programme (market studies of lead in consumer products), October 2024 to October 2026, no accounts (charities/lead-research-for-action.json one line, $300,000 a year). Scoped verification: only round 2's two mediums and what they touched.
 Preflight: pass (no blocking lines; one low, generated/distributions.json out of date, which the builder regenerates before commit).
@@ -28,3 +28,5 @@ Unchanged from round 2: `$mobiliser_share`, `$discount_rate`, `$win_years_counte
 Re-stamped (23 Nov 2026), rule input-domains: Every input states its kind of number (domain); the simulation draws each by its kind, so no draw is a number it can't be (normalization 2.18, INV-27). Mechanical: headline unchanged, against the tree before the rule.
 
 Re-stamped (25 Nov 2026): the plain-words story (docs/story.md) added; no value changed.
+
+Re-stamped 27 Nov 2026: source link points to the model's page (the old /<model-id> address was a 404); values unchanged.

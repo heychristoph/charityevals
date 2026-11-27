@@ -8,7 +8,7 @@ import { sensitivity, type Swing } from "../engine/sensitivity";
 import { modelRange } from "../engine/figures";
 import { licenceOf, OWN_LICENCE } from "./licence";
 import { abs } from "./seo";
-import { formatYears } from "./format";
+import { formatYears, plainModelName } from "./format";
 import rawAssumptions from "../../assumptions/default.json";
 import rawOwners from "../../owners.json";
 import bulkSummaries from "../../generated/bulk-summaries.json";
@@ -70,7 +70,7 @@ function indexEntry(m: ResolvedModel) {
   const f = figureOf(m);
   return {
     id: m.id,
-    name: m.name,
+    name: plainModelName(m.name),
     charity: m.charity,
     owner: m.owner,
     cause: m.cause,
@@ -160,7 +160,7 @@ const show = (m: ResolvedModel, x: number) => (comparable(lib, m) ? formatYears(
 function modelText(m: ResolvedModel, seen: Set<string>): string {
   const f = figureOf(m);
   const owner = lib.owners.get(m.owner)!;
-  const out = [`### ${m.name}`, "", `By ${owner.name}. ${abs(modelUrl(lib, m))} (data: ${abs(dataUrl(m.id))})`];
+  const out = [`### ${plainModelName(m.name)}`, "", `By ${owner.name}. ${abs(modelUrl(lib, m))} (data: ${abs(dataUrl(m.id))})`];
   if (m.theoretical) out.push("Purely theoretical: an estimate of the idea from before the charity existed.");
   out.push(`Result: ${show(m, f.headline)} ${unitOf(m)} (plausible range ${show(m, f.low)} to ${show(m, f.high)}), default assumptions.`);
   if (m.summary) out.push("", m.summary.trim());
